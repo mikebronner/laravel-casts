@@ -34,6 +34,8 @@ class LaravelCastsServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->mergeConfigFrom(__DIR__ . '/../../config/genealabs-laravel-casts.php', 'genealabs-laravel-casts');
+
         $this->registerHtmlBuilder();
         $this->registerFormBuilder();
         AliasLoader::getInstance()->alias('Form', FormFacade::class);
