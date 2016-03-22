@@ -1,8 +1,8 @@
-<?php namespace GeneaLabs\Bones\Macros;
+<?php namespace GeneaLabs\LaravelCasts;
 
-use Collective\Html\HtmlBuilder;
+use Collective\Html\HtmlBuilder as Html;
 
-class BonesMacrosHtmlBuilder extends HtmlBuilder
+class HtmlBuilder extends Html
 {
 	public static function slugify($text)
 	{
@@ -11,6 +11,7 @@ class BonesMacrosHtmlBuilder extends HtmlBuilder
 		$text = iconv('utf-8', 'us-ascii//TRANSLIT', $text);
 		$text = strtolower($text);
 		$text = preg_replace('~[^-\w]+~', '', $text);
+
 		if (empty($text)) {
 			return 'n-a';
 		}

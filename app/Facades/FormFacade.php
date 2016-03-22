@@ -1,11 +1,8 @@
-<?php namespace GeneaLabs\Bones\Macros;
+<?php namespace GeneaLabs\LaravelCasts\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
-/**
- * @see \GeneaLabs\Bones\Macros\BonesMacrosHtmlBuilder
- */
-class BonesMacrosHtmlFacade extends Facade
+class FormFacade extends Facade
 {
     /**
      * Get the registered name of the component.
@@ -14,6 +11,6 @@ class BonesMacrosHtmlFacade extends Facade
      */
     protected static function getFacadeAccessor()
     {
-        return 'html';
+        return 'form';
     }
 }

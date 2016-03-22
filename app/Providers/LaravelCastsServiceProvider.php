@@ -1,13 +1,16 @@
-<?php namespace GeneaLabs\Bones\Macros;
+<?php namespace GeneaLabs\LaravelCasts\Providers;
 
+use GeneaLabs\LaravelCasts\Facades\FormFacade;
+use GeneaLabs\LaravelCasts\Facades\HtmlFacade;
+use GeneaLabs\LaravelCasts\FormBuilder;
+use GeneaLabs\LaravelCasts\HtmlBuilder;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 use Illuminate\Foundation\AliasLoader;
-//use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Event;
 
-class BonesMacrosServiceProvider extends ServiceProvider
+class LaravelCastsServiceProvider extends ServiceProvider
 {
 
     /**
@@ -17,6 +20,12 @@ class BonesMacrosServiceProvider extends ServiceProvider
      */
     protected $defer = false;
 
+    public function boot()
+    {
+        $this->publishes([
+            __DIR__ . '/../../config/genealabs-laravel-casts.php' => config_path('genealabs-laravel-casts.php'),
+        ], 'config');
+    }
 
     /**
      * Register the service provider.
@@ -27,8 +36,8 @@ class BonesMacrosServiceProvider extends ServiceProvider
     {
         $this->registerHtmlBuilder();
         $this->registerFormBuilder();
-        AliasLoader::getInstance()->alias('Form', BonesMacrosFormFacade::class);
-        AliasLoader::getInstance()->alias('HTML', BonesMacrosHtmlFacade::class);
+        AliasLoader::getInstance()->alias('Form', FormFacade::class);
+        AliasLoader::getInstance()->alias('HTML', HtmlFacade::class);
     }
 
     /**
@@ -40,7 +49,7 @@ class BonesMacrosServiceProvider extends ServiceProvider
     {
         $this->app->singleton('html', function($app)
         {
-            return new BonesMacrosHtmlBuilder($app['url'], $app['view']);
+            return new HtmlBuilder($app['url'], $app['view']);
         });
     }
 
@@ -53,7 +62,7 @@ class BonesMacrosServiceProvider extends ServiceProvider
     {
         $this->app->singleton('form', function($app)
         {
-            return new BonesMacrosFormBuilder($app['html'], $app['url'], $app['view'], $app['session.store']->getToken());
+            return new FormBuilder($app['html'], $app['url'], $app['view'], $app['session.store']->getToken());
         });
     }
 
@@ -64,6 +73,6 @@ class BonesMacrosServiceProvider extends ServiceProvider
      */
     public function provides()
     {
-        return ['genealabs-bones-macros'];
+        return ['genealabs-laravel-casts'];
     }
 }

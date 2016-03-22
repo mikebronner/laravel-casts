@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/GeneaLabs/bones-macros.svg?branch=master)](https://travis-ci.org/GeneaLabs/bones-macros) [![Latest Stable Version](https://poser.pugx.org/genealabs/bones-macros/v/stable.svg)](https://packagist.org/packages/genealabs/bones-macros) [![Latest Unstable Version](https://poser.pugx.org/genealabs/bones-macros/v/unstable.svg)](https://packagist.org/packages/genealabs/bones-macros) [![License](https://poser.pugx.org/genealabs/bones-macros/license.svg)](https://packagist.org/packages/genealabs/bones-macros)
 
-# Laravel Bones Macros (bones-macros) 
+# Laravel Bones Macros (bones-macros)
 
 ## Installation
 
@@ -24,14 +24,14 @@ If you are using Laravel < 5.2 use version `0.2.*`.
 
 And then add the service provider to your app.php config file:
 ```php
-	// 'providers' => array(
-		'GeneaLabs\BonesMacros\BonesMacrosServiceProvider',
-    // );
+	// 'providers' => [
+		GeneaLabs\Bones\Macros\BonesMacrosServiceProvider::class,
+    // ];
 ```
 
 ## Usage
 
-These HTML and FORM macros are intended to be used mainly in Blade tempaltes to reduce tedium.
+These HTML and FORM macros are intended to be used mainly in Blade templates to reduce tedium.
 
 ## Methods
 

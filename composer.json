@@ -1,5 +1,5 @@
 {
-    "name": "genealabs/bones-macros",
+    "name": "genealabs/laravel-casts",
     "description": "Useful form macros for Laravel's Blade template engine.",
     "license": "MIT",
     "authors": [
@@ -18,10 +18,9 @@
     },
     "autoload": {
         "classmap": [
-            "src/migrations"
         ],
         "psr-4": {
-            "GeneaLabs\\Bones\\Macros\\": "src/GeneaLabs/Bones/Macros/"
+            "GeneaLabs\\LaravelCasts\\": "app/"
         }
     },
     "minimum-stability": "stable"
