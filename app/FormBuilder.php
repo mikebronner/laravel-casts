@@ -311,7 +311,7 @@ class FormBuilder extends Form
 
         $output = $this->preHtml($name, $options);
         $output .= $html;
-        $output .= $this->postHtml($name);
+        $output .= $this->postHtml($name, $options);
 
         return $output;
     }
@@ -364,7 +364,7 @@ class FormBuilder extends Form
      *
      * @return string
      */
-    protected function postHtml($name, $extraElement = null, $extraWidth = 0)
+    protected function postHtml($name, array $options, $extraElement = null, $extraWidth = 0)
     {
         $html = '';
         $hasExtras = (strlen($extraElement) && $extraWidth > 0);
@@ -380,6 +380,11 @@ class FormBuilder extends Form
             if ($this->framework === 'bootstrap-4') {
                 $html .= $this->errors->all($name, '<p><small class="text-help"></span></p>');
             }
+        }
+
+        if (array_key_exists('description', $options)) {
+            $helpClass = ($this->framework === 'bootstrap-3' ? 'help-block' : '';
+            $html .= '<small class="text-muted' . $helpClass . '">' . $options['description'] . '</small>';
         }
 
         if ($this->isHorizontalForm) {
