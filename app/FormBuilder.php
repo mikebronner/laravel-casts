@@ -383,7 +383,7 @@ class FormBuilder extends Form
         }
 
         if (array_key_exists('description', $options)) {
-            $helpClass = ($this->framework === 'bootstrap-3' ? 'help-block' : '';
+            $helpClass = ($this->framework === 'bootstrap-3' ? 'help-block' : '');
             $html .= '<small class="text-muted' . $helpClass . '">' . $options['description'] . '</small>';
         }
 
