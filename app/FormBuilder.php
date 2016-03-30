@@ -280,7 +280,7 @@ class FormBuilder extends Form
         $cancelUrl = array_key_exists('cancelUrl', $options) ? $options['cancelUrl'] : null;
 
         $this->framework = config('genealabs-laravel-casts.front-end-framework');
-        $options = $this->getClasses('', $options);
+        $options = $this->getClasses('', $options, ['btn', 'btn-primary']);
 
         $html = $this->preHtml('', []);
 
