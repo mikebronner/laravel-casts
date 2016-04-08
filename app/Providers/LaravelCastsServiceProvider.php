@@ -9,6 +9,8 @@ use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Event;
+use Blade;
+use Exception;
 
 class LaravelCastsServiceProvider extends ServiceProvider
 {
@@ -25,6 +27,21 @@ class LaravelCastsServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__ . '/../../config/genealabs-laravel-casts.php' => config_path('genealabs-laravel-casts.php'),
         ], 'config');
+
+        $this->registerBladeDirective('form');
+        $this->registerBladeDirective('modelForm');
+        $this->registerBladeDirective('email');
+        $this->registerBladeDirective('url');
+        $this->registerBladeDirective('date');
+        $this->registerBladeDirective('password');
+        $this->registerBladeDirective('file');
+        $this->registerBladeDirective('textarea');
+        $this->registerBladeDirective('checkbox');
+        $this->registerBladeDirective('submit');
+        $this->registerBladeDirective('cancel');
+        $this->registerBladeDirective('select');
+        $this->registerBladeDirective('selectRangeWithInterval');
+        $this->registerBladeDirective('endform');
     }
 
     /**
@@ -43,11 +60,21 @@ class LaravelCastsServiceProvider extends ServiceProvider
     }
 
     /**
+     * Get the services provided by the provider.
+     *
+     * @return array
+     */
+    public function provides()
+    {
+        return ['genealabs-laravel-casts'];
+    }
+
+    /**
      * Register the HTML builder instance.
      *
      * @return void
      */
-    protected function registerHtmlBuilder()
+    private function registerHtmlBuilder()
     {
         $this->app->singleton('html', function($app)
         {
@@ -60,7 +87,7 @@ class LaravelCastsServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    protected function registerFormBuilder()
+    private function registerFormBuilder()
     {
         $this->app->singleton('form', function($app)
         {
@@ -68,13 +95,16 @@ class LaravelCastsServiceProvider extends ServiceProvider
         });
     }
 
-    /**
-     * Get the services provided by the provider.
-     *
-     * @return array
-     */
-    public function provides()
+    private function registerBladeDirective($formMethod)
     {
-        return ['genealabs-laravel-casts'];
+        if (array_key_exists($formMethod, Blade::getCustomDirectives())) {
+            throw new Exception("Blade directive '{$formMethod}' is already registered.");
+        }
+
+        app('blade.compiler')->directive($formMethod, function ($parameters) {
+            $parameters = (strlen(trim($parameters)) === 0 ?: '()');
+
+            return eval("return app('form')->{$formMethod}{$parameters};");
+        });
     }
 }
