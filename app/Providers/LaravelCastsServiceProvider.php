@@ -28,8 +28,10 @@ class LaravelCastsServiceProvider extends ServiceProvider
             __DIR__ . '/../../config/genealabs-laravel-casts.php' => config_path('genealabs-laravel-casts.php'),
         ], 'config');
 
-        $this->registerBladeDirective('form');
+        $this->registerBladeDirective('open', 'form');
+        $this->registerBladeDirective('hidden');
         $this->registerBladeDirective('modelForm');
+        $this->registerBladeDirective('text');
         $this->registerBladeDirective('email');
         $this->registerBladeDirective('url');
         $this->registerBladeDirective('date');
@@ -41,7 +43,7 @@ class LaravelCastsServiceProvider extends ServiceProvider
         $this->registerBladeDirective('cancel');
         $this->registerBladeDirective('select');
         $this->registerBladeDirective('selectRangeWithInterval');
-        $this->registerBladeDirective('endform');
+        $this->registerBladeDirective('close', 'endform');
     }
 
     /**
@@ -95,16 +97,21 @@ class LaravelCastsServiceProvider extends ServiceProvider
         });
     }
 
-    private function registerBladeDirective($formMethod)
+    /**
+     * @return string
+     */
+    private function registerBladeDirective($formMethod, $alias = null)
     {
-        if (array_key_exists($formMethod, Blade::getCustomDirectives())) {
-            throw new Exception("Blade directive '{$formMethod}' is already registered.");
+        $alias = $alias ?: $formMethod;
+
+        if (array_key_exists($alias, Blade::getCustomDirectives())) {
+            throw new Exception("Blade directive '{$alias}' is already registered.");
         }
 
-        app('blade.compiler')->directive($formMethod, function ($parameters) {
-            $parameters = (strlen(trim($parameters)) === 0 ?: '()');
+        app('blade.compiler')->directive($alias, function ($parameters) use ($formMethod) {
+            $parameters = trim($parameters, "()");
 
-            return eval("return app('form')->{$formMethod}{$parameters};");
+            return "<?= app('form')->{$formMethod}({$parameters}) ?>";
         });
     }
 }
