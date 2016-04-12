@@ -3,6 +3,7 @@
 use Collective\Html\FormBuilder as Form;
 use Illuminate\Support\HtmlString;
 use Illuminate\Support\MessageBag;
+use Illuminate\Support\Collection;
 
 class FormBuilder extends Form
 {
@@ -149,27 +150,7 @@ class FormBuilder extends Form
             return '';
         }
 
-        $options = collect($options)->filter(function ($value, $key) {
-            $rejects = ['label', 'form-control', 'form-control-error', 'form-control-success', 'form-control-feedback'];
-
-            return ((strtolower($key) === 'class') && ! in_array($value, $rejects));
-        });
-
-        $labelClasses = collect(explode(' ', array_get($options, 'class')));
-
-        if ($this->isHorizontalForm) {
-            $labelClasses[] = 'col-sm-' . $this->labelWidth;
-        }
-
-        if ($this->usesBootstrap3()) {
-            $labelClasses[] = 'control-label';
-        }
-
-        if ($this->usesBootstrap4() && $this->isHorizontalForm) {
-            $labelClasses[] = 'form-control-label';
-        }
-
-        $options = $this->setOptionClasses('', $options->toArray(), $labelClasses->toArray());
+        $options = $this->setLabelOptionClasses('', $options);
 
         return parent::label($name, $label, $options);
     }
@@ -332,6 +313,41 @@ class FormBuilder extends Form
 		}
 
         return $this->group(null, $cancelHtml, $controlHtml);
+    }
+
+    private function setLabelOptionClasses($name, array $options, array $addClasses = [])
+    {
+        $classes = explode(' ', array_get($options, 'class'));
+
+        foreach ($addClasses as $key => $class) {
+            if (! in_array($class, $classes)) {
+                $classes[] = $class;
+            }
+        }
+
+        if ($this->isHorizontalForm) {
+            $classes[] = 'col-sm-' . $this->labelWidth;
+        }
+
+        if ($this->usesBootstrap3()) {
+            $classes[] = 'control-label';
+        }
+
+        if ($this->usesBootstrap4() && $this->isHorizontalForm) {
+            $classes[] = 'form-control-label';
+        }
+
+
+        $classes = collect($classes)->filter(function ($value, $key) {
+            $rejects = ['label', 'form-control', 'form-control-error', 'form-control-success', 'form-control-feedback'];
+
+            return (! in_array($value, $rejects));
+        });
+
+        $classes = array_filter($classes->toArray());
+        $options['class'] = implode(' ', $classes);
+
+        return $options;
     }
 
     /**
