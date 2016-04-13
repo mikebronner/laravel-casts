@@ -164,6 +164,10 @@ class FormBuilder extends Form
      */
     public function text($name, $value = null, $options = [])
     {
+        if (! $value) {
+            $value = old($name);
+        }
+
         $this->framework = config('genealabs-laravel-casts.front-end-framework');
         $options = $this->setOptionClasses($name, $options, ['form-control']);
 
@@ -182,6 +186,10 @@ class FormBuilder extends Form
      */
     public function email($name, $value = null, $options = [])
     {
+        if (! $value) {
+            $value = old($name);
+        }
+
         $this->framework = config('genealabs-laravel-casts.front-end-framework');
         $options = $this->setOptionClasses($name, $options, ['form-control']);
         $labelHtml = $this->label($name, array_pull($options, 'label'));
@@ -200,6 +208,10 @@ class FormBuilder extends Form
      */
     public function combobox($name, $list = [], $selected = null, $options = [])
     {
+        if (! $selected) {
+            $selected = old($selected);
+        }
+
         $this->framework = config('genealabs-laravel-casts.front-end-framework');
         $options = $this->setOptionClasses($name, $options, ['form-control']);
         $options['multiple'] = '';
@@ -232,6 +244,10 @@ class FormBuilder extends Form
      */
     public function url($name, $value = null, $options = [])
     {
+        if (! $value) {
+            $value = old($name);
+        }
+
         $this->framework = config('genealabs-laravel-casts.front-end-framework');
         $options = $this->setOptionClasses($name, $options, ['form-control']);
         $labelHtml = $this->label($name, null, $options);
@@ -269,6 +285,10 @@ class FormBuilder extends Form
      */
     public function textarea($name, $value = null, $options = [])
     {
+        if (! $value) {
+            $value = old($name);
+        }
+
         $this->framework = config('genealabs-laravel-casts.front-end-framework');
         $options = $this->setOptionClasses($name, $options, ['form-control']);
         $labelHtml = $this->label($name, null, $options);
@@ -279,6 +299,10 @@ class FormBuilder extends Form
 
     public function checkbox($name, $value = 1, $checked = null, $options = [])
     {
+        if (! $value) {
+            $value = old($name);
+        }
+
         $this->framework = config('genealabs-laravel-casts.front-end-framework');
         $options = $this->setOptionClasses($name, $options);
         $label = $options['label'];
