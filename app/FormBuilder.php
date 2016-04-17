@@ -4,6 +4,8 @@ use Collective\Html\FormBuilder as Form;
 use Illuminate\Support\HtmlString;
 use Illuminate\Support\MessageBag;
 use Illuminate\Support\Collection;
+use Illuminate\Routing\UrlGenerator;
+use Illuminate\View\Factory;
 
 class FormBuilder extends Form
 {
@@ -13,6 +15,13 @@ class FormBuilder extends Form
     protected $fieldWidth = 9;
     protected $isHorizontalForm = false;
     protected $framework = 'none';
+
+    public function __construct(HtmlBuilder $html, UrlGenerator $url, Factory $view, $csrfToken)
+    {
+        parent::__construct($html, $url, $view, $csrfToken);
+
+        $this->errors = app('session')->get('errors', new MessageBag());
+    }
 
     /**
      * @param string $returnUrl
@@ -89,8 +98,6 @@ class FormBuilder extends Form
      */
     public function open(array $options = [])
     {
-        $this->errors = app('session')->get('errors', new MessageBag());
-
         if (array_key_exists('class', $options) && (strpos($options['class'], 'form-horizontal') !== false)) {
             $this->isHorizontalForm = true;
         }
@@ -119,6 +126,10 @@ class FormBuilder extends Form
     public function model($model, array $options = [])
     {
         $this->errors = app('session')->get('errors', new MessageBag());
+
+        if (! $this->errors) {
+            $this->errors = new Collection();
+        }
 
         if (array_key_exists('class', $options) && (strpos($options['class'], 'form-horizontal') !== false)) {
             $this->isHorizontalForm = true;
@@ -461,7 +472,11 @@ class FormBuilder extends Form
     }
 
     private function getErrorHtml($name) {
-        if (! $this->hasErrors() xor ! $this->errors->has($name)) {
+        if (! $this->hasErrors()) {
+            return '';
+        }
+
+        if (! $this->errors->has($name)) {
             return '';
         }
 
