@@ -21,6 +21,8 @@ class FormBuilder extends Form
         parent::__construct($html, $url, $view, $csrfToken);
 
         $this->errors = app('session')->get('errors', new MessageBag());
+        $this->framework = config('genealabs-laravel-casts.front-end-framework');
+        $this->isHorizontalForm = $this->usesBootstrap4();
     }
 
     /**
@@ -412,6 +414,14 @@ class FormBuilder extends Form
             }
         }
 
+        if (array_key_exists('labelWidth', $options)) {
+            $this->labelWidth = $options['labelWidth'];
+        }
+
+        if (array_key_exists('fieldWidth', $options)) {
+            $this->fieldWidth = $options['fieldWidth'];
+        }
+
         $classes = array_filter($classes);
         $options['class'] = implode(' ', $classes);
 
@@ -426,8 +436,8 @@ class FormBuilder extends Form
      */
     private function wrapFormControl($labelHtml, $controlHtml, $errorHtml = '')
     {
-        if (! $this->isHorizontalForm) {
-            return '';
+        if (! $this->isHorizontalForm && $this->usesBootstrap3()) {
+            return $controlHtml;
         }
 
         $offsetClass = $labelHtml ? '' : ' col-sm-offset-' . $this->labelWidth;
