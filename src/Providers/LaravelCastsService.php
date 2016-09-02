@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Event;
 use Blade;
 use Exception;
 
-class LaravelCastsServiceProvider extends ServiceProvider
+class LaravelCastsService extends ServiceProvider
 {
 
     /**
@@ -24,6 +24,7 @@ class LaravelCastsServiceProvider extends ServiceProvider
 
     public function boot()
     {
+        $this->loadViewsFrom(__DIR__ . '/../../resources/views', 'genealabs-laravel-casts');
         $this->publishes([
             __DIR__ . '/../../config/genealabs-laravel-casts.php' => config_path('genealabs-laravel-casts.php'),
         ], 'config');
@@ -45,6 +46,8 @@ class LaravelCastsServiceProvider extends ServiceProvider
         $this->registerBladeDirective('select');
         $this->registerBladeDirective('selectRangeWithInterval');
         $this->registerBladeDirective('close', 'endform');
+
+        $this->registerComponents();
     }
 
     /**
@@ -92,8 +95,7 @@ class LaravelCastsServiceProvider extends ServiceProvider
      */
     private function registerFormBuilder()
     {
-        $this->app->singleton('form', function($app)
-        {
+        $this->app->singleton('form', function ($app) {
             return new FormBuilder($app['html'], $app['url'], $app['view'], $app['session.store']->getToken());
         });
     }
@@ -114,5 +116,31 @@ class LaravelCastsServiceProvider extends ServiceProvider
 
             return "<?= app('form')->{$formMethod}({$parameters}) ?>";
         });
+    }
+
+    private function registerComponents()
+    {
+        $options = [
+            'type',
+            'controlHtml',
+            'name',
+            'value' => null,
+            'options' => [],
+            'fieldWidth' => 9,
+            'labelWidth' => 3,
+            'errors' => [],
+        ];
+
+        app('form')->component(
+            "bootstrap3Control",
+            "genealabs-laravel-casts::components.bootstrap3.control",
+            $options
+        );
+
+        app('form')->component(
+            "bootstrap4Control",
+            "genealabs-laravel-casts::components.bootstrap4.control",
+            $options
+        );
     }
 }

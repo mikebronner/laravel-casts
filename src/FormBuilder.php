@@ -1,6 +1,9 @@
 <?php namespace GeneaLabs\LaravelCasts;
 
 use Collective\Html\FormBuilder as Form;
+use GeneaLabs\LaravelCasts\Traits\CurrentFormBuilderMethods;
+use GeneaLabs\LaravelCasts\Traits\CurrentOrLtsLaravelVersion;
+use GeneaLabs\LaravelCasts\Traits\LtsFormBuilderMethods;
 use Illuminate\Support\HtmlString;
 use Illuminate\Support\MessageBag;
 use Illuminate\Support\Collection;
@@ -9,12 +12,16 @@ use Illuminate\View\Factory;
 
 class FormBuilder extends Form
 {
+    use CurrentFormBuilderMethods;
+    use CurrentOrLtsLaravelVersion;
+    use LtsFormBuilderMethods;
+
     protected $errors;
     protected $offset = 0;
     protected $labelWidth = 3;
     protected $fieldWidth = 9;
     protected $isHorizontalForm = false;
-    protected $framework = 'none';
+    protected $framework = 'bootstrap3';
 
     public function __construct(HtmlBuilder $html, UrlGenerator $url, Factory $view, $csrfToken)
     {
@@ -25,18 +32,25 @@ class FormBuilder extends Form
         $this->isHorizontalForm = $this->usesBootstrap4();
     }
 
-    /**
-     * @param string $returnUrl
-     *
-     * @return string
-     */
-    public function cancelButton($returnUrl = '')
-	{
-		return '<a href="' .
-            $this->url->previous() . '">' .
-            $this->button('Cancel', ['class' => 'btn btn-cancel   pull-right']) .
-            '</a>';
-	}
+    private function renderControlForLaravelCurrent(string $type, string $controlHtml, string $name, $value = '', array $options) : string
+    {
+        return call_user_func_array(
+            [$this, "{$this->framework}Control"],
+            [$type, $controlHtml, $name, $value, $options, $this->fieldWidth, $this->labelWidth, $this->errors]
+        );
+    }
+
+    private function renderControlForLaravelLts(string $type, string $controlHtml, string $name, $value = '', array $options) : string
+    {
+        $labelHtml = $this->label($name, null, $options);
+
+        return $this->group($name, $labelHtml, $controlHtml);
+    }
+
+    public function token()
+    {
+        return $this->hidden('_token', csrf_token());
+    }
 
     /**
      * @param string $name
@@ -49,24 +63,24 @@ class FormBuilder extends Form
      * @return string
      */
     public function selectRangeWithInterval($name, $start, $end, $interval, $value = null, $options = [])
-	{
+    {
         if ($interval == 0) {
             return parent::selectRange($name, $start, $end, $value, $options);
         }
 
-		$items = [];
-		$items[$value] = $value;
-		$startValue = $start;
+        $items = [];
+        $items[$value] = $value;
+        $startValue = $start;
         $endValue = $end;
         $interval *= ($interval < 0) ? -1 : 1;
 
-		if ($start > $end) {
-			$interval *= ($interval > 0) ? -1 : 1;
-			$startValue = $end;
+    	if ($start > $end) {
+    		$interval *= ($interval > 0) ? -1 : 1;
+    		$startValue = $end;
             $endValue = $start;
         }
 
-		for ($i=$startValue; $i<$endValue; $i+=$interval) {
+	    for ($i=$startValue; $i<$endValue; $i+=$interval) {
             $items[$i . ""] = $i;
         }
 
@@ -153,62 +167,30 @@ class FormBuilder extends Form
     }
 
 
-    public function label($name, $label = null, $options = [])
+    public function label($name, $label = null, $options = [], $escapeHtml = true)
     {
-        if (! $label) {
-            $label = array_pull($options, 'label');
-        }
+        $label = $label ?? array_pull($options, 'label') ?? '';
+        $options = $this->setLabelOptionClasses($options);
 
-        if (! $label) {
-            return '';
-        }
-
-        $options = $this->setLabelOptionClasses('', $options);
-
-        return parent::label($name, $label, $options);
+        return parent::label($name, $label, $options, $escapeHtml);
     }
 
-    /**
-     * @param string $name
-     * @param string $value
-     * @param array $options
-     *
-     * @return string
-     */
     public function text($name, $value = null, $options = [])
     {
-        if (! $value) {
-            $value = old($name);
-        }
-
         $this->framework = config('genealabs-laravel-casts.front-end-framework');
         $options = $this->setOptionClasses($name, $options, ['form-control']);
-
-        $labelHtml = $this->label($name, null, $options);
         $controlHtml = parent::text($name, $value, $options);
 
-        return $this->group($name, $labelHtml, $controlHtml);
+        return $this->renderControl('text', $controlHtml, $name, $value ?: old($name), $options);
     }
 
-    /**
-     * @param string $name
-     * @param string $value
-     * @param array $options
-     *
-     * @return string
-     */
     public function email($name, $value = null, $options = [])
     {
-        if (! $value) {
-            $value = old($name);
-        }
-
         $this->framework = config('genealabs-laravel-casts.front-end-framework');
         $options = $this->setOptionClasses($name, $options, ['form-control']);
-        $labelHtml = $this->label($name, array_pull($options, 'label'));
         $controlHtml = parent::email($name, $value, $options);
 
-        return $this->group($name, $labelHtml, $controlHtml);
+        return $this->renderControl('email', $controlHtml, $name, $value ?: old($name), $options);
     }
 
     /**
@@ -232,12 +214,6 @@ class FormBuilder extends Form
         return $this->select($name, $list, $selected, $options);
     }
 
-    /**
-     * @param string $name
-     * @param array $options
-     *
-     * @return string
-     */
     public function password($name, $options = [])
     {
         $this->framework = config('genealabs-laravel-casts.front-end-framework');
@@ -245,48 +221,25 @@ class FormBuilder extends Form
         $labelHtml = $this->label($name, null, $options);
         $controlHtml = parent::password($name, $options);
 
-        return $this->group($name, $labelHtml, $controlHtml);
+        return $this->renderControl('password', $controlHtml, $name, '', $options);
     }
 
-    /**
-     * @param string $name
-     * @param string $value
-     * @param array $options
-     *
-     * @return string
-     */
     public function url($name, $value = null, $options = [])
     {
-        if (! $value) {
-            $value = old($name);
-        }
-
         $this->framework = config('genealabs-laravel-casts.front-end-framework');
         $options = $this->setOptionClasses($name, $options, ['form-control']);
-        $labelHtml = $this->label($name, null, $options);
         $controlHtml = parent::url($name, $value, $options);
 
-        return $this->group($name, $labelHtml, $controlHtml);
+        return $this->renderControl('url', $controlHtml, $name, $value ?: old($name), $options);
     }
 
-    /**
-     * @param string $name
-     * @param array $options
-     *
-     * @return string
-     */
     public function file($name, $options = [])
     {
         $this->framework = config('genealabs-laravel-casts.front-end-framework');
         $options = $this->setOptionClasses($name, $options, ['form-control']);
-        $labelHtml = $this->label($name, null, $options);
         $controlHtml = parent::file($name, $options);
 
-        if ($this->$usesBootstrap4) {
-            $controlHtml = '<span class="file">' . $controlHtml . '<span class="file-custom"></span></span>';
-        }
-
-        return $this->group($name, $labelHtml, $controlHtml);
+        return $this->renderControl('file', $controlHtml, $name, '', $options);
     }
 
     /**
@@ -298,37 +251,22 @@ class FormBuilder extends Form
      */
     public function textarea($name, $value = null, $options = [])
     {
-        if (! $value) {
-            $value = old($name);
-        }
-
         $this->framework = config('genealabs-laravel-casts.front-end-framework');
         $options = $this->setOptionClasses($name, $options, ['form-control']);
-        $labelHtml = $this->label($name, null, $options);
         $controlHtml = parent::textarea($name, $value, $options);
 
-        return $this->group($name, $labelHtml, $controlHtml);
+        return $this->renderControl('textarea', $controlHtml, $name, $value ?: old($name), $options);
     }
 
     public function checkbox($name, $value = 1, $checked = null, $options = [])
     {
-        if (! $value) {
-            $value = old($name);
-        }
-
         $this->framework = config('genealabs-laravel-casts.front-end-framework');
         $options = $this->setOptionClasses($name, $options);
         $label = $options['label'];
         unset($options['label']);
-        $html = parent::checkbox($name, $value, $checked, $options);
+        $controlHtml = parent::checkbox($name, $value, $checked, $options) . " {$label}";
 
-        if ($this->framework === 'none') {
-            return $html;
-        }
-
-        $html = '<div class="checkbox"><label>' . $html . ' ' . $label . '</label></div>';
-
-        return $this->group($name, null, $html);
+        return $this->renderControl('checkbox', $controlHtml, $name, $value ?: old($name), $options);
     }
 
     /**
@@ -347,45 +285,11 @@ class FormBuilder extends Form
 
         if (! is_null($cancelUrl)) {
             $cancelHtml = link_to($cancelUrl, 'Cancel', ['class' => 'btn btn-cancel pull-right']);
-		}
+	    }
 
-        return $this->group(null, $cancelHtml, $controlHtml);
+        return $this->group('', $cancelHtml, $controlHtml);
     }
 
-    private function setLabelOptionClasses($name, array $options, array $addClasses = [])
-    {
-        $classes = explode(' ', array_get($options, 'class'));
-
-        foreach ($addClasses as $key => $class) {
-            if (! in_array($class, $classes)) {
-                $classes[] = $class;
-            }
-        }
-
-        if ($this->isHorizontalForm) {
-            $classes[] = 'col-sm-' . $this->labelWidth;
-        }
-
-        if ($this->usesBootstrap3()) {
-            $classes[] = 'control-label';
-        }
-
-        if ($this->usesBootstrap4() && $this->isHorizontalForm) {
-            $classes[] = 'form-control-label';
-        }
-
-
-        $classes = collect($classes)->filter(function ($value, $key) {
-            $rejects = ['label', 'form-control', 'form-control-error', 'form-control-success', 'form-control-feedback'];
-
-            return (! in_array($value, $rejects));
-        });
-
-        $classes = array_filter($classes->toArray());
-        $options['class'] = implode(' ', $classes);
-
-        return $options;
-    }
 
     /**
      * @param string $name
@@ -428,93 +332,42 @@ class FormBuilder extends Form
         return $options;
     }
 
-    /**
-    * @param string $label
-    * @param int    $fieldWidth
-     *
-     * @return string
-     */
-    private function wrapFormControl($labelHtml, $controlHtml, $errorHtml = '')
-    {
-        if (! $this->isHorizontalForm && $this->usesBootstrap3()) {
-            return $controlHtml;
-        }
-
-        $offsetClass = $labelHtml ? '' : ' col-sm-offset-' . $this->labelWidth;
-
-        return "<div class=\"col-sm-{$this->fieldWidth}{$offsetClass}\">{$controlHtml}{$errorHtml}</div>";
-    }
-
-    private function group($name, $labelHtml, $controlHtml)
-    {
-        $errorHtml = $this->getErrorHtml($name);
-        $formGroupClasses = $this->getFormGroupClasses($name);
-        $options = $this->setOptionClasses('', [], $formGroupClasses);
-        $attributes = $this->html->attributes($options);
-        $controlHtml = $this->wrapFormControl($labelHtml, $controlHtml, $errorHtml);
-
-        return "<div {$attributes}>{$labelHtml}{$controlHtml}</div>";
-    }
-
-    private function getFormGroupClasses($name)
-    {
-        $formGroupClasses = [];
-        $formGroupClasses[] = 'form-group';
-
-        if (! $this->errors->isEmpty() && ! $this->errors->has($name)) {
-            $formGroupClasses[] = 'has-success';
-        }
-
-        if ($this->errors->has($name) && $this->usesBootstrap3()) {
-            $formGroupClasses[] = 'has-feedback';
-            $formGroupClasses[] = 'has-error';
-        }
-
-        if ($this->errors->has($name) && $this->usesBootstrap4()) {
-            $formGroupClasses[] = 'has-danger';
-        }
-
-        if ($this->usesBootstrap4() && $this->isHorizontalForm) {
-            $formGroupClasses[] = 'row';
-        }
-
-        return $formGroupClasses;
-    }
-
-    private function getErrorHtml($name) {
-        if (! $this->hasErrors()) {
-            return '';
-        }
-
-        if (! $this->errors->has($name)) {
-            return '';
-        }
-
-        $errors = implode(' ', $this->errors->get($name));
-
-        if ($this->usesBootstrap3()) {
-            return "<span class=\"help-block\">{$errors}</span>";
-        }
-
-        if ($this->usesBootstrap4()) {
-            return "<small class=\"text-danger\"><em>{$errors}</em></small>";
-        }
-
-        return '';
-    }
-
-    private function hasErrors()
-    {
-        return (count($this->errors) > 0);
-    }
-
     private function usesBootstrap3()
     {
-        return ($this->framework === 'bootstrap-3');
+        return ($this->framework === 'bootstrap3');
     }
 
     private function usesBootstrap4()
     {
-        return ($this->framework === 'bootstrap-4');
+        return ($this->framework === 'bootstrap4');
+    }
+
+    private function setLabelOptionClasses(array $options)
+    {
+        $classes = explode(' ', array_get($options, 'class'));
+
+        if ($this->isHorizontalForm) {
+            $classes[] = 'col-sm-' . $this->labelWidth;
+        }
+
+        if ($this->usesBootstrap3()) {
+            $classes[] = 'control-label';
+        }
+
+        if ($this->usesBootstrap4() && $this->isHorizontalForm) {
+            $classes[] = 'form-control-label';
+        }
+
+
+        $classes = collect($classes)->filter(function ($value, $key) {
+            $rejects = ['label', 'form-control', 'form-control-error', 'form-control-success', 'form-control-feedback'];
+
+            return (! in_array($value, $rejects));
+        });
+
+        $classes = array_filter($classes->toArray());
+        $options['class'] = implode(' ', $classes);
+
+        return $options;
     }
 }

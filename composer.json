@@ -10,17 +10,16 @@
     ],
     "require": {
         "php": ">=5.5.9",
-        "illuminate/support": "~5.2",
-        "laravelcollective/html": "~5.2."
+        "illuminate/support": "5.3.*",
+        "laravelcollective/html": "5.3.*"
     },
     "require-dev": {
         "phpspec/phpspec": "*"
     },
     "autoload": {
-        "classmap": [
-        ],
+        "classmap": [],
         "psr-4": {
-            "GeneaLabs\\LaravelCasts\\": "app/"
+            "GeneaLabs\\LaravelCasts\\": "src/"
         }
     },
     "minimum-stability": "stable"
