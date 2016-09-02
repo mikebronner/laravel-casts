@@ -233,8 +233,6 @@ class FormBuilder extends Form
 
         // TODO: render cancel and reset buttons.
         return $this->renderControl('submit', $controlHtml, '', '', $options);
-        //
-        // return $this->group('', $cancelHtml, $controlHtml);
     }
 
     public function cancelButton($returnUrl = '')

@@ -6,7 +6,7 @@ trait CurrentOrLtsLaravelVersion
 {
     public function __call($method, $arguments)
     {
-        if (static::hasComponent($method)) {
+        if (method_exists($this, 'hasComponent') && static::hasComponent($method)) {
             return $this->renderComponent($method, $arguments);
         }
 

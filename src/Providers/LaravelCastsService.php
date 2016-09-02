@@ -24,7 +24,12 @@ class LaravelCastsService extends ServiceProvider
 
     public function boot()
     {
-        $this->loadViewsFrom(__DIR__ . '/../../resources/views', 'genealabs-laravel-casts');
+        $laravelIsCurrent = starts_with(app()->version(), '5.3.');
+
+        if ($laravelIsCurrent) {
+            $this->loadViewsFrom(__DIR__ . '/../../resources/views', 'genealabs-laravel-casts');
+        }
+
         $this->publishes([
             __DIR__ . '/../../config/genealabs-laravel-casts.php' => config_path('genealabs-laravel-casts.php'),
         ], 'config');
@@ -47,7 +52,9 @@ class LaravelCastsService extends ServiceProvider
         $this->registerBladeDirective('selectRangeWithInterval');
         $this->registerBladeDirective('close', 'endform');
 
-        $this->registerComponents();
+        if ($laravelIsCurrent) {
+            $this->registerComponents();
+        }
     }
 
     /**

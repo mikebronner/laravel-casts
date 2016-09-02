@@ -1,8 +1,8 @@
 # Laravel Casts
 ## Installation
-To install in Laravel 5.0+:
+To install in Laravel 5.1 (lts) or Laravel 5.3 (current):
 ```sh
-composer require "genealabs/bones-macros":"0.1.*"
+composer require genealabs/laravel-casts
 ```
 
 ## Work In Progress

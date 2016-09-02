@@ -4,9 +4,11 @@ trait LtsFormBuilderMethods
 {
     private function renderControlForLaravelLts(string $type, string $controlHtml, string $name, $value = '', array $options) : string
     {
-        $labelHtml = $this->label($name, null, $options);
+        if ($type !== 'checkbox' && $type !== 'submit') {
+            $labelHtml = $this->label($name, null, $options);
+        }
 
-        return $this->group($name, $labelHtml, $controlHtml);
+        return $this->group($name, $labelHtml ?? '', $controlHtml);
     }
 
     private function wrapFormControl(string $labelHtml, string $controlHtml, $errorHtml = '') : string
@@ -145,7 +147,7 @@ trait LtsFormBuilderMethods
         }
 
 
-        $classes = collect($classes)->filter(function ($value, $key) {
+        $classes = collect($classes)->filter(function ($value, $key = null) {
             $rejects = ['label', 'form-control', 'form-control-error', 'form-control-success', 'form-control-feedback'];
 
             return (! in_array($value, $rejects));
