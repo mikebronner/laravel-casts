@@ -1,6 +1,6 @@
 @include('genealabs-laravel-casts::components.bootstrap3.form-group-open')
 
-@if($type !== 'checkbox')
+@if($type !== 'checkbox' && $type !== 'submit')
     @include('genealabs-laravel-casts::components.bootstrap3.label')
 @endif
 
