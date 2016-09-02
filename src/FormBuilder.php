@@ -21,15 +21,15 @@ class FormBuilder extends Form
     protected $labelWidth = 3;
     protected $fieldWidth = 9;
     protected $isHorizontalForm = false;
-    protected $framework = 'bootstrap3';
+    protected $framework; // = 'bootstrap3';
 
     public function __construct(HtmlBuilder $html, UrlGenerator $url, Factory $view, $csrfToken)
     {
         parent::__construct($html, $url, $view, $csrfToken);
 
         $this->errors = app('session')->get('errors', new MessageBag());
-        $this->framework = config('genealabs-laravel-casts.front-end-framework');
-        $this->isHorizontalForm = $this->usesBootstrap4();
+        // $this->framework = config('genealabs-laravel-casts.front-end-framework');
+        // $this->isHorizontalForm = $this->usesBootstrap4();
     }
 
     private function renderControlForLaravelCurrent(string $type, string $controlHtml, string $name, $value = '', array $options) : string
@@ -74,7 +74,7 @@ class FormBuilder extends Form
 
     public function select($name, $list = [], $selected = null, $options = [])
     {
-        $this->framework = config('genealabs-laravel-casts.front-end-framework');
+        // $this->framework = config('genealabs-laravel-casts.front-end-framework');
         $options = $this->setOptionClasses($name, $options, ['form-control']);
         $labelHtml = $this->label($name, array_pull($options, 'label'));
         $controlHtml = parent::select($name, $list, $selected, $options);
@@ -90,6 +90,10 @@ class FormBuilder extends Form
 
         if (array_key_exists('offset', $options)) {
             $this->offset = $options['offset'];
+        }
+
+        if (array_key_exists('framework', $options)) {
+            $this->framework = $options['framework'];
         }
 
         if (array_key_exists('labelWidth', $options)) {
@@ -127,6 +131,10 @@ class FormBuilder extends Form
             $this->fieldWidth = $options['fieldWidth'];
         }
 
+        if (array_key_exists('framework', $options)) {
+            $this->framework = $options['framework'];
+        }
+
         return parent::model($model, $options);
     }
 
@@ -141,7 +149,6 @@ class FormBuilder extends Form
 
     public function text($name, $value = null, $options = [])
     {
-        $this->framework = config('genealabs-laravel-casts.front-end-framework');
         $options = $this->setOptionClasses($name, $options, ['form-control']);
         $controlHtml = parent::text($name, $value, $options);
 
@@ -150,7 +157,6 @@ class FormBuilder extends Form
 
     public function email($name, $value = null, $options = [])
     {
-        $this->framework = config('genealabs-laravel-casts.front-end-framework');
         $options = $this->setOptionClasses($name, $options, ['form-control']);
         $controlHtml = parent::email($name, $value, $options);
 
@@ -159,20 +165,14 @@ class FormBuilder extends Form
 
     public function combobox($name, $list = [], $selected = null, $options = [])
     {
-        if (! $selected) {
-            $selected = old($selected);
-        }
-
-        $this->framework = config('genealabs-laravel-casts.front-end-framework');
         $options = $this->setOptionClasses($name, $options, ['form-control']);
         $options['multiple'] = '';
 
-        return $this->select($name, $list, $selected, $options);
+        return $this->select($name, $list, $selected ?? old($selected), $options);
     }
 
     public function password($name, $options = [])
     {
-        $this->framework = config('genealabs-laravel-casts.front-end-framework');
         $options = $this->setOptionClasses($name, $options, ['form-control']);
         $labelHtml = $this->label($name, null, $options);
         $controlHtml = parent::password($name, $options);
@@ -182,7 +182,6 @@ class FormBuilder extends Form
 
     public function url($name, $value = null, $options = [])
     {
-        $this->framework = config('genealabs-laravel-casts.front-end-framework');
         $options = $this->setOptionClasses($name, $options, ['form-control']);
         $controlHtml = parent::url($name, $value, $options);
 
@@ -191,8 +190,7 @@ class FormBuilder extends Form
 
     public function file($name, $options = [])
     {
-        $this->framework = config('genealabs-laravel-casts.front-end-framework');
-        $options = $this->setOptionClasses($name, $options, ['form-control']);
+        $options = $this->setOptionClasses($name, $options, ['form-control form-control-file']);
         $controlHtml = parent::file($name, $options);
 
         return $this->renderControl('file', $controlHtml, $name, '', $options);
@@ -200,7 +198,6 @@ class FormBuilder extends Form
 
     public function textarea($name, $value = null, $options = [])
     {
-        $this->framework = config('genealabs-laravel-casts.front-end-framework');
         $options = $this->setOptionClasses($name, $options, ['form-control']);
         $controlHtml = parent::textarea($name, $value, $options);
 
@@ -209,8 +206,7 @@ class FormBuilder extends Form
 
     public function checkbox($name, $value = 1, $checked = null, $options = [])
     {
-        $this->framework = config('genealabs-laravel-casts.front-end-framework');
-        $options = $this->setOptionClasses($name, $options);
+        $options = $this->setOptionClasses($name, $options, ['form-check-input']);
         $label = $options['label'];
         unset($options['label']);
         $controlHtml = parent::checkbox($name, $value, $checked, $options) . " {$label}";
@@ -222,7 +218,6 @@ class FormBuilder extends Form
     {
         $cancelUrl = array_key_exists('cancelUrl', $options) ? $options['cancelUrl'] : null;
         $cancelHtml = '';
-        $this->framework = config('genealabs-laravel-casts.front-end-framework');
         $options = $this->setOptionClasses('', $options, ['btn', 'btn-primary']);
         $controlHtml = parent::submit($value, $options);
         unset($options['label']);
@@ -241,5 +236,77 @@ class FormBuilder extends Form
                 $this->url->previous() . '">' .
                 $this->button('Cancel', ['class' => 'btn btn-cancel   pull-right']) .
                 '</a>';
+    }
+
+    private function setOptionClasses(string $name, array $options, array $addClasses = []) : array
+    {
+        $classes = [];
+
+        if (array_key_exists('class', $options)) {
+            $classes = explode(' ', $options['class']);
+        }
+
+        if (count($this->errors)) {
+            if ($this->framework === 'bootstrap-4') {
+                $classes[] = $this->errors->has($name) ? 'form-control-error' : 'form-control-success';
+            }
+        }
+
+        foreach ($addClasses as $key => $class) {
+            if (! in_array($class, $classes)) {
+                $classes[] = $class;
+            }
+        }
+
+        if (array_key_exists('labelWidth', $options)) {
+            $this->labelWidth = $options['labelWidth'];
+        }
+
+        if (array_key_exists('fieldWidth', $options)) {
+            $this->fieldWidth = $options['fieldWidth'];
+        }
+
+        $classes = array_filter($classes);
+        $options['class'] = implode(' ', $classes);
+
+        return $options;
+    }
+
+    private function usesBootstrap3()
+    {
+        return ($this->framework === 'bootstrap3');
+    }
+
+    private function usesBootstrap4()
+    {
+        return ($this->framework === 'bootstrap4');
+    }
+
+    private function setLabelOptionClasses(array $options)
+    {
+        $classes = explode(' ', array_get($options, 'class'));
+
+        if ($this->isHorizontalForm) {
+            $classes[] = 'col-sm-' . $this->labelWidth;
+        }
+
+        if ($this->usesBootstrap3()) {
+            $classes[] = 'control-label';
+        }
+
+        if ($this->usesBootstrap4() && $this->isHorizontalForm) {
+            $classes[] = 'col-form-label';
+        }
+
+        $classes = collect($classes)->filter(function ($value, $key = null) {
+            $rejects = ['label', 'form-control', 'form-control-error', 'form-control-success', 'form-control-feedback'];
+
+            return (! in_array($value, $rejects));
+        });
+
+        $classes = array_filter($classes->toArray());
+        $options['class'] = implode(' ', $classes);
+
+        return $options;
     }
 }

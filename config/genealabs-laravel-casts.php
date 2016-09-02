@@ -7,5 +7,5 @@ return [
      *      none, bootstrap3, bootstrap4
      */
 
-    'front-end-framework' => 'bootstrap3',
+    // 'front-end-framework' => 'bootstrap3',
 ];
