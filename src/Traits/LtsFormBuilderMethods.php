@@ -9,10 +9,11 @@ trait LtsFormBuilderMethods
         }
 
         if ($type === 'checkbox') {
-            $controlHtml = $this->usesBootstrap4()
+            $openLabel = $this->usesBootstrap4()
                 ? '<label class="form-check-label">'
                 : '<label>';
-            $controlHtml .= $controlHtml . '</label>';
+            $closeLabel = '</label>';
+            $controlHtml = $openLabel . $controlHtml . $closeLabel;
         }
 
         return $this->group($name, $labelHtml ?? '', $controlHtml);
