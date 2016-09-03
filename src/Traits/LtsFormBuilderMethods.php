@@ -8,6 +8,13 @@ trait LtsFormBuilderMethods
             $labelHtml = $this->label($name, null, $options);
         }
 
+        if ($type === 'checkbox') {
+            $controlHtml = $this->usesBootstrap4()
+                ? '<label class="form-check-label">'
+                : '<label>';
+            $controlHtml .= $controlHtml . '</label>';
+        }
+
         return $this->group($name, $labelHtml ?? '', $controlHtml);
     }
 
@@ -18,6 +25,10 @@ trait LtsFormBuilderMethods
         }
 
         $offsetClass = $labelHtml ? '' : ' col-sm-offset-' . $this->labelWidth;
+
+        if ($this->usesBootstrap4()) {
+            $offsetClass = $labelHtml ? '' : ' offset-sm-' . $this->labelWidth;
+        }
 
         return "<div class=\"col-sm-{$this->fieldWidth}{$offsetClass}\">{$controlHtml}{$errorHtml}</div>";
     }
@@ -75,7 +86,7 @@ trait LtsFormBuilderMethods
         }
 
         if ($this->usesBootstrap4()) {
-            return "<small class=\"text-danger\"><em>{$errors}</em></small>";
+            return "<small class=\"form-text text-danger\"><em>{$errors}</em></small>";
         }
 
         return '';
