@@ -28,12 +28,15 @@ class FormBuilder extends Form
         parent::__construct($html, $url, $view, $csrfToken);
 
         $this->errors = app('session')->get('errors', new MessageBag());
-        // $this->framework = config('genealabs-laravel-casts.front-end-framework');
-        // $this->isHorizontalForm = $this->usesBootstrap4();
     }
 
-    private function renderControlForLaravelCurrent(string $type, string $controlHtml, string $name, $value = '', array $options) : string
-    {
+    private function renderControlForLaravelCurrent(
+        string $type,
+        string $controlHtml,
+        string $name,
+        $value = '',
+        array $options = []
+    ) : string {
         return call_user_func_array(
             [$this, "{$this->framework}Control"],
             [$type, $controlHtml, $name, $value, $options, $this->fieldWidth, $this->labelWidth, $this->errors]
@@ -45,8 +48,14 @@ class FormBuilder extends Form
         return $this->hidden('_token', csrf_token());
     }
 
-    public function selectRangeWithInterval(string $name, int $start, int $end, int $interval, int $value = null, array $options = []) : string
-    {
+    public function selectRangeWithInterval(
+        string $name,
+        int $start,
+        int $end,
+        int $interval,
+        int $value = null,
+        array $options = []
+    ) : string {
         if ($interval == 0) {
             return parent::selectRange($name, $start, $end, $value, $options);
         }
@@ -150,7 +159,10 @@ class FormBuilder extends Form
     public function text($name, $value = null, $options = [])
     {
         $options = $this->setOptionClasses($name, $options, ['form-control']);
-        $controlHtml = parent::text($name, $value, $options);
+        $controlOptions = array_filter($options, function ($key) {
+            return ($key !== 'label');
+        }, ARRAY_FILTER_USE_KEY);
+        $controlHtml = parent::text($name, $value, $controlOptions);
 
         return $this->renderControl('text', $controlHtml, $name, $value ?: old($name), $options);
     }
@@ -158,7 +170,8 @@ class FormBuilder extends Form
     public function email($name, $value = null, $options = [])
     {
         $options = $this->setOptionClasses($name, $options, ['form-control']);
-        $controlHtml = parent::email($name, $value, $options);
+        $controlOptions = $this->getControlOptions(collect($options));
+        $controlHtml = parent::email($name, $value, $controlOptions->toArray());
 
         return $this->renderControl('email', $controlHtml, $name, $value ?: old($name), $options);
     }
@@ -174,8 +187,8 @@ class FormBuilder extends Form
     public function password($name, $options = [])
     {
         $options = $this->setOptionClasses($name, $options, ['form-control']);
-        $labelHtml = $this->label($name, null, $options);
-        $controlHtml = parent::password($name, $options);
+        $controlOptions = $this->getControlOptions(collect($options));
+        $controlHtml = parent::password($name, $controlOptions->toArray());
 
         return $this->renderControl('password', $controlHtml, $name, '', $options);
     }
@@ -183,7 +196,8 @@ class FormBuilder extends Form
     public function url($name, $value = null, $options = [])
     {
         $options = $this->setOptionClasses($name, $options, ['form-control']);
-        $controlHtml = parent::url($name, $value, $options);
+        $controlOptions = $this->getControlOptions(collect($options));
+        $controlHtml = parent::url($name, $value, $controlOptions->toArray());
 
         return $this->renderControl('url', $controlHtml, $name, $value ?: old($name), $options);
     }
@@ -191,7 +205,8 @@ class FormBuilder extends Form
     public function file($name, $options = [])
     {
         $options = $this->setOptionClasses($name, $options, ['form-control form-control-file']);
-        $controlHtml = parent::file($name, $options);
+        $controlOptions = $this->getControlOptions(collect($options), ['placeholder']);
+        $controlHtml = parent::file($name, $controlOptions->toArray());
 
         return $this->renderControl('file', $controlHtml, $name, '', $options);
     }
@@ -199,7 +214,8 @@ class FormBuilder extends Form
     public function textarea($name, $value = null, $options = [])
     {
         $options = $this->setOptionClasses($name, $options, ['form-control']);
-        $controlHtml = parent::textarea($name, $value, $options);
+        $controlOptions = $this->getControlOptions(collect($options));
+        $controlHtml = parent::textarea($name, $value, $controlOptions->toArray());
 
         return $this->renderControl('textarea', $controlHtml, $name, $value ?: old($name), $options);
     }
@@ -208,8 +224,8 @@ class FormBuilder extends Form
     {
         $options = $this->setOptionClasses($name, $options, ['form-check-input']);
         $label = $options['label'];
-        unset($options['label']);
-        $controlHtml = parent::checkbox($name, $value, $checked, $options) . " {$label}";
+        $controlOptions = $this->getControlOptions(collect($options), ['form-control', 'placeholder']);
+        $controlHtml = parent::checkbox($name, $value, $checked, $controlOptions->toArray()) . " {$label}";
 
         return $this->renderControl('checkbox', $controlHtml, $name, $value ?: old($name), $options);
     }
@@ -219,8 +235,8 @@ class FormBuilder extends Form
         $cancelUrl = array_key_exists('cancelUrl', $options) ? $options['cancelUrl'] : null;
         $cancelHtml = '';
         $options = $this->setOptionClasses('', $options, ['btn', 'btn-primary']);
-        $controlHtml = parent::submit($value, $options);
-        unset($options['label']);
+        $controlOptions = $this->getControlOptions(collect($options));
+        $controlHtml = parent::submit($value, $controlOptions->toArray());
 
         if (! is_null($cancelUrl)) {
             $cancelHtml = link_to($cancelUrl, 'Cancel', ['class' => 'btn btn-cancel pull-right']);
@@ -299,14 +315,42 @@ class FormBuilder extends Form
         }
 
         $classes = collect($classes)->filter(function ($value, $key = null) {
-            $rejects = ['label', 'form-control', 'form-control-error', 'form-control-success', 'form-control-feedback'];
+            $rejects = [
+                'form-control',
+                'form-control-error',
+                'form-control-success',
+                'form-control-feedback',
+                'form-control-file',
+            ];
 
             return (! in_array($value, $rejects));
         });
 
         $classes = array_filter($classes->toArray());
         $options['class'] = implode(' ', $classes);
+        $options = array_filter($options, function ($key) {
+            $exclusions = collect([
+                'label',
+                'placeholder',
+            ])->flip();
+
+            return (! $exclusions->has($key));
+        }, ARRAY_FILTER_USE_KEY);
 
         return $options;
+    }
+
+    private function getControlOptions(Collection $options, array $additionalExclusions = []) : Collection
+    {
+        $additionalExclusions = collect($additionalExclusions)->flip();
+
+        return $options->filter(function ($value, $key) use ($additionalExclusions) {
+            $excludedKeys = collect([
+                'label' => '',
+            ]);
+            $excludedKeys = $excludedKeys->merge($additionalExclusions);
+
+            return (! $excludedKeys->has($key));
+        });
     }
 }

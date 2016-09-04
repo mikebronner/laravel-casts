@@ -19,7 +19,8 @@
     "autoload": {
         "classmap": [],
         "psr-4": {
-            "GeneaLabs\\LaravelCasts\\": "src/"
+            "GeneaLabs\\LaravelCasts\\": "src/",
+            "GeneaLabs\\LaravelCasts\\Tests\\": "tests/"
         }
     },
     "minimum-stability": "stable"

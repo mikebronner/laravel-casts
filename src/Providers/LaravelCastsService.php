@@ -14,16 +14,13 @@ use Exception;
 
 class LaravelCastsService extends ServiceProvider
 {
-
-    /**
-     * Indicates if loading of the provider is deferred.
-     *
-     * @var bool
-     */
     protected $defer = false;
 
     public function boot()
     {
+
+        include __DIR__ . '/../../routes/web.php';
+
         $laravelIsCurrent = starts_with(app()->version(), '5.3.');
 
         if ($laravelIsCurrent) {
@@ -49,7 +46,9 @@ class LaravelCastsService extends ServiceProvider
         $this->registerBladeDirective('submit');
         $this->registerBladeDirective('cancel');
         $this->registerBladeDirective('select');
+        $this->registerBladeDirective('selectRange');
         $this->registerBladeDirective('selectRangeWithInterval');
+        $this->registerBladeDirective('combobox');
         $this->registerBladeDirective('close', 'endform');
 
         if ($laravelIsCurrent) {
@@ -57,11 +56,6 @@ class LaravelCastsService extends ServiceProvider
         }
     }
 
-    /**
-     * Register the service provider.
-     *
-     * @return void
-     */
     public function register()
     {
         $this->mergeConfigFrom(__DIR__ . '/../../config/genealabs-laravel-casts.php', 'genealabs-laravel-casts');
@@ -72,34 +66,18 @@ class LaravelCastsService extends ServiceProvider
         AliasLoader::getInstance()->alias('HTML', HtmlFacade::class);
     }
 
-    /**
-     * Get the services provided by the provider.
-     *
-     * @return array
-     */
-    public function provides()
+    public function provides() : array
     {
         return ['genealabs-laravel-casts'];
     }
 
-    /**
-     * Register the HTML builder instance.
-     *
-     * @return void
-     */
     private function registerHtmlBuilder()
     {
-        $this->app->singleton('html', function($app)
-        {
+        $this->app->singleton('html', function ($app) {
             return new HtmlBuilder($app['url'], $app['view']);
         });
     }
 
-    /**
-     * Register the form builder instance.
-     *
-     * @return void
-     */
     private function registerFormBuilder()
     {
         $this->app->singleton('form', function ($app) {
@@ -107,9 +85,6 @@ class LaravelCastsService extends ServiceProvider
         });
     }
 
-    /**
-     * @return string
-     */
     private function registerBladeDirective($formMethod, $alias = null)
     {
         $alias = $alias ?: $formMethod;
