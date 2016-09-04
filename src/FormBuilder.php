@@ -83,7 +83,6 @@ class FormBuilder extends Form
 
     public function select($name, $list = [], $selected = null, $options = [])
     {
-        // $this->framework = config('genealabs-laravel-casts.front-end-framework');
         $options = $this->setOptionClasses($name, $options, ['form-control']);
         $labelHtml = $this->label($name, array_pull($options, 'label'));
         $controlHtml = parent::select($name, $list, $selected, $options);
@@ -103,6 +102,10 @@ class FormBuilder extends Form
 
         if (array_key_exists('framework', $options)) {
             $this->framework = $options['framework'];
+        }
+
+        if ($this->usesBootstrap4()) {
+            $this->isHorizontalForm = true;
         }
 
         if (array_key_exists('labelWidth', $options)) {
@@ -222,7 +225,8 @@ class FormBuilder extends Form
 
     public function checkbox($name, $value = 1, $checked = null, $options = [])
     {
-        $options = $this->setOptionClasses($name, $options, ['form-check-input']);
+        $additionalClasses = $this->usesBootstrap4() ? 'form-check-input' : '';
+        $options = $this->setOptionClasses($name, $options, [$additionalClasses]);
         $label = $options['label'];
         $controlOptions = $this->getControlOptions(collect($options), ['form-control', 'placeholder']);
         $controlHtml = parent::checkbox($name, $value, $checked, $controlOptions->toArray()) . " {$label}";
