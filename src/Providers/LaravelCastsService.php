@@ -18,14 +18,15 @@ class LaravelCastsService extends ServiceProvider
 
     public function boot()
     {
-        $laravelIsCurrent = starts_with(app()->version(), '5.3.');
-        $routesPath = __DIR__ . '/../../routes/web.php';
+        if (app()->environment('testing', 'local', 'development')) {
+            $routesPath = __DIR__ . '/../../routes/web.php';
 
-        if (starts_with(app()->version(), '5.1.')) {
-            $routesPath = __DIR__ . '/../../routes/no-middleware-group.php';
+            if (starts_with(app()->version(), '5.1.')) {
+                $routesPath = __DIR__ . '/../../routes/no-middleware-group.php';
+            }
+
+            require($routesPath);
         }
-
-        require($routesPath);
 
         $this->loadViewsFrom(__DIR__ . '/../../resources/views', 'genealabs-laravel-casts');
         $this->publishes([
@@ -52,7 +53,7 @@ class LaravelCastsService extends ServiceProvider
         $this->registerBladeDirective('combobox');
         $this->registerBladeDirective('close', 'endform');
 
-        if ($laravelIsCurrent) {
+        if (starts_with(app()->version(), '5.3.')) {
             $this->registerComponents();
         }
     }
