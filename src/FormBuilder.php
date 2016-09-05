@@ -21,7 +21,7 @@ class FormBuilder extends Form
     protected $labelWidth = 3;
     protected $fieldWidth = 9;
     protected $isHorizontalForm = false;
-    protected $framework; // = 'bootstrap3';
+    protected $framework = 'vanilla';
 
     public function __construct(HtmlBuilder $html, UrlGenerator $url, Factory $view, $csrfToken)
     {

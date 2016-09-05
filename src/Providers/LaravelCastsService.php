@@ -122,5 +122,11 @@ class LaravelCastsService extends ServiceProvider
             "genealabs-laravel-casts::components.bootstrap4.control",
             $options
         );
+
+        app('form')->component(
+            "vanillaControl",
+            "genealabs-laravel-casts::components.vanilla.control",
+            $options
+        );
     }
 }

@@ -8,4 +8,8 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/genealabs/laravel-casts/examples/bootstrap4', function () {
         return view('genealabs-laravel-casts::examples.bootstrap4');
     });
+
+    Route::get('/genealabs/laravel-casts/examples/vanilla', function () {
+        return view('genealabs-laravel-casts::examples.vanilla');
+    });
 });
