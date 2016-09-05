@@ -1,27 +1,26 @@
-<?php namespace GeneaLabs\LaravelCasts\Tests;
+<?php namespace GeneaLabs\LaravelCasts\Tests\Laravel5_3;
 
 // use Illuminate\Foundation\Testing\WithoutMiddleware;
 // use Illuminate\Foundation\Testing\DatabaseMigrations;
 // use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-class Bootstrap3Test extends TestCase
+class vanillaTest extends TestCase
 {
     public function testFormClose()
     {
-        $result = $this->visit('/genealabs/laravel-casts/examples/bootstrap3')
+        $result = $this->visit('/genealabs/laravel-casts/examples/vanilla')
             ->see('</form>')
             ->seeStatusCode('200');
     }
 
     public function testFormOpen()
     {
-        $this->visit('/genealabs/laravel-casts/examples/bootstrap3')
+        $this->visit('/genealabs/laravel-casts/examples/vanilla')
             ->seeElement('form', [
                 'method' => 'POST',
                 'action' => 'http://localhost',
                 'accept-charset' => 'UTF-8',
                 'class' => 'form-horizontal',
-                'framework' => 'bootstrap3',
             ])
             ->seeElement('input', [
                 'name' => '_token',
@@ -31,7 +30,7 @@ class Bootstrap3Test extends TestCase
 
     public function testTextInputWithLabel()
     {
-        $this->visit('/genealabs/laravel-casts/examples/bootstrap3')
+        $this->visit('/genealabs/laravel-casts/examples/vanilla')
             ->seeElement('input', [
                 'type' => 'text',
                 'name' => 'text',
@@ -43,7 +42,7 @@ class Bootstrap3Test extends TestCase
                 'name' => 'text',
                 'label' => 'Text Input',
             ])
-            ->seeElement('label', [
+            ->dontSeeElement('label', [
                 'for' => 'text',
                 'class' => 'col-sm-3 control-label',
             ])
@@ -52,16 +51,12 @@ class Bootstrap3Test extends TestCase
                 'class' => 'col-sm-3 control-label',
                 'placeholder' => 'Placeholder Text',
             ])
-            ->seeInElement(
-                'label[for=text][class="col-sm-3 control-label"]',
-                'Text Input'
-            )
             ->seeStatusCode('200');
     }
 
     public function testPasswordInput()
     {
-        $this->visit('/genealabs/laravel-casts/examples/bootstrap3')
+        $this->visit('/genealabs/laravel-casts/examples/vanilla')
             ->seeElement('input', [
                 'placeholder' => 'Placeholder Text',
                 'class' => 'form-control',
@@ -74,7 +69,7 @@ class Bootstrap3Test extends TestCase
                 'name' => 'password',
                 'type' => 'password',
             ])
-            ->seeElement('label', [
+            ->dontSeeElement('label', [
                 'for' => 'password',
                 'class' => 'col-sm-3 control-label',
             ])
@@ -82,16 +77,12 @@ class Bootstrap3Test extends TestCase
                 'for' => 'password',
                 'placeholder' => 'Placeholder Text',
             ])
-            ->seeInElement(
-                'label[for=password][class="col-sm-3 control-label"]',
-                'Password'
-            )
             ->seeStatusCode('200');
     }
 
     public function testEmailInput()
     {
-        $this->visit('/genealabs/laravel-casts/examples/bootstrap3')
+        $this->visit('/genealabs/laravel-casts/examples/vanilla')
             ->seeElement('input', [
                 'placeholder' => 'Placeholder Text',
                 'class' => 'form-control',
@@ -104,7 +95,7 @@ class Bootstrap3Test extends TestCase
                 'name' => 'email',
                 'type' => 'email',
             ])
-            ->seeElement('label', [
+            ->dontSeeElement('label', [
                 'for' => 'email',
                 'class' => 'col-sm-3 control-label',
             ])
@@ -112,16 +103,12 @@ class Bootstrap3Test extends TestCase
                 'for' => 'email',
                 'placeholder' => 'Placeholder Text',
             ])
-            ->seeInElement(
-                'label[for=email][class="col-sm-3 control-label"]',
-                'Email Input'
-            )
             ->seeStatusCode('200');
     }
 
     public function testUrlInput()
     {
-        $this->visit('/genealabs/laravel-casts/examples/bootstrap3')
+        $this->visit('/genealabs/laravel-casts/examples/vanilla')
             ->seeElement('input', [
                 'placeholder' => 'Placeholder Text',
                 'class' => 'form-control',
@@ -134,7 +121,7 @@ class Bootstrap3Test extends TestCase
                 'name' => 'url',
                 'type' => 'url',
             ])
-            ->seeElement('label', [
+            ->dontSeeElement('label', [
                 'for' => 'url',
                 'class' => 'col-sm-3 control-label',
             ])
@@ -142,16 +129,12 @@ class Bootstrap3Test extends TestCase
                 'for' => 'url',
                 'placeholder' => 'Placeholder Text',
             ])
-            ->seeInElement(
-                'label[for=url][class="col-sm-3 control-label"]',
-                'Url Input'
-            )
             ->seeStatusCode('200');
     }
 
     public function testFileInput()
     {
-        $this->visit('/genealabs/laravel-casts/examples/bootstrap3')
+        $this->visit('/genealabs/laravel-casts/examples/vanilla')
             ->seeElement('input', [
                 'class' => 'form-control form-control-file',
                 'name' => 'file',
@@ -167,7 +150,7 @@ class Bootstrap3Test extends TestCase
                 'name' => 'file',
                 'type' => 'file',
             ])
-            ->seeElement('label', [
+            ->dontSeeElement('label', [
                 'for' => 'file',
                 'class' => 'col-sm-3 control-label',
             ])
@@ -175,16 +158,12 @@ class Bootstrap3Test extends TestCase
                 'for' => 'file',
                 'placeholder' => 'Placeholder Text',
             ])
-            ->seeInElement(
-                'label[for=file][class="col-sm-3 control-label"]',
-                'File'
-            )
             ->seeStatusCode('200');
     }
 
     public function testTextarea()
     {
-        $this->visit('/genealabs/laravel-casts/examples/bootstrap3')
+        $this->visit('/genealabs/laravel-casts/examples/vanilla')
             ->seeElement('textarea', [
                 'class' => 'form-control',
                 'name' => 'textarea',
@@ -195,7 +174,7 @@ class Bootstrap3Test extends TestCase
                 'label' => 'Textarea',
                 'name' => 'textarea',
             ])
-            ->seeElement('label', [
+            ->dontSeeElement('label', [
                 'for' => 'textarea',
                 'class' => 'col-sm-3 control-label',
             ])
@@ -203,16 +182,12 @@ class Bootstrap3Test extends TestCase
                 'for' => 'textarea',
                 'placeholder' => 'Placeholder Text',
             ])
-            ->seeInElement(
-                'label[for=textarea][class="col-sm-3 control-label"]',
-                'Textarea'
-            )
             ->seeStatusCode('200');
     }
 
     public function testCheckbox()
     {
-        $this->visit('/genealabs/laravel-casts/examples/bootstrap3')
+        $this->visit('/genealabs/laravel-casts/examples/vanilla')
             ->seeElement('input', [
                 'class' => '',
                 'name' => 'checkbox',
@@ -228,26 +203,18 @@ class Bootstrap3Test extends TestCase
                 'placeholder' => 'Placeholder Text',
                 'type' => 'checkbox',
             ])
-            ->seeElement('div', [
+            ->dontSeeElement('div', [
                 'class' => 'checkbox',
             ])
             ->dontSeeElement('label', [
                 'for' => 'checkbox',
             ])
-            ->seeInElement(
-                'div.checkbox',
-                'Checkbox'
-            )
-            ->seeInElement(
-                '.checkbox',
-                '<input class="" checked name="checkbox" type="checkbox" value="test">'
-            )
             ->seeStatusCode('200');
     }
 
     public function testSelect()
     {
-        $this->visit('/genealabs/laravel-casts/examples/bootstrap3')
+        $this->visit('/genealabs/laravel-casts/examples/vanilla')
             ->seeElement('select', [
                 'class' => 'form-control',
                 'name' => 'select',
@@ -258,7 +225,7 @@ class Bootstrap3Test extends TestCase
             ->dontSeeElement('select', [
                 'placeholder' => 'Placeholder Text',
             ])
-            ->seeElement('label', [
+            ->dontSeeElement('label', [
                 'for' => 'select',
                 'class' => 'col-sm-3 control-label',
             ])
@@ -266,16 +233,12 @@ class Bootstrap3Test extends TestCase
                 'for' => 'select',
                 'placeholder' => 'Placeholder Text',
             ])
-            ->seeInElement(
-                'label[for=select][class="col-sm-3 control-label"]',
-                'Select'
-            )
             ->seeStatusCode('200');
     }
 
     public function testSelectRange()
     {
-        $this->visit('/genealabs/laravel-casts/examples/bootstrap3')
+        $this->visit('/genealabs/laravel-casts/examples/vanilla')
             ->seeElement('select', [
                 'class' => 'form-control',
                 'name' => 'selectRange',
@@ -288,7 +251,7 @@ class Bootstrap3Test extends TestCase
                 'placeholder' => 'Placeholder Text',
                 'name' => 'selectRange',
             ])
-            ->seeElement('label', [
+            ->dontSeeElement('label', [
                 'for' => 'selectRange',
                 'class' => 'col-sm-3 control-label',
             ])
@@ -296,16 +259,12 @@ class Bootstrap3Test extends TestCase
                 'for' => 'selectRange',
                 'placeholder' => 'Placeholder Text',
             ])
-            ->seeInElement(
-                'label[for=selectRange][class="col-sm-3 control-label"]',
-                'SelectRange'
-            )
             ->seeStatusCode('200');
     }
 
     public function testSelectRangeWithInterval()
     {
-        $this->visit('/genealabs/laravel-casts/examples/bootstrap3')
+        $this->visit('/genealabs/laravel-casts/examples/vanilla')
             ->seeElement('select', [
                 'class' => 'form-control',
                 'name' => 'selectRangeWithInterval',
@@ -318,7 +277,7 @@ class Bootstrap3Test extends TestCase
                 'name' => 'selectRangeWithInterval',
                 'placeholder' => 'Placeholder Text',
             ])
-            ->seeElement('label', [
+            ->dontSeeElement('label', [
                 'for' => 'selectRangeWithInterval',
                 'class' => 'col-sm-3 control-label',
             ])
@@ -326,16 +285,12 @@ class Bootstrap3Test extends TestCase
                 'for' => 'selectRangeWithInterval',
                 'placeholder' => 'Placeholder Text',
             ])
-            ->seeInElement(
-                'label[for=selectRangeWithInterval][class="col-sm-3 control-label"]',
-                'SelectRangeWithInterval'
-            )
             ->seeStatusCode('200');
     }
 
     public function testSubmit()
     {
-        $this->visit('/genealabs/laravel-casts/examples/bootstrap3')
+        $this->visit('/genealabs/laravel-casts/examples/vanilla')
             ->seeElement('input', [
                 'class' => 'btn btn-success btn-primary',
                 'type' => 'submit',

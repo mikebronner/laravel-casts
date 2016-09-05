@@ -18,15 +18,16 @@ class LaravelCastsService extends ServiceProvider
 
     public function boot()
     {
-
-        include __DIR__ . '/../../routes/web.php';
-
         $laravelIsCurrent = starts_with(app()->version(), '5.3.');
+        $routesPath = __DIR__ . '/../../routes/web.php';
 
-        if ($laravelIsCurrent) {
-            $this->loadViewsFrom(__DIR__ . '/../../resources/views', 'genealabs-laravel-casts');
+        if (starts_with(app()->version(), '5.1.')) {
+            $routesPath = __DIR__ . '/../../routes/no-middleware-group.php';
         }
 
+        require($routesPath);
+
+        $this->loadViewsFrom(__DIR__ . '/../../resources/views', 'genealabs-laravel-casts');
         $this->publishes([
             __DIR__ . '/../../config/genealabs-laravel-casts.php' => config_path('genealabs-laravel-casts.php'),
         ], 'config');

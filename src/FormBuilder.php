@@ -348,13 +348,17 @@ class FormBuilder extends Form
     {
         $additionalExclusions = collect($additionalExclusions)->flip();
 
-        return $options->filter(function ($value, $key) use ($additionalExclusions) {
+        $options = $options->map(function ($value, $key) use ($additionalExclusions) {
             $excludedKeys = collect([
                 'label' => '',
             ]);
             $excludedKeys = $excludedKeys->merge($additionalExclusions);
 
-            return (! $excludedKeys->has($key));
+            return ($excludedKeys->has($key) ? null : $value);
+        });
+
+        return $options->filter(function ($value) use ($additionalExclusions) {
+            return ($value !== null);
         });
     }
 }
