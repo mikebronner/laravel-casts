@@ -23,13 +23,6 @@ class FormBuilder extends Form
     protected $isHorizontalForm = false;
     protected $framework = 'vanilla';
 
-    public function __construct(HtmlBuilder $html, UrlGenerator $url, Factory $view, $csrfToken)
-    {
-        parent::__construct($html, $url, $view, $csrfToken);
-
-        $this->errors = app('session')->get('errors', new MessageBag());
-    }
-
     private function renderControlForLaravelCurrent(
         string $type,
         string $controlHtml,
@@ -92,6 +85,8 @@ class FormBuilder extends Form
 
     public function open(array $options = [])
     {
+        $this->errors = app('session')->get('errors', new MessageBag());
+
         if (array_key_exists('class', $options) && (strpos($options['class'], 'form-horizontal') !== false)) {
             $this->isHorizontalForm = true;
         }
