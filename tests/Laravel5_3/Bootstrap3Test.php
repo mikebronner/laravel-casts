@@ -54,7 +54,7 @@ class Bootstrap3Test extends TestCase
             ])
             ->seeInElement(
                 'label[for=text][class="col-sm-3 control-label"]',
-                'Text Input'
+                'Text'
             )
             ->seeStatusCode('200');
     }
@@ -114,7 +114,7 @@ class Bootstrap3Test extends TestCase
             ])
             ->seeInElement(
                 'label[for=email][class="col-sm-3 control-label"]',
-                'Email Input'
+                'Email'
             )
             ->seeStatusCode('200');
     }
@@ -144,7 +144,7 @@ class Bootstrap3Test extends TestCase
             ])
             ->seeInElement(
                 'label[for=url][class="col-sm-3 control-label"]',
-                'Url Input'
+                'Url'
             )
             ->seeStatusCode('200');
     }
