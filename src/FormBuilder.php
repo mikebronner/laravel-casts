@@ -4,11 +4,8 @@ use Collective\Html\FormBuilder as Form;
 use GeneaLabs\LaravelCasts\Traits\CurrentFormBuilderMethods;
 use GeneaLabs\LaravelCasts\Traits\CurrentOrLtsLaravelVersion;
 use GeneaLabs\LaravelCasts\Traits\LtsFormBuilderMethods;
-use Illuminate\Support\HtmlString;
 use Illuminate\Support\MessageBag;
 use Illuminate\Support\Collection;
-use Illuminate\Routing\UrlGenerator;
-use Illuminate\View\Factory;
 
 class FormBuilder extends Form
 {
@@ -22,13 +19,6 @@ class FormBuilder extends Form
     protected $fieldWidth = 9;
     protected $isHorizontalForm = false;
     protected $framework = 'vanilla';
-
-    public function __construct(HtmlBuilder $html, UrlGenerator $url, Factory $view, $csrfToken)
-    {
-        parent::__construct($html, $url, $view, $csrfToken);
-
-        $this->errors = app('session')->get('errors', new MessageBag());
-    }
 
     private function renderControlForLaravelCurrent(
         string $type,
@@ -92,6 +82,8 @@ class FormBuilder extends Form
 
     public function open(array $options = [])
     {
+        $this->errors = app('session')->get('errors', new MessageBag());
+
         if (array_key_exists('class', $options) && (strpos($options['class'], 'form-horizontal') !== false)) {
             $this->isHorizontalForm = true;
         }
@@ -267,7 +259,11 @@ class FormBuilder extends Form
         }
 
         if (count($this->errors)) {
-            if ($this->framework === 'bootstrap-4') {
+            if ($this->framework === 'bootstrap3') {
+                $classes[] = $this->errors->has($name) ? 'has-error' : 'has-success';
+            }
+
+            if ($this->framework === 'bootstrap4') {
                 $classes[] = $this->errors->has($name) ? 'form-control-error' : 'form-control-success';
             }
         }
