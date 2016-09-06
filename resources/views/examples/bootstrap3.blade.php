@@ -18,20 +18,42 @@
   </head>
     <body>
         <div class="container">
-            @form(['url' => '', 'class' => 'form-horizontal', 'framework' => 'bootstrap3'])
-                @text('text', '', ['placeholder' => 'Placeholder Text', 'label' => 'Text Input'])
-                @password('password', ['placeholder' => 'Placeholder Text', 'label' => 'Password Input'])
-                @email('email', '', ['placeholder' => 'Placeholder Text', 'label' => 'Email Input'])
-                @url('url', '', ['placeholder' => 'Placeholder Text', 'label' => 'Url Input'])
-                @file('file', ['placeholder' => 'Placeholder Text', 'label' => 'File Input'])
-                @textarea('textarea', '', ['placeholder' => 'Placeholder Text', 'label' => 'Textarea', 'rows' => 7])
-                @checkbox('checkbox', 'test', true, ['placeholder' => 'Placeholder Text', 'label' => 'Checkbox'])
-                @select('select', [1, 2, 3, 4], null, ['placeholder' => 'Placeholder Text', 'label' => 'Select'])
-                @selectRange('selectRange', 1, 21, null, ['class' => 'form-control', 'placeholder' => 'Placeholder Text', 'label' => 'Select Range'])
-                @selectRangeWithInterval('selectRangeWithInterval', 1, 21, 3, null, ['class' => 'form-control', 'placeholder' => 'Placeholder Text', 'label' => 'Select Range With Interval'])
-                @combobox('combobox', [1, 2, 3, 4], null, ['class' => 'form-control', 'placeholder' => 'Placeholder Text', 'label' => 'Combobox'])
-                @submit('submit', ['class' => 'btn btn-success', 'label' => 'Submit Button'], '/bs3')
-            @endform
+            <div class="row">
+                <div class="col-sm-6">
+                    <h1 class="page-header">Horizontal Form</h1>
+                    @form(['url' => '', 'class' => 'form-horizontal', 'framework' => 'bootstrap3'])
+                        @text('text', '', ['placeholder' => 'Placeholder Text', 'label' => 'Text Input'])
+                        @password('password', ['placeholder' => 'Placeholder Text', 'label' => 'Password Input'])
+                        @email('email', '', ['placeholder' => 'Placeholder Text', 'label' => 'Email Input'])
+                        @url('url', '', ['placeholder' => 'Placeholder Text', 'label' => 'Url Input'])
+                        @file('file', ['placeholder' => 'Placeholder Text', 'label' => 'File Input'])
+                        @textarea('textarea', '', ['placeholder' => 'Placeholder Text', 'label' => 'Textarea', 'rows' => 7])
+                        @checkbox('checkbox', 'test', true, ['placeholder' => 'Placeholder Text', 'label' => 'Checkbox'])
+                        @select('select', [1, 2, 3, 4], null, ['placeholder' => 'Placeholder Text', 'label' => 'Select'])
+                        @selectRange('selectRange', 1, 21, null, ['class' => 'form-control', 'placeholder' => 'Placeholder Text', 'label' => 'Select Range'])
+                        @selectRangeWithInterval('selectRangeWithInterval', 1, 21, 3, null, ['class' => 'form-control', 'placeholder' => 'Placeholder Text', 'label' => 'Select Range With Interval'])
+                        @combobox('combobox', [1, 2, 3, 4], null, ['class' => 'form-control', 'placeholder' => 'Placeholder Text', 'label' => 'Combobox'])
+                        @submit('submit', ['class' => 'btn btn-success', 'label' => 'Submit Button'], '/bs3')
+                    @endform
+                </div>
+                <div class="col-sm-6">
+                    <h1 class="page-header">Normal Form</h1>
+                    @form(['url' => '', 'framework' => 'bootstrap3'])
+                        @text('text', '', ['placeholder' => 'Placeholder Text', 'label' => 'Text Input'])
+                        @password('password', ['placeholder' => 'Placeholder Text', 'label' => 'Password Input'])
+                        @email('email', '', ['placeholder' => 'Placeholder Text', 'label' => 'Email Input'])
+                        @url('url', '', ['placeholder' => 'Placeholder Text', 'label' => 'Url Input'])
+                        @file('file', ['placeholder' => 'Placeholder Text', 'label' => 'File Input'])
+                        @textarea('textarea', '', ['placeholder' => 'Placeholder Text', 'label' => 'Textarea', 'rows' => 7])
+                        @checkbox('checkbox', 'test', true, ['placeholder' => 'Placeholder Text', 'label' => 'Checkbox'])
+                        @select('select', [1, 2, 3, 4], null, ['placeholder' => 'Placeholder Text', 'label' => 'Select'])
+                        @selectRange('selectRange', 1, 21, null, ['class' => 'form-control', 'placeholder' => 'Placeholder Text', 'label' => 'Select Range'])
+                        @selectRangeWithInterval('selectRangeWithInterval', 1, 21, 3, null, ['class' => 'form-control', 'placeholder' => 'Placeholder Text', 'label' => 'Select Range With Interval'])
+                        @combobox('combobox', [1, 2, 3, 4], null, ['class' => 'form-control', 'placeholder' => 'Placeholder Text', 'label' => 'Combobox'])
+                        @submit('submit', ['class' => 'btn btn-success', 'label' => 'Submit Button'], '/bs3')
+                    @endform
+                </div>
+            </div>
         </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>

@@ -17,7 +17,8 @@ class FormBuilder extends Form
     protected $offset = 0;
     protected $labelWidth = 3;
     protected $fieldWidth = 9;
-    protected $isHorizontalForm = false;
+    protected $isHorizontal = false;
+    protected $isInline = false;
     protected $framework = 'vanilla';
 
     private function renderControlForLaravelCurrent(
@@ -27,10 +28,24 @@ class FormBuilder extends Form
         $value = '',
         array $options = []
     ) : string {
-        return call_user_func_array(
-            [$this, "{$this->framework}Control"],
-            [$type, $controlHtml, $name, $value, $options, $this->fieldWidth, $this->labelWidth, $this->errors]
-        );
+        $method = [
+            $this,
+            "{$this->framework}Control",
+        ];
+        $parameters = [
+            $type,
+            $controlHtml,
+            $name,
+            $value,
+            $options,
+            $this->fieldWidth,
+            $this->labelWidth,
+            $this->isHorizontal,
+            $this->isInline,
+            $this->errors,
+        ];
+
+        return call_user_func_array($method, $parameters);
     }
 
     public function token()
@@ -82,10 +97,30 @@ class FormBuilder extends Form
 
     public function open(array $options = [])
     {
+        $this->initializeForm($options);
+
+        return parent::open($options);
+    }
+
+    public function model($model, array $options = [])
+    {
+        $this->initializeForm($options);
+
+        return parent::model($model, $options);
+    }
+
+    public function initializeForm(array $options)
+    {
         $this->errors = app('session')->get('errors', new MessageBag());
+        $this->isHorizontal = false;
+        $this->isInline = false;
 
         if (array_key_exists('class', $options) && (strpos($options['class'], 'form-horizontal') !== false)) {
-            $this->isHorizontalForm = true;
+            $this->isHorizontal = true;
+        }
+
+        if (array_key_exists('class', $options) && (strpos($options['class'], 'form-inline') !== false)) {
+            $this->isInline = true;
         }
 
         if (array_key_exists('offset', $options)) {
@@ -97,7 +132,7 @@ class FormBuilder extends Form
         }
 
         if ($this->usesBootstrap4()) {
-            $this->isHorizontalForm = true;
+            $this->isHorizontal = true;
         }
 
         if (array_key_exists('labelWidth', $options)) {
@@ -107,39 +142,6 @@ class FormBuilder extends Form
         if (array_key_exists('fieldWidth', $options)) {
             $this->fieldWidth = $options['fieldWidth'];
         }
-
-        return parent::open($options);
-    }
-
-    public function model($model, array $options = [])
-    {
-        $this->errors = app('session')->get('errors', new MessageBag());
-
-        if (! $this->errors) {
-            $this->errors = new Collection();
-        }
-
-        if (array_key_exists('class', $options) && (strpos($options['class'], 'form-horizontal') !== false)) {
-            $this->isHorizontalForm = true;
-        }
-
-        if (array_key_exists('offset', $options)) {
-            $this->offset = $options['offset'];
-        }
-
-        if (array_key_exists('labelWidth', $options)) {
-            $this->labelWidth = $options['labelWidth'];
-        }
-
-        if (array_key_exists('fieldWidth', $options)) {
-            $this->fieldWidth = $options['fieldWidth'];
-        }
-
-        if (array_key_exists('framework', $options)) {
-            $this->framework = $options['framework'];
-        }
-
-        return parent::model($model, $options);
     }
 
 
@@ -302,7 +304,7 @@ class FormBuilder extends Form
     {
         $classes = explode(' ', array_get($options, 'class'));
 
-        if ($this->isHorizontalForm) {
+        if ($this->isHorizontal) {
             $classes[] = 'col-sm-' . $this->labelWidth;
         }
 
@@ -310,7 +312,7 @@ class FormBuilder extends Form
             $classes[] = 'control-label';
         }
 
-        if ($this->usesBootstrap4() && $this->isHorizontalForm) {
+        if ($this->usesBootstrap4() && $this->isHorizontal) {
             $classes[] = 'col-form-label';
         }
 

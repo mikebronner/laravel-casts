@@ -110,6 +110,8 @@ class LaravelCastsService extends ServiceProvider
             'options' => [],
             'fieldWidth' => 9,
             'labelWidth' => 3,
+            'isHorizontal' => false,
+            'isInline' => false,
             'errors' => [],
         ];
 
