@@ -167,7 +167,7 @@ class FormBuilder extends Form
         }, ARRAY_FILTER_USE_KEY);
         $controlHtml = parent::text($name, $value, $controlOptions);
 
-        return $this->renderControl('text', $controlHtml, $name, $value ?: old($name), $options);
+        return $this->renderControl('text', $controlHtml, $name, $value, $options);
     }
 
     public function email($name, $value = null, $options = [])
@@ -176,7 +176,7 @@ class FormBuilder extends Form
         $controlOptions = $this->getControlOptions(collect($options));
         $controlHtml = parent::email($name, $value, $controlOptions->toArray());
 
-        return $this->renderControl('email', $controlHtml, $name, $value ?: old($name), $options);
+        return $this->renderControl('email', $controlHtml, $name, $value, $options);
     }
 
     public function combobox($name, $list = [], $selected = null, $options = [])
@@ -184,7 +184,7 @@ class FormBuilder extends Form
         $options = $this->setOptionClasses($name, $options, ['form-control']);
         $options['multiple'] = '';
 
-        return $this->select($name, $list, $selected ?? old($selected), $options);
+        return $this->select($name, $list, $selected, $options);
     }
 
     public function password($name, $options = [])
@@ -202,7 +202,7 @@ class FormBuilder extends Form
         $controlOptions = $this->getControlOptions(collect($options));
         $controlHtml = parent::url($name, $value, $controlOptions->toArray());
 
-        return $this->renderControl('url', $controlHtml, $name, $value ?: old($name), $options);
+        return $this->renderControl('url', $controlHtml, $name, $value, $options);
     }
 
     public function file($name, $options = [])
@@ -220,7 +220,7 @@ class FormBuilder extends Form
         $controlOptions = $this->getControlOptions(collect($options));
         $controlHtml = parent::textarea($name, $value, $controlOptions->toArray());
 
-        return $this->renderControl('textarea', $controlHtml, $name, $value ?: old($name), $options);
+        return $this->renderControl('textarea', $controlHtml, $name, $value, $options);
     }
 
     public function checkbox($name, $value = 1, $checked = null, $options = [])
@@ -231,7 +231,7 @@ class FormBuilder extends Form
         $controlOptions = $this->getControlOptions(collect($options), ['form-control', 'placeholder']);
         $controlHtml = parent::checkbox($name, $value, $checked, $controlOptions->toArray()) . " {$label}";
 
-        return $this->renderControl('checkbox', $controlHtml, $name, $value ?: old($name), $options);
+        return $this->renderControl('checkbox', $controlHtml, $name, $value, $options);
     }
 
     public function submit($value = null, $options = [])
