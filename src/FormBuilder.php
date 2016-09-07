@@ -143,7 +143,7 @@ class FormBuilder extends Form
 
     public function label($name, $label = null, $options = [], $escapeHtml = true)
     {
-        $label = $label ?? array_pull($options, 'label') ?? '';
+        $label = array_pull($options, 'label') ?? $label ?? '';
         $options = $this->setLabelOptionClasses($options);
 
         return parent::label($name, $label, $options, $escapeHtml);
