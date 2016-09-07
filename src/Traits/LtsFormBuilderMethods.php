@@ -30,8 +30,8 @@ trait LtsFormBuilderMethods
 
     private function wrapFormControl(string $labelHtml, string $controlHtml, $errorHtml = '') : string
     {
-        if (! $this->isHorizontalForm && $this->usesBootstrap3()) {
-            return $controlHtml;
+        if (! $this->isHorizontal) {
+            return $controlHtml . $errorHtml;
         }
 
         $offsetClass = $labelHtml ? '' : ' col-sm-offset-' . $this->labelWidth;
@@ -72,7 +72,7 @@ trait LtsFormBuilderMethods
             $formGroupClasses[] = 'has-danger';
         }
 
-        if ($this->usesBootstrap4() && $this->isHorizontalForm) {
+        if ($this->usesBootstrap4() && $this->isHorizontal) {
             $formGroupClasses[] = 'row';
         }
 
