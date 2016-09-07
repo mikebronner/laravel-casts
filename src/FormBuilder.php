@@ -131,10 +131,6 @@ class FormBuilder extends Form
             $this->framework = $options['framework'];
         }
 
-        if ($this->usesBootstrap4()) {
-            $this->isHorizontal = true;
-        }
-
         if (array_key_exists('labelWidth', $options)) {
             $this->labelWidth = $options['labelWidth'];
         }
