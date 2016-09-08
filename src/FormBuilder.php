@@ -111,7 +111,7 @@ class FormBuilder extends Form
 
     public function initializeForm(array $options)
     {
-        $this->errors = app('session')->get('errors', new MessageBag());
+        $this->errors = $this->session->get('errors', new MessageBag());
         $this->isHorizontal = false;
         $this->isInline = false;
 
