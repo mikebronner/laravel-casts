@@ -34,7 +34,7 @@ class LaravelCastsService extends ServiceProvider
         ], 'config');
 
         $this->registerBladeDirective('open', 'form');
-        $this->registerBladeDirective('model', 'modelForm');
+        $this->registerBladeDirective('model');
         $this->registerBladeDirective('hidden');
         $this->registerBladeDirective('label');
         $this->registerBladeDirective('text');
