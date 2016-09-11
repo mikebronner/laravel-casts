@@ -1,9 +1,4 @@
 /vendor
-composer.phar
 composer.lock
 .DS_Store
-<<<<<<< HEAD
 .idea
-=======
-.idea
->>>>>>> 353c93624872a03140b897a2a7f938d74fe18c9f
