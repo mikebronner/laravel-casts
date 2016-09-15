@@ -27,7 +27,6 @@
                         @password('password', ['placeholder' => 'Placeholder Text', 'label' => 'Password Input'])
                         @date('date', '', ['placeholder' => 'Placeholder Text', 'label' => 'Date'])
                         @datetime('datetime', '', ['placeholder' => 'Placeholder Text', 'label' => 'DateTime'])
-                        @week('week', '', ['placeholder' => 'Placeholder Text', 'label' => 'Week'])
                         @email('email', '', ['placeholder' => 'Placeholder Text', 'label' => 'Email Input'])
                         @url('url', '', ['placeholder' => 'Placeholder Text', 'label' => 'Url Input'])
                         @file('file', ['placeholder' => 'Placeholder Text', 'label' => 'File Input'])
@@ -47,7 +46,6 @@
                         @password('password', ['placeholder' => 'Placeholder Text', 'label' => 'Password Input'])
                         @date('date', '', ['placeholder' => 'Placeholder Text', 'label' => 'Date'])
                         @datetime('datetime', '', ['placeholder' => 'Placeholder Text', 'label' => 'DateTime'])
-                        @week('week', '', ['placeholder' => 'Placeholder Text', 'label' => 'Week'])
                         @email('email', '', ['placeholder' => 'Placeholder Text', 'label' => 'Email Input'])
                         @url('url', '', ['placeholder' => 'Placeholder Text', 'label' => 'Url Input'])
                         @file('file', ['placeholder' => 'Placeholder Text', 'label' => 'File Input'])
@@ -67,16 +65,20 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.0/moment.min.js"></script>
         <script src="https://cdn.jsdelivr.net/bootstrap.datetimepicker/4.17.42/js/bootstrap-datetimepicker.min.js"></script>
         <script>
-            $(function () {
-                $('input[type=date]').datetimepicker({
-                    format: 'LL'
-                });
+            if (window.$) {
+                $(function () {
+                    if ( $.isFunction($.fn.datetimepicker) ) {
+                        $('input[type=date]').datetimepicker({
+                            format: 'LL'
+                        });
 
-                $('input[type=datetime]').datetimepicker({
-                    format: 'LLL',
-                    sideBySide: true
+                        $('input[type=datetime]').datetimepicker({
+                            format: 'LLL',
+                            sideBySide: true
+                        });
+                    }
                 });
-            });
+            }
         </script>
     </body>
 </html>

@@ -16,11 +16,12 @@ This package is an effort to streamline and make form development more
  Bootstrap 4.alpha.3, more coming soon.)
 - Blade directives for elegant Blade view integration, providing concise
  syntax, reducing form boilerplate 10-fold.
+ - DateTime Picker for Bootstrap 3.
 
 ## Requirements
 - PHP 7.0+
 - Laravel 5.1 (LTS) or Laravel 5.3 (Current)
- 
+
 ## Usage
 ### Blade Directives
 The following Blade directives developing forms a snap:
@@ -28,6 +29,8 @@ The following Blade directives developing forms a snap:
 @form(['url' => ''])
     @text('text', '', ['placeholder' => 'Placeholder Text', 'label' => 'Text Input'])
     @password('password', ['placeholder' => 'Placeholder Text', 'label' => 'Password Input'])
+    @date('date', '', ['placeholder' => 'Placeholder Text', 'label' => 'Date'])
+    @datetime('datetime', '', ['placeholder' => 'Placeholder Text', 'label' => 'DateTime'])
     @email('email', '', ['placeholder' => 'Placeholder Text', 'label' => 'Email Input'])
     @url('url', '', ['placeholder' => 'Placeholder Text', 'label' => 'Url Input'])
     @file('file', ['placeholder' => 'Placeholder Text', 'label' => 'File Input'])
@@ -77,6 +80,8 @@ All controls are built on top of the
 #### Input controls
 The following controls use the same syntax:
 - `@text` / `{!! Form::text() !!}`
+- `@date` / `{!! Form::date() !!}`
+- `@datetime` / `{!! Form::datetime() !!}`
 - `@email` / `{!! Form::email() !!}`
 - `@url` / `{!! Form::url() !!}`
 - `@textarea` / `{!! Form::textarea() !!}`
@@ -131,6 +136,57 @@ To have a form render for Bootstrap 3, specify the framework and form
  orientation in the `@form` directive:
 ```blade
 @form(['url' => '', 'class' => 'form-horizontal', 'framework' => 'bootstrap3'])
+```
+
+Additionally, to enable the date/time picker, add the following to your
+ JavaScript file for the page rendering the date fields:
+ ```js
+ if (window.$) {
+     $(function () {
+         if ( $.isFunction($.fn.datetimepicker) ) {
+             $('input[type=date]').datetimepicker({
+                 format: 'LL'
+             });
+
+             $('input[type=datetime]').datetimepicker({
+                 format: 'LLL',
+                 sideBySide: true
+             });
+         }
+     });
+ }
+ ```
+
+You can include the library using Gulp and NPM (preferred), or use a CDN.
+
+##### Gulp / NPM
+1. `npm install save-dev bootstrap-datetimepicker-npm`
+2. Then require the library in your `/resources/assets/js/app.js` file:
+  ```js
+  require('/node_modules/bootstrap-datetimepicker/src/js/bootstrap-datetimepicker');
+  ```
+3. Don't forget to include the CSS as well in `/resources/assets/less/app.less`:
+  ```less
+  @import('./node_modules/bootstrap-datetimepicker/src/less/bootstrap-datetimepicker');
+  ```
+4. Finally, edit your `/gulpfile.js` as needed, and run `gulp`.
+
+##### CDNs
+Add the following references to the page(s) or your main layout file. You will
+need to have jQuery and Bootstrap libraries included as well.
+```html
+<html>
+    <head>
+        <!-- ... -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/bootstrap.datetimepicker/4.17.42/css/bootstrap-datetimepicker.min.css">
+        <!-- ... -->
+    </head>
+    <body>
+        <!-- ... -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.0/moment.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/bootstrap.datetimepicker/4.17.42/js/bootstrap-datetimepicker.min.js"></script>
+    </body>
+</html>
 ```
 
 #### Bootstrap 4 (alpha 3)
