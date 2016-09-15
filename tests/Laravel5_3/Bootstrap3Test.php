@@ -354,4 +354,64 @@ class Bootstrap3Test extends TestCase
             ])
             ->seeStatusCode('200');
     }
+
+    public function testDate()
+    {
+        $this->visit('/genealabs/laravel-casts/examples/bootstrap3')
+            ->seeElement('input', [
+                'placeholder' => 'Placeholder Text',
+                'class' => 'form-control',
+                'name' => 'date',
+                'type' => 'date',
+                'value' => '',
+            ])
+            ->dontSeeElement('input', [
+                'label' => 'Date Input',
+                'name' => 'date',
+                'type' => 'date',
+            ])
+            ->seeElement('label', [
+                'for' => 'date',
+                'class' => 'col-sm-3 control-label',
+            ])
+            ->dontSeeElement('label', [
+                'for' => 'date',
+                'placeholder' => 'Placeholder Text',
+            ])
+            ->seeInElement(
+                'label[for=date][class="col-sm-3 control-label"]',
+                'Date'
+            )
+            ->seeStatusCode('200');
+    }
+
+    public function testDateTime()
+    {
+        $this->visit('/genealabs/laravel-casts/examples/bootstrap3')
+            ->seeElement('input', [
+                'placeholder' => 'Placeholder Text',
+                'class' => 'form-control',
+                'name' => 'datetime',
+                'type' => 'datetime',
+                'value' => '',
+            ])
+            ->dontSeeElement('input', [
+                'label' => 'DateTime Input',
+                'name' => 'datetime',
+                'type' => 'datetime',
+            ])
+            ->seeElement('label', [
+                'for' => 'datetime',
+                'class' => 'col-sm-3 control-label',
+            ])
+            ->dontSeeElement('label', [
+                'for' => 'datetime',
+                'placeholder' => 'Placeholder Text',
+            ])
+            ->seeInElement(
+                'label[for=datetime][class="col-sm-3 control-label"]',
+                'Date'
+            )
+            ->seeStatusCode('200');
+    }
 }

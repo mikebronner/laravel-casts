@@ -160,6 +160,28 @@ class FormBuilder extends Form
         return $this->renderControl('text', $controlHtml, $name, $value, $options);
     }
 
+    public function date($name, $value = null, $options = [])
+    {
+        $options = $this->setOptionClasses($name, $options, ['form-control']);
+        $controlOptions = array_filter($options, function ($key) {
+            return ($key !== 'label');
+        }, ARRAY_FILTER_USE_KEY);
+        $controlHtml = parent::date($name, $value, $controlOptions);
+
+        return $this->renderControl('date', $controlHtml, $name, $value, $options);
+    }
+
+    public function datetime($name, $value = null, $options = [])
+    {
+        $options = $this->setOptionClasses($name, $options, ['form-control']);
+        $controlOptions = array_filter($options, function ($key) {
+            return ($key !== 'label');
+        }, ARRAY_FILTER_USE_KEY);
+        $controlHtml = parent::datetime($name, $value, $controlOptions);
+
+        return $this->renderControl('datetime', $controlHtml, $name, $value, $options);
+    }
+
     public function email($name, $value = null, $options = [])
     {
         $options = $this->setOptionClasses($name, $options, ['form-control']);
