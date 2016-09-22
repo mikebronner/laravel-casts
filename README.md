@@ -161,13 +161,14 @@ You can include the library using Gulp and NPM (preferred), or use a CDN.
 
 ##### Gulp / NPM
 1. `npm install save-dev bootstrap-datetimepicker-npm`
-2. Then require the library in your `/resources/assets/js/app.js` file:
-  ```js
-  require('/node_modules/bootstrap-datetimepicker/src/js/bootstrap-datetimepicker');
+2. Then require the library in your `/resources/assets/js/app.js` file (after jQuery and Bootstrap have been required):
   ```
-3. Don't forget to include the CSS as well in `/resources/assets/less/app.less`:
-  ```less
-  @import('./node_modules/bootstrap-datetimepicker/src/less/bootstrap-datetimepicker');
+  require('bootstrap-datetimepicker-npm');
+  ```
+3. Don't forget to include the CSS as well in `/resources/assets/sass/app.sass`:
+  ```
+  // DateTimePicker
+  @import "./node_modules/bootstrap-datetimepicker-npm/src/sass/bootstrap-datetimepicker-build";
   ```
 4. Finally, edit your `/gulpfile.js` as needed, and run `gulp`.
 
