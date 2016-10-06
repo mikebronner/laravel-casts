@@ -46,6 +46,7 @@ class LaravelCastsService extends ServiceProvider
         $this->registerBladeDirective('file');
         $this->registerBladeDirective('textarea');
         $this->registerBladeDirective('checkbox');
+        $this->registerBladeDirective('radio');
         $this->registerBladeDirective('submit');
         $this->registerBladeDirective('cancel');
         $this->registerBladeDirective('select');
