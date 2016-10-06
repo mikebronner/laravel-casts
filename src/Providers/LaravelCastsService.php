@@ -100,7 +100,7 @@ class LaravelCastsService extends ServiceProvider
         app('blade.compiler')->directive($alias, function ($parameters) use ($formMethod) {
             $parameters = trim($parameters, "()");
 
-            return "<?= app('form')->{$formMethod}({$parameters}) ?>";
+            return "<?php echo app('form')->{$formMethod}({$parameters}); ?>";
         });
     }
 
