@@ -4,7 +4,7 @@ trait LtsFormBuilderMethods
 {
     private function renderControlForLaravelLts(string $type, string $controlHtml, string $name, $value = '', array $options) : string
     {
-        if ($type !== 'checkbox' && $type !== 'submit') {
+        if ($type !== 'checkbox' && $type !== 'radio' && $type !== 'submit') {
             $labelHtml = $this->label($name, null, $options);
         }
 
@@ -19,6 +19,23 @@ trait LtsFormBuilderMethods
 
             if ($this->usesBootstrap3()) {
                 $openLabel = '<div class="checkbox"><label>';
+                $closeLabel = '</label></div>';
+            }
+
+            $controlHtml = $openLabel . $controlHtml . $closeLabel;
+        }
+
+        if ($type === 'radio') {
+            $openLabel = '';
+            $closeLabel = '';
+
+            if ($this->usesBootstrap4()) {
+                $openLabel = '<label class="form-check-label">';
+                $closeLabel = '</label>';
+            }
+
+            if ($this->usesBootstrap3()) {
+                $openLabel = '<div class="radio"><label>';
                 $closeLabel = '</label></div>';
             }
 
