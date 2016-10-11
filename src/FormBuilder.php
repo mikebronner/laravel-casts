@@ -6,6 +6,7 @@ use GeneaLabs\LaravelCasts\Traits\CurrentOrLtsLaravelVersion;
 use GeneaLabs\LaravelCasts\Traits\LtsFormBuilderMethods;
 use Illuminate\Support\MessageBag;
 use Illuminate\Support\Collection;
+use Carbon\Carbon;
 
 class FormBuilder extends Form
 {
@@ -233,6 +234,15 @@ class FormBuilder extends Form
         $controlHtml = parent::textarea($name, $value, $controlOptions->toArray());
 
         return $this->renderControl('textarea', $controlHtml, $name, $value, $options);
+    }
+
+    public function signature($name, $value = null, $options = [])
+    {
+        $options = $this->setOptionClasses($name, $options, ['form-control']);
+        $controlOptions = $this->getControlOptions(collect($options));
+        $controlHtml = $this->hidden($name) . $this->hidden($name . '_date');
+
+        return $this->renderControl('signature', $controlHtml, $name, $value, $options);
     }
 
     public function checkbox($name, $value = 1, $checked = null, $options = [])
