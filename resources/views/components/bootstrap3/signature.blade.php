@@ -18,48 +18,57 @@
         </div>
     </div>
     <script>
-        document.onreadystatechange = function () {
-           if (document.readyState == "complete") {
-                var canvas = document.querySelector('.signature.{{ $name }} canvas');
+        window.addEventListener('load', function () {
+            var canvas = document.querySelector('.signature.{{ $name }} canvas');
 
-                if ((window.SignaturePad !== undefined) && (canvas !== null)) {
-                    window.signaturePad{{ $name }} = new window.SignaturePad(canvas);
+            if ((window.SignaturePad !== undefined) && (canvas !== null)) {
+                console.log('test4{{ $name }}');
+                window['signaturePad{{ $name }}'] = new window.SignaturePad(canvas);
 
-                    var setImageData = function() {
-                        var imageData = signaturePad{{ $name }}.toDataURL();
+                if (window.setImageData === undefined) {
+                    window.setImageData = function (name) {
+                        var imageData = window['signaturePad' + name].toDataURL();
                         var timestamp = '';
 
                         if (imageData.length > 0) {
                             timestamp = new Date().getTime();
                         }
 
-                        $('input[type=hidden][name={{ $name }}]').val(imageData);
-                        $('input[type=hidden][name={{ $name }}_date]').val(timestamp);
+                        $('input[type=hidden][name=' + name + ']').val(imageData);
+                        $('input[type=hidden][name=' + name + '_date]').val(timestamp);
                     };
+                }
 
-                    var resizeCanvas = function () {
+                if (window.resizeCanvas === undefined) {
+                    window.resizeCanvas = function (name) {
+                        var canvas = document.querySelector('.signature.' + name + ' canvas');
                         var ratio =  Math.max(window.devicePixelRatio || 1, 1);
+
                         canvas.width = canvas.offsetWidth * ratio;
                         canvas.height = canvas.offsetHeight * ratio;
                         canvas.getContext("2d").scale(ratio, ratio);
-                        signaturePad{{ $name }}.clear(); // otherwise isEmpty() might return incorrect value
+                        window['signaturePad' + name].clear(); // otherwise isEmpty() might return incorrect value
                     };
+                }
 
+                if (window.clearSignature === undefined) {
                     window.clearSignature = function (name) {
                         window['signaturePad' + name].clear();
                         $('input[type=hidden][name=' + name + ']').val('');
                         $('input[type=hidden][name=' + name + '_date]').val('');
                     };
-
-                    signaturePad{{ $name }}.onEnd = function () {
-                        setImageData();
-                    };
-
-                    window.addEventListener("resize", resizeCanvas);
-                    resizeCanvas();
                 }
+
+                window['signaturePad{{ $name }}'].onEnd = function () {
+                    window.setImageData('{{ $name }}');
+                };
+
+                window.addEventListener("resize", function () {
+                    window.resizeCanvas('{{ $name }}');
+                });
+                window.resizeCanvas('{{ $name }}');
             }
-        }
+        });
     </script>
 
 @if($isHorizontal)
