@@ -53,6 +53,7 @@ class LaravelCastsService extends ServiceProvider
         $this->registerBladeDirective('selectRange');
         $this->registerBladeDirective('selectRangeWithInterval');
         $this->registerBladeDirective('combobox');
+        $this->registerBladeDirective('signature');
         $this->registerBladeDirective('close', 'endform');
 
         if (starts_with(app()->version(), '5.3.')) {
