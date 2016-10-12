@@ -22,7 +22,6 @@
             var canvas = document.querySelector('.signature.{{ $name }} canvas');
 
             if ((window.SignaturePad !== undefined) && (canvas !== null)) {
-                console.log('test4{{ $name }}');
                 window['signaturePad{{ $name }}'] = new window.SignaturePad(canvas);
 
                 if (window.setImageData === undefined) {
@@ -67,6 +66,7 @@
                     window.resizeCanvas('{{ $name }}');
                 });
                 window.resizeCanvas('{{ $name }}');
+                window['signaturePad{{ $name }}'].fromDataURL($('input[type=hidden][name={{ $name }}]').val());
             }
         });
     </script>
