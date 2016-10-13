@@ -90,7 +90,6 @@ class FormBuilder extends Form
     public function select($name, $list = [], $selected = null, $options = [])
     {
         $options = $this->setOptionClasses($name, $options, ['form-control']);
-        $labelHtml = $this->label($name, array_pull($options, 'label'));
         $controlHtml = parent::select($name, $list, $selected, $options);
 
         return $this->renderControl('select', $controlHtml, $name, '', $options);
