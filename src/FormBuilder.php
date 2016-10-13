@@ -294,6 +294,7 @@ class FormBuilder extends Form
 
     private function setOptionClasses(string $name, array $options, array $addClasses = []) : array
     {
+        $options = array_filter($options);
         $classes = [];
 
         if (array_key_exists('class', $options)) {
