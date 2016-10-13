@@ -163,7 +163,7 @@ class FormBuilder extends Form
     public function date($name, $value = null, $options = [])
     {
         $options = $this->setOptionClasses($name, $options, ['form-control']);
-        $options['autocomplete'] = 'off';
+        $options['autocomplete'] = 'noway';
         $controlOptions = array_filter($options, function ($key) {
             return ($key !== 'label');
         }, ARRAY_FILTER_USE_KEY);
@@ -175,7 +175,7 @@ class FormBuilder extends Form
     public function datetime($name, $value = null, $options = [])
     {
         $options = $this->setOptionClasses($name, $options, ['form-control']);
-        $options['autocomplete'] = 'off';
+        $options['autocomplete'] = 'noway';
         $controlOptions = array_filter($options, function ($key) {
             return ($key !== 'label');
         }, ARRAY_FILTER_USE_KEY);
