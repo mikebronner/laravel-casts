@@ -11,7 +11,7 @@ trait CurrentOrLtsLaravelVersion
         }
 
         $laravelVersion = app()->version();
-        $currentOrLts = starts_with($laravelVersion, '5.3.')
+        $currentOrLts = starts_with($laravelVersion, '5.3.') || starts_with($laravelVersion, '5.4.')
             ? 'ForLaravelCurrent'
             : (starts_with($laravelVersion, '5.1.') ? 'ForLaravelLts' : '');
 
