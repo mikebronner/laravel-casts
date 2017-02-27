@@ -2,7 +2,7 @@
 
 # Laravel Casts
 ## Installation
-To install in Laravel 5.1 (lts) or Laravel 5.3 (current):
+To install in Laravel 5.1 (lts), Laravel 5.3, or Laravel 5.4 (current):
 ```sh
 composer require genealabs/laravel-casts
 ```
