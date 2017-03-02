@@ -1,3 +1,7 @@
+/node_modules
+/public/storage
+/public/hot
+/storage/*.key
 /vendor
 composer.lock
 .DS_Store

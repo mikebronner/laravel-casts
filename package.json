@@ -1,0 +1,14 @@
+{
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development webpack --progress --hide-modules",
+    "watch": "cross-env NODE_ENV=development webpack --watch --progress --hide-modules",
+    "hot": "cross-env NODE_ENV=development webpack-dev-server --inline --hot",
+    "production": "cross-env NODE_ENV=production webpack --progress --hide-modules"
+  },
+  "devDependencies": {
+    "bootstrap-sass": "^3.3.7",
+    "bootstrap-switch": "^3.3.4",
+    "jquery": "^3.1.1",
+    "laravel-mix": "^0.8.8"
+  }
+}
