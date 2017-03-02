@@ -257,6 +257,17 @@ class FormBuilder extends Form
         return $this->renderControl('checkbox', $controlHtml, $name, $value, $options);
     }
 
+    public function switch($name, $value = 1, $checked = null, $options = [])
+    {
+        $additionalClasses = $this->usesBootstrap4() ? 'form-check-input' : '';
+        $options = $this->setOptionClasses($name, $options, [$additionalClasses]);
+        $label = $options['label'];
+        $controlOptions = $this->getControlOptions(collect($options), ['form-control', 'placeholder']);
+        $controlHtml = parent::checkbox($name, $value, $checked, $controlOptions->toArray()) . " {$label}";
+
+        return $this->renderControl('switch', $controlHtml, $name, $value, $options);
+    }
+
     public function radio($name, $value = 1, $checked = null, $options = [])
     {
         $additionalClasses = $this->usesBootstrap4() ? 'form-check-input' : '';
