@@ -27,6 +27,10 @@ This package is an effort to streamline and make form development more
 - Laravel 5.1 (LTS) or Laravel 5.3 (Current)
 
 ## Usage
+The following shows all elements using Bootstrap 3:
+
+
+
 ### Blade Directives
 The following Blade directives developing forms a snap:
 ```blade
