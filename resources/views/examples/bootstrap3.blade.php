@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-    <link rel="stylesheet" href="{!! mix('/app.css', 'genealabs-laravel-casts') !!}">
     <div class="container">
         <div class="row">
             <div class="col-sm-6">
