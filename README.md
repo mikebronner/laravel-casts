@@ -36,6 +36,7 @@ The following Blade directives developing forms a snap:
     @file('file', ['placeholder' => 'Placeholder Text', 'label' => 'File Input'])
     @textarea('textarea', '', ['placeholder' => 'Placeholder Text', 'label' => 'Textarea', 'rows' => 7])
     @checkbox('checkbox', 'test', true, ['placeholder' => 'Placeholder Text', 'label' => 'Checkbox'])
+    @switch('fieldname', 'true value', $isChecked, ['label' => 'Switch', 'label' => 'Switch', 'onText' => 'Available', 'onColor' => 'success', 'offText' => 'Unavailable', 'offColor' => 'danger'])
     @select('select', [1, 2, 3, 4], null, ['placeholder' => 'Placeholder Text', 'label' => 'Select'])
     @selectRange('selectRange', 1, 21, null, ['class' => 'form-control', 'placeholder' => 'Placeholder Text', 'label' => 'Select Range'])
     @selectRangeWithInterval('selectRangeWithInterval', 1, 21, 3, null, ['class' => 'form-control', 'placeholder' => 'Placeholder Text', 'label' => 'Select Range With Interval'])
@@ -43,15 +44,6 @@ The following Blade directives developing forms a snap:
     @submit('submit', ['class' => 'btn btn-success', 'label' => 'Submit Button'])
 @endform
 ```
-
-### Controls
-All controls are built on top of the
- [LaravelCollective HTML package](https://laravelcollective.com/docs/5.3/html).
- As such, they support all the options and syntax provided through that package,
- in addition to the setting detailed below. For the sake of brevity, the
- examples are written using Blade directives. However, all directives are also
- implementable through the standard `Form` alias as identified in each
- heading.
 
 #### `@form` / `{!! Form::open() !!}`
 ```blade
@@ -94,6 +86,11 @@ The following controls use the same syntax:
 - `$value`: (default: null) value of the control, if you need to prepopulate it.
  It will automatically populate old form values if validation fails.
 - `$options`: (default: []) array of options, including `class`.
+
+#### `@switch` / `{!! Form::switch() !!}`
+```blade
+@switch('fieldname', 'active value', $isActivated, [label' => 'Switch', 'onText' => 'Available', 'offText' => 'Unavailable', 'onColor' => 'success', 'offColor' => 'danger'])
+```
 
 #### `@select` / `{!! Form::select() !!}`
 ```blade

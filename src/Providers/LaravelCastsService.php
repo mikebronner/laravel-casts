@@ -4,6 +4,7 @@ use GeneaLabs\LaravelCasts\Facades\FormFacade;
 use GeneaLabs\LaravelCasts\Facades\HtmlFacade;
 use GeneaLabs\LaravelCasts\FormBuilder;
 use GeneaLabs\LaravelCasts\HtmlBuilder;
+use GeneaLabs\LaravelCasts\Console\Commands\Publish;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 use Illuminate\Foundation\AliasLoader;
@@ -30,9 +31,8 @@ class LaravelCastsService extends ServiceProvider
 
         $this->loadViewsFrom(__DIR__ . '/../../resources/views', 'genealabs-laravel-casts');
         $this->publishes([
-            __DIR__ . '/../../config/genealabs-laravel-casts.php' => config_path('genealabs-laravel-casts.php'),
-        ], 'config');
-
+            __DIR__ . '/../../public/' => public_path('genealabs-laravel-casts'),
+        ], 'assets');
         $this->registerBladeDirective('open', 'form');
         $this->registerBladeDirective('model');
         $this->registerBladeDirective('hidden');
@@ -57,7 +57,7 @@ class LaravelCastsService extends ServiceProvider
         $this->registerBladeDirective('signature');
         $this->registerBladeDirective('close', 'endform');
 
-        if (starts_with(app()->version(), '5.3.') || starts_with(app()->version(), '5.4.')) {
+        if (! starts_with(app()->version(), '5.1.')) {
             $this->registerComponents();
         }
     }
@@ -68,6 +68,7 @@ class LaravelCastsService extends ServiceProvider
         $this->registerFormBuilder();
         AliasLoader::getInstance()->alias('Form', FormFacade::class);
         AliasLoader::getInstance()->alias('HTML', HtmlFacade::class);
+        $this->commands(Publish::class);
     }
 
     public function provides() : array

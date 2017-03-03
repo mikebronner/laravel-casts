@@ -1,18 +1,21 @@
 @if($isHorizontal)
-    <div class="col-sm-offset-{{ $labelWidth }} col-sm-{{ $fieldWidth }}">
+    <div class="col-sm-{{ $fieldWidth }}">
 @endif
 
     <div class="">
         {!! $controlHtml !!}
     </div>
-    <script>
+
+    @if($name)
+    <script defer>
         $("[name='{{ $name }}']").bootstrapSwitch({
             onText: "{{ $options['onText'] ?? 'On' }}",
             offText: "{{ $options['offText'] ?? 'Off' }}",
-            onColor: "{{ $options['onColor'] ?? 'success' }}",
-            offColor: "{{ $options['offColor'] ?? 'danger' }}"
+            onColor: "{{ $options['onColor'] ?? 'info' }}",
+            offColor: "{{ $options['offColor'] ?? 'default' }}"
         });
     </script>
+    @endif
 
     @if(! $errors->isEmpty() && $errors->has($name))
         <span class="help-block">{{ implode(' ', $errors->get($name)) }}</span>
