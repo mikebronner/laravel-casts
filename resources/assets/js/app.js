@@ -1,3 +1,12 @@
-global.$ = global.jQuery = require('jquery');
-require('bootstrap-sass');
-require('bootstrap-switch');
+
+if (typeof $().html !== 'function') {
+    global.$ = global.jQuery = require('jquery');
+}
+
+if (typeof $().modal !== 'function') {
+    require('bootstrap-sass');
+}
+
+if (typeof $().bootstrapSwitch !== 'function') {
+    require('bootstrap-switch');
+}
