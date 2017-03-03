@@ -376,6 +376,7 @@ class FormBuilder extends Form
                 'form-control-success',
                 'form-control-feedback',
                 'form-control-file',
+                'form-check-input',
             ];
 
             return (! in_array($value, $rejects));

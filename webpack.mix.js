@@ -11,13 +11,15 @@ let mix = require('laravel-mix');
  |
  */
 
-mix
-    .setPublicPath('public/')
+mix.setPublicPath('public/')
+    .copy('node_modules/bootstrap-sass/assets/javascripts/bootstrap.min.js', 'public/bootstrap3.js')
+    .copy('node_modules/bootstrap/dist/js/bootstrap.min.js', 'public/bootstrap4.js')
     .js('resources/assets/js/app.js', '')
+    .sass('resources/assets/scss/bootstrap-switch.scss', 'public')
+    .sass('resources/assets/scss/bootstrap3.scss', 'public')
+    .sass('resources/assets/scss/bootstrap4.scss', 'public')
     // .version()
    ;
-
-   mix.sass('resources/assets/scss/app.scss', 'public');
 
 // Full API
 // mix.js(src, output);

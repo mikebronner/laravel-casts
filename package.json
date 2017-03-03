@@ -6,6 +6,7 @@
     "production": "cross-env NODE_ENV=production webpack --progress --hide-modules"
   },
   "devDependencies": {
+    "bootstrap": "^4.0.0-alpha.6",
     "bootstrap-sass": "^3.3.7",
     "bootstrap-switch": "^3.3.4",
     "jquery": "^3.1.1",
