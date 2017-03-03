@@ -1,5 +1,5 @@
 
-if (typeof $().html !== 'function') {
+if (!window.$ && !global.$) {
     global.$ = global.jQuery = require('jquery');
 }
 
