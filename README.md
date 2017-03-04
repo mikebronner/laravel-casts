@@ -6,10 +6,11 @@
  ```sh
  composer require genealabs/laravel-casts
  ```
+ 
 2. Publish the required assets:
-```sh
-php artisan casts:publish --assets
-```
+ ```sh
+ php artisan casts:publish --assets
+ ```
 
 ## Rationale
 This package is an effort to streamline and make form development more
