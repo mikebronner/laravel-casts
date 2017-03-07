@@ -6,8 +6,21 @@
  ```sh
  composer require genealabs/laravel-casts
  ```
+
+2. Add the service provider to your `config/app.php` file:
+ ```php
+ /*
+     'providers' => [
+         [...]
+*/
+         GeneaLabs\LaravelCasts\Providers\LaravelCastsService::class,
+/*
+         [...]
+     ],
+*/
+ ```
  
-2. Publish the required assets:
+3. Publish the required assets:
  ```sh
  php artisan casts:publish --assets
  ```
