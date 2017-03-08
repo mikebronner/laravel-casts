@@ -288,6 +288,9 @@ class FormBuilder extends Form
         $cancelHtml = '';
         $options = $this->setOptionClasses('', $options, ['btn', 'btn-primary']);
         $controlOptions = $this->getControlOptions(collect($options));
+        $controlOptions = $controlOptions->map(function ($option) {
+            return str_replace('form-control-success', '', $option);
+        });
         $controlHtml = parent::submit($value, $controlOptions->toArray());
 
         if (! is_null($cancelUrl)) {
