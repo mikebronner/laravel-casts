@@ -145,6 +145,8 @@ class FormBuilder extends Form
     {
         $label = array_pull($options, 'label') ?? $label ?? '';
         $options = $this->setLabelOptionClasses($options);
+        $name = str_replace('_id', '', $name);
+        $name = str_replace('[]', '', $name);
 
         return parent::label($name, $label, $options, $escapeHtml);
     }
