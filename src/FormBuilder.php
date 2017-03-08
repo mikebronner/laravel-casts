@@ -90,7 +90,19 @@ class FormBuilder extends Form
     public function select($name, $list = [], $selected = null, $options = [])
     {
         $options = $this->setOptionClasses($name, $options, ['form-control']);
-        $controlHtml = parent::select($name, $list, $selected, $options);
+        $controlOptions = collect($options);
+
+        if ($this->framework === 'bootstrap4' && ! $controlOptions->has('multiple')) {
+            $controlOptions = $controlOptions->map(function ($option, $index) {
+                if ($index === 'class') {
+                    $option .= ' custom-select';
+                }
+
+                return $option;
+            });
+        }
+
+        $controlHtml = parent::select($name, $list, $selected, $controlOptions->toArray());
 
         return $this->renderControl('select', $controlHtml, $name, '', $options);
     }
