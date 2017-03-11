@@ -237,6 +237,17 @@ class FormBuilder extends Form
     {
         $options = $this->setOptionClasses($name, $options, ['form-control form-control-file']);
         $controlOptions = $this->getControlOptions(collect($options), ['placeholder']);
+
+        if ($this->framework === 'bootstrap4') {
+            $controlOptions = $controlOptions->map(function ($option, $index) {
+                if ($index === 'class') {
+                    $option = 'custom-file-input';
+                }
+
+                return $option;
+            });
+        }
+
         $controlHtml = parent::file($name, $controlOptions->toArray());
 
         return $this->renderControl('file', $controlHtml, $name, '', $options);

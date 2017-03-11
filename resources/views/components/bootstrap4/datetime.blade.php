@@ -2,12 +2,7 @@
 <div class="col-sm-{{ $fieldWidth }}">
 @endif
 
-    <div>
-        <label class="custom-file">
-            {!! $controlHtml !!}
-            <span class="custom-file-control"></span>
-        </label>
-    </div>
+    {!! $controlHtml !!}
 
     @if(! $errors->isEmpty() && $errors->has($name))
         <small class="form-text text-danger">{{ implode(' ', $errors->get($name)) }}</small>

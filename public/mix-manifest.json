@@ -1,6 +1,5 @@
 {
   "/app.js": "/app.js",
-  "/bootstrap-switch.css": "/bootstrap-switch.css",
   "/bootstrap3.css": "/bootstrap3.css",
-  "/bootstrap4.css": "/bootstrap4.css"
+  "/bootstrap4-datetimepicker.js": "/bootstrap4-datetimepicker.js"
 }

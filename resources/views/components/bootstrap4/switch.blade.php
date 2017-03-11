@@ -7,7 +7,9 @@
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        window['genealabsLaravelCasts'] = window.genealabsLaravelCasts || {};
+        window.genealabsLaravelCasts['switchLoaders'] = window.genealabsLaravelCasts.switchLoaders || [];
+        window.genealabsLaravelCasts.switchLoaders.push(function () {
             $("[name='{{ $name }}']").bootstrapSwitch({
                 onText: "{{ $options['onText'] ?? 'On' }}",
                 offText: "{{ $options['offText'] ?? 'Off' }}",

@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('head')
+    <link href="/css/bootstrap4.css" rel="stylesheet" type="text/css" media="all">
+@endsection
+
 @section('content')
     <div class="container">
         <div class="row">
@@ -13,7 +17,9 @@
                     @file('file', ['placeholder' => 'Placeholder Text', 'label' => 'File Input'])
                     @textarea('textarea', '', ['placeholder' => 'Placeholder Text', 'label' => 'Textarea', 'rows' => 7])
                     @checkbox('checkbox', 'test', true, ['placeholder' => 'Placeholder Text', 'label' => 'Checkbox'])
-                    @switch('switch', 'test', true, ['label' => 'Switch'])
+                    @switch('switch1', 'test', true, ['label' => 'Switch'])
+                    @date('date1')
+                    @datetime('datetime1')
                     @select('select', [1, 2, 3, 4], null, ['placeholder' => 'Placeholder Text', 'label' => 'Select'])
                     @selectRange('selectRange', 1, 21, null, ['class' => 'form-control', 'placeholder' => 'Placeholder Text', 'label' => 'Select Range'])
                     @selectRangeWithInterval('selectRangeWithInterval', 1, 21, 3, null, ['class' => 'form-control', 'placeholder' => 'Placeholder Text', 'label' => 'Select Range With Interval'])
@@ -32,6 +38,8 @@
                     @textarea('textarea', '', ['placeholder' => 'Placeholder Text', 'label' => 'Textarea', 'rows' => 7])
                     @checkbox('checkbox', 'test', true, ['placeholder' => 'Placeholder Text', 'label' => 'Checkbox'])
                     @switch('switch2', 'test', true, ['label' => 'Switch', 'onText' => 'Available', 'offText' => 'Unavailable', 'onColor' => 'success', 'offColor' => 'danger'])
+                    @date('date2')
+                    @datetime('datetime2')
                     @select('select', [1, 2, 3, 4], null, ['placeholder' => 'Placeholder Text', 'label' => 'Select'])
                     @selectRange('selectRange', 1, 21, null, ['class' => 'form-control', 'placeholder' => 'Placeholder Text', 'label' => 'Select Range'])
                     @selectRangeWithInterval('selectRangeWithInterval', 1, 21, 3, null, ['class' => 'form-control', 'placeholder' => 'Placeholder Text', 'label' => 'Select Range With Interval'])
@@ -42,7 +50,10 @@
         </div>
     </div>
 
+    <script src="/js/bootstrap4.js"></script>
+    <script>
+        window['genealabsLaravelCasts'] = window.genealabsLaravelCasts || {};
+        window.genealabsLaravelCasts['framework'] = 'bootstrap4';
+    </script>
     <script src="{!! mix('app.js', 'genealabs-laravel-casts') !!}"></script>
-    <script src="https://raw.githubusercontent.com/HubSpot/tether/master/dist/js/tether.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.3/js/bootstrap.min.js"></script>
 @endsection
