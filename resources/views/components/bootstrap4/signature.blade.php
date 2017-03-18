@@ -12,7 +12,7 @@
                     <span class="help-block">{{ implode(' ', $errors->get($name)) }}</span>
                 @endif
 
-                <button type="button" class="btn btn-default btn-xs pull-right" onclick="clearSignature('{{ $name }}');">&nbsp;{{ $options['clearButton'] }}&nbsp;</button>
+                <button type="button" class="btn btn-outline-secondary btn-sm pull-right" onclick="clearSignature('{{ $name }}');">&nbsp;{{ $options['clearButton'] }}&nbsp;</button>
             </div>
             {!! $controlHtml !!}
         </div>
