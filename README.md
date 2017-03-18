@@ -19,7 +19,7 @@
      ],
 */
  ```
- 
+
 3. Publish the required assets:
  ```sh
  php artisan casts:publish --assets
@@ -39,6 +39,8 @@ This package is an effort to streamline and make form development more
 ## Requirements
 - PHP 7.0+
 - Laravel 5.1 (LTS) or Laravel 5.3 (Current)
+- `jQuery` already loaded
+- `Bootstrap JS` (3 or 4) already loaded, if using a framework
 
 ## Usage
 The following shows all elements using Bootstrap 3:
