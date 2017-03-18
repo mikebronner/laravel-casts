@@ -9,6 +9,7 @@
         <div class="row">
             <div class="col-sm-6">
                 <h1 class="page-title">Horizontal Form</h1>
+
                 @form(['url' => '', 'class' => 'form-horizontal', 'framework' => 'bootstrap4'])
                     @text('text', '', ['placeholder' => 'Placeholder Text', 'label' => 'Text Input'])
                     @password('password', ['placeholder' => 'Placeholder Text', 'label' => 'Password Input'])
@@ -49,11 +50,9 @@
             </div>
         </div>
     </div>
+@endsection
 
-    <script src="/js/bootstrap4.js"></script>
-    <script>
-        window['genealabsLaravelCasts'] = window.genealabsLaravelCasts || {};
-        window.genealabsLaravelCasts['framework'] = 'bootstrap4';
-    </script>
-    <script src="{!! mix('app.js', 'genealabs-laravel-casts') !!}"></script>
+@section('footer')
+    <script src="{!! asset('genealabs-laravel-casts/tether.js') !!}"></script>
+    <script src="{!! asset('genealabs-laravel-casts/bootstrap4.js') !!}"></script>
 @endsection

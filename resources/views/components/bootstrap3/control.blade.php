@@ -5,11 +5,4 @@
 @endif
 
 @include("genealabs-laravel-casts::components.bootstrap3.{$type}")
-
-<script>
-    window.genealabsLaravelCasts = {
-        framework: 'bootstrap3'
-    };
-</script>
-
 @include('genealabs-laravel-casts::components.bootstrap3.form-group-close')

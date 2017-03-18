@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('head')
+    <link href="/css/bootstrap3.css" rel="stylesheet" type="text/css" media="all">
+@endsection
+
 @section('content')
     <div class="container">
         <div class="row">
@@ -8,8 +12,8 @@
                 @form(['url' => '', 'class' => 'form-horizontal', 'framework' => 'bootstrap3'])
                     @text('text', '', ['placeholder' => 'Placeholder Text', 'label' => 'Text Input'])
                     @password('password', ['placeholder' => 'Placeholder Text', 'label' => 'Password Input'])
-                    @date('date', '', ['placeholder' => 'Placeholder Text', 'label' => 'Date'])
-                    @datetime('datetime', '', ['placeholder' => 'Placeholder Text', 'label' => 'DateTime'])
+                    @date('date')
+                    @datetime('datetime')
                     @email('email', '', ['placeholder' => 'Placeholder Text', 'label' => 'Email Input'])
                     @url('url', '', ['placeholder' => 'Placeholder Text', 'label' => 'Url Input'])
                     @file('file', ['placeholder' => 'Placeholder Text', 'label' => 'File Input'])
@@ -28,8 +32,8 @@
                 @form(['url' => '', 'framework' => 'bootstrap3'])
                     @text('text', '', ['placeholder' => 'Placeholder Text', 'label' => 'Text Input'])
                     @password('password', ['placeholder' => 'Placeholder Text', 'label' => 'Password Input'])
-                    @date('date', '', ['placeholder' => 'Placeholder Text', 'label' => 'Date'])
-                    @datetime('datetime', '', ['placeholder' => 'Placeholder Text', 'label' => 'DateTime'])
+                    @date('date2', '', ['placeholder' => 'Placeholder Text', 'label' => 'Date'])
+                    @datetime('datetime2', '', ['placeholder' => 'Placeholder Text', 'label' => 'DateTime'])
                     @email('email', '', ['placeholder' => 'Placeholder Text', 'label' => 'Email Input'])
                     @url('url', '', ['placeholder' => 'Placeholder Text', 'label' => 'Url Input'])
                     @file('file', ['placeholder' => 'Placeholder Text', 'label' => 'File Input'])
@@ -45,5 +49,8 @@
             </div>
         </div>
     </div>
-    <script src="{!! mix('app.js', 'genealabs-laravel-casts') !!}"></script>
+@endsection
+
+@section('footer')
+    <script src="{!! asset('genealabs-laravel-casts/bootstrap3.js') !!}"></script>
 @endsection

@@ -5,8 +5,10 @@ use GeneaLabs\LaravelCasts\Facades\HtmlFacade;
 use GeneaLabs\LaravelCasts\FormBuilder;
 use GeneaLabs\LaravelCasts\HtmlBuilder;
 use GeneaLabs\LaravelCasts\Console\Commands\Publish;
+use GeneaLabs\LaravelCasts\Http\Middleware\AssetInjection;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Contracts\Auth\Access\Gate as GateContract;
+use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Event;
@@ -19,6 +21,18 @@ class LaravelCastsService extends ServiceProvider
 
     public function boot()
     {
+        // HTTP/2 Server Push All The Things
+        header('Link: Link: <' . url('/genealabs-laravel-casts/app.js') . '>; rel=preload; as=script', false);
+        header('Link: <' . url('/genealabs-laravel-casts/bootstrap3.js') . '>; rel=preload; as=script', false);
+        header('Link: <' . url('/genealabs-laravel-casts/bootstrap3.css') . '>; rel=preload; as=style', false);
+        header('Link: <' . url('/genealabs-laravel-casts/bootstrap4.js') . '>; rel=preload; as=script', false);
+        header('Link: <' . url('/genealabs-laravel-casts/bootstrap4.css') . '>; rel=preload; as=style', false);
+        header('Link: <' . url('/genealabs-laravel-casts/bootstrap-switch.js') . '>; rel=preload; as=script', false);
+        header('Link: <' . url('/genealabs-laravel-casts/bootstrap3-datetimepicker.js') . '>; rel=preload; as=script', false);
+        header('Link: <' . url('/genealabs-laravel-casts/bootstrap3-datetimepicker.css') . '>; rel=preload; as=style', false);
+        header('Link: <' . url('/genealabs-laravel-casts/bootstrap4-datetimepicker.js') . '>; rel=preload; as=script', false);
+        header('Link: <' . url('/genealabs-laravel-casts/bootstrap4-datetimepicker.css') . '>; rel=preload; as=style', false);
+
         if (app()->environment('testing', 'local', 'development')) {
             $routesPath = __DIR__ . '/../../routes/web.php';
 
@@ -69,6 +83,7 @@ class LaravelCastsService extends ServiceProvider
         AliasLoader::getInstance()->alias('Form', FormFacade::class);
         AliasLoader::getInstance()->alias('HTML', HtmlFacade::class);
         $this->commands(Publish::class);
+        app(Kernel::class)->pushMiddleware(AssetInjection::class);
     }
 
     public function provides() : array
