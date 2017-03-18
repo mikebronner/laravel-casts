@@ -266,6 +266,14 @@ class FormBuilder extends Form
 
     public function signature($name, $value = null, $options = [])
     {
+        if (! array_key_exists('label', $options)) {
+            $options['label'] = ucwords(str_replace('_id', '', str_replace('[]', '', $name)));
+        }
+
+        if (! array_key_exists('clearButton', $options)) {
+            $options['clearButton'] = 'Clear';
+        }
+
         $options = $this->setOptionClasses($name, $options, ['form-control']);
         $controlOptions = $this->getControlOptions(collect($options));
         $controlHtml = $this->hidden($name) . $this->hidden($name . '_date');

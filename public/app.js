@@ -42,7 +42,7 @@ function insertCssLink(path) {
     link.type = 'text/css';
     link.href = path;
     link.media = 'all';
-    head.insertBefore(link, head.firstChild);
+    head.append(link);
 }
 
 if (! fontAwesomeIsLoaded()) {
@@ -72,6 +72,15 @@ if ((window.genealabsLaravelCasts.dateTimeLoaders || false) !== false) {
             });
         });
     }
+}
+
+if ((window.genealabsLaravelCasts.signatureLoaders || false) !== false) {
+    insertCssLink('/genealabs-laravel-casts/signature-pad.css');
+    $.getScript('/genealabs-laravel-casts/signature-pad.js', function() {
+        window.genealabsLaravelCasts.signatureLoaders.forEach(function(signatureLoader) {
+            signatureLoader();
+        });
+    });
 }
 
 if ((window.genealabsLaravelCasts.switchLoaders || false) !== false) {
