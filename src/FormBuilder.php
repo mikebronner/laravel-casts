@@ -357,7 +357,7 @@ class FormBuilder extends Form
             }
 
             if ($this->framework === 'bootstrap4') {
-                $classes[] = $this->errors->has($name) ? 'form-control-error' : 'form-control-success';
+                $classes[] = $this->errors->has($name) ? 'form-control-danger' : 'form-control-success';
             }
         }
 
