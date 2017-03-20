@@ -9,7 +9,7 @@
     </div>
 
     @if(! $errors->isEmpty() && $errors->has($name))
-        <span class="help-block">{{ implode(' ', $errors->get($name)) }}</span>
+        <small class="form-text text-danger">{{ implode(' ', $errors->get($name)) }}</small>
     @endif
 
 @if($isHorizontal)
