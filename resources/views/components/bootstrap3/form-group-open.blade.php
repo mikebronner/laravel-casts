@@ -1,1 +1,1 @@
-<div class="form-group {{ ! $errors->isEmpty() ? ($errors->has($name) ? 'has-feedback has-error' : 'has-success' ) : '' }}">
+<div class="form-group{{ $errors->isEmpty() ? '' : (($errors->has($name) ? ' has-error' : ' has-success' ) . ' has-feedback') }}">
