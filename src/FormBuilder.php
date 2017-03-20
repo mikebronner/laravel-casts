@@ -159,6 +159,13 @@ class FormBuilder extends Form
         $options = $this->setLabelOptionClasses($options);
         $name = str_replace('_id', '', $name);
         $name = str_replace('[]', '', $name);
+        $options = collect($options)->map(function ($option) {
+            $option = str_replace('form-control-success', '', $option);
+            $option = str_replace('form-control-warning', '', $option);
+            $option = str_replace('form-control-danger', '', $option);
+
+            return $option;
+        })->toArray();
 
         return parent::label($name, $label, $options, $escapeHtml);
     }
@@ -322,7 +329,11 @@ class FormBuilder extends Form
         $options = $this->setOptionClasses('', $options, ['btn', 'btn-primary']);
         $controlOptions = $this->getControlOptions(collect($options));
         $controlOptions = $controlOptions->map(function ($option) {
-            return str_replace('form-control-success', '', $option);
+            $option = str_replace('form-control-success', '', $option);
+            $option = str_replace('form-control-warning', '', $option);
+            $option = str_replace('form-control-danger', '', $option);
+
+            return $option;
         });
         $controlHtml = parent::submit($value, $controlOptions->toArray());
 
