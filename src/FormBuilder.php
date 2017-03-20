@@ -67,7 +67,10 @@ class FormBuilder extends Form
         }
 
         $items = [];
-        $items[$value] = $value;
+        if ($value !== null) {
+            $items[$value] = $value;
+        }
+
         $startValue = $start;
         $endValue = $end;
         $interval *= ($interval < 0) ? -1 : 1;
@@ -103,6 +106,10 @@ class FormBuilder extends Form
         }
 
         $controlHtml = parent::select($name, $list, $selected, $controlOptions->toArray());
+
+        if (array_key_exists('placeholder', $options)) {
+            $controlHtml = str_replace('<option selected="selected" value="">' . $options['placeholder'] . '</option>', '<option selected="selected" value="" disabled="disabled">' . $options['placeholder'] . '</option>', $controlHtml);
+        }
 
         return $this->renderControl('select', $controlHtml, $name, '', $options);
     }
