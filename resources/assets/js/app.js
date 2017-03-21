@@ -17,23 +17,6 @@ function fontAwesomeIsLoaded()
     return fontAwesomeIsLoaded;
 }
 
-function getFramework()
-{
-    if ((typeof $.fn.alert.Constructor.VERSION !== 'undefined') &&
-        ($.fn.alert.Constructor.VERSION.charAt(0) === '3')
-    ) {
-        return "bootstrap3";
-    }
-
-    if ((typeof $.fn.alert.Constructor.VERSION !== undefined) &&
-        ($.fn.alert.Constructor.VERSION.charAt(0) === '4')
-    ) {
-        return "bootstrap4";
-    }
-
-    return 'vanilla';
-}
-
 function insertCssLink(path) {
     var head = document.getElementsByTagName('head')[0];
     var link = document.createElement('link');
@@ -50,7 +33,7 @@ if (! fontAwesomeIsLoaded()) {
 }
 
 window['genealabsLaravelCasts'] = window.genealabsLaravelCasts || {};
-window.genealabsLaravelCasts['framework'] = getFramework();
+window.genealabsLaravelCasts['framework'] = {{ config('genealabs-laravel-casts.framework') }};
 
 if ((window.genealabsLaravelCasts.dateTimeLoaders || false) !== false) {
     if (typeof moment === 'undefined') {

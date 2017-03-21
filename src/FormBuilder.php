@@ -21,7 +21,7 @@ class FormBuilder extends Form
     protected $isHorizontal = false;
     protected $isInButtonGroup = false;
     protected $isInline = false;
-    protected $framework = 'vanilla';
+    protected $framework = 'bootstrap3';
 
     private function renderControlForLaravelCurrent(
         string $type,
@@ -135,6 +135,7 @@ class FormBuilder extends Form
         $this->errors = $this->session->get('errors', new MessageBag());
         $this->isHorizontal = false;
         $this->isInline = false;
+        $this->framework = config('genealabs-laravel-casts.framework');
 
         if (array_key_exists('class', $options) && (strpos($options['class'], 'form-horizontal') !== false)) {
             $this->isHorizontal = true;
@@ -146,10 +147,6 @@ class FormBuilder extends Form
 
         if (array_key_exists('offset', $options)) {
             $this->offset = $options['offset'];
-        }
-
-        if (array_key_exists('framework', $options)) {
-            $this->framework = $options['framework'];
         }
 
         if (array_key_exists('labelWidth', $options)) {

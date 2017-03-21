@@ -9,7 +9,7 @@
         <div class="row">
             <div class="col-sm-6">
                 <h1 class="page-header">Horizontal Form</h1>
-                @form(['url' => 'genealabs/laravel-casts/examples/bootstrap3', 'class' => 'form-horizontal', 'framework' => 'bootstrap3'])
+                @form(['url' => 'genealabs/laravel-casts/examples/bootstrap3', 'class' => 'form-horizontal'])
                     @text('text1', '', ['placeholder' => 'Placeholder Text', 'label' => 'Text Input'])
                     @password('password1', ['placeholder' => 'Placeholder Text', 'label' => 'Password Input'])
                     @date('date1')
@@ -37,7 +37,7 @@
             </div>
             <div class="col-sm-6">
                 <h1 class="page-header">Normal Form</h1>
-                @form(['url' => 'genealabs/laravel-casts/examples/bootstrap3', 'framework' => 'bootstrap3'])
+                @form(['url' => 'genealabs/laravel-casts/examples/bootstrap3'])
                     @text('text2', '', ['placeholder' => 'Placeholder Text', 'label' => 'Text Input'])
                     @password('password2', ['placeholder' => 'Placeholder Text', 'label' => 'Password Input'])
                     @date('date2', '', ['placeholder' => 'Placeholder Text', 'label' => 'Date'])

@@ -7,7 +7,7 @@ use File;
 
 class Publish extends Command
 {
-    protected $signature = 'casts:publish {--assets}';
+    protected $signature = 'casts:publish {--assets} {--config}';
     protected $description = 'Publish various assets of the Laravel Casts package.';
 
     public function handle()
@@ -17,6 +17,14 @@ class Publish extends Command
             $this->call('vendor:publish', [
                 '--provider' => LaravelCastsService::class,
                 '--tag' => ['assets'],
+                '--force' => true,
+            ]);
+        }
+
+        if ($this->option('config')) {
+            $this->call('vendor:publish', [
+                '--provider' => LaravelCastsService::class,
+                '--tag' => ['config'],
                 '--force' => true,
             ]);
         }

@@ -8,7 +8,7 @@
   </head>
     <body>
         <div class="container">
-            @form(['url' => '', 'class' => 'form-horizontal'])
+            @form(['url' => ''])
                 @text('text', '', ['placeholder' => 'Placeholder Text', 'label' => 'Text Input'])
                 @password('password', ['placeholder' => 'Placeholder Text', 'label' => 'Password Input'])
                 @email('email', '', ['placeholder' => 'Placeholder Text', 'label' => 'Email Input'])

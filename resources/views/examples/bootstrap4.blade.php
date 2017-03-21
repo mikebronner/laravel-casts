@@ -10,7 +10,7 @@
             <div class="col-sm-6">
                 <h1 class="page-title">Horizontal Form</h1>
 
-                @form(['url' => 'genealabs/laravel-casts/examples/bootstrap4', 'class' => 'form-horizontal', 'framework' => 'bootstrap4'])
+                @form(['url' => 'genealabs/laravel-casts/examples/bootstrap4', 'class' => 'form-horizontal'])
                     @text('text1', '', ['placeholder' => 'Placeholder Text', 'label' => 'Text Input'])
                     @password('password1', ['placeholder' => 'Placeholder Text', 'label' => 'Password Input'])
                     @email('email1', '', ['placeholder' => 'Placeholder Text', 'label' => 'Email Input'])
@@ -38,7 +38,7 @@
             </div>
             <div class="col-sm-6">
                 <h1 class="page-title">Normal Form</h1>
-                @form(['url' => 'genealabs/laravel-casts/examples/bootstrap4', 'framework' => 'bootstrap4'])
+                @form(['url' => 'genealabs/laravel-casts/examples/bootstrap4'])
                     @text('text2', '', ['placeholder' => 'Placeholder Text', 'label' => 'Text Input'])
                     @password('password2', ['placeholder' => 'Placeholder Text', 'label' => 'Password Input'])
                     @email('email2', '', ['placeholder' => 'Placeholder Text', 'label' => 'Email Input'])

@@ -1,15 +1,1 @@
-.signature {
-  position: relative;
-}
-
-.signature .footer {
-  border-top: 1px dashed #ccc;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 15px;
-  position: absolute;
-  text-align: center;
-}
-
-/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy9taWtlL0RldmVsb3Blci9TaXRlcy81LTQtdGVzdHN1aXRlL3BhY2thZ2VzL2dlbmVhbGFicy9sYXJhdmVsLWNhc3RzL3Jlc291cmNlcy9hc3NldHMvc2Nzcy9zaWduYXR1cmUtcGFkLnNjc3MiXSwic291cmNlc0NvbnRlbnQiOlsiLnNpZ25hdHVyZSB7XG4gICAgcG9zaXRpb246IHJlbGF0aXZlO1xufVxuXG4uc2lnbmF0dXJlIC5mb290ZXIge1xuICAgIGJvcmRlci10b3A6IDFweCBkYXNoZWQgI2NjYztcbiAgICBib3R0b206IDA7XG4gICAgbGVmdDogMDtcbiAgICByaWdodDogMDtcbiAgICBwYWRkaW5nOiAxNXB4O1xuICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XG59XG4iXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsQUFBQSxVQUFVLENBQUM7RUFDUCxRQUFRLEVBQUUsUUFBUTtDQUNyQjs7QUFFRCxBQUFXLFVBQUQsQ0FBQyxPQUFPLENBQUM7RUFDZixVQUFVLEVBQUUsZUFBZTtFQUMzQixNQUFNLEVBQUUsQ0FBQztFQUNULElBQUksRUFBRSxDQUFDO0VBQ1AsS0FBSyxFQUFFLENBQUM7RUFDUixPQUFPLEVBQUUsSUFBSTtFQUNiLFFBQVEsRUFBRSxRQUFRO0VBQ2xCLFVBQVUsRUFBRSxNQUFNO0NBQ3JCIn0= */
+.signature{position:relative}.signature .footer{border-top:1px dashed #ccc;bottom:0;left:0;right:0;padding:15px;position:absolute;text-align:center}

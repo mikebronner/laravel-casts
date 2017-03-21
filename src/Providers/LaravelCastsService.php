@@ -47,6 +47,13 @@ class LaravelCastsService extends ServiceProvider
         $this->publishes([
             __DIR__ . '/../../public/' => public_path('genealabs-laravel-casts'),
         ], 'assets');
+
+        $configPath = __DIR__ . '/../../config/genealabs-laravel-casts.php';
+        $this->publishes([
+            $configPath => config_path('genealabs-laravel-casts.php')
+        ], 'config');
+        $this->mergeConfigFrom($configPath, 'genealabs-laravel-casts');
+
         $this->registerBladeDirective('open', 'form');
         $this->registerBladeDirective('model');
         $this->registerBladeDirective('hidden');
