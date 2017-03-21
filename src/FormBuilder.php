@@ -363,6 +363,14 @@ class FormBuilder extends Form
         return $this->renderControl('endButtonGroup', '', '', '', []);
     }
 
+    public function staticText(string $value, array $options = [])
+    {
+        $label = $options['label'] ?? '';
+        $controlHtml = $this->toHtmlString('<p class="form-control-static">' . $value . '</p>');
+
+        return $this->renderControl('staticText', $controlHtml, '', $label, []);
+    }
+
     public function submit($value = null, $options = [])
     {
         $cancelUrl = array_key_exists('cancelUrl', $options) ? $options['cancelUrl'] : null;

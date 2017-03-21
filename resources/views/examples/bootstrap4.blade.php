@@ -32,6 +32,7 @@
                         @button('button3', ['class' => 'btn-primary'])
                         @button('button4', ['class' => 'btn-primary'])
                     @endButtonGroup
+                    @staticText('Show me the text!', ['label' => 'What?'])
                     @submit('submit', ['class' => 'btn btn-success', 'label' => 'Submit Button'], '/bs3')
                 @endform
             </div>
@@ -59,6 +60,7 @@
                         @button('button3', ['class' => 'btn-primary'])
                         @button('button4', ['class' => 'btn-primary'])
                     @endButtonGroup
+                    @staticText('Show me the text!', ['label' => 'What?'])
                     @submit('submit', ['class' => 'btn btn-success', 'label' => 'Submit Button'], '/bs3')
                 @endform
             </div>
