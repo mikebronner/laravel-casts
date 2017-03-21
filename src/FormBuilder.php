@@ -19,6 +19,7 @@ class FormBuilder extends Form
     protected $labelWidth = 3;
     protected $fieldWidth = 9;
     protected $isHorizontal = false;
+    protected $isInButtonGroup = false;
     protected $isInline = false;
     protected $framework = 'vanilla';
 
@@ -43,6 +44,7 @@ class FormBuilder extends Form
             $this->labelWidth,
             $this->isHorizontal,
             $this->isInline,
+            $this->isInButtonGroup,
             $this->errors,
         ];
 
@@ -167,6 +169,13 @@ class FormBuilder extends Form
         $name = str_replace('_id', '', $name);
         $name = str_replace('[]', '', $name);
         $options = collect($options)->map(function ($option) {
+            $option = str_replace('btn-primary', '', $option);
+            $option = str_replace('btn-default', '', $option);
+            $option = str_replace('btn-danger', '', $option);
+            $option = str_replace('btn-warning', '', $option);
+            $option = str_replace('btn-success', '', $option);
+            $option = str_replace('btn-secondary', '', $option);
+            $option = str_replace('btn', '', $option);
             $option = str_replace('form-control-success', '', $option);
             $option = str_replace('form-control-warning', '', $option);
             $option = str_replace('form-control-danger', '', $option);
@@ -328,6 +337,31 @@ class FormBuilder extends Form
         return $this->renderControl('radio', $controlHtml, $name, $value, $options);
     }
 
+    public function button($value = null, $options = [])
+    {
+        $options = $this->setOptionClasses('', $options, ['btn']);
+        $label = $options['label'] ?? '';
+        $controlHtml = parent::button($value, $options);
+
+        return $this->renderControl('button', $controlHtml, $label, '', $options);
+    }
+
+    public function buttonGroup(array $options = [])
+    {
+        $label = $options['label'] ?? '';
+        $options = $this->setOptionClasses('', $options, ['btn-group']);
+        $controlHtml = $this->toHtmlString('<div ' . $this->html->attributes($options) . '>');
+        $this->isInButtonGroup = true;
+
+        return $this->renderControl('buttonGroup', $controlHtml, '', $label, $options);
+    }
+
+    public function endbuttonGroup()
+    {
+        $this->isInButtonGroup = false;
+
+        return $this->renderControl('endButtonGroup', '', '', '', []);
+    }
 
     public function submit($value = null, $options = [])
     {

@@ -62,6 +62,9 @@ class LaravelCastsService extends ServiceProvider
         $this->registerBladeDirective('checkbox');
         $this->registerBladeDirective('switch');
         $this->registerBladeDirective('radio');
+        $this->registerBladeDirective('button');
+        $this->registerBladeDirective('buttonGroup');
+        $this->registerBladeDirective('endButtonGroup');
         $this->registerBladeDirective('submit');
         $this->registerBladeDirective('cancel');
         $this->registerBladeDirective('select');
@@ -134,6 +137,7 @@ class LaravelCastsService extends ServiceProvider
             'labelWidth' => 3,
             'isHorizontal' => false,
             'isInline' => false,
+            'isInButtonGroup' => false,
             'errors' => [],
         ];
 
