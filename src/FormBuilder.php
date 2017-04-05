@@ -21,7 +21,14 @@ class FormBuilder extends Form
     protected $isHorizontal = false;
     protected $isInButtonGroup = false;
     protected $isInline = false;
-    protected $framework = config('genealabs-laravel-casts.framework', 'bootstrap3');
+    protected $framework;
+
+    public function __construct($html, $url, $view, $csrfToken)
+    {
+        parent::__construct($html, $url, $view, $csrfToken);
+
+        $this->framework = config('genealabs-laravel-casts.framework', 'bootstrap3');
+    }
 
     private function renderControlForLaravelCurrent(
         string $type,
