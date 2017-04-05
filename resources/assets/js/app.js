@@ -33,7 +33,6 @@ if (! fontAwesomeIsLoaded()) {
 }
 
 window['genealabsLaravelCasts'] = window.genealabsLaravelCasts || {};
-window.genealabsLaravelCasts['framework'] = {{ config('genealabs-laravel-casts.framework') }};
 
 if ((window.genealabsLaravelCasts.dateTimeLoaders || false) !== false) {
     if (typeof moment === 'undefined') {

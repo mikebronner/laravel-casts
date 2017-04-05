@@ -21,7 +21,7 @@ class FormBuilder extends Form
     protected $isHorizontal = false;
     protected $isInButtonGroup = false;
     protected $isInline = false;
-    protected $framework = 'bootstrap3';
+    protected $framework = config('genealabs-laravel-casts.framework', 'bootstrap3');
 
     private function renderControlForLaravelCurrent(
         string $type,
