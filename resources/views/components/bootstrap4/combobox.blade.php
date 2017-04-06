@@ -18,12 +18,15 @@
         window['genealabsLaravelCasts'] = window.genealabsLaravelCasts || {};
         window.genealabsLaravelCasts['comboboxLoaders'] = window.genealabsLaravelCasts.comboboxLoaders || [];
         window.genealabsLaravelCasts.comboboxLoaders.push(function () {
-            $('[name="{{ $name }}"]').selectize({
-                options: {!! $options['list'] !!},
-                list: {!! $options['selected'] !!},
-                labelField: 'text',
-                valueField: 'value',
-                create: {{ $options['createFunction'] }},
+            $('[name="{{ $name }}"]').selectize(
+                {
+                    multiple: {!! $options['multiple'] !!},
+                    options: {!! $options['list'] !!},
+                    list: {!! $options['selected'] !!},
+                    labelField: 'text',
+                    valueField: 'value',
+                    create: {{ $options['createFunction'] }}
+                },
                 onChange: {{ $options['changeFunction'] }}
             });
         });

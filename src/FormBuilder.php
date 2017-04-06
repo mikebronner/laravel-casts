@@ -236,6 +236,7 @@ class FormBuilder extends Form
     public function combobox(string $name, array $list = [], array $selected = [], array $options = [])
     {
         $options = $this->setOptionClasses($name, $options, ['form-control']);
+        $options['multiple'] = $options['multiple'] ?? false === true ? 'true' : 'false';
         $options['createFunction'] = $options['createFunction'] ?? 'false';
         $options['changeFunction'] = $options['changeFunction'] ?? 'null';
         $options['list'] = collect($list)->transform(function ($item, $index) {
