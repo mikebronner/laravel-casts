@@ -237,6 +237,7 @@ class FormBuilder extends Form
     {
         $options = $this->setOptionClasses($name, $options, ['form-control']);
         $options['createFunction'] = $options['createFunction'] ?? 'false';
+        $options['changeFunction'] = $options['changeFunction'] ?? 'null';
         $options['list'] = collect($list)->transform(function ($item, $index) {
             return [
                 'text' => $item,

@@ -23,7 +23,8 @@
                 list: {!! $options['selected'] !!},
                 labelField: 'text',
                 valueField: 'value',
-                create: {{ $options['createFunction'] }}
+                create: {{ $options['createFunction'] }},
+                onChange: {{ $options['changeFunction'] }}
             });
         });
     </script>
