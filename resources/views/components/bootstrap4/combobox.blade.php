@@ -19,7 +19,6 @@
         window.genealabsLaravelCasts['comboboxLoaders'] = window.genealabsLaravelCasts.comboboxLoaders || [];
         window.genealabsLaravelCasts.comboboxLoaders.push(function () {
             $('[name="{{ $name }}"]').selectize({
-                multiple: {!! $options['multiple'] !!},
                 options: {!! $options['list'] !!},
                 list: {!! $options['selected'] !!},
                 labelField: 'text',
