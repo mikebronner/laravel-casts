@@ -23,7 +23,12 @@
                     @select('select1', [1, 2, 3, 4], null, ['placeholder' => 'Placeholder Text', 'label' => 'Select'])
                     @selectRange('select_range1', 1, 21, null, ['class' => 'form-control', 'placeholder' => 'Placeholder Text', 'label' => 'Select Range'])
                     @selectRangeWithInterval('select_range_with_interval1', 1, 21, 3, null, ['class' => 'form-control', 'placeholder' => 'Placeholder Text', 'label' => 'Select Range With Interval'])
-                    @combobox('combobox1', [1, 2, 3, 4], null, ['class' => 'form-control', 'placeholder' => 'Placeholder Text', 'label' => 'Combobox'])
+                    @combobox('combobox1', [1, 2, '3'=>5], [], ['class' => 'form-control', 'placeholder' => 'Placeholder Text', 'label' => 'Combobox', 'createFunction' => 'createComboBoxItem'])
+                    <script>
+                        var createComboBoxItem = function (text) {
+                            console.log(text);
+                        };
+                    </script>
                     @signature('signature1')
                     @button('button1', ['class' => 'btn-primary'])
                     @buttonGroup(['label' => 'test label'])
@@ -51,7 +56,7 @@
                     @select('select2', [1, 2, 3, 4], null, ['placeholder' => 'Placeholder Text', 'label' => 'Select'])
                     @selectRange('select_range2', 1, 21, null, ['class' => 'form-control', 'placeholder' => 'Placeholder Text', 'label' => 'Select Range'])
                     @selectRangeWithInterval('select_range_with_interval2', 1, 21, 3, null, ['class' => 'form-control', 'placeholder' => 'Placeholder Text', 'label' => 'Select Range With Interval'])
-                    @combobox('combobox2', [1, 2, 3, 4], null, ['class' => 'form-control', 'placeholder' => 'Placeholder Text', 'label' => 'Combobox'])
+                    @combobox('combobox2', [1, 2, 3, 4], [], ['class' => 'form-control', 'placeholder' => 'Placeholder Text', 'label' => 'Combobox'])
                     @signature('signature2')
                     @buttonGroup(['label' => 'test label'])
                         @button('button2', ['class' => 'btn-primary'])
@@ -67,5 +72,6 @@
 @endsection
 
 @section('footer')
+    <script src="{!! asset('genealabs-laravel-casts/app.js') !!}"></script>
     <script src="{!! asset('genealabs-laravel-casts/bootstrap3.js') !!}"></script>
 @endsection

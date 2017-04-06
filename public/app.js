@@ -73,3 +73,12 @@ if ((window.genealabsLaravelCasts.switchLoaders || false) !== false) {
         });
     });
 }
+
+if ((window.genealabsLaravelCasts.comboboxLoaders || false) !== false) {
+    insertCssLink('/genealabs-laravel-casts/bootstrap3-combobox.css');
+    $.getScript('/genealabs-laravel-casts/bootstrap-combobox.js', function() {
+        window.genealabsLaravelCasts.comboboxLoaders.forEach(function(comboboxLoader) {
+            comboboxLoader();
+        });
+    });
+}

@@ -165,7 +165,11 @@ class FormBuilder extends Form
         $options = $this->setLabelOptionClasses($options);
         $name = str_replace('_id', '', $name);
         $name = str_replace('[]', '', $name);
-        $options = collect($options)->map(function ($option) {
+        $options = collect($options)->map(function ($option, $index) {
+            if (is_array($option)) {
+                return '';
+            }
+
             $option = str_replace('btn-primary', '', $option);
             $option = str_replace('btn-default', '', $option);
             $option = str_replace('btn-danger', '', $option);
@@ -178,7 +182,7 @@ class FormBuilder extends Form
             $option = str_replace('form-control-danger', '', $option);
 
             return $option;
-        })->toArray();
+        })->filter()->toArray();
 
         return parent::label($name, $label, $options, $escapeHtml);
     }
@@ -229,12 +233,26 @@ class FormBuilder extends Form
         return $this->renderControl('email', $controlHtml, $name, $value, $options);
     }
 
-    public function combobox($name, $list = [], $selected = null, $options = [])
+    public function combobox(string $name, array $list = [], array $selected = [], array $options = [])
     {
         $options = $this->setOptionClasses($name, $options, ['form-control']);
-        $options['multiple'] = '';
+        $options['createFunction'] = $options['createFunction'] ?? 'false';
+        $options['list'] = collect($list)->transform(function ($item, $index) {
+            return [
+                'text' => $item,
+                'value' => $index,
+            ];
+        })->values()->toJson();
+        $options['selected'] = collect($selected)->transform(function ($item, $index) {
+            return [
+                'text' => $item,
+                'value' => $index,
+            ];
+        })->values()->toJson();
+        $controlOptions = $this->getControlOptions(collect($options), ['list', 'selected']);
+        $controlHtml = parent::text($name, null, $controlOptions->toArray());
 
-        return $this->select($name, $list, $selected, $options);
+        return $this->renderControl('combobox', $controlHtml, $name, null, $options);
     }
 
     public function password($name, $options = [])
