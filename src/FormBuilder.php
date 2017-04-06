@@ -236,7 +236,7 @@ class FormBuilder extends Form
     public function combobox(string $name, array $list = [], array $selected = [], array $options = [])
     {
         $options = $this->setOptionClasses($name, $options, ['form-control']);
-        $options['multiple'] = $options['multiple'] ?? false === true ? 'multiple' : null;
+        $options['multiple'] = array_key_exists('multiple', $options) ? 'multiple' : null;
         $options['createFunction'] = $options['createFunction'] ?? 'false';
         $options['changeFunction'] = $options['changeFunction'] ?? 'null';
         $options['list'] = collect($list)->transform(function ($item, $index) {
@@ -253,7 +253,7 @@ class FormBuilder extends Form
         })->values()->toJson();
         array_filter($options);
         $controlOptions = $this->getControlOptions(collect($options), ['list', 'selected']);
-        $controlHtml = parent::text($name, null, $controlOptions->toArray());
+        $controlHtml = parent::select($name, [], [], $options);
 
         return $this->renderControl('combobox', $controlHtml, $name, null, $options);
     }
