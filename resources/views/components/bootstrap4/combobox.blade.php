@@ -23,6 +23,15 @@
                 list: {!! $options['selected'] !!},
                 labelField: 'text',
                 valueField: 'value',
+                sortField: [
+                    {
+                        field: 'text',
+                        direction: 'asc'
+                    },
+                    {
+                        field: '$score'
+                    }
+                ],
                 create: {{ $options['createFunction'] }},
                 onChange: {{ $options['changeFunction'] }}
             });
