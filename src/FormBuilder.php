@@ -237,8 +237,14 @@ class FormBuilder extends Form
     {
         $options = $this->setOptionClasses($name, $options, ['form-control']);
         $options['multiple'] = array_key_exists('multiple', $options) ? 'multiple' : null;
-        $options['createFunction'] = $options['createFunction'] ?? 'false';
-        $options['changeFunction'] = $options['changeFunction'] ?? 'null';
+        $options['createCallback'] = $options['createCallback'] ?? 'false';
+        $options['changeCallback'] = $options['changeCallback'] ?? 'null';
+
+        if (array_key_exists('subFormAction', $options)) {
+            $options['subFormMethod'] = $options['subFormMethod'] ?? 'POST';
+            $options['subFormClass'] = str_slug($options['subFormMethod'] . ' ' . $options['subFormAction']);
+        }
+
         $options['list'] = collect($list)->transform(function ($item, $index) {
             return [
                 'text' => $item,
