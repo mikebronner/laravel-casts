@@ -32,8 +32,27 @@
                         field: '$score'
                     }
                 ],
-                create: {{ $options['createFunction'] }},
-                onChange: {{ $options['changeFunction'] }}
+                create: function (name) {
+                    @if(array_key_exists('createCallback')
+                        {{ $options['createFunction'] }}(name);
+                    @endif
+                    
+                    return {'text': name, 'value': -1};
+                },
+                onChange: function (value) {
+                    @if(array_key_exists('changeCallback')
+                        {{ $options['changeFunction'] }}(value);
+                    @endif
+
+                    if (value == -1) {
+                        $('{{ $options['subFormSelector'] }}').removeClass('hidden-xs-up');
+                        $('{{ $options['subFormSelector'] }} [name="{{ $options['subFormFieldName'] }}"]').val(selectedContactName);
+                    } else {
+                        $('[name={{ $name }}]').selectize()[0].selectize.removeOption(-1);
+                        $('{{ $options['subFormSelector'] }}').addClass('hidden-xs-up');
+                        $('{{ $options['subFormSelector'] }} [name="{{ $options['subFormFieldName'] }}"]').val('');
+                    }
+                }
             });
         });
     </script>
