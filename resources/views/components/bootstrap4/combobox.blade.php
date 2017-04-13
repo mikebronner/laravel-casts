@@ -62,7 +62,7 @@
                     event.preventDefault();
                     event.stopPropagation();
 
-                    $('.new-contact-form').find('input,textarea,select').each(function (index, control) {
+                    $('.{{ $options['subFormClass'] }}').find('input,textarea,select').each(function (index, control) {
                         $(control).removeClass('form-control-danger').removeClass('form-control-success');
                         $(control).closest('.form-group').removeClass('has-danger').removeClass('has-success');
                         $(control).closest('.form-group').find('.form-control-feedback').remove();
