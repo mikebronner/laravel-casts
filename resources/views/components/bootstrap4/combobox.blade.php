@@ -58,7 +58,7 @@
             });
 
             @if(array_key_exists('subFormClass', $options))
-                document.querySelector('.{!! $options['subFormClass'] !!} input[type="submit"]').addEventListener('click', function (event) {
+            $('.{!! $options['subFormClass'] !!} input[type="submit"]').on('click', function (event) {
                     event.preventDefault();
                     event.stopPropagation();
 
