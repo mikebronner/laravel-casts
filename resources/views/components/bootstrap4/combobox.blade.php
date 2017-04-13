@@ -100,7 +100,7 @@
 @if(array_key_exists('subFormClass', $options))
     @include('genealabs-laravel-casts::components.bootstrap4.form-group-close')
 
-    @include('genealabs-laravel-casts::components.bootstrap4.form-group-open', ['classes' => $options['subFormClass'] . ' hidden-xs-up'])
+    @include('genealabs-laravel-casts::components.bootstrap4.form-group-open', ['test123' => $options['subFormClass'] . ' hidden-xs-up'])
         <div class="col-sm-12">
             <div class="popover popover-static popover-bottom">
 
