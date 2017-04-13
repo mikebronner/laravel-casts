@@ -44,52 +44,56 @@
                         {{ $options['changeCallback'] }}(value);
                     @endif
 
-                    if (value == -1) {
-                        $('.{{ $options['subFormClass'] }}').removeClass('hidden-xs-up');
-                        $('.{{ $options['subFormClass'] }} [name="{{ $options['subFormFieldName'] }}"]').val($('[name={{ $name }}]').text());
-                    } else {
-                        $('[name={{ $name }}]').selectize()[0].selectize.removeOption(-1);
-                        $('.{{ $options['subFormClass'] }}').addClass('hidden-xs-up');
-                        $('.{{ $options['subFormClass'] }} [name="{{ $options['subFormFieldName'] }}"]').val('');
-                    }
+                    @if(array_key_exists('subFormClass', $options))
+                        if (value == -1) {
+                            $('.{{ $options['subFormClass'] }}').removeClass('hidden-xs-up');
+                            $('.{{ $options['subFormClass'] }} [name="{{ $options['subFormFieldName'] }}"]').val($('[name={{ $name }}]').text());
+                        } else {
+                            $('[name={{ $name }}]').selectize()[0].selectize.removeOption(-1);
+                            $('.{{ $options['subFormClass'] }}').addClass('hidden-xs-up');
+                            $('.{{ $options['subFormClass'] }} [name="{{ $options['subFormFieldName'] }}"]').val('');
+                        }
+                    @endif
                 }
             });
 
-            document.querySelector('.{!! $options['subFormClass'] !!} input[type="submit"]').addEventListener('click', function (event) {
-                event.preventDefault();
-                event.stopPropagation();
+            @if(array_key_exists('subFormClass', $options))
+                document.querySelector('.{!! $options['subFormClass'] !!} input[type="submit"]').addEventListener('click', function (event) {
+                    event.preventDefault();
+                    event.stopPropagation();
 
-                $('.new-contact-form').find('input,textarea,select').each(function (index, control) {
-                    $(control).removeClass('form-control-danger').removeClass('form-control-success');
-                    $(control).closest('.form-group').removeClass('has-danger').removeClass('has-success');
-                    $(control).closest('.form-group').find('.form-control-feedback').remove();
-                });
-
-                window.axios.post('{!! route('api.contacts.store') !!}',
-                    $('.{{ $options['subFormClass'] }}').find('input,textarea,select').serialize()
-                ).then(function (response) {
-                    var combobox = $('[name={{ $name }}]').selectize()[0].selectize;
-                    combobox.removeOption(-1);
-                    combobox.addOption({'value': response.data.id, 'text': response.data.name});
-                    combobox.refreshOptions();
-                    combobox.setValue(response.data.id);
-                }).catch(function (error) {
-                    $('.{{ $options['subFormClass'] }}').find('input,textarea,select').each(function (index, control) {
-                        if ($(control).attr('type') != 'submit') {
-                            $(control).addClass('form-control-success');
-                            $(control).closest('.form-group').addClass('has-success');
-                        }
+                    $('.new-contact-form').find('input,textarea,select').each(function (index, control) {
+                        $(control).removeClass('form-control-danger').removeClass('form-control-success');
+                        $(control).closest('.form-group').removeClass('has-danger').removeClass('has-success');
+                        $(control).closest('.form-group').find('.form-control-feedback').remove();
                     });
 
-                    _.forOwn(error.response.data, function (message, field) {
-                        $('[name=' + field + ']').addClass('form-control-danger');
-                        $('[name=' + field + ']').closest('.form-group').addClass('has-danger');
-                        $('[name=' + field + ']').after('<small class="form-control-feedback">' + _.join(message, '<br>') + '</small>');
-                    });
-                });
+                    window.axios.post('{!! route('api.contacts.store') !!}',
+                        $('.{{ $options['subFormClass'] }}').find('input,textarea,select').serialize()
+                    ).then(function (response) {
+                        var combobox = $('[name={{ $name }}]').selectize()[0].selectize;
+                        combobox.removeOption(-1);
+                        combobox.addOption({'value': response.data.id, 'text': response.data.name});
+                        combobox.refreshOptions();
+                        combobox.setValue(response.data.id);
+                    }).catch(function (error) {
+                        $('.{{ $options['subFormClass'] }}').find('input,textarea,select').each(function (index, control) {
+                            if ($(control).attr('type') != 'submit') {
+                                $(control).addClass('form-control-success');
+                                $(control).closest('.form-group').addClass('has-success');
+                            }
+                        });
 
-                return false;
-            });
+                        _.forOwn(error.response.data, function (message, field) {
+                            $('[name=' + field + ']').addClass('form-control-danger');
+                            $('[name=' + field + ']').closest('.form-group').addClass('has-danger');
+                            $('[name=' + field + ']').after('<small class="form-control-feedback">' + _.join(message, '<br>') + '</small>');
+                        });
+                    });
+
+                    return false;
+                });
+            @endif
         });
     </script>
 
