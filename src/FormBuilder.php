@@ -237,8 +237,6 @@ class FormBuilder extends Form
     {
         $options = $this->setOptionClasses($name, $options, ['form-control']);
         $options['multiple'] = array_key_exists('multiple', $options) ? 'multiple' : null;
-        $options['createCallback'] = $options['createCallback'] ?? 'null';
-        $options['changeCallback'] = $options['changeCallback'] ?? 'null';
 
         if (array_key_exists('subFormAction', $options)) {
             $options['subFormMethod'] = $options['subFormMethod'] ?? 'POST';
