@@ -33,7 +33,7 @@
                     }
                 ],
                 create: function (name) {
-                    @if(array_key_exists('createCallback')
+                    @if(array_key_exists('createCallback', $options))
                         {{ $options['createFunction'] }}(name);
                     @endif
 
