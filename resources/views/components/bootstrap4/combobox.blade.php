@@ -45,7 +45,7 @@
                     @endif
 
                     @if(array_key_exists('subFormClass', $options))
-                        if (value == -1) { 
+                        if (value == -1) {
                             $('.{{ $options['subFormClass'] }}').removeClass('hidden-xs-up');
                             $('.{{ $options['subFormClass'] }} [name="{{ $options['subFormFieldName'] }}"]').val($('[name={{ $name }}]').text());
                         } else {
