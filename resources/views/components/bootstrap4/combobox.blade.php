@@ -34,14 +34,14 @@
                 ],
                 create: function (name) {
                     @if(array_key_exists('createCallback', $options))
-                        {{ $options['createFunction'] }}(name);
+                        {{ $options['createCallback'] }}(name);
                     @endif
 
                     return {'text': name, 'value': -1};
                 },
                 onChange: function (value) {
                     @if(array_key_exists('changeCallback', $options))
-                        {{ $options['changeFunction'] }}(value);
+                        {{ $options['changeCallback'] }}(value);
                     @endif
 
                     if (value == -1) {
