@@ -240,7 +240,7 @@ class FormBuilder extends Form
 
         if (array_key_exists('subFormAction', $options)) {
             $options['subFormMethod'] = $options['subFormMethod'] ?? 'POST';
-            $options['subFormClass'] = str_slug($options['subFormMethod'] . ' ' . $options['subFormAction']);
+            $options['subFormClass'] = str_random(64);
         }
 
         $options['list'] = collect($list)->transform(function ($item, $index) {
