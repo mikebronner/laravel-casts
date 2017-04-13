@@ -68,7 +68,7 @@
                         $(control).closest('.form-group').find('.form-control-feedback').remove();
                     });
 
-                    window.axios.post('{!! route('api.contacts.store') !!}',
+                    window.axios.post('{{ $options['subFormAction'] }}',
                         $('.{{ $options['subFormClass'] }}').find('input,textarea,select').serialize()
                     ).then(function (response) {
                         var combobox = $('[name={{ $name }}]').selectize()[0].selectize;
