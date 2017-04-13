@@ -40,7 +40,7 @@
                     return {'text': name, 'value': -1};
                 },
                 onChange: function (value) {
-                    @if(array_key_exists('changeCallback'))
+                    @if(array_key_exists('changeCallback', $options))
                         {{ $options['changeFunction'] }}(value);
                     @endif
 
