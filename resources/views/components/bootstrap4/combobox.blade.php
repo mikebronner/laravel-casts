@@ -19,7 +19,7 @@
         window.genealabsLaravelCasts['comboboxLoaders'] = window.genealabsLaravelCasts.comboboxLoaders || [];
         window.genealabsLaravelCasts.comboboxLoaders.push(function () {
             @if(array_key_exists('subFormClass', $options))
-                $('.{{ $options['subFormClass'] }}').find('input,textarea,select').attr('disabled', 'disabled');
+                $('{{ $options['subFormClass'] }}').find('input,textarea,select').attr('disabled', 'disabled');
             @endif
 
             $('[name="{{ $name }}"]').selectize({
@@ -50,32 +50,32 @@
 
                     @if(array_key_exists('subFormClass', $options))
                         if (value == -1) {
-                            $('.{{ $options['subFormClass'] }}').find('input,textarea,select').removeAttr('disabled');
-                            $('.{{ $options['subFormClass'] }}').removeClass('hidden-xs-up');
-                            $('.{{ $options['subFormClass'] }} [name="{{ $options['subFormFieldName'] }}"]').val($('[name={{ $name }}]').text());
+                            $('{{ $options['subFormClass'] }}').find('input,textarea,select').removeAttr('disabled');
+                            $('{{ $options['subFormClass'] }}').removeClass('hidden-xs-up');
+                            $('{{ $options['subFormClass'] }} [name="{{ $options['subFormFieldName'] }}"]').val($('[name={{ $name }}]').text());
                         } else {
                             $('[name={{ $name }}]').selectize()[0].selectize.removeOption(-1);
-                            $('.{{ $options['subFormClass'] }}').addClass('hidden-xs-up');
-                            $('.{{ $options['subFormClass'] }} [name="{{ $options['subFormFieldName'] }}"]').val('');
-                            $('.{{ $options['subFormClass'] }}').find('input,textarea,select').attr('disabled', 'disabled');
+                            $('{{ $options['subFormClass'] }}').addClass('hidden-xs-up');
+                            $('{{ $options['subFormClass'] }} [name="{{ $options['subFormFieldName'] }}"]').val('');
+                            $('{{ $options['subFormClass'] }}').find('input,textarea,select').attr('disabled', 'disabled');
                         }
                     @endif
                 }
             });
 
             @if(array_key_exists('subFormClass', $options))
-            $('.{!! $options['subFormClass'] !!} input[type="submit"]').on('click', function (event) {
+            $('{!! $options['subFormClass'] !!} input[type="submit"]').on('click', function (event) {
                     event.preventDefault();
                     event.stopPropagation();
 
-                    $('.{{ $options['subFormClass'] }}').find('input,textarea,select').each(function (index, control) {
+                    $('{{ $options['subFormClass'] }}').find('input,textarea,select').each(function (index, control) {
                         $(control).removeClass('form-control-danger').removeClass('form-control-success');
                         $(control).closest('.form-group').removeClass('has-danger').removeClass('has-success');
                         $(control).closest('.form-group').find('.form-control-feedback').remove();
                     });
 
                     window.axios.post('{{ $options['subFormAction'] }}',
-                        $('.{{ $options['subFormClass'] }}').find('input,textarea,select').serialize()
+                        $('{{ $options['subFormClass'] }}').find('input,textarea,select').serialize()
                     ).then(function (response) {
                         var combobox = $('[name={{ $name }}]').selectize()[0].selectize;
                         combobox.removeOption(-1);
@@ -83,7 +83,7 @@
                         combobox.refreshOptions();
                         combobox.setValue(response.data.{{ $options['subFormResponseObjectPrimaryKey'] }});
                     }).catch(function (error) {
-                        $('.{{ $options['subFormClass'] }}').find('input,textarea,select').each(function (index, control) {
+                        $('{{ $options['subFormClass'] }}').find('input,textarea,select').each(function (index, control) {
                             if ($(control).attr('type') != 'submit') {
                                 $(control).addClass('form-control-success');
                                 $(control).closest('.form-group').addClass('has-success');
@@ -110,7 +110,7 @@
 @if(array_key_exists('subFormClass', $options))
     @include('genealabs-laravel-casts::components.bootstrap4.form-group-close')
 
-    @include('genealabs-laravel-casts::components.bootstrap4.form-group-open', ['classes' => $options['subFormClass'] . ' hidden-xs-up'])
+    @include('genealabs-laravel-casts::components.bootstrap4.form-group-open', ['classes' => str_replace('.', '', $options['subFormClass']) . ' hidden-xs-up'])
         <div class="col-sm-12">
             <div class="popover popover-static popover-bottom">
 

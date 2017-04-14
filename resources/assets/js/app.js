@@ -47,6 +47,7 @@ if ((window.genealabsLaravelCasts.dateTimeLoaders || false) !== false) {
             });
         });
     } else if (window.genealabsLaravelCasts.framework === "bootstrap4") {
+        console.log('datetime');
         insertCssLink('/genealabs-laravel-casts/bootstrap4-datetimepicker.css');
         $.getScript('/genealabs-laravel-casts/bootstrap4-datetimepicker.js', function() {
             window.genealabsLaravelCasts.dateTimeLoaders.forEach(function(dateTimeLoader) {
@@ -77,7 +78,6 @@ if ((window.genealabsLaravelCasts.switchLoaders || false) !== false) {
 if ((window.genealabsLaravelCasts.comboboxLoaders || false) !== false) {
     insertCssLink('/genealabs-laravel-casts/bootstrap3-combobox.css');
     insertCssLink('/genealabs-laravel-casts/bootstrap4-custom.css');
-    console.log(1);
     $.getScript('/genealabs-laravel-casts/bootstrap-combobox.js', function() {
         window.genealabsLaravelCasts.comboboxLoaders.forEach(function(comboboxLoader) {
             comboboxLoader();

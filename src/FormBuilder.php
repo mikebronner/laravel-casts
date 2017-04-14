@@ -253,7 +253,7 @@ class FormBuilder extends Form
 
         if (array_key_exists('subFormAction', $options)) {
             $options['subFormMethod'] = $options['subFormMethod'] ?? 'POST';
-            $options['subFormClass'] = str_random(6);
+            $options['subFormClass'] = '.' . str_random(6);
             $options['subFormResponseObjectPrimaryKey'] = $options['subFormResponseObjectPrimaryKey'] ?? 'id';
         }
 
