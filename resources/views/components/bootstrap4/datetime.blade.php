@@ -11,6 +11,7 @@
 
     <script>
         window['genealabsLaravelCasts'] = window.genealabsLaravelCasts || {};
+        window.genealabsLaravelCasts['framework'] = 'bootstrap4';
         window.genealabsLaravelCasts['dateTimeLoaders'] = window.genealabsLaravelCasts.dateTimeLoaders || [];
         window.genealabsLaravelCasts.dateTimeLoaders.push(function () {
             $("[name='{{ $name }}']").datetimepicker({
