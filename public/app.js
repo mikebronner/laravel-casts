@@ -47,6 +47,7 @@ if ((window.genealabsLaravelCasts.dateTimeLoaders || false) !== false) {
             });
         });
     } else if (window.genealabsLaravelCasts.framework === "bootstrap4") {
+        console.log('datetime');
         insertCssLink('/genealabs-laravel-casts/bootstrap4-datetimepicker.css');
         $.getScript('/genealabs-laravel-casts/bootstrap4-datetimepicker.js', function() {
             window.genealabsLaravelCasts.dateTimeLoaders.forEach(function(dateTimeLoader) {
