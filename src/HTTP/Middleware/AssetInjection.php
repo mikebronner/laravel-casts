@@ -9,7 +9,7 @@ class AssetInjection
         $response = $next($request);
         $content = $response->content();
 
-        if (preg_match('/<form.*?framework=".*/', $content)) {
+        if (preg_match('/<form/', $content)) {
             return $response->setContent(str_replace(
                 '</body>',
                 '<script src="' . asset('genealabs-laravel-casts/app.js') . '"></script></body>',
