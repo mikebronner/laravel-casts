@@ -73,9 +73,9 @@
                     ).then(function (response) {
                         var combobox = $('[name={{ $name }}]').selectize()[0].selectize;
                         combobox.removeOption(-1);
-                        combobox.addOption({'value': response.data.id, 'text': response.data.name});
+                        combobox.addOption({'value': response.data.{{ $options['subFormResponseObjectPrimaryKey'] }}, 'text': response.data.{{ $options['subFormFieldName'] }}});
                         combobox.refreshOptions();
-                        combobox.setValue(response.data.id);
+                        combobox.setValue(response.data.{{ $options['subFormResponseObjectPrimaryKey'] }});
                     }).catch(function (error) {
                         $('.{{ $options['subFormClass'] }}').find('input,textarea,select').each(function (index, control) {
                             if ($(control).attr('type') != 'submit') {

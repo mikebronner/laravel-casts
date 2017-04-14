@@ -165,24 +165,37 @@ class FormBuilder extends Form
         $options = $this->setLabelOptionClasses($options);
         $name = str_replace('_id', '', $name);
         $name = str_replace('[]', '', $name);
-        $options = collect($options)->map(function ($option, $index) {
-            if (is_array($option)) {
-                return '';
-            }
+        $excludeOptions = [
+            'list' => '',
+            'subFormAction' => '',
+            'subFormBlade' => '',
+            'subFormClass' => '',
+            'subFormFieldName' => '',
+            'subFormMethod' => '',
+            'subFormTitle' => '',
+            'subFormResponseObjectPrimaryKey' => '',
+        ];
+        $options = collect($options)->diffKeys($excludeOptions)
+            ->map(function ($option, $index) {
+                if (is_array($option)) {
+                    return '';
+                }
 
-            $option = str_replace('btn-primary', '', $option);
-            $option = str_replace('btn-default', '', $option);
-            $option = str_replace('btn-danger', '', $option);
-            $option = str_replace('btn-warning', '', $option);
-            $option = str_replace('btn-success', '', $option);
-            $option = str_replace('btn-secondary', '', $option);
-            $option = str_replace('btn', '', $option);
-            $option = str_replace('form-control-success', '', $option);
-            $option = str_replace('form-control-warning', '', $option);
-            $option = str_replace('form-control-danger', '', $option);
+                $option = str_replace('btn-primary', '', $option);
+                $option = str_replace('btn-default', '', $option);
+                $option = str_replace('btn-danger', '', $option);
+                $option = str_replace('btn-warning', '', $option);
+                $option = str_replace('btn-success', '', $option);
+                $option = str_replace('btn-secondary', '', $option);
+                $option = str_replace('btn', '', $option);
+                $option = str_replace('form-control-success', '', $option);
+                $option = str_replace('form-control-warning', '', $option);
+                $option = str_replace('form-control-danger', '', $option);
 
-            return $option;
-        })->filter()->toArray();
+                return $option;
+            })
+            ->filter()
+            ->toArray();
 
         return parent::label($name, $label, $options, $escapeHtml);
     }
