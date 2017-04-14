@@ -18,6 +18,10 @@
         window['genealabsLaravelCasts'] = window.genealabsLaravelCasts || {};
         window.genealabsLaravelCasts['comboboxLoaders'] = window.genealabsLaravelCasts.comboboxLoaders || [];
         window.genealabsLaravelCasts.comboboxLoaders.push(function () {
+            @if(array_key_exists('subFormClass', $options))
+                $('.{{ $options['subFormClass'] }}').find('input,textarea,select').attr('disabled', 'disabled');
+            @endif
+
             $('[name="{{ $name }}"]').selectize({
                 options: {!! $options['list'] !!},
                 list: {!! $options['selected'] !!},
