@@ -39,7 +39,7 @@ if ((window.genealabsLaravelCasts.dateTimeLoaders || false) !== false) {
         $.getScript('/genealabs-laravel-casts/moment.js', function() {});
     }
 
-    if (window.genealabsLaravelCasts.framework === "bootstrap4") {
+    if (window.genealabsLaravelCasts.framework === "bootstrap3") {
         insertCssLink('/genealabs-laravel-casts/bootstrap3-datetimepicker.css');
         $.getScript('/genealabs-laravel-casts/bootstrap3-datetimepicker.js', function() {
             window.genealabsLaravelCasts.dateTimeLoaders.forEach(function(dateTimeLoader) {
@@ -48,15 +48,15 @@ if ((window.genealabsLaravelCasts.dateTimeLoaders || false) !== false) {
         });
     }
 
-    // if (window.genealabsLaravelCasts.framework === "bootstrap4") {
-    //     console.log('datetime');
-    //     insertCssLink('/genealabs-laravel-casts/bootstrap4-datetimepicker.css');
-    //     $.getScript('/genealabs-laravel-casts/bootstrap4-datetimepicker.js', function() {
-    //         window.genealabsLaravelCasts.dateTimeLoaders.forEach(function(dateTimeLoader) {
-    //             dateTimeLoader();
-    //         });
-    //     });
-    // }
+    if (window.genealabsLaravelCasts.framework === "bootstrap4") {
+        console.log('datetime');
+        insertCssLink('/genealabs-laravel-casts/bootstrap4-datetimepicker.css');
+        $.getScript('/genealabs-laravel-casts/bootstrap4-datetimepicker.js', function() {
+            window.genealabsLaravelCasts.dateTimeLoaders.forEach(function(dateTimeLoader) {
+                dateTimeLoader();
+            });
+        });
+    }
 }
 
 if ((window.genealabsLaravelCasts.signatureLoaders || false) !== false) {

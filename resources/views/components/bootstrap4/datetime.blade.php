@@ -14,7 +14,7 @@
         window.genealabsLaravelCasts['framework'] = 'bootstrap4';
         window.genealabsLaravelCasts['dateTimeLoaders'] = window.genealabsLaravelCasts.dateTimeLoaders || [];
         window.genealabsLaravelCasts.dateTimeLoaders.push(function () {
-            $("[name='{{ $name }}']").datetimepicker({
+            $("#datetimepicker-{{ $name }}").datetimepicker({
                 format: 'lll',
                 sideBySide: true,
                 icons: {

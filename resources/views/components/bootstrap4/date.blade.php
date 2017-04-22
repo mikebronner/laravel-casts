@@ -13,7 +13,7 @@
         window['genealabsLaravelCasts'] = window.genealabsLaravelCasts || {};
         window.genealabsLaravelCasts['dateTimeLoaders'] = window.genealabsLaravelCasts.dateTimeLoaders || [];
         window.genealabsLaravelCasts.dateTimeLoaders.push(function () {
-            $("[name='{{ $name }}']").datetimepicker({
+            $("#datetimepicker-{{ $name }}").datetimepicker({
                 format: 'll',
                 icons: {
                     time: "fa fa-btn fa-clock-o",
