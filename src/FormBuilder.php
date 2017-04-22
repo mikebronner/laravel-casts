@@ -220,6 +220,7 @@ class FormBuilder extends Form
             return ($key !== 'label');
         }, ARRAY_FILTER_USE_KEY);
         $controlHtml = parent::date($name, $value, $controlOptions);
+        $options['value'] = $this->getValueAttribute($name, $value);
 
         return $this->renderControl('date', $controlHtml, $name, $value, $options);
     }
@@ -233,6 +234,7 @@ class FormBuilder extends Form
             return ($key !== 'label');
         }, ARRAY_FILTER_USE_KEY);
         $controlHtml = parent::datetime($name, $value, $controlOptions);
+        $options['value'] = $this->getValueAttribute($name, $value);
 
         return $this->renderControl('datetime', $controlHtml, $name, $value, $options);
     }
@@ -246,7 +248,7 @@ class FormBuilder extends Form
         return $this->renderControl('email', $controlHtml, $name, $value, $options);
     }
 
-    public function combobox(string $name, array $list = [], array $selected = [], array $options = [])
+    public function combobox(string $name, array $list = [], $selected = null, array $options = [])
     {
         $options = $this->setOptionClasses($name, $options, ['form-control']);
         $options['multiple'] = array_key_exists('multiple', $options) ? 'multiple' : null;

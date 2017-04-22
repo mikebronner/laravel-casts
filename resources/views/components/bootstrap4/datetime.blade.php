@@ -16,6 +16,7 @@
         window.genealabsLaravelCasts.dateTimeLoaders.push(function () {
             $("#datetimepicker-{{ $name }}").datetimepicker({
                 format: 'lll',
+                date: '{{ $options['value'] }}',
                 sideBySide: true,
                 icons: {
                     time: "fa fa-btn fa-clock-o",
