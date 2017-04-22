@@ -22,7 +22,7 @@
                 $('{{ $options['subFormClass'] }}').find('input,textarea,select').attr('disabled', 'disabled');
             @endif
 
-            $('[name="{{ $name }}"]').selectize({
+            $('{!! array_key_exists('subFormClass', $options) ? '[subFormClass="' . $options['subFormClass'] . '"]' : '' !!}[name="{{ $name }}"]').selectize({
                 options: {!! $options['list'] !!},
                 list: {!! $options['selected'] !!},
                 labelField: 'text',
