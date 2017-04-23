@@ -1,1 +1,1 @@
-@label($name, $value, $options)
+@label($name, $value, $options, $options['escapeLabel'] ?? false)
