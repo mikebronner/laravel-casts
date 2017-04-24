@@ -165,11 +165,6 @@ class FormBuilder extends Form
     {
         $this->framework = $options['framework'] ?? $this->framework;
         $label = array_pull($options, 'label') ?? $label ?? '';
-
-        if (! $label) {
-            return '';
-        }
-
         $options = $this->setLabelOptionClasses($options);
         $name = str_replace('_id', '', $name);
         $name = str_replace('[]', '', $name);
