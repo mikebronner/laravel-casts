@@ -45,7 +45,7 @@ class FormBuilder extends Form
             $this->isHorizontal,
             $this->isInline,
             $this->isInButtonGroup,
-            $this->errors,
+            $this->errors ?? collect(),
         ];
 
         return call_user_func_array($method, $parameters);
@@ -165,6 +165,11 @@ class FormBuilder extends Form
     {
         $this->framework = $options['framework'] ?? $this->framework;
         $label = array_pull($options, 'label') ?? $label ?? '';
+
+        if (! $label) {
+            return '';
+        }
+
         $options = $this->setLabelOptionClasses($options);
         $name = str_replace('_id', '', $name);
         $name = str_replace('[]', '', $name);
