@@ -38,11 +38,15 @@
                     }
                 ],
                 create: function (name) {
-                    @if(array_key_exists('createCallback', $options))
-                        {{ $options['createCallback'] }}(name);
-                    @endif
+                    @if(array_key_exists('multiple', $options))
+                        return false;
+                    @else
+                        @if(array_key_exists('createCallback', $options))
+                            {{ $options['createCallback'] }}(name);
+                        @endif
 
-                    return {'text': name, 'value': -1};
+                        return {'text': name, 'value': -1};
+                    @endif
                 },
                 onChange: function (value) {
                     @if(array_key_exists('changeCallback', $options))
