@@ -18,7 +18,7 @@ function fontAwesomeIsLoaded()
 }
 
 function insertCssLink(path) {
-    var head = document.getElementsByTagName('head')[0];
+    var head = $(document.getElementsByTagName('head')[0]);
     var link = document.createElement('link');
 
     link.rel = 'stylesheet';
