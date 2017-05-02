@@ -18,14 +18,14 @@ function fontAwesomeIsLoaded()
 }
 
 function insertCssLink(path) {
-    var head = $(document.getElementsByTagName('head')[0]);
+    var head = document.getElementsByTagName('head')[0];
     var link = document.createElement('link');
 
     link.rel = 'stylesheet';
     link.type = 'text/css';
     link.href = path;
     link.media = 'all';
-    head.append(link);
+    head.appendChild(link);
 }
 
 if (! fontAwesomeIsLoaded()) {
