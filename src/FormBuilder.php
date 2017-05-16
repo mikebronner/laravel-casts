@@ -89,10 +89,10 @@ class FormBuilder extends Form
 
         $items[$endValue] = $endValue;
 
-        return $this->select($name, $items, $value, $options);
+        return $this->select($name, $items, $value, $options, $optionOptions);
     }
 
-    public function select($name, $list = [], $selected = null, $options = [])
+    public function select($name, $list = [], $selected = null, array $options = [], array $optionOptions = [])
     {
         $this->framework = $options['framework'] ?? $this->framework;
         $options = $this->setOptionClasses($name, $options, ['form-control']);
@@ -108,7 +108,7 @@ class FormBuilder extends Form
             });
         }
 
-        $controlHtml = parent::select($name, $list, $selected, $controlOptions->toArray());
+        $controlHtml = parent::select($name, $list, $selected, $controlOptions->toArray(), $optionOptions);
 
         if (array_key_exists('placeholder', $options)) {
             $controlHtml = str_replace('<option selected="selected" value="">' . $options['placeholder'] . '</option>', '<option selected="selected" value="" disabled="disabled">' . $options['placeholder'] . '</option>', $controlHtml);
@@ -255,7 +255,7 @@ class FormBuilder extends Form
         return $this->renderControl('email', $controlHtml, $name, $value, $options);
     }
 
-    public function combobox(string $name, array $list = [], $selected = null, array $options = [])
+    public function combobox(string $name, array $list = [], $selected = null, array $options = [], array $optionOptions = [])
     {
         $this->framework = $options['framework'] ?? $this->framework;
         $options = $this->setOptionClasses($name, $options, ['form-control']);
@@ -281,7 +281,7 @@ class FormBuilder extends Form
         })->values()->toJson();
         array_filter($options);
         $controlOptions = $this->getControlOptions(collect($options), ['list', 'selected']);
-        $controlHtml = parent::select($name, $list, $selected, $options);
+        $controlHtml = parent::select($name, $list, $selected, $controlOptions, $optionOptions);
 
         return $this->renderControl('combobox', $controlHtml, $name, null, $options);
     }
