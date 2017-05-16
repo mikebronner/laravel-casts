@@ -38,7 +38,7 @@
                     }
                 ],
                 create:
-                    @if(array_key_exists('multiple', $options))
+                    @if(array_key_exists('multiple', $options) && $options['multiple'] === 'multiple')
                         false,
                     @else
                         function (name) {
