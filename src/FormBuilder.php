@@ -281,7 +281,7 @@ class FormBuilder extends Form
         })->values()->toJson();
         array_filter($options);
         $controlOptions = $this->getControlOptions(collect($options), ['list', 'selected']);
-        $controlHtml = parent::select($name, $list, $selected, $controlOptions, $optionOptions);
+        $controlHtml = parent::select($name, $list, $selected, $controlOptions->toArray(), $optionOptions);
 
         return $this->renderControl('combobox', $controlHtml, $name, null, $options);
     }
