@@ -446,11 +446,6 @@ class FormBuilder extends Form
         });
         $controlHtml = parent::submit($value, $controlOptions->toArray());
 
-        if (! is_null($cancelUrl)) {
-            $cancelHtml = link_to($cancelUrl, 'Cancel', ['class' => 'btn btn-cancel pull-right']);
-        }
-
-        // TODO: render cancel and reset buttons.
         return $this->renderControl('submit', $controlHtml, '', '', $options);
     }
 
