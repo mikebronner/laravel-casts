@@ -361,7 +361,7 @@ class FormBuilder extends Form
         $this->framework = $options['framework'] ?? $this->framework;
         $additionalClasses = $this->usesBootstrap4() ? 'form-check-input' : '';
         $options = $this->setOptionClasses($name, $options, [$additionalClasses]);
-        $label = $options['label'];
+        $label = $options['label'] ?? ucwords($name);
         $controlOptions = $this->getControlOptions(collect($options), ['form-control', 'placeholder']);
         $controlHtml = parent::checkbox($name, $value, $checked, $controlOptions->toArray()) . " {$label}";
 
