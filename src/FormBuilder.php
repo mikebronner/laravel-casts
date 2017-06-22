@@ -133,11 +133,10 @@ class FormBuilder extends Form
 
     public function initializeForm(array $options)
     {
-        $this->framework = $options['framework'] ?? $this->framework;
+        $this->framework = $options['framework'] ?? $this->framework ?? config('genealabs-laravel-casts.framework');
         $this->errors = $this->session->get('errors', new MessageBag());
         $this->isHorizontal = false;
         $this->isInline = false;
-        $this->framework = config('genealabs-laravel-casts.framework');
 
         if (array_key_exists('class', $options) && (strpos($options['class'], 'form-horizontal') !== false)) {
             $this->isHorizontal = true;
