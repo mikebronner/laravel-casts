@@ -5,7 +5,7 @@
         </div>
         <div class="col-sm-{{ $fieldWidth }}">
     @else
-        <div class="col-sm-{{ $fieldWidth }} col-sm-offset-{{ $labelWidth }}">
+        <div class="col-sm-{{ $fieldWidth }} offset-sm-{{ $labelWidth }}">
     @endif
 @elseif (array_key_exists('cancelUrl', $options))
     {!! link_to(collect($options)->get('cancelUrl'), 'Cancel', ['class' => 'btn btn-default']) !!}
