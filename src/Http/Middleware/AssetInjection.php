@@ -9,7 +9,7 @@ class AssetInjection
     {
         $response = $next($request);
 
-        if (is_a($response, RedirectResponse::class)) {
+        if (! method_exists($response, 'content')) {
             return $response;
         }
 
