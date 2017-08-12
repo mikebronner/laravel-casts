@@ -116,6 +116,11 @@ class FormBuilder extends Form
 
         return $this->renderControl('select', $controlHtml, $name, '', $options);
     }
+    
+    public function form($args)
+    {
+        
+    }
 
     public function open(array $options = [])
     {
