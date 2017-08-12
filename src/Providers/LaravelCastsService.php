@@ -54,7 +54,7 @@ class LaravelCastsService extends ServiceProvider
         ], 'config');
         $this->mergeConfigFrom($configPath, 'genealabs-laravel-casts');
 
-        $this->registerBladeDirective('open', 'form');
+        $this->registerBladeDirective('form');
         $this->registerBladeDirective('model');
         $this->registerBladeDirective('hidden');
         $this->registerBladeDirective('label');
