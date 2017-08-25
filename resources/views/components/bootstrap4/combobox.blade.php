@@ -122,10 +122,10 @@
         <div class="popover popover-static popover-bottom">
 
             @if(array_key_exists('subFormTitle', $options))
-                <h3 class="popover-title">{{ $options['subFormTitle'] }}</h3>
+                <h3 class="popover-header">{{ $options['subFormTitle'] }}</h3>
             @endif
 
-            <div class="popover-content">
+            <div class="popover-body">
                 {!! csrf_field() !!}
 
                 @include($options['subFormBlade'])
