@@ -1,5 +1,5 @@
 @if($isHorizontal)
-<div class="offset-sm-{{ $labelWidth }} col-sm-{{ $fieldWidth }}">
+<div class="ml-auto col-sm-{{ $fieldWidth }}">
 @endif
 
     <div class="form-check">
