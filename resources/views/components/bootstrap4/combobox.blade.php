@@ -106,6 +106,7 @@
                     return false;
                 });
             @endif
+
         });
     </script>
 
@@ -114,20 +115,22 @@
 @endif
 
 @if(array_key_exists('subFormClass', $options))
-    @include('genealabs-laravel-casts::components.bootstrap4.form-group-close')
+    @include ('genealabs-laravel-casts::components.bootstrap4.form-group-close')
+    @include ('genealabs-laravel-casts::components.bootstrap4.form-group-open', ['classes' => str_replace('.', '', $options['subFormClass']) . ' d-none'])
 
-    @include('genealabs-laravel-casts::components.bootstrap4.form-group-open', ['classes' => str_replace('.', '', $options['subFormClass']) . ' d-none'])
-        <div class="col-sm-12">
-            <div class="popover popover-static popover-bottom">
+    <div class="col-sm-12">
+        <div class="popover popover-static popover-bottom">
 
-                @if(array_key_exists('subFormTitle', $options))
-                    <h3 class="popover-title">{{ $options['subFormTitle'] }}</h3>
-                @endif
+            @if(array_key_exists('subFormTitle', $options))
+                <h3 class="popover-title">{{ $options['subFormTitle'] }}</h3>
+            @endif
 
-                <div class="popover-content">
-                    <?= csrf_field() ?>
-                    @include($options['subFormBlade'])
-                </div>
+            <div class="popover-content">
+                {!! csrf_field() !!}
+
+                @include($options['subFormBlade'])
+
             </div>
         </div>
+    </div>
 @endif

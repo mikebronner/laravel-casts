@@ -57,11 +57,11 @@
                     @if(array_key_exists('subFormClass', $options))
                         if (value == -1) {
                             $('{{ $options['subFormClass'] }}').find('input,textarea,select').removeAttr('disabled');
-                            $('{{ $options['subFormClass'] }}').removeClass('d-none');
+                            $('{{ $options['subFormClass'] }}').removeClass('hidden-xs-up');
                             $('{{ $options['subFormClass'] }} [name="{{ $options['subFormFieldName'] }}"]').val($('[name={{ $name }}]').text());
                         } else {
                             $('[name={{ $name }}]').selectize()[0].selectize.removeOption(-1);
-                            $('{{ $options['subFormClass'] }}').addClass('d-none');
+                            $('{{ $options['subFormClass'] }}').addClass('hidden-xs-up');
                             $('{{ $options['subFormClass'] }} [name="{{ $options['subFormFieldName'] }}"]').val('');
                             $('{{ $options['subFormClass'] }}').find('input,textarea,select').attr('disabled', 'disabled');
                         }

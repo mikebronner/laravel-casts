@@ -116,7 +116,7 @@ class FormBuilder extends Form
 
         return $this->renderControl('select', $controlHtml, $name, '', $options);
     }
-    
+
     public function form()
     {
         if (func_num_args() > 1) {
@@ -125,7 +125,7 @@ class FormBuilder extends Form
 
         return call_user_func_array(array($this, 'open'), func_get_args());
     }
-    
+
     public function open(array $options = [])
     {
         $this->initializeForm($options);
@@ -142,7 +142,7 @@ class FormBuilder extends Form
 
     public function initializeForm(array $options)
     {
-        $this->framework = $options['framework'] ?? $this->framework ?? config('genealabs-laravel-casts.framework');
+        $this->framework = $options['framework'] ?? config('genealabs-laravel-casts.framework');
         $this->errors = $this->session->get('errors', new MessageBag());
         $this->isHorizontal = false;
         $this->isInline = false;
@@ -423,7 +423,6 @@ class FormBuilder extends Form
 
     public function endbuttonGroup()
     {
-        $this->framework = $options['framework'] ?? $this->framework;
         $this->isInButtonGroup = false;
 
         return $this->renderControl('endButtonGroup', '', '', '', []);
@@ -459,8 +458,7 @@ class FormBuilder extends Form
 
     public function cancelButton($returnUrl = '')
     {
-        return '<a href="' .
-                $this->url->previous() . '">' .
+        return '<a href="' . ($returnUrl ?: $this->url->previous()) . '">' .
                 $this->button('Cancel', ['class' => 'btn btn-cancel   pull-right']) .
                 '</a>';
     }
