@@ -57,11 +57,11 @@
                     @if(array_key_exists('subFormClass', $options))
                         if (value == -1) {
                             $('{{ $options['subFormClass'] }}').find('input,textarea,select').removeAttr('disabled');
-                            $('{{ $options['subFormClass'] }}').removeClass('hidden-xs-up');
+                            $('{{ $options['subFormClass'] }}').removeClass('d-none');
                             $('{{ $options['subFormClass'] }} [name="{{ $options['subFormFieldName'] }}"]').val($('[name={{ $name }}]').text());
                         } else {
                             $('[name={{ $name }}]').selectize()[0].selectize.removeOption(-1);
-                            $('{{ $options['subFormClass'] }}').addClass('hidden-xs-up');
+                            $('{{ $options['subFormClass'] }}').addClass('d-none');
                             $('{{ $options['subFormClass'] }} [name="{{ $options['subFormFieldName'] }}"]').val('');
                             $('{{ $options['subFormClass'] }}').find('input,textarea,select').attr('disabled', 'disabled');
                         }
@@ -116,7 +116,7 @@
 @if(array_key_exists('subFormClass', $options))
     @include('genealabs-laravel-casts::components.bootstrap4.form-group-close')
 
-    @include('genealabs-laravel-casts::components.bootstrap4.form-group-open', ['classes' => str_replace('.', '', $options['subFormClass']) . ' hidden-xs-up'])
+    @include('genealabs-laravel-casts::components.bootstrap4.form-group-open', ['classes' => str_replace('.', '', $options['subFormClass']) . ' d-none'])
         <div class="col-sm-12">
             <div class="popover popover-static popover-bottom">
 
