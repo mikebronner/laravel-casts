@@ -29,7 +29,7 @@
     </script>
 
     @if(! $errors->isEmpty() && $errors->has($name))
-        <small class="form-control-feedback">{{ implode(' ', $errors->get($name)) }}</small>
+        <div class="invalid-feedback">{{ implode(' ', $errors->get($name)) }}</div>
     @endif
 
 @if($isHorizontal)
