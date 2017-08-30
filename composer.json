@@ -10,7 +10,7 @@
     ],
     "require": {
         "php": ">=7.0.0",
-        "illuminate/support": "5.1.* || 5.3.* || 5.4.*",
+        "illuminate/support": "5.1.* || 5.3.* || 5.4.* || 5.5.*",
         "laravelcollective/html": "5.1.* || 5.3.* || 5.4.*",
         "symfony/dom-crawler": "^3.2"
     },
@@ -22,6 +22,13 @@
         "psr-4": {
             "GeneaLabs\\LaravelCasts\\": "src/",
             "GeneaLabs\\LaravelCasts\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "GeneaLabs\\LaravelCasts\\Providers\\LaravelCastsService"
+            ]
         }
     },
     "minimum-stability": "stable"
