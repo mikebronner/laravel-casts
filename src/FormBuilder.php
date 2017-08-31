@@ -62,7 +62,8 @@ class FormBuilder extends Form
         int $end,
         int $interval,
         int $value = null,
-        array $options = []
+        array $options = [],
+        array $optionOptions = []
     ) : string {
         if ($interval == 0) {
             return parent::selectRange($name, $start, $end, $value, $options);
@@ -167,7 +168,7 @@ class FormBuilder extends Form
             $this->fieldWidth = $options['fieldWidth'];
         }
     }
-    
+
     public function selectMonths($name, $value = null, array $options = [], array $optionOptions = [])
     {
         $monthOptions = [
