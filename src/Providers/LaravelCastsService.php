@@ -93,8 +93,6 @@ class LaravelCastsService extends ServiceProvider
     {
         $this->registerHtmlBuilder();
         $this->registerFormBuilder();
-        AliasLoader::getInstance()->alias('Form', FormFacade::class);
-        AliasLoader::getInstance()->alias('HTML', HtmlFacade::class);
         $this->commands(Publish::class);
         app(Kernel::class)->pushMiddleware(AssetInjection::class);
     }
@@ -109,6 +107,7 @@ class LaravelCastsService extends ServiceProvider
         $this->app->singleton('html', function ($app) {
             return new HtmlBuilder($app['url'], $app['view']);
         });
+
     }
 
     private function registerFormBuilder()
