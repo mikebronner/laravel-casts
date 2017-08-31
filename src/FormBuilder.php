@@ -167,7 +167,43 @@ class FormBuilder extends Form
             $this->fieldWidth = $options['fieldWidth'];
         }
     }
+    
+    public function selectMonths($name, $value = null, array $options = [], array $optionOptions = [])
+    {
+        $monthOptions = [
+            '1' => 'January',
+            '2' => 'February',
+            '3' => 'March',
+            '4' => 'April',
+            '5' => 'May',
+            '6' => 'June',
+            '7' => 'July',
+            '8' => 'August',
+            '9' => 'September',
+            '10' => 'October',
+            '11' => 'November',
+            '12' => 'December',
+        ];
 
+        if (($options['optionsFormat'] ?? '') === 'slugs') {
+            $monthOptions = [
+                'january' => 'January',
+                'february' => 'February',
+                'march' => 'March',
+                'april' => 'April',
+                'may' => 'May',
+                'june' => 'June',
+                'july' => 'July',
+                'august' => 'August',
+                'september' => 'September',
+                'october' => 'October',
+                'november' => 'November',
+                'december' => 'December',
+            ];
+        }
+
+        return $this->select($name, $monthOptions, $value, $options, $optionOptions);
+    }
 
     public function label($name, $label = null, $options = [], $escapeHtml = true)
     {
