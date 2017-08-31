@@ -76,6 +76,7 @@ class LaravelCastsService extends ServiceProvider
         $this->registerBladeDirective('submit');
         $this->registerBladeDirective('cancel');
         $this->registerBladeDirective('select');
+        $this->registerBladeDirective('selectMonths');
         $this->registerBladeDirective('selectRange');
         $this->registerBladeDirective('selectRangeWithInterval');
         $this->registerBladeDirective('combobox');
