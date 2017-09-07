@@ -1,23 +1,52 @@
-@if($isHorizontal)
+@if ($isHorizontal)
     <div class="col-sm-{{ $fieldWidth }}">
 @endif
 
-    {!! $controlHtml !!}
+{!! $controlHtml !!}
 
-    @if(! $errors->isEmpty() && ! $errors->has($name))
-        <span id="inputSuccess2Status" class="sr-only">(success)</span>
-    @endif
+@if (! $errors->isEmpty() && ! $errors->has($name))
+    <span id="inputSuccess2Status" class="sr-only">(success)</span>
+@endif
 
-    @if(! $errors->isEmpty() && $errors->has($name))
-        <span id="inputError2Status" class="sr-only">(error)</span>
-        <span class="invalid-feedback">{{ implode(' ', $errors->get($name)) }}</span>
-    @endif
+@if (! $errors->isEmpty() && $errors->has($name))
+    <span id="inputError2Status" class="sr-only">(error)</span>
+    <span class="invalid-feedback">{{ implode(' ', $errors->get($name)) }}</span>
+@endif
+
+@if ($isHorizontal)
+    </div>
+@endif
+
+@if (array_key_exists('subFormClass', $options))
+    @include ('genealabs-laravel-casts::components.bootstrap4.form-group-close')
+    @include ('genealabs-laravel-casts::components.bootstrap4.form-group-open', ['classes' => str_replace('.', '', $options['subFormClass']) . ' d-none'])
+
+    <div class="col-sm-12">
+        <div class="popover popover-static popover-bottom">
+
+            @if (array_key_exists('subFormTitle', $options))
+                <h3 class="popover-header">{{ $options['subFormTitle'] }}</h3>
+            @endif
+
+            <div class="popover-body">
+                {!! csrf_field() !!}
+
+                @include ($options['subFormBlade'])
+
+            </div>
+        </div>
+    </div>
+@endif
+
+@section ('genealabs-laravel-casts')
+    @parent
+
     <script>
         window['genealabsLaravelCasts'] = window.genealabsLaravelCasts || {};
         window.genealabsLaravelCasts['comboboxLoaders'] = window.genealabsLaravelCasts.comboboxLoaders || [];
         window.genealabsLaravelCasts['framework'] = window.genealabsLaravelCasts.framework || 'bootstrap4';
         window.genealabsLaravelCasts.comboboxLoaders.push(function () {
-            @if(array_key_exists('subFormClass', $options))
+            @if (array_key_exists('subFormClass', $options))
                 $('{{ $options['subFormClass'] }}').find('input,textarea,select').attr('disabled', 'disabled');
             @endif
 
@@ -36,7 +65,7 @@
                     }
                 ],
                 create:
-                    @if(array_key_exists('multiple', $options) && $options['multiple'] === 'multiple')
+                    @if (array_key_exists('multiple', $options) && $options['multiple'] === 'multiple')
                         false,
                     @else
                         function (name) {
@@ -48,11 +77,11 @@
                         },
                     @endif
                 onChange: function (value) {
-                    @if(array_key_exists('changeCallback', $options))
+                    @if (array_key_exists('changeCallback', $options))
                         {{ $options['changeCallback'] }}(value);
                     @endif
 
-                    @if(array_key_exists('subFormClass', $options))
+                    @if (array_key_exists('subFormClass', $options))
                         if (value == -1) {
                             $('{{ $options['subFormClass'] }}').find('input,textarea,select').removeAttr('disabled');
                             $('{{ $options['subFormClass'] }}').removeClass('d-none');
@@ -67,8 +96,8 @@
                 }
             });
 
-            @if(array_key_exists('subFormClass', $options))
-            $('{!! $options['subFormClass'] !!} input[type="submit"]').on('click', function (event) {
+            @if (array_key_exists('subFormClass', $options))
+                $('{!! $options['subFormClass'] !!} input[type="submit"]').on('click', function (event) {
                     event.preventDefault();
                     event.stopPropagation();
 
@@ -107,28 +136,4 @@
 
         });
     </script>
-
-@if($isHorizontal)
-    </div>
-@endif
-
-@if(array_key_exists('subFormClass', $options))
-    @include ('genealabs-laravel-casts::components.bootstrap4.form-group-close')
-    @include ('genealabs-laravel-casts::components.bootstrap4.form-group-open', ['classes' => str_replace('.', '', $options['subFormClass']) . ' d-none'])
-
-    <div class="col-sm-12">
-        <div class="popover popover-static popover-bottom">
-
-            @if(array_key_exists('subFormTitle', $options))
-                <h3 class="popover-header">{{ $options['subFormTitle'] }}</h3>
-            @endif
-
-            <div class="popover-body">
-                {!! csrf_field() !!}
-
-                @include($options['subFormBlade'])
-
-            </div>
-        </div>
-    </div>
-@endif
+@endsection

@@ -73,4 +73,6 @@
 @section('footer')
     <script src="{!! asset('genealabs-laravel-casts/tether.js') !!}"></script>
     <script src="{!! asset('genealabs-laravel-casts/bootstrap4.js') !!}"></script>
+
+    @yield ('js')
 @endsection

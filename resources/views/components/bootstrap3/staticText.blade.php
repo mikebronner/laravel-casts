@@ -2,7 +2,7 @@
     <div class="col-sm-{{ $fieldWidth }}">
 @endif
 
-    {!! $controlHtml !!}
+{!! $controlHtml !!}
 
 @if($isHorizontal)
     </div>

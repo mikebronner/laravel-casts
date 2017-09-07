@@ -1,13 +1,25 @@
-@if($isHorizontal)
-<div class="col-sm-{{ $fieldWidth }}">
+@if ($isHorizontal)
+    <div class="col-sm-{{ $fieldWidth }}">
 @endif
 
-    <div class="input-group date" id="datetimepicker-{{ $name }}" data-target-input="nearest">
-        {!! $controlHtml !!}
-        <span class="input-group-addon" data-target="#datetimepicker-{{ $name }}" data-toggle="datetimepicker">
-            <i class="fa fa-btn fa-calendar"></i>
-        </span>
+<div class="input-group date" id="datetimepicker-{{ $name }}" data-target-input="nearest">
+    {!! $controlHtml !!}
+    <span class="input-group-addon" data-target="#datetimepicker-{{ $name }}" data-toggle="datetimepicker">
+        <i class="fa fa-btn fa-calendar"></i>
+    </span>
+</div>
+
+
+@if(! $errors->isEmpty() && $errors->has($name))
+    <div class="invalid-feedback">{{ implode(' ', $errors->get($name)) }}</div>
+@endif
+
+@if($isHorizontal)
     </div>
+@endif
+
+@section ('genealabs-laravel-casts')
+    @parent
 
     <script>
         window['genealabsLaravelCasts'] = window.genealabsLaravelCasts || {};
@@ -29,11 +41,4 @@
             });
         });
     </script>
-
-    @if(! $errors->isEmpty() && $errors->has($name))
-        <div class="invalid-feedback">{{ implode(' ', $errors->get($name)) }}</div>
-    @endif
-
-@if($isHorizontal)
-</div>
-@endif
+@endsection

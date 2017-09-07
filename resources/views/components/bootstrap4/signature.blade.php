@@ -17,6 +17,15 @@
             {!! $controlHtml !!}
         </div>
     </div>
+
+
+@if($isHorizontal)
+    </div>
+@endif
+
+@section ('genealabs-laravel-casts')
+    @parent
+
     <script>
         window['genealabsLaravelCasts'] = window.genealabsLaravelCasts || {};
         window.genealabsLaravelCasts['signatureLoaders'] = window.genealabsLaravelCasts.signatureLoaders || [];
@@ -72,7 +81,4 @@
             }
         });
     </script>
-
-@if($isHorizontal)
-    </div>
-@endif
+@endsection

@@ -1,29 +1,11 @@
 ![laravel-casts](https://cloud.githubusercontent.com/assets/1791050/18258832/b7c177d6-7391-11e6-99ba-ea7e63735cd8.jpg)
 
 # Laravel Casts
-## Installation
-1. To install in Laravel 5.1 (lts), Laravel 5.3, or Laravel 5.4 (current):
- ```sh
- composer require genealabs/laravel-casts
- ```
-
-2. Add the service provider to your `config/app.php` file:
- ```php
- /*
-     'providers' => [
-         [...]
-*/
-         GeneaLabs\LaravelCasts\Providers\LaravelCastsService::class,
-/*
-         [...]
-     ],
-*/
- ```
-
-3. Publish the required assets:
- ```sh
- php artisan casts:publish --assets
- ```
+## Requirements
+- PHP >= 7.0.0
+- Laravel 5.5
+- `jQuery` needs to be already loaded in your project
+- `Bootstrap JS` (3 or 4) needs to be already loaded, if being used
 
 ## Rationale
 This package is an effort to streamline and make form development more
@@ -34,13 +16,18 @@ This package is an effort to streamline and make form development more
  Bootstrap 4.alpha.3, more coming soon.)
 - Blade directives for elegant Blade view integration, providing concise
  syntax, reducing form boilerplate 10-fold.
- - DateTime Picker for Bootstrap 3.
+- DateTime Picker for Bootstrap 3.
 
-## Requirements
-- PHP 7.0+
-- Laravel 5.1 (LTS) or Laravel 5.3 (Current)
-- `jQuery` already loaded
-- `Bootstrap JS` (3 or 4) already loaded, if using a framework
+## Installation
+1. Install the package:
+  ```sh
+  composer require genealabs/laravel-casts
+  ```
+
+3. Publish the required assets:
+  ```sh
+  php artisan casts:publish --assets
+  ```
 
 ## Usage
 The following shows all elements using Bootstrap 3:

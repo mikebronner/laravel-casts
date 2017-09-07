@@ -10,8 +10,8 @@
     ],
     "require": {
         "php": ">=7.0.0",
-        "illuminate/support": "5.1.* || 5.3.* || 5.4.* || 5.5.*",
-        "laravelcollective/html": "5.1.* || 5.3.* || 5.4.* || 5.5.*",
+        "illuminate/support": "5.5.*",
+        "laravelcollective/html": "5.5.*",
         "symfony/dom-crawler": "^3.2"
     },
     "require-dev": {
