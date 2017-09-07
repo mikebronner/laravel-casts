@@ -24,11 +24,6 @@
                     @selectRange('select_range1', 1, 21, null, ['class' => 'form-control', 'placeholder' => 'Placeholder Text', 'label' => 'Select Range'])
                     @selectRangeWithInterval('select_range_with_interval1', 1, 21, 3, null, ['class' => 'form-control', 'placeholder' => 'Placeholder Text', 'label' => 'Select Range With Interval'])
                     @combobox('combobox1', [1, 2, '3'=>5], [], ['class' => 'form-control', 'placeholder' => 'Placeholder Text', 'label' => 'Combobox', 'createFunction' => 'createComboBoxItem'])
-                    <script>
-                        var createComboBoxItem = function (text) {
-                            console.log(text);
-                        };
-                    </script>
                     @signature('signature1')
                     @button('button1', ['class' => 'btn-primary'])
                     @buttonGroup(['label' => 'test label'])

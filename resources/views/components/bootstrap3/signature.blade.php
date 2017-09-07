@@ -2,33 +2,40 @@
     <div class="col-sm-offset-{{ $labelWidth }} col-sm-{{ $fieldWidth }}">
 @endif
 
-    <div class="signature {{ $name }}">
-        <div class="embed-responsive embed-responsive-16by9 form-control">
-            <canvas class="embed-responsive-item"></canvas>
-            <div class="footer">
-                <small>
-                    <em>{{ $options['label'] }}</em>
-                    &nbsp;
+<div class="signature {{ $name }}">
+    <div class="embed-responsive embed-responsive-16by9 form-control">
+        <canvas class="embed-responsive-item"></canvas>
+        <div class="footer">
+            <small>
+                <em>{{ $options['label'] }}</em>
+                &nbsp;
 
-                    @if(! $errors->isEmpty() && $errors->has($name))
-                        <span class="help-block" style="display: inline-block;">{{ implode(' ', $errors->get($name)) }}</span>
-                    @endif
-                </small>
-                <button type="button" class="btn btn-default btn-xs pull-right" onclick="clearSignature('{{ $name }}');">&nbsp;{{ $options['clearButton'] }}&nbsp;</button>
-            </div>
-            {!! $controlHtml !!}
+                @if(! $errors->isEmpty() && $errors->has($name))
+                    <span class="help-block" style="display: inline-block;">{{ implode(' ', $errors->get($name)) }}</span>
+                @endif
+            </small>
+            <button type="button" class="btn btn-default btn-xs pull-right" onclick="clearSignature('{{ $name }}');">&nbsp;{{ $options['clearButton'] }}&nbsp;</button>
         </div>
+        {!! $controlHtml !!}
     </div>
+</div>
 
-    @if(! $errors->isEmpty() && ! $errors->has($name))
-        <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
-        <span id="inputSuccess2Status" class="sr-only">(success)</span>
-    @endif
+@if(! $errors->isEmpty() && ! $errors->has($name))
+    <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+    <span id="inputSuccess2Status" class="sr-only">(success)</span>
+@endif
 
-    @if(! $errors->isEmpty() && $errors->has($name))
-        <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
-        <span id="inputError2Status" class="sr-only">(error)</span>
-    @endif
+@if(! $errors->isEmpty() && $errors->has($name))
+    <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+    <span id="inputError2Status" class="sr-only">(error)</span>
+@endif
+
+@if($isHorizontal)
+    </div>
+@endif
+
+@section ('genealabs-laravel-casts')
+    @parent
 
     <script>
         window['genealabsLaravelCasts'] = window.genealabsLaravelCasts || {};
@@ -85,7 +92,4 @@
             }
         });
     </script>
-
-@if($isHorizontal)
-    </div>
-@endif
+@endsection

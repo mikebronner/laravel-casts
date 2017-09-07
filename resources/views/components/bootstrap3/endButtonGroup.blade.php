@@ -2,5 +2,5 @@
 </div>
 
 @if($isHorizontal)
-</div>
+    </div>
 @endif

@@ -2,23 +2,30 @@
     <div class="col-sm-{{ $fieldWidth }}">
 @endif
 
-    <div class="input-group date" id="datetimepicker-{{ $name }}" data-target-input="nearest">
-        {!! $controlHtml !!}
-        <span class="input-group-addon" data-target="#datetimepicker-{{ $name }}" data-toggle="datetimepicker">
-            <i class="fa fa-btn fa-calendar"></i>
-        </span>
+<div class="input-group date" id="datetimepicker-{{ $name }}" data-target-input="nearest">
+    {!! $controlHtml !!}
+    <span class="input-group-addon" data-target="#datetimepicker-{{ $name }}" data-toggle="datetimepicker">
+        <i class="fa fa-btn fa-calendar"></i>
+    </span>
+</div>
+
+@if(! $errors->isEmpty() && ! $errors->has($name))
+    <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true" style="margin-right: 35px;"></span>
+    <span id="inputSuccess2Status" class="sr-only">(success)</span>
+@endif
+
+@if(! $errors->isEmpty() && $errors->has($name))
+    <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true" style="margin-right: 35px;"></span>
+    <span id="inputError2Status" class="sr-only">(error)</span>
+    <span class="help-block">{{ implode(' ', $errors->get($name)) }}</span>
+@endif
+
+@if($isHorizontal)
     </div>
+@endif
 
-    @if(! $errors->isEmpty() && ! $errors->has($name))
-        <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true" style="margin-right: 35px;"></span>
-        <span id="inputSuccess2Status" class="sr-only">(success)</span>
-    @endif
-
-    @if(! $errors->isEmpty() && $errors->has($name))
-        <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true" style="margin-right: 35px;"></span>
-        <span id="inputError2Status" class="sr-only">(error)</span>
-        <span class="help-block">{{ implode(' ', $errors->get($name)) }}</span>
-    @endif
+@section ('genealabs-laravel-casts')
+    @parent
 
     <script>
         window['genealabsLaravelCasts'] = window.genealabsLaravelCasts || {};
@@ -37,7 +44,4 @@
             });
         });
     </script>
-
-@if($isHorizontal)
-    </div>
-@endif
+@endsection

@@ -2,9 +2,21 @@
     <div class="col-sm-{{ $fieldWidth }}">
 @endif
 
-    <div>
-        {!! $controlHtml !!}
+<div>
+    {!! $controlHtml !!}
+</div>
+
+
+@if(! $errors->isEmpty() && $errors->has($name))
+    <span class="help-block">{{ implode(' ', $errors->get($name)) }}</span>
+@endif
+
+@if($isHorizontal)
     </div>
+@endif
+
+@section ('genealabs-laravel-casts')
+    @parent
 
     <script>
         window['genealabsLaravelCasts'] = window.genealabsLaravelCasts || {};
@@ -18,11 +30,4 @@
             });
         });
     </script>
-
-    @if(! $errors->isEmpty() && $errors->has($name))
-        <span class="help-block">{{ implode(' ', $errors->get($name)) }}</span>
-    @endif
-
-@if($isHorizontal)
-    </div>
-@endif
+@endsection

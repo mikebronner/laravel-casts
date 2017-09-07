@@ -22,7 +22,7 @@ class LaravelCastsService extends ServiceProvider
     public function boot()
     {
         // HTTP/2 Server Push All The Things
-        @header('Link: Link: <' . url('/genealabs-laravel-casts/app.js') . '>; rel=preload; as=script', false);
+        @header('Link: <' . url('/genealabs-laravel-casts/app.js') . '>; rel=preload; as=script', false);
         @header('Link: <' . url('/genealabs-laravel-casts/bootstrap3.js') . '>; rel=preload; as=script', false);
         @header('Link: <' . url('/genealabs-laravel-casts/bootstrap3.css') . '>; rel=preload; as=style', false);
         @header('Link: <' . url('/genealabs-laravel-casts/bootstrap4.js') . '>; rel=preload; as=script', false);
@@ -36,10 +36,6 @@ class LaravelCastsService extends ServiceProvider
         if (app()->environment('testing', 'local', 'development')) {
             $routesPath = __DIR__ . '/../../routes/web.php';
 
-            if (starts_with(app()->version(), '5.1.')) {
-                $routesPath = __DIR__ . '/../../routes/no-middleware-group.php';
-            }
-
             require($routesPath);
         }
 
@@ -47,7 +43,6 @@ class LaravelCastsService extends ServiceProvider
         $this->publishes([
             __DIR__ . '/../../public/' => public_path('genealabs-laravel-casts'),
         ], 'assets');
-
         $configPath = __DIR__ . '/../../config/genealabs-laravel-casts.php';
         $this->publishes([
             $configPath => config_path('genealabs-laravel-casts.php')
@@ -83,10 +78,7 @@ class LaravelCastsService extends ServiceProvider
         $this->registerBladeDirective('signature');
         $this->registerBladeDirective('staticText');
         $this->registerBladeDirective('close', 'endform');
-
-        if (! starts_with(app()->version(), '5.1.')) {
-            $this->registerComponents();
-        }
+        $this->registerComponents();
     }
 
     public function register()

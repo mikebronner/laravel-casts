@@ -1,19 +1,12 @@
 <?php namespace GeneaLabs\LaravelCasts;
 
 use Collective\Html\FormBuilder as Form;
-use GeneaLabs\LaravelCasts\Traits\CurrentFormBuilderMethods;
-use GeneaLabs\LaravelCasts\Traits\CurrentOrLtsLaravelVersion;
-use GeneaLabs\LaravelCasts\Traits\LtsFormBuilderMethods;
 use Illuminate\Support\MessageBag;
 use Illuminate\Support\Collection;
 use Carbon\Carbon;
 
 class FormBuilder extends Form
 {
-    use CurrentFormBuilderMethods;
-    use CurrentOrLtsLaravelVersion;
-    use LtsFormBuilderMethods;
-
     protected $errors;
     protected $offset = 0;
     protected $labelWidth = 3;
@@ -23,7 +16,7 @@ class FormBuilder extends Form
     protected $isInline = false;
     protected $framework = 'bootstrap3';
 
-    private function renderControlForLaravelCurrent(
+    private function renderControl(
         string $type,
         string $controlHtml,
         string $name,

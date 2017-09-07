@@ -16,4 +16,5 @@ return [
     */
 
     'framework' => 'bootstrap3',
+    'javascript-blade-section' => 'js',
 ];
