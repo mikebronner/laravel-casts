@@ -166,12 +166,14 @@ class FormBuilder extends Form
     public function subForm(array $options = []) : string
     {
         $this->subFormClass = $options['subFormClass'];
+        \Log::debug(['subform' => $options, 'class' => $this->subFormClass]);
         return $this->renderControl('subForm', '', '', null, $options);
     }
 
     public function endSubForm()
     {
         $this->subFormClass = '';
+        \Log::debug(['endSubform' => $this->subFormClass]);
     }
 
     public function selectMonths($name, $value = null, array $options = [], array $optionOptions = [])
@@ -331,6 +333,7 @@ class FormBuilder extends Form
 
         if (array_key_exists('subFormAction', $options)) {
             $renderedHtml .= $this->subform($options);
+            $this->endSubForm();
         }
 
         return $renderedHtml;
