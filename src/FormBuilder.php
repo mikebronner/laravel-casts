@@ -120,16 +120,6 @@ class FormBuilder extends Form
         return call_user_func_array(array($this, 'open'), func_get_args());
     }
 
-    public function subForm(array $options = []) : string
-    {
-        return $this->renderControl('subForm', $options);
-    }
-
-    public function endSubForm()
-    {
-        $this->subFormClass = '';
-    }
-
     public function open(array $options = [])
     {
         $this->initializeForm($options);
@@ -170,6 +160,16 @@ class FormBuilder extends Form
         if (array_key_exists('fieldWidth', $options)) {
             $this->fieldWidth = $options['fieldWidth'];
         }
+    }
+
+    public function subForm(array $options = []) : string
+    {
+        return $this->renderControl('subForm', '', '', null, $options);
+    }
+
+    public function endSubForm()
+    {
+        $this->subFormClass = '';
     }
 
     public function selectMonths($name, $value = null, array $options = [], array $optionOptions = [])
