@@ -1,30 +1,11 @@
 <?php
 
-use GeneaLabs\LaravelCasts\Http\Requests\FormsExample;
+use GeneaLabs\LaravelCasts\Html\Controllers\Bootstrap3;
+use GeneaLabs\LaravelCasts\Html\Controllers\Bootstrap4;
+use GeneaLabs\LaravelCasts\Html\Controllers\Vanilla;
 
-Route::get('/genealabs/laravel-casts/examples/bootstrap3', function () {
-    config(['genealabs-laravel-casts.framework' => 'bootstrap3']);
-    return view('genealabs-laravel-casts::examples.bootstrap3');
-});
-
-Route::post('/genealabs/laravel-casts/examples/bootstrap3', function (FormsExample $request) {
-    return redirect('genealabs/laravel-casts/examples/bootstrap3');
-});
-
-Route::get('/genealabs/laravel-casts/examples/bootstrap4', function () {
-    config(['genealabs-laravel-casts.framework' => 'bootstrap4']);
-    return view('genealabs-laravel-casts::examples.bootstrap4');
-});
-
-Route::post('/genealabs/laravel-casts/examples/bootstrap4', function (FormsExample $request) {
-    return redirect('genealabs/laravel-casts/examples/bootstrap4');
-});
-
-Route::get('/genealabs/laravel-casts/examples/vanilla', function () {
-    config(['genealabs-laravel-casts.framework' => 'vanilla']);
-    return view('genealabs-laravel-casts::examples.vanilla');
-});
-
-Route::post('/genealabs/laravel-casts/examples/vanilla', function (FormsExample $request) {
-    return redirect('genealabs/laravel-casts/examples/vanilla');
+Route::group(['prefix' => 'genealabs/laravel-casts/examples'], function () {
+    Route::resource('bootstrap3', Bootstrap3::class)->only(['index', 'store']);
+    Route::resource('bootstrap4', Bootstrap4::class)->only(['index', 'store']);
+    Route::resource('vanilla', Vanilla::class)->only(['index', 'store']);
 });
