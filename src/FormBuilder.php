@@ -165,6 +165,7 @@ class FormBuilder extends Form
 
     public function subForm(array $options = []) : string
     {
+        $this->subFormClass = $options['subFormClass'];
         return $this->renderControl('subForm', '', '', null, $options);
     }
 
