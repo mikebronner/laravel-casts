@@ -15,6 +15,7 @@ class FormBuilder extends Form
     protected $isInButtonGroup = false;
     protected $isInline = false;
     protected $framework = 'bootstrap3';
+    protected $subFormClass = '';
 
     private function renderControl(
         string $type,
