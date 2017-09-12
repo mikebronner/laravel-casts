@@ -280,7 +280,7 @@ class FormBuilder extends Form
     {
         $options = $this->setOptionClasses($name, $options, ['form-control', 'datetimepicker-input']);
         $options['autocomplete'] = 'noway';
-        $options['data-target'] = "#datetimepicker-{$name}";
+        $options['data-target'] = ($this->subFormClass ? ".{$this->subFormClass} " : '') . "#datetimepicker-{$name}";
         $controlOptions = array_filter($options, function ($key) {
             return ($key !== 'label');
         }, ARRAY_FILTER_USE_KEY);

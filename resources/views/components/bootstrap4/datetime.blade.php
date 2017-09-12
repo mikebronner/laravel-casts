@@ -4,7 +4,7 @@
 
 <div class="input-group date" id="datetimepicker-{{ $name }}" data-target-input="nearest">
     {!! $controlHtml !!}
-    <span class="input-group-addon" data-target="#datetimepicker-{{ $name }}" data-toggle="datetimepicker">
+    <span class="input-group-addon" data-target="{{ $options['data-target'] }}" data-toggle="datetimepicker">
         <i class="fa fa-btn fa-calendar"></i>
     </span>
 </div>
