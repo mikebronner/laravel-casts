@@ -12,6 +12,7 @@
             {!! csrf_field() !!}
 
             @include ($options['subFormBlade'])
+            @endSubForm
 
         </div>
     </div>

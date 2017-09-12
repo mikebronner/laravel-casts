@@ -166,14 +166,13 @@ class FormBuilder extends Form
     public function subForm(array $options = []) : string
     {
         $this->subFormClass = $options['subFormClass'];
-        \Log::debug(['subform' => $options, 'class' => $this->subFormClass]);
+
         return $this->renderControl('subForm', '', '', null, $options);
     }
 
     public function endSubForm()
     {
         $this->subFormClass = '';
-        \Log::debug(['endSubform' => $this->subFormClass]);
     }
 
     public function selectMonths($name, $value = null, array $options = [], array $optionOptions = [])
@@ -284,7 +283,8 @@ class FormBuilder extends Form
     {
         $options = $this->setOptionClasses($name, $options, ['form-control', 'datetimepicker-input']);
         $options['autocomplete'] = 'noway';
-        $options['data-target'] = ($this->subFormClass ? ".{$this->subFormClass} " : '') . "#datetimepicker-{$name}";
+        $options['subFormClass'] = $this->subFormClass;
+        $options['data-target'] = ($this->subFormClass ?: '') . " #datetimepicker-{$name}";
         $controlOptions = array_filter($options, function ($key) {
             return ($key !== 'label');
         }, ARRAY_FILTER_USE_KEY);
@@ -333,7 +333,6 @@ class FormBuilder extends Form
 
         if (array_key_exists('subFormAction', $options)) {
             $renderedHtml .= $this->subform($options);
-            $this->endSubForm();
         }
 
         return $renderedHtml;
@@ -503,6 +502,10 @@ class FormBuilder extends Form
         $this->framework = $options['framework'] ?? $this->framework;
         $options = array_filter($options);
         $classes = [];
+
+        if ($this->subFormClass) {
+            $options['subFormClass'] = $this->subFormClass;
+        }
 
         if (array_key_exists('class', $options)) {
             $classes = explode(' ', $options['class']);
