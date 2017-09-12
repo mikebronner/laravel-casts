@@ -1,38 +1,41 @@
-@if($isHorizontal)
+@if ($isHorizontal)
     <div class="col-sm-{{ $fieldWidth }}">
 @endif
 
 {!! $controlHtml !!}
 
-@if(! $errors->isEmpty() && ! $errors->has($name))
+@if (! $errors->isEmpty() && ! $errors->has($name))
     <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true" style="margin-right: 35px;"></span>
     <span id="inputSuccess2Status" class="sr-only">(success)</span>
 @endif
 
-@if(! $errors->isEmpty() && $errors->has($name))
+@if (! $errors->isEmpty() && $errors->has($name))
     <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true" style="margin-right: 35px;"></span>
     <span id="inputError2Status" class="sr-only">(error)</span>
     <span class="help-block">{{ implode(' ', $errors->get($name)) }}</span>
 @endif
 
-@if($isHorizontal)
+@if ($isHorizontal)
     </div>
 @endif
 
 @if(array_key_exists('subFormClass', $options))
-    @include('genealabs-laravel-casts::components.bootstrap4.form-group-close')
-    @include('genealabs-laravel-casts::components.bootstrap4.form-group-open', ['classes' => str_replace('.', '', $options['subFormClass']) . ' hidden-xs-up'])
+    @include ('genealabs-laravel-casts::components.bootstrap4.form-group-close')
+    @include ('genealabs-laravel-casts::components.bootstrap4.form-group-open', ['classes' => str_replace('.', '', $options['subFormClass']) . ' hidden-xs-up'])
 
     <div class="col-sm-12">
         <div class="popover popover-static popover-bottom">
 
-            @if(array_key_exists('subFormTitle', $options))
+            @if (array_key_exists('subFormTitle', $options))
                 <h3 class="popover-title">{{ $options['subFormTitle'] }}</h3>
             @endif
 
             <div class="popover-content">
                 <?= csrf_field() ?>
-                @include($options['subFormBlade'])
+
+                @subForm ($options['subFormBlade'], $options['subFormClass'])
+                @endSubForm
+
             </div>
         </div>
     </div>

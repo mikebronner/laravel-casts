@@ -120,6 +120,16 @@ class FormBuilder extends Form
         return call_user_func_array(array($this, 'open'), func_get_args());
     }
 
+    public function subForm(array $options = []) : string
+    {
+        return $this->renderControl('subForm', $options);
+    }
+
+    public function endSubForm()
+    {
+        $this->subFormClass = '';
+    }
+
     public function open(array $options = [])
     {
         $this->initializeForm($options);
@@ -243,7 +253,6 @@ class FormBuilder extends Form
 
     public function text($name, $value = null, $options = [])
     {
-        $this->framework = $options['framework'] ?? $this->framework;
         $options = $this->setOptionClasses($name, $options, ['form-control']);
         $controlOptions = array_filter($options, function ($key) {
             return ($key !== 'label');
@@ -255,7 +264,6 @@ class FormBuilder extends Form
 
     public function date($name, $value = null, $options = [])
     {
-        $this->framework = $options['framework'] ?? $this->framework;
         $options = $this->setOptionClasses($name, $options, ['form-control', 'datetimepicker-input']);
         $options['autocomplete'] = 'noway';
         $options['data-target'] = "#datetimepicker-{$name}";
@@ -270,7 +278,6 @@ class FormBuilder extends Form
 
     public function datetime($name, $value = null, $options = [])
     {
-        $this->framework = $options['framework'] ?? $this->framework;
         $options = $this->setOptionClasses($name, $options, ['form-control', 'datetimepicker-input']);
         $options['autocomplete'] = 'noway';
         $options['data-target'] = "#datetimepicker-{$name}";
@@ -285,7 +292,6 @@ class FormBuilder extends Form
 
     public function email($name, $value = null, $options = [])
     {
-        $this->framework = $options['framework'] ?? $this->framework;
         $options = $this->setOptionClasses($name, $options, ['form-control']);
         $controlOptions = $this->getControlOptions(collect($options));
         $controlHtml = parent::email($name, $value, $controlOptions->toArray());
@@ -295,7 +301,6 @@ class FormBuilder extends Form
 
     public function combobox(string $name, array $list = [], $selected = null, array $options = [], array $optionOptions = [])
     {
-        $this->framework = $options['framework'] ?? $this->framework;
         $options = $this->setOptionClasses($name, $options, ['form-control']);
         $options['multiple'] = array_key_exists('multiple', $options) ? 'multiple' : null;
 
@@ -320,13 +325,16 @@ class FormBuilder extends Form
         array_filter($options);
         $controlOptions = $this->getControlOptions(collect($options), ['list', 'selected']);
         $controlHtml = parent::select($name, $list, $selected, $controlOptions->toArray(), $optionOptions);
+        $renderedHtml = $this->renderControl('combobox', $controlHtml, $name, null, $options);
+        $renderedHtml .= $this->subform($options);
+
+        return $renderedHtml;
 
         return $this->renderControl('combobox', $controlHtml, $name, null, $options);
     }
 
     public function password($name, $options = [])
     {
-        $this->framework = $options['framework'] ?? $this->framework;
         $options = $this->setOptionClasses($name, $options, ['form-control']);
         $controlOptions = $this->getControlOptions(collect($options));
         $controlHtml = parent::password($name, $controlOptions->toArray());
@@ -336,7 +344,6 @@ class FormBuilder extends Form
 
     public function url($name, $value = null, $options = [])
     {
-        $this->framework = $options['framework'] ?? $this->framework;
         $options = $this->setOptionClasses($name, $options, ['form-control']);
         $controlOptions = $this->getControlOptions(collect($options));
         $controlHtml = parent::url($name, $value, $controlOptions->toArray());
@@ -346,7 +353,6 @@ class FormBuilder extends Form
 
     public function file($name, $options = [])
     {
-        $this->framework = $options['framework'] ?? $this->framework;
         $options = $this->setOptionClasses($name, $options, ['form-control form-control-file']);
         $controlOptions = $this->getControlOptions(collect($options), ['placeholder']);
 
@@ -367,7 +373,6 @@ class FormBuilder extends Form
 
     public function textarea($name, $value = null, $options = [])
     {
-        $this->framework = $options['framework'] ?? $this->framework;
         $options = $this->setOptionClasses($name, $options, ['form-control']);
         $controlOptions = $this->getControlOptions(collect($options));
         $controlHtml = parent::textarea($name, $value, $controlOptions->toArray());
@@ -377,8 +382,6 @@ class FormBuilder extends Form
 
     public function signature($name, $value = null, $options = [])
     {
-        $this->framework = $options['framework'] ?? $this->framework;
-
         if (! array_key_exists('label', $options)) {
             $options['label'] = ucwords(str_replace('_id', '', str_replace('[]', '', $name)));
         }
@@ -396,7 +399,6 @@ class FormBuilder extends Form
 
     public function checkbox($name, $value = 1, $checked = null, $options = [])
     {
-        $this->framework = $options['framework'] ?? $this->framework;
         $additionalClasses = $this->usesBootstrap4() ? 'form-check-input' : '';
         $options = $this->setOptionClasses($name, $options, [$additionalClasses]);
         $label = $options['label'] ?? ucwords($name);
@@ -408,7 +410,6 @@ class FormBuilder extends Form
 
     public function switch($name, $value = 1, $checked = null, $options = [])
     {
-        $this->framework = $options['framework'] ?? $this->framework;
         $additionalClasses = $this->usesBootstrap4() ? 'form-check-input' : '';
         $options = $this->setOptionClasses($name, $options, [$additionalClasses]);
         $label = '';
@@ -420,7 +421,6 @@ class FormBuilder extends Form
 
     public function radio($name, $value = 1, $checked = null, $options = [])
     {
-        $this->framework = $options['framework'] ?? $this->framework;
         $additionalClasses = $this->usesBootstrap4() ? 'form-check-input' : '';
         $options = $this->setOptionClasses($name, $options, [$additionalClasses]);
         $label = $options['label'];
@@ -432,7 +432,6 @@ class FormBuilder extends Form
 
     public function button($value = null, $options = [])
     {
-        $this->framework = $options['framework'] ?? $this->framework;
         $options = $this->setOptionClasses('', $options, ['btn']);
         $label = $options['label'] ?? '';
         $controlHtml = parent::button($value, $options);
@@ -442,7 +441,6 @@ class FormBuilder extends Form
 
     public function buttonGroup(array $options = [])
     {
-        $this->framework = $options['framework'] ?? $this->framework;
         $label = $options['label'] ?? '';
         $options = $this->setOptionClasses('', $options, ['btn-group']);
         $controlHtml = $this->toHtmlString('<div ' . $this->html->attributes($options) . '>');
@@ -469,7 +467,6 @@ class FormBuilder extends Form
 
     public function submit($value = null, $options = [])
     {
-        $this->framework = $options['framework'] ?? $this->framework;
         $cancelUrl = array_key_exists('cancelUrl', $options) ? $options['cancelUrl'] : null;
         $cancelHtml = '';
         $options = $this->setOptionClasses('', $options, ['btn', 'btn-primary']);
@@ -495,6 +492,7 @@ class FormBuilder extends Form
 
     private function setOptionClasses(string $name, array $options, array $addClasses = []) : array
     {
+        $this->framework = $options['framework'] ?? $this->framework;
         $options = array_filter($options);
         $classes = [];
 
