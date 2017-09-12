@@ -25,7 +25,7 @@
         window.genealabsLaravelCasts['comboboxLoaders'] = window.genealabsLaravelCasts.comboboxLoaders || [];
         window.genealabsLaravelCasts['framework'] = window.genealabsLaravelCasts.framework || 'bootstrap4';
         window.genealabsLaravelCasts.comboboxLoaders.push(function () {
-            @if (array_key_exists('subFormClass', $options))
+            @if (array_key_exists('subFormAction', $options))
                 $('{{ $options['subFormClass'] }}').find('input,textarea,select').attr('disabled', 'disabled');
             @endif
 
@@ -64,18 +64,26 @@
                         if (value == -1) {
                             $('{{ $options['subFormClass'] }}').find('input,textarea,select').removeAttr('disabled');
                             $('{{ $options['subFormClass'] }}').removeClass('d-none');
-                            $('{{ $options['subFormClass'] }} [name="{{ $options['subFormFieldName'] }}"]').val($('[name={{ $name }}]').text());
+
+                            @if ($options['subFormFieldName'] ?? false)
+                                $('{{ $options['subFormClass'] }} [name="{{ $options['subFormFieldName'] }}"]').val($('[name={{ $name }}]').text());
+                            @endif
+
                         } else {
                             $('[name={{ $name }}]').selectize()[0].selectize.removeOption(-1);
                             $('{{ $options['subFormClass'] }}').addClass('d-none');
-                            $('{{ $options['subFormClass'] }} [name="{{ $options['subFormFieldName'] }}"]').val('');
+
+                            @if ($options['subFormFieldName'] ?? false)
+                                $('{{ $options['subFormClass'] }} [name="{{ $options['subFormFieldName'] }}"]').val('');
+                            @endif
+
                             $('{{ $options['subFormClass'] }}').find('input,textarea,select').attr('disabled', 'disabled');
                         }
                     @endif
                 }
             });
 
-            @if (array_key_exists('subFormClass', $options))
+            @if (array_key_exists('subFormAction', $options))
                 $('{!! $options['subFormClass'] !!} input[type="submit"]').on('click', function (event) {
                     event.preventDefault();
                     event.stopPropagation();
