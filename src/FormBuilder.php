@@ -326,7 +326,10 @@ class FormBuilder extends Form
         $controlOptions = $this->getControlOptions(collect($options), ['list', 'selected']);
         $controlHtml = parent::select($name, $list, $selected, $controlOptions->toArray(), $optionOptions);
         $renderedHtml = $this->renderControl('combobox', $controlHtml, $name, null, $options);
-        $renderedHtml .= $this->subform($options);
+
+        if (array_key_exists('subFormAction', $options)) {
+            $renderedHtml .= $this->subform($options);
+        }
 
         return $renderedHtml;
 
