@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('genealabs-laravel-casts::examples.layout')
 
 @section('head')
     <link href="/css/bootstrap4.css" rel="stylesheet" type="text/css" media="all">
@@ -10,7 +10,7 @@
             <div class="col-sm-6">
                 <h1 class="page-title">Horizontal Form</h1>
 
-                @form(['url' => 'genealabs/laravel-casts/examples/bootstrap4', 'class' => 'form-horizontal'])
+                @form(['url' => 'genealabs/laravel-casts/examples/bootstrap4', 'class' => 'form-horizontal', 'framework' => 'bootstrap4'])
                     @text('text1', '', ['placeholder' => 'Placeholder Text', 'label' => 'Text Input'])
                     @password('password1', ['placeholder' => 'Placeholder Text', 'label' => 'Password Input'])
                     @email('email1', '', ['placeholder' => 'Placeholder Text', 'label' => 'Email Input'])

@@ -15,7 +15,14 @@
         "symfony/dom-crawler": "^3.2"
     },
     "require-dev": {
-        "phpspec/phpspec": "*"
+        "fzaninotto/faker": "~1.4",
+        "laravel/laravel": "5.5.*",
+        "mockery/mockery": "0.9.*",
+        "phpmd/phpmd": "^2.6",
+        "phpunit/phpunit": "6.*",
+        "satooshi/php-coveralls" : "dev-master@dev",
+        "sebastian/phpcpd": "*",
+        "laravel/browser-kit-testing": "^2.0"
     },
     "autoload": {
         "classmap": [],

@@ -1,5 +1,7 @@
 <?php namespace GeneaLabs\LaravelCasts\Providers;
 
+use Blade;
+use Exception;
 use GeneaLabs\LaravelCasts\Facades\FormFacade;
 use GeneaLabs\LaravelCasts\Facades\HtmlFacade;
 use GeneaLabs\LaravelCasts\FormBuilder;
@@ -12,8 +14,6 @@ use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Event;
-use Blade;
-use Exception;
 
 class LaravelCastsService extends ServiceProvider
 {
@@ -32,12 +32,6 @@ class LaravelCastsService extends ServiceProvider
         @header('Link: <' . url('/genealabs-laravel-casts/bootstrap3-datetimepicker.css') . '>; rel=preload; as=style', false);
         @header('Link: <' . url('/genealabs-laravel-casts/bootstrap4-datetimepicker.js') . '>; rel=preload; as=script', false);
         @header('Link: <' . url('/genealabs-laravel-casts/bootstrap4-datetimepicker.css') . '>; rel=preload; as=style', false);
-
-        if (app()->environment('testing', 'local', 'development')) {
-            $routesPath = __DIR__ . '/../../routes/web.php';
-
-            require($routesPath);
-        }
 
         $this->loadViewsFrom(__DIR__ . '/../../resources/views', 'genealabs-laravel-casts');
         $this->publishes([
@@ -84,6 +78,12 @@ class LaravelCastsService extends ServiceProvider
 
     public function register()
     {
+        // if (app()->environment('testing', 'local', 'development')) {
+            $routesPath = __DIR__ . '/../../routes/web.php';
+
+            require($routesPath);
+        // }
+
         $this->registerHtmlBuilder();
         $this->registerFormBuilder();
         $this->commands(Publish::class);

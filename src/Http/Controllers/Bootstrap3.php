@@ -1,4 +1,4 @@
-<?php namespace GeneaLabs\LaravelCasts\Html\Controllers;
+<?php namespace GeneaLabs\LaravelCasts\Http\Controllers;
 
 use GeneaLabs\LaravelCasts\Http\Requests\FormsExample;
 use Illuminate\Foundation\Bus\DispatchesJobs;
