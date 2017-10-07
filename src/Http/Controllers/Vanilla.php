@@ -1,4 +1,4 @@
-<?php namespace GeneaLabs\LaravelCasts\Html\Controllers;
+<?php namespace GeneaLabs\LaravelCasts\Http\Controllers;
 
 use GeneaLabs\LaravelCasts\Http\Requests\FormsExample;
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -16,9 +16,9 @@ class Vanilla extends Controller
 
     public function index() : View
     {
-        config(['genealabs-laravel-casts.framework' => 'bootstrap3']);
+        config(['genealabs-laravel-casts.framework' => 'vanilla']);
 
-        return view('genealabs-laravel-casts::examples.bootstrap3');
+        return view('genealabs-laravel-casts::examples.vanilla');
     }
 
     /**
@@ -26,6 +26,6 @@ class Vanilla extends Controller
      */
     public function store(FormsExample $request) : RedirectResponse
     {
-        return redirect('genealabs/laravel-casts/examples/bootstrap3');
+        return redirect('genealabs/laravel-casts/examples/vanilla');
     }
 }

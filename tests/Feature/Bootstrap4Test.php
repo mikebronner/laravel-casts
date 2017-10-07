@@ -1,26 +1,25 @@
-<?php namespace GeneaLabs\LaravelCasts\Tests\Laravel5_3;
+<?php namespace GeneaLabs\LaravelCasts\Tests\Feature;
 
-// use Illuminate\Foundation\Testing\WithoutMiddleware;
-// use Illuminate\Foundation\Testing\DatabaseMigrations;
-// use Illuminate\Foundation\Testing\DatabaseTransactions;
+use GeneaLabs\LaravelCasts\Tests\FeatureTestCase;
 
-class vanillaTest extends TestCase
+class Bootstrap4Test extends FeatureTestCase
 {
     public function testFormClose()
     {
-        $result = $this->visit('/genealabs/laravel-casts/examples/vanilla')
+        $this->visit('/genealabs/laravel-casts/examples/bootstrap4')
             ->see('</form>')
             ->seeStatusCode('200');
     }
 
     public function testFormOpen()
     {
-        $this->visit('/genealabs/laravel-casts/examples/vanilla')
+        $this->visit('/genealabs/laravel-casts/examples/bootstrap4')
             ->seeElement('form', [
                 'method' => 'POST',
-                'action' => 'http://localhost',
+                'action' => 'http://localhost/genealabs/laravel-casts/examples/bootstrap4',
                 'accept-charset' => 'UTF-8',
                 'class' => 'form-horizontal',
+                'framework' => 'bootstrap4',
             ])
             ->seeElement('input', [
                 'name' => '_token',
@@ -30,167 +29,191 @@ class vanillaTest extends TestCase
 
     public function testTextInputWithLabel()
     {
-        $this->visit('/genealabs/laravel-casts/examples/vanilla')
+        $this->visit('/genealabs/laravel-casts/examples/bootstrap4')
             ->seeElement('input', [
                 'type' => 'text',
-                'name' => 'text',
+                'name' => 'text1',
                 'placeholder' => 'Placeholder Text',
                 'value' => '',
             ])
             ->dontSeeElement('input', [
                 'type' => 'text',
-                'name' => 'text',
+                'name' => 'text1',
                 'label' => 'Text Input',
             ])
-            ->dontSeeElement('label', [
-                'for' => 'text',
-                'class' => 'col-sm-3 control-label',
+            ->seeElement('label', [
+                'for' => 'text1',
+                'class' => 'col-sm-3 col-form-label',
             ])
             ->dontSeeElement('label', [
-                'for' => 'text',
-                'class' => 'col-sm-3 control-label',
+                'for' => 'text1',
+                'class' => 'col-sm-3 col-form-label',
                 'placeholder' => 'Placeholder Text',
             ])
+            ->seeInElement(
+                'label[for=text1][class="col-sm-3 col-form-label"]',
+                'Text'
+            )
             ->seeStatusCode('200');
     }
 
     public function testPasswordInput()
     {
-        $this->visit('/genealabs/laravel-casts/examples/vanilla')
+        $this->visit('/genealabs/laravel-casts/examples/bootstrap4')
             ->seeElement('input', [
                 'placeholder' => 'Placeholder Text',
                 'class' => 'form-control',
-                'name' => 'password',
+                'name' => 'password1',
                 'type' => 'password',
                 'value' => '',
             ])
             ->dontSeeElement('input', [
                 'label' => 'Password Input',
-                'name' => 'password',
+                'name' => 'password1',
                 'type' => 'password',
             ])
-            ->dontSeeElement('label', [
-                'for' => 'password',
-                'class' => 'col-sm-3 control-label',
+            ->seeElement('label', [
+                'for' => 'password1',
+                'class' => 'col-sm-3 col-form-label',
             ])
             ->dontSeeElement('label', [
-                'for' => 'password',
+                'for' => 'password1',
                 'placeholder' => 'Placeholder Text',
             ])
+            ->seeInElement(
+                'label[for=password1][class="col-sm-3 col-form-label"]',
+                'Password'
+            )
             ->seeStatusCode('200');
     }
 
     public function testEmailInput()
     {
-        $this->visit('/genealabs/laravel-casts/examples/vanilla')
+        $this->visit('/genealabs/laravel-casts/examples/bootstrap4')
             ->seeElement('input', [
                 'placeholder' => 'Placeholder Text',
                 'class' => 'form-control',
-                'name' => 'email',
+                'name' => 'email1',
                 'type' => 'email',
                 'value' => '',
             ])
             ->dontSeeElement('input', [
                 'label' => 'Email Input',
-                'name' => 'email',
+                'name' => 'email1',
                 'type' => 'email',
             ])
-            ->dontSeeElement('label', [
-                'for' => 'email',
-                'class' => 'col-sm-3 control-label',
+            ->seeElement('label', [
+                'for' => 'email1',
+                'class' => 'col-sm-3 col-form-label',
             ])
             ->dontSeeElement('label', [
-                'for' => 'email',
+                'for' => 'email1',
                 'placeholder' => 'Placeholder Text',
             ])
+            ->seeInElement(
+                'label[for=email1][class="col-sm-3 col-form-label"]',
+                'Email'
+            )
             ->seeStatusCode('200');
     }
 
     public function testUrlInput()
     {
-        $this->visit('/genealabs/laravel-casts/examples/vanilla')
+        $this->visit('/genealabs/laravel-casts/examples/bootstrap4')
             ->seeElement('input', [
                 'placeholder' => 'Placeholder Text',
                 'class' => 'form-control',
-                'name' => 'url',
+                'name' => 'url1',
                 'type' => 'url',
                 'value' => '',
             ])
             ->dontSeeElement('input', [
                 'label' => 'Url Input',
-                'name' => 'url',
+                'name' => 'url1',
                 'type' => 'url',
             ])
-            ->dontSeeElement('label', [
-                'for' => 'url',
-                'class' => 'col-sm-3 control-label',
+            ->seeElement('label', [
+                'for' => 'url1',
+                'class' => 'col-sm-3 col-form-label',
             ])
             ->dontSeeElement('label', [
-                'for' => 'url',
+                'for' => 'url1',
                 'placeholder' => 'Placeholder Text',
             ])
+            ->seeInElement(
+                'label[for=url1][class="col-sm-3 col-form-label"]',
+                'Url'
+            )
             ->seeStatusCode('200');
     }
 
     public function testFileInput()
     {
-        $this->visit('/genealabs/laravel-casts/examples/vanilla')
+        $this->visit('/genealabs/laravel-casts/examples/bootstrap4')
             ->seeElement('input', [
-                'class' => 'form-control form-control-file',
-                'name' => 'file',
+                'class' => 'custom-file-input',
+                'name' => 'file1',
                 'type' => 'file',
             ])
             ->dontSeeElement('input', [
                 'label' => 'Url Input',
-                'name' => 'file',
+                'name' => 'file1',
                 'type' => 'file',
             ])
             ->dontSeeElement('input', [
                 'placeholder' => 'Placeholder Text',
-                'name' => 'file',
+                'name' => 'file1',
                 'type' => 'file',
             ])
-            ->dontSeeElement('label', [
-                'for' => 'file',
-                'class' => 'col-sm-3 control-label',
+            ->seeElement('label', [
+                'for' => 'file1',
+                'class' => 'col-sm-3 col-form-label',
             ])
             ->dontSeeElement('label', [
-                'for' => 'file',
+                'for' => 'file1',
                 'placeholder' => 'Placeholder Text',
             ])
+            ->seeInElement(
+                'label[for=file1][class="col-sm-3 col-form-label"]',
+                'File'
+            )
             ->seeStatusCode('200');
     }
 
     public function testTextarea()
     {
-        $this->visit('/genealabs/laravel-casts/examples/vanilla')
+        $this->visit('/genealabs/laravel-casts/examples/bootstrap4')
             ->seeElement('textarea', [
                 'class' => 'form-control',
-                'name' => 'textarea',
+                'name' => 'textarea1',
                 'placeholder' => 'Placeholder Text',
                 'rows' => '7',
             ])
             ->dontSeeElement('textarea', [
                 'label' => 'Textarea',
-                'name' => 'textarea',
+                'name' => 'textarea1',
+            ])
+            ->seeElement('label', [
+                'for' => 'textarea1',
+                'class' => 'col-sm-3 col-form-label',
             ])
             ->dontSeeElement('label', [
-                'for' => 'textarea',
-                'class' => 'col-sm-3 control-label',
-            ])
-            ->dontSeeElement('label', [
-                'for' => 'textarea',
+                'for' => 'textarea1',
                 'placeholder' => 'Placeholder Text',
             ])
+            ->seeInElement(
+                'label[for=textarea1][class="col-sm-3 col-form-label"]',
+                'Textarea'
+            )
             ->seeStatusCode('200');
     }
 
     public function testCheckbox()
     {
-        $this->visit('/genealabs/laravel-casts/examples/vanilla')
+        $this->visit('/genealabs/laravel-casts/examples/bootstrap4')
             ->seeElement('input', [
-                'class' => '',
-                'name' => 'checkbox',
+                'class' => 'form-check-input',
+                'name' => 'checkbox1',
                 'type' => 'checkbox',
                 'checked' => 'checked',
                 'value' => 'test',
@@ -203,21 +226,29 @@ class vanillaTest extends TestCase
                 'placeholder' => 'Placeholder Text',
                 'type' => 'checkbox',
             ])
-            ->dontSeeElement('div', [
-                'class' => 'checkbox',
+            ->seeElement('label', [
+                'class' => 'form-check-label',
             ])
             ->dontSeeElement('label', [
-                'for' => 'checkbox',
+                'for' => 'checkbox1',
             ])
+            ->seeInElement(
+                'label[class="form-check-label"]',
+                'Checkbox'
+            )
+            ->seeInElement(
+                'label[class="form-check-label"]',
+                '<input class="form-check-input" checked name="checkbox1" type="checkbox" value="test">'
+            )
             ->seeStatusCode('200');
     }
 
     public function testSelect()
     {
-        $this->visit('/genealabs/laravel-casts/examples/vanilla')
+        $this->visit('/genealabs/laravel-casts/examples/bootstrap4')
             ->seeElement('select', [
-                'class' => 'form-control',
-                'name' => 'select',
+                'class' => 'form-control custom-select',
+                'name' => 'select1',
             ])
             ->dontSeeElement('select', [
                 'label' => 'Url Input',
@@ -225,72 +256,84 @@ class vanillaTest extends TestCase
             ->dontSeeElement('select', [
                 'placeholder' => 'Placeholder Text',
             ])
-            ->dontSeeElement('label', [
-                'for' => 'select',
-                'class' => 'col-sm-3 control-label',
+            ->seeElement('label', [
+                'for' => 'select1',
+                'class' => 'col-sm-3 col-form-label',
             ])
             ->dontSeeElement('label', [
-                'for' => 'select',
+                'for' => 'select1',
                 'placeholder' => 'Placeholder Text',
             ])
+            ->seeInElement(
+                'label[for=select1][class="col-sm-3 col-form-label"]',
+                'Select'
+            )
             ->seeStatusCode('200');
     }
 
     public function testSelectRange()
     {
-        $this->visit('/genealabs/laravel-casts/examples/vanilla')
+        $this->visit('/genealabs/laravel-casts/examples/bootstrap4')
             ->seeElement('select', [
-                'class' => 'form-control',
-                'name' => 'selectRange',
+                'class' => 'form-control custom-select',
+                'name' => 'select_range1',
             ])
             ->dontSeeElement('select', [
                 'label' => 'SelectRange',
-                'name' => 'selectRange',
+                'name' => 'select_range1',
             ])
             ->dontSeeElement('select', [
                 'placeholder' => 'Placeholder Text',
-                'name' => 'selectRange',
+                'name' => 'select_range1',
+            ])
+            ->seeElement('label', [
+                'for' => 'select_range1',
+                'class' => 'col-sm-3 col-form-label',
             ])
             ->dontSeeElement('label', [
-                'for' => 'selectRange',
-                'class' => 'col-sm-3 control-label',
-            ])
-            ->dontSeeElement('label', [
-                'for' => 'selectRange',
+                'for' => 'select_range1',
                 'placeholder' => 'Placeholder Text',
             ])
+            ->seeInElement(
+                'label[for=select_range1][class="col-sm-3 col-form-label"]',
+                'Select Range'
+            )
             ->seeStatusCode('200');
     }
 
     public function testSelectRangeWithInterval()
     {
-        $this->visit('/genealabs/laravel-casts/examples/vanilla')
+        $this->visit('/genealabs/laravel-casts/examples/bootstrap4')
             ->seeElement('select', [
-                'class' => 'form-control',
-                'name' => 'selectRangeWithInterval',
+                'class' => 'form-control custom-select',
+                'name' => 'select_range_with_interval1',
             ])
             ->dontSeeElement('select', [
-                'name' => 'selectRangeWithInterval',
+                'name' => 'select_range_with_interval1',
                 'label' => 'SelectRangeWithInterval',
             ])
             ->dontSeeElement('select', [
-                'name' => 'selectRangeWithInterval',
+                'name' => 'select_range_with_interval1',
                 'placeholder' => 'Placeholder Text',
             ])
-            ->dontSeeElement('label', [
-                'for' => 'selectRangeWithInterval',
-                'class' => 'col-sm-3 control-label',
+            ->seeElement('label', [
+                'for' => 'select_range_with_interval1',
+                'class' => 'col-sm-3 col-form-label',
             ])
             ->dontSeeElement('label', [
-                'for' => 'selectRangeWithInterval',
+                'for' => 'select_range_with_interval1',
                 'placeholder' => 'Placeholder Text',
             ])
+            ->seeInElement(
+                'label[for=select_range_with_interval1][class="col-sm-3 col-form-label"]',
+                'Select Range With Interval'
+            )
             ->seeStatusCode('200');
     }
 
     public function testSubmit()
     {
-        $this->visit('/genealabs/laravel-casts/examples/vanilla')
+        $this->visit('/genealabs/laravel-casts/examples/bootstrap4')
             ->seeElement('input', [
                 'class' => 'btn btn-success btn-primary',
                 'type' => 'submit',

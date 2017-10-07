@@ -1,14 +1,12 @@
-<?php namespace GeneaLabs\LaravelCasts\Tests\Laravel5_1;
+<?php namespace GeneaLabs\LaravelCasts\Tests\Feature;
 
-// use Illuminate\Foundation\Testing\WithoutMiddleware;
-// use Illuminate\Foundation\Testing\DatabaseMigrations;
-// use Illuminate\Foundation\Testing\DatabaseTransactions;
+use GeneaLabs\LaravelCasts\Tests\FeatureTestCase;
 
-class vanillaTest extends TestCase
+class VanillaTest extends FeatureTestCase
 {
     public function testFormClose()
     {
-        $result = $this->visit('/genealabs/laravel-casts/examples/vanilla')
+        $this->visit('/genealabs/laravel-casts/examples/vanilla')
             ->see('</form>')
             ->seeStatusCode('200');
     }
@@ -20,7 +18,6 @@ class vanillaTest extends TestCase
                 'method' => 'POST',
                 'action' => 'http://localhost',
                 'accept-charset' => 'UTF-8',
-                'class' => 'form-horizontal',
             ])
             ->seeElement('input', [
                 'name' => '_token',
