@@ -23,6 +23,7 @@
                 @month ('month', 'January', ['placeholder' => 'Placeholder Text', 'label' => 'Month Input'])
                 @textarea('textarea', '', ['placeholder' => 'Placeholder Text', 'label' => 'Textarea', 'rows' => 7])
                 @checkbox('checkbox', 'test', true, ['placeholder' => 'Placeholder Text', 'label' => 'Checkbox'])
+                @radio('radio', 'test', true, ['placeholder' => 'Placeholder Text', 'label' => 'Radio'])
                 @select('select', [1, 2, 3, 4], null, ['placeholder' => 'Placeholder Text', 'label' => 'Select'])
                 @selectMonths('selectMonths', 3, ['placeholder' => 'Placeholder Text', 'label' => 'Select Months'])
                 @selectWeekdays('selectWeekdays', 3, ['placeholder' => 'Placeholder Text', 'label' => 'Select Weekdays'])
