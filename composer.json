@@ -41,7 +41,7 @@
             ],
             "aliases": {
                 "Form": "GeneaLabs\\LaravelCasts\\FormFacade",
-                "Html": "GeneaLabs\\LaravelCasts\\HtmlFacade"
+                "Html": "Collective\\Html\\HtmlFacade"
             }
         }
     },

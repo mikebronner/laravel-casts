@@ -6,6 +6,12 @@ use Illuminate\Support\MessageBag;
 use Illuminate\Support\Collection;
 use Carbon\Carbon;
 
+/**
+ * @SuppressWarnings(PHPMD.TooManyMethods)
+ * @SuppressWarnings(PHPMD.TooManyPublicMethods)
+ * @SuppressWarnings(PHPMD.ExcessivePublicCount)
+ * @SuppressWarnings(PHPMD.ExcessiveClassComplexity)
+ */
 class FormBuilder extends Form
 {
     use FormParsable;
@@ -88,6 +94,9 @@ class FormBuilder extends Form
         return $this->hidden('_token', csrf_token());
     }
 
+    /**
+     * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
+     */
     public function label($name, $label = null, $options = [], $escapeHtml = true)
     {
         $this->framework = $options['framework'] ?? $this->framework;
@@ -148,6 +157,17 @@ class FormBuilder extends Form
         $controlHtml = parent::text($name, $value, $controlOptions);
 
         return $this->renderControl('text', $controlHtml, $name, $value, $options);
+    }
+
+    public function number($name, $value = null, $options = [])
+    {
+        $options = $this->setOptionClasses($name, $options, ['form-control']);
+        $controlOptions = array_filter($options, function ($key) {
+            return ($key !== 'label');
+        }, ARRAY_FILTER_USE_KEY);
+        $controlHtml = parent::number($name, $value, $controlOptions);
+
+        return $this->renderControl('number', $controlHtml, $name, $value, $options);
     }
 
     public function email($name, $value = null, $options = [])

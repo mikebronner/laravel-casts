@@ -14,6 +14,7 @@
                 @email('email', '', ['placeholder' => 'Placeholder Text', 'label' => 'Email Input'])
                 @url('url', '', ['placeholder' => 'Placeholder Text', 'label' => 'Url Input'])
                 @file('file', ['placeholder' => 'Placeholder Text', 'label' => 'File Input'])
+                @number ('number1', 5, ['placeholder' => 'Placeholder Text', 'label' => 'Number Input'])
                 @textarea('textarea', '', ['placeholder' => 'Placeholder Text', 'label' => 'Textarea', 'rows' => 7])
                 @checkbox('checkbox', 'test', true, ['placeholder' => 'Placeholder Text', 'label' => 'Checkbox'])
                 @select('select', [1, 2, 3, 4], null, ['placeholder' => 'Placeholder Text', 'label' => 'Select'])

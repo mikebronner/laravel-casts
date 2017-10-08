@@ -5,7 +5,7 @@ use Exception;
 use GeneaLabs\LaravelCasts\Facades\FormFacade;
 use GeneaLabs\LaravelCasts\Facades\HtmlFacade;
 use GeneaLabs\LaravelCasts\FormBuilder;
-use GeneaLabs\LaravelCasts\HtmlBuilder;
+use Collective\Html\HtmlBuilder;
 use GeneaLabs\LaravelCasts\Console\Commands\Publish;
 use GeneaLabs\LaravelCasts\Http\Middleware\AssetInjection;
 use Illuminate\Support\ServiceProvider;
@@ -21,18 +21,18 @@ class LaravelCastsService extends ServiceProvider
 
     public function boot()
     {
-        // HTTP/2 Server Push All The Things
-        // ignore error if headers already set
-        @header('Link: <' . url('/genealabs-laravel-casts/app.js') . '>; rel=preload; as=script', false);
-        @header('Link: <' . url('/genealabs-laravel-casts/bootstrap3.js') . '>; rel=preload; as=script', false);
-        @header('Link: <' . url('/genealabs-laravel-casts/bootstrap3.css') . '>; rel=preload; as=style', false);
-        @header('Link: <' . url('/genealabs-laravel-casts/bootstrap4.js') . '>; rel=preload; as=script', false);
-        @header('Link: <' . url('/genealabs-laravel-casts/bootstrap4.css') . '>; rel=preload; as=style', false);
-        @header('Link: <' . url('/genealabs-laravel-casts/bootstrap-switch.js') . '>; rel=preload; as=script', false);
-        @header('Link: <' . url('/genealabs-laravel-casts/bootstrap3-datetimepicker.js') . '>; rel=preload; as=script', false);
-        @header('Link: <' . url('/genealabs-laravel-casts/bootstrap3-datetimepicker.css') . '>; rel=preload; as=style', false);
-        @header('Link: <' . url('/genealabs-laravel-casts/bootstrap4-datetimepicker.js') . '>; rel=preload; as=script', false);
-        @header('Link: <' . url('/genealabs-laravel-casts/bootstrap4-datetimepicker.css') . '>; rel=preload; as=style', false);
+        if (! headers_sent()) {
+            header('Link: <' . url('/genealabs-laravel-casts/app.js') . '>; rel=preload; as=script', false);
+            header('Link: <' . url('/genealabs-laravel-casts/bootstrap3.js') . '>; rel=preload; as=script', false);
+            header('Link: <' . url('/genealabs-laravel-casts/bootstrap3.css') . '>; rel=preload; as=style', false);
+            header('Link: <' . url('/genealabs-laravel-casts/bootstrap4.js') . '>; rel=preload; as=script', false);
+            header('Link: <' . url('/genealabs-laravel-casts/bootstrap4.css') . '>; rel=preload; as=style', false);
+            header('Link: <' . url('/genealabs-laravel-casts/bootstrap-switch.js') . '>; rel=preload; as=script', false);
+            header('Link: <' . url('/genealabs-laravel-casts/bootstrap3-datetimepicker.js') . '>; rel=preload; as=script', false);
+            header('Link: <' . url('/genealabs-laravel-casts/bootstrap3-datetimepicker.css') . '>; rel=preload; as=style', false);
+            header('Link: <' . url('/genealabs-laravel-casts/bootstrap4-datetimepicker.js') . '>; rel=preload; as=script', false);
+            header('Link: <' . url('/genealabs-laravel-casts/bootstrap4-datetimepicker.css') . '>; rel=preload; as=style', false);
+        }
 
         $this->loadViewsFrom(__DIR__ . '/../../resources/views', 'genealabs-laravel-casts');
         $this->publishes([
@@ -51,6 +51,7 @@ class LaravelCastsService extends ServiceProvider
         $this->registerBladeDirective('hidden');
         $this->registerBladeDirective('label');
         $this->registerBladeDirective('text');
+        $this->registerBladeDirective('number');
         $this->registerBladeDirective('email');
         $this->registerBladeDirective('url');
         $this->registerBladeDirective('date');
@@ -79,11 +80,11 @@ class LaravelCastsService extends ServiceProvider
 
     public function register()
     {
-        // if (app()->environment('testing', 'local', 'development')) {
+        if (app()->environment('testing')) {
             $routesPath = __DIR__ . '/../../routes/web.php';
 
             require($routesPath);
-        // }
+        }
 
         $this->registerHtmlBuilder();
         $this->registerFormBuilder();
@@ -101,7 +102,6 @@ class LaravelCastsService extends ServiceProvider
         $this->app->singleton('html', function ($app) {
             return new HtmlBuilder($app['url'], $app['view']);
         });
-
     }
 
     private function registerFormBuilder()
@@ -113,6 +113,9 @@ class LaravelCastsService extends ServiceProvider
         });
     }
 
+    /**
+     * @SuppressWarnings(PHPMD.StaticAccess)
+     */
     private function registerBladeDirective($formMethod, $alias = null)
     {
         $alias = $alias ?: $formMethod;
