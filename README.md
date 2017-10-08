@@ -62,6 +62,7 @@ The following Blade directives developing forms a snap:
     @file('file', ['placeholder' => 'Placeholder Text', 'label' => 'File Input'])
     @textarea('textarea', '', ['placeholder' => 'Placeholder Text', 'label' => 'Textarea', 'rows' => 7])
     @checkbox('checkbox', 'test', true, ['placeholder' => 'Placeholder Text', 'label' => 'Checkbox'])
+    @radio('radio', 'test', true, ['placeholder' => 'Placeholder Text', 'label' => 'Radio'])
     @switch('fieldname', 'true value', $isChecked, ['label' => 'Switch', 'label' => 'Switch', 'onText' => 'Available', 'onColor' => 'success', 'offText' => 'Unavailable', 'offColor' => 'danger'])
     @select('select', [1, 2, 3, 4], null, ['placeholder' => 'Placeholder Text', 'label' => 'Select'])
     @selectMonths('select_months', null, ['placeholder' => 'Placeholder Text', 'label' => 'Select'])
