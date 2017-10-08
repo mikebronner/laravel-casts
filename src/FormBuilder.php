@@ -356,6 +356,33 @@ class FormBuilder extends Form
         return $this->select($name, $monthOptions, $value, $options, $optionOptions);
     }
 
+    public function selectWeekdays($name, $value = null, array $options = [], array $optionOptions = [])
+    {
+        $monthOptions = [
+            '1' => 'Sunday',
+            '2' => 'Monday',
+            '3' => 'Tuesday',
+            '4' => 'Wednesday',
+            '5' => 'Thursday',
+            '6' => 'Friday',
+            '7' => 'Saturday',
+        ];
+
+        if (($options['optionsFormat'] ?? '') === 'slugs') {
+            $monthOptions = [
+                'sunday' => 'Sunday',
+                'monday' => 'Monday',
+                'tuesday' => 'Tuesday',
+                'wednesday' => 'Wednesday',
+                'thursday' => 'Thursday',
+                'friday' => 'Friday',
+                'saturday' => 'Saturday',
+            ];
+        }
+
+        return $this->select($name, $monthOptions, $value, $options, $optionOptions);
+    }
+
     public function selectRangeWithInterval(
         string $name,
         int $start,

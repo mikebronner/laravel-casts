@@ -47,6 +47,7 @@ The following Blade directives developing forms a snap:
 ```blade
 @form(['url' => ''])
     @text('text', '', ['placeholder' => 'Placeholder Text', 'label' => 'Text Input'])
+    @number('number', '', ['placeholder' => 'Placeholder Text', 'label' => 'Number Input'])
     @password('password', ['placeholder' => 'Placeholder Text', 'label' => 'Password Input'])
     @date('date', '', ['placeholder' => 'Placeholder Text', 'label' => 'Date'])
     @datetime('datetime', '', ['placeholder' => 'Placeholder Text', 'label' => 'DateTime'])
@@ -57,7 +58,8 @@ The following Blade directives developing forms a snap:
     @checkbox('checkbox', 'test', true, ['placeholder' => 'Placeholder Text', 'label' => 'Checkbox'])
     @switch('fieldname', 'true value', $isChecked, ['label' => 'Switch', 'label' => 'Switch', 'onText' => 'Available', 'onColor' => 'success', 'offText' => 'Unavailable', 'offColor' => 'danger'])
     @select('select', [1, 2, 3, 4], null, ['placeholder' => 'Placeholder Text', 'label' => 'Select'])
-    @selectRange('selectRange', 1, 21, null, ['class' => 'form-control', 'placeholder' => 'Placeholder Text', 'label' => 'Select Range'])
+    @selectMonths('select_months', null, ['placeholder' => 'Placeholder Text', 'label' => 'Select'])
+    @selectWeekdays('select_weekdays', null, ['placeholder' => 'Placeholder Text', 'label' => 'Select Weekdays']) @selectRange('selectRange', 1, 21, null, ['class' => 'form-control', 'placeholder' => 'Placeholder Text', 'label' => 'Select Range'])
     @selectRangeWithInterval('selectRangeWithInterval', 1, 21, 3, null, ['class' => 'form-control', 'placeholder' => 'Placeholder Text', 'label' => 'Select Range With Interval'])
     @combobox('combobox', [1, 2, 3, 4], null, ['class' => 'form-control', 'placeholder' => 'Placeholder Text', 'label' => 'Combobox'])
     @submit('submit', ['class' => 'btn btn-success', 'label' => 'Submit Button'])
@@ -66,9 +68,9 @@ The following Blade directives developing forms a snap:
 
 #### `@form` / `{!! Form::open() !!}`
 ```blade
-@form(['class' => '', 'labelWidth' => '', 'fieldWidth' => '', 'framework' => ''])
+@form ($model, ['class' => '', 'labelWidth' => '', 'fieldWidth' => '', 'framework' => ''])
 ```
-
+- `$model`: (optional) used to pre-populate a model-based form.
 - `class`: (optional)
 - `offset`: (optional, default: 3)
 - `labelWidth`: (optional, default: 3)
@@ -77,7 +79,7 @@ The following Blade directives developing forms a snap:
 
 #### `@label` / `{!! Form::label() !!}`
 ```blade
-@label($name, $label = null, array $options = [], $escapeHtml = true)
+@label ($name, $label = null, array $options = [], $escapeHtml = true)
 ```
 
 - `$name`: used for the `for=` attribute on the label.
@@ -98,7 +100,7 @@ The following controls use the same syntax:
 - `@textarea` / `{!! Form::textarea() !!}`
 
 ```blade
-@text($name, $value = null, $options = [])
+@text ($name, $value = null, $options = [])
 ```
 
 - `$name`: name of the control, used to submit form values.
@@ -108,17 +110,35 @@ The following controls use the same syntax:
 
 #### `@switch` / `{!! Form::switch() !!}`
 ```blade
-@switch('fieldname', 'active value', $isActivated, [label' => 'Switch', 'onText' => 'Available', 'offText' => 'Unavailable', 'onColor' => 'success', 'offColor' => 'danger'])
+@switch ('fieldname', 'active value', $isActivated, [label' => 'Switch', 'onText' => 'Available', 'offText' => 'Unavailable', 'onColor' => 'success', 'offColor' => 'danger'])
 ```
 
 #### `@select` / `{!! Form::select() !!}`
 ```blade
-@select($name, $list = [], $selected = null, $options = [])
+@select ($name, $list = [], $selected = null, $options = [])
 ```
 
 - `$name`: name of the control, used to submit form values.
 - `$list`: (default: []) array of key-value pairs used to create the select list
  options.
+- `$selected`: (default: null) the value of the selected options.
+- `$options`: (default: []) array of options, including `class`.
+
+#### `@selectMonths` / `{!! Form::selectMonths() !!}`
+```blade
+@selectMonths ($name, $selected = null, $options = [])
+```
+
+- `$name`: name of the control, used to submit form values.
+- `$selected`: (default: null) the value of the selected options.
+- `$options`: (default: []) array of options, including `class`.
+
+#### `@selectWeekdays` / `{!! Form::selectWeekdays() !!}`
+```blade
+@selectWeekdays ($name, $selected = null, $options = [])
+```
+
+- `$name`: name of the control, used to submit form values.
 - `$selected`: (default: null) the value of the selected options.
 - `$options`: (default: []) array of options, including `class`.
 
