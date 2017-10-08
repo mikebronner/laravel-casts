@@ -214,6 +214,17 @@ class FormBuilder extends Form
         return $this->renderControl('number', $controlHtml, $name, $value, $options);
     }
 
+    public function range($name, $value = null, $options = [])
+    {
+        $options = $this->setOptionClasses($name, $options, ['form-control']);
+        $controlOptions = array_filter($options, function ($key) {
+            return ($key !== 'label');
+        }, ARRAY_FILTER_USE_KEY);
+        $controlHtml = parent::input('range', $name, $value, $controlOptions);
+
+        return $this->renderControl('range', $controlHtml, $name, $value, $options);
+    }
+
     public function email($name, $value = null, $options = [])
     {
         $options = $this->setOptionClasses($name, $options, ['form-control']);

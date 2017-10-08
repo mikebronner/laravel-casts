@@ -16,6 +16,7 @@
                 @file('file', ['placeholder' => 'Placeholder Text', 'label' => 'File Input'])
                 @search ('search', 'search term', ['placeholder' => 'Placeholder Text', 'label' => 'Search Input'])
                 @number ('number1', 5, ['placeholder' => 'Placeholder Text', 'label' => 'Number Input'])
+                @range ('range', 5, ['placeholder' => 'Placeholder Text', 'label' => 'Range Input'])
                 @tel ('tel', '1234567890', ['placeholder' => 'Placeholder Text', 'label' => 'Tel Input'])
                 @week ('week', 3, ['placeholder' => 'Placeholder Text', 'label' => 'Week Input'])
                 @month ('month', 'January', ['placeholder' => 'Placeholder Text', 'label' => 'Month Input'])
