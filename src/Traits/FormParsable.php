@@ -114,7 +114,7 @@ trait FormParsable
             return ($excludedKeys->has($key) ? null : $value);
         });
 
-        return $options->filter(function ($value) use ($additionalExclusions) {
+        return $options->filter(function ($value) {
             return ($value !== null);
         });
     }

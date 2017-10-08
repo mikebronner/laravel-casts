@@ -11,7 +11,7 @@ class FormBuilder extends Form
     use FormParsable;
 
     protected $errors;
-    protected $offset = 0;
+    protected $offset = 0
     protected $labelWidth = 3;
     protected $fieldWidth = 9;
     protected $isHorizontal = false;
@@ -300,8 +300,6 @@ class FormBuilder extends Form
         }
 
         return $renderedHtml;
-
-        return $this->renderControl('combobox', $controlHtml, $name, null, $options);
     }
 
     public function select($name, $list = [], $selected = null, array $options = [], array $optionOptions = [])
