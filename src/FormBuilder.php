@@ -45,73 +45,6 @@ class FormBuilder extends Form
         return call_user_func_array($method, $parameters);
     }
 
-    public function token()
-    {
-        return $this->hidden('_token', csrf_token());
-    }
-
-    public function selectRangeWithInterval(
-        string $name,
-        int $start,
-        int $end,
-        int $interval,
-        int $value = null,
-        array $options = [],
-        array $optionOptions = []
-    ) : string {
-        if ($interval == 0) {
-            return parent::selectRange($name, $start, $end, $value, $options);
-        }
-
-        $items = [];
-        if ($value !== null) {
-            $items[$value] = $value;
-        }
-
-        $startValue = $start;
-        $endValue = $end;
-        $interval *= ($interval < 0) ? -1 : 1;
-
-        if ($start > $end) {
-            $interval *= ($interval > 0) ? -1 : 1;
-            $startValue = $end;
-            $endValue = $start;
-        }
-
-        for ($i=$startValue; $i<$endValue; $i+=$interval) {
-            $items[$i . ""] = $i;
-        }
-
-        $items[$endValue] = $endValue;
-
-        return $this->select($name, $items, $value, $options, $optionOptions);
-    }
-
-    public function select($name, $list = [], $selected = null, array $options = [], array $optionOptions = [])
-    {
-        $this->framework = $options['framework'] ?? $this->framework;
-        $options = $this->setOptionClasses($name, $options, ['form-control']);
-        $controlOptions = collect($options);
-
-        if ($this->framework === 'bootstrap4' && ! $controlOptions->has('multiple')) {
-            $controlOptions = $controlOptions->map(function ($option, $index) {
-                if ($index === 'class') {
-                    $option .= ' custom-select';
-                }
-
-                return $option;
-            });
-        }
-
-        $controlHtml = parent::select($name, $list, $selected, $controlOptions->toArray(), $optionOptions);
-
-        if (array_key_exists('placeholder', $options)) {
-            $controlHtml = str_replace('<option selected="selected" value="">' . $options['placeholder'] . '</option>', '<option selected="selected" value="" disabled="disabled">' . $options['placeholder'] . '</option>', $controlHtml);
-        }
-
-        return $this->renderControl('select', $controlHtml, $name, '', $options);
-    }
-
     public function form()
     {
         if (func_num_args() > 1) {
@@ -175,6 +108,37 @@ class FormBuilder extends Form
         $this->subFormClass = '';
     }
 
+    public function token()
+    {
+        return $this->hidden('_token', csrf_token());
+    }
+
+
+    public function select($name, $list = [], $selected = null, array $options = [], array $optionOptions = [])
+    {
+        $this->framework = $options['framework'] ?? $this->framework;
+        $options = $this->setOptionClasses($name, $options, ['form-control']);
+        $controlOptions = collect($options);
+
+        if ($this->framework === 'bootstrap4' && ! $controlOptions->has('multiple')) {
+            $controlOptions = $controlOptions->map(function ($option, $index) {
+                if ($index === 'class') {
+                    $option .= ' custom-select';
+                }
+
+                return $option;
+            });
+        }
+
+        $controlHtml = parent::select($name, $list, $selected, $controlOptions->toArray(), $optionOptions);
+
+        if (array_key_exists('placeholder', $options)) {
+            $controlHtml = str_replace('<option selected="selected" value="">' . $options['placeholder'] . '</option>', '<option selected="selected" value="" disabled="disabled">' . $options['placeholder'] . '</option>', $controlHtml);
+        }
+
+        return $this->renderControl('select', $controlHtml, $name, '', $options);
+    }
+
     public function selectMonths($name, $value = null, array $options = [], array $optionOptions = [])
     {
         $monthOptions = [
@@ -230,7 +194,7 @@ class FormBuilder extends Form
             'subFormResponseObjectPrimaryKey' => '',
         ];
         $options = collect($options)->diffKeys($excludeOptions)
-            ->map(function ($option, $index) {
+            ->map(function ($option) {
                 if (is_array($option)) {
                     return '';
                 }
@@ -252,6 +216,43 @@ class FormBuilder extends Form
             ->toArray();
 
         return parent::label($name, $label, $options, $escapeHtml);
+    }
+
+    public function selectRangeWithInterval(
+        string $name,
+        int $start,
+        int $end,
+        int $interval,
+        int $value = null,
+        array $options = [],
+        array $optionOptions = []
+    ) : string {
+        if ($interval == 0) {
+            return parent::selectRange($name, $start, $end, $value, $options);
+        }
+
+        $items = [];
+        if ($value !== null) {
+            $items[$value] = $value;
+        }
+
+        $startValue = $start;
+        $endValue = $end;
+        $interval *= ($interval < 0) ? -1 : 1;
+
+        if ($start > $end) {
+            $interval *= ($interval > 0) ? -1 : 1;
+            $startValue = $end;
+            $endValue = $start;
+        }
+
+        for ($i=$startValue; $i<$endValue; $i+=$interval) {
+            $items[$i . ""] = $i;
+        }
+
+        $items[$endValue] = $endValue;
+
+        return $this->select($name, $items, $value, $options, $optionOptions);
     }
 
     public function text($name, $value = null, $options = [])
@@ -398,7 +399,6 @@ class FormBuilder extends Form
         }
 
         $options = $this->setOptionClasses($name, $options, ['form-control']);
-        $controlOptions = $this->getControlOptions(collect($options));
         $controlHtml = $this->hidden($name) . $this->hidden($name . '_date');
 
         return $this->renderControl('signature', $controlHtml, $name, $value, $options);
@@ -474,8 +474,6 @@ class FormBuilder extends Form
 
     public function submit($value = null, $options = [])
     {
-        $cancelUrl = array_key_exists('cancelUrl', $options) ? $options['cancelUrl'] : null;
-        $cancelHtml = '';
         $options = $this->setOptionClasses('', $options, ['btn', 'btn-primary']);
         $controlOptions = $this->getControlOptions(collect($options));
         $controlOptions = $controlOptions->map(function ($option) {
