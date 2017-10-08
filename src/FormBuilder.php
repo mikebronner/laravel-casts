@@ -20,34 +20,6 @@ class FormBuilder extends Form
     protected $framework = 'bootstrap3';
     protected $subFormClass = '';
 
-    private function renderControl(
-        string $type,
-        string $controlHtml,
-        string $name,
-        $value = '',
-        array $options = []
-    ) : string {
-        $method = [
-            $this,
-            "{$this->framework}Control",
-        ];
-        $parameters = [
-            $type,
-            $controlHtml,
-            $name,
-            $value,
-            $options,
-            $this->fieldWidth,
-            $this->labelWidth,
-            $this->isHorizontal,
-            $this->isInline,
-            $this->isInButtonGroup,
-            $this->errors ?? collect(),
-        ];
-
-        return call_user_func_array($method, $parameters);
-    }
-
     public function form()
     {
         if (func_num_args() > 1) {
