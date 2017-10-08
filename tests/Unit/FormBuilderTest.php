@@ -59,6 +59,19 @@ class FormBuilderTest extends UnitTestCase
         $this->assertEquals($expectedHtml, $html);
     }
 
+    public function testLabelBladeDirective()
+    {
+        $string = "@label ('field-name', 'Label Text')";
+        $expected = "<?php echo app('form')->label('field-name', 'Label Text'); ?>";
+        $expectedHtml = '<label for="field-name" class="control-label">Label Text</label>';
+
+        $compiled = app('blade.compiler')->compileString($string);
+        $html = app('form')->label('field-name', 'Label Text');
+
+        $this->assertEquals($expected, $compiled);
+        $this->assertEquals($expectedHtml, $html);
+    }
+
     public function testTextBladeDirective()
     {
         $string = "@text ('input-field', 'test text', ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label'])";
@@ -72,14 +85,261 @@ class FormBuilderTest extends UnitTestCase
         $this->assertEquals($expectedHtml, $html);
     }
 
-    public function testLabelBladeDirective()
+    public function testEmailBladeDirective()
     {
-        $string = "@label ('field-name', 'Label Text')";
-        $expected = "<?php echo app('form')->label('field-name', 'Label Text'); ?>";
-        $expectedHtml = '<label for="field-name" class="control-label">Label Text</label>';
+        $string = "@email ('email-input', 'test email', ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label'])";
+        $expected = "<?php echo app('form')->email('email-input', 'test email', ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label']); ?>";
+        $expectedHtml = "<div class=\"form-group\">\n\n            <label for=\"input-field\" class=\"blue control-label\">Text field label</label>    \n<input class=\"blue form-control\" placeholder=\"Placeholder\" name=\"input-field\" type=\"email\" value=\"test text\">\n\n\n\n\n    </div>\n";
 
         $compiled = app('blade.compiler')->compileString($string);
-        $html = app('form')->label('field-name', 'Label Text');
+        $html = app('form')->email('input-field', 'test text', ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label']);
+
+        $this->assertEquals($expected, $compiled);
+        $this->assertEquals($expectedHtml, $html);
+    }
+
+    public function testPasswordBladeDirective()
+    {
+        $string = "@password ('input-field', ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label'])";
+        $expected = "<?php echo app('form')->password('input-field', ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label']); ?>";
+        $expectedHtml = "<div class=\"form-group\">\n\n            <label for=\"input-field\" class=\"blue control-label\">Text field label</label>    \n<input class=\"blue form-control\" placeholder=\"Placeholder\" name=\"input-field\" type=\"password\" value=\"\">\n\n\n\n\n    </div>\n";
+
+        $compiled = app('blade.compiler')->compileString($string);
+        $html = app('form')->password('input-field', ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label']);
+
+        $this->assertEquals($expected, $compiled);
+        $this->assertEquals($expectedHtml, $html);
+    }
+
+    public function testUrlBladeDirective()
+    {
+        $string = "@url ('input-field', 'test url', ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label'])";
+        $expected = "<?php echo app('form')->url('input-field', 'test url', ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label']); ?>";
+        $expectedHtml = "<div class=\"form-group\">\n\n            <label for=\"input-field\" class=\"blue control-label\">Text field label</label>    \n<input class=\"blue form-control\" placeholder=\"Placeholder\" name=\"input-field\" type=\"url\" value=\"test url\">\n\n\n\n\n    </div>\n";
+
+        $compiled = app('blade.compiler')->compileString($string);
+        $html = app('form')->url('input-field', 'test url', ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label']);
+
+        $this->assertEquals($expected, $compiled);
+        $this->assertEquals($expectedHtml, $html);
+    }
+
+    public function testFileBladeDirective()
+    {
+        $string = "@file ('input-field', ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label'])";
+        $expected = "<?php echo app('form')->file('input-field', ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label']); ?>";
+        $expectedHtml = "<div class=\"form-group\">\n\n            <label for=\"input-field\" class=\"blue control-label\">Text field label</label>    \n<input class=\"blue form-control form-control-file\" name=\"input-field\" type=\"file\">\n\n\n\n\n    </div>\n";
+
+        $compiled = app('blade.compiler')->compileString($string);
+        $html = app('form')->file('input-field', ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label']);
+
+        $this->assertEquals($expected, $compiled);
+        $this->assertEquals($expectedHtml, $html);
+    }
+
+    public function testTextareaBladeDirective()
+    {
+        $string = "@textarea ('input-field', 'example text', ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label'])";
+        $expected = "<?php echo app('form')->textarea('input-field', 'example text', ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label']); ?>";
+        $expectedHtml = "<div class=\"form-group\">\n\n            <label for=\"input-field\" class=\"blue control-label\">Text field label</label>    \n<textarea class=\"blue form-control\" placeholder=\"Placeholder\" name=\"input-field\" cols=\"50\" rows=\"10\">example text</textarea>\n\n\n\n\n    </div>\n";
+
+        $compiled = app('blade.compiler')->compileString($string);
+        $html = app('form')->textarea('input-field', 'example text', ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label']);
+
+        $this->assertEquals($expected, $compiled);
+        $this->assertEquals($expectedHtml, $html);
+    }
+
+    public function testComboboxBladeDirective()
+    {
+        $string = "@combobox ('input-field', ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label'])";
+        $expected = "<?php echo app('form')->combobox('input-field', ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label']); ?>";
+        $expectedHtml = "<div class=\"form-group\">\n\n            <label for=\"input-field\" class=\"control-label\" selected=\"[]\">Input-field</label>    \n<select class=\"form-control\" name=\"input-field\"><option value=\"class\">blue</option><option value=\"placeholder\">Placeholder</option><option value=\"label\">Text field label</option></select>\n\n\n\n\n\n\n    </div>\n";
+
+        $compiled = app('blade.compiler')->compileString($string);
+        $html = app('form')->combobox('input-field', ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label']);
+
+        $this->assertEquals($expected, $compiled);
+        $this->assertEquals($expectedHtml, $html);
+    }
+
+    public function testSelectBladeDirective()
+    {
+        $string = "@select ('input-field', ['test1', 'test2', 'test3'], 'test1', ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label'])";
+        $expected = "<?php echo app('form')->select('input-field', ['test1', 'test2', 'test3'], 'test1', ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label']); ?>";
+        $expectedHtml = "<div class=\"form-group\">\n\n            <label for=\"input-field\" class=\"blue control-label\">Text field label</label>    \n<select class=\"blue form-control\" label=\"Text field label\" name=\"input-field\"><option value=\"\">Placeholder</option><option value=\"0\">test1</option><option value=\"1\">test2</option><option value=\"2\">test3</option></select>\n\n\n\n\n    </div>\n";
+
+        $compiled = app('blade.compiler')->compileString($string);
+        $html = app('form')->select('input-field', ['test1', 'test2', 'test3'], 'test1', ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label']);
+
+        $this->assertEquals($expected, $compiled);
+        $this->assertEquals($expectedHtml, $html);
+    }
+
+    public function testSelectMonthsBladeDirective()
+    {
+        $string = "@selectMonths ('input-field', 3, ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label'])";
+        $expected = "<?php echo app('form')->selectMonths('input-field', 3, ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label']); ?>";
+        $expectedHtml = "<div class=\"form-group\">\n\n            <label for=\"input-field\" class=\"blue control-label\">Text field label</label>    \n<select class=\"blue form-control\" label=\"Text field label\" name=\"input-field\"><option value=\"\">Placeholder</option><option value=\"1\">January</option><option value=\"2\">February</option><option value=\"3\" selected=\"selected\">March</option><option value=\"4\">April</option><option value=\"5\">May</option><option value=\"6\">June</option><option value=\"7\">July</option><option value=\"8\">August</option><option value=\"9\">September</option><option value=\"10\">October</option><option value=\"11\">November</option><option value=\"12\">December</option></select>\n\n\n\n\n    </div>\n";
+
+        $compiled = app('blade.compiler')->compileString($string);
+        $html = app('form')->selectMonths('input-field', 3, ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label']);
+
+        $this->assertEquals($expected, $compiled);
+        $this->assertEquals($expectedHtml, $html);
+    }
+
+    public function testSelectRangeWithIntervalMonthsBladeDirective()
+    {
+        $string = "@selectRangeWithInterval ('input-field', 1, 5, 2, 3, ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label'])";
+        $expected = "<?php echo app('form')->selectRangeWithInterval('input-field', 1, 5, 2, 3, ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label']); ?>";
+        $expectedHtml = "<div class=\"form-group\">\n\n            <label for=\"input-field\" class=\"blue control-label\">Text field label</label>    \n<select class=\"blue form-control\" label=\"Text field label\" name=\"input-field\"><option value=\"\">Placeholder</option><option value=\"3\" selected=\"selected\">3</option><option value=\"1\">1</option><option value=\"5\">5</option></select>\n\n\n\n\n    </div>\n";
+
+        $compiled = app('blade.compiler')->compileString($string);
+        $html = app('form')->selectRangeWithInterval('input-field', 1, 5, 2, 3, ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label']);
+
+        $this->assertEquals($expected, $compiled);
+        $this->assertEquals($expectedHtml, $html);
+    }
+
+    public function testDateBladeDirective()
+    {
+        $string = "@date ('input-field', null, ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label'])";
+        $expected = "<?php echo app('form')->date('input-field', null, ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label']); ?>";
+        $expectedHtml = "<div class=\"form-group\">\n\n            <label for=\"input-field\" class=\"blue datetimepicker-input control-label\" autocomplete=\"noway\" data-target=\"#datetimepicker-input-field\">Text field label</label>    \n<div class=\"input-group date\" id=\"datetimepicker-input-field\" data-target-input=\"nearest\">\n    <input class=\"blue form-control datetimepicker-input\" placeholder=\"Placeholder\" autocomplete=\"noway\" data-target=\"#datetimepicker-input-field\" name=\"input-field\" type=\"date\">\n    <span class=\"input-group-addon\" data-target=\"#datetimepicker-input-field\" data-toggle=\"datetimepicker\">\n        <i class=\"fa fa-btn fa-calendar\"></i>\n    </span>\n</div>\n\n\n\n\n\n    </div>\n";
+
+        $compiled = app('blade.compiler')->compileString($string);
+        $html = app('form')->date('input-field', null, ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label']);
+
+        $this->assertEquals($expected, $compiled);
+        $this->assertEquals($expectedHtml, $html);
+    }
+
+    public function testDatetimeBladeDirective()
+    {
+        $string = "@datetime ('input-field', null, ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label'])";
+        $expected = "<?php echo app('form')->datetime('input-field', null, ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label']); ?>";
+        $expectedHtml = "<div class=\"form-group\">\n\n            <label for=\"input-field\" class=\"blue datetimepicker-input control-label\" autocomplete=\"noway\" data-target=\" #datetimepicker-input-field\">Text field label</label>    \n<div class=\"input-group date\" id=\"datetimepicker-input-field\" data-target-input=\"nearest\">\n    <input class=\"blue form-control datetimepicker-input\" placeholder=\"Placeholder\" autocomplete=\"noway\" subFormClass=\"\" data-target=\" #datetimepicker-input-field\" name=\"input-field\" type=\"datetime\">\n    <span class=\"input-group-addon\" data-target=\"#datetimepicker-input-field\" data-toggle=\"datetimepicker\">\n        <i class=\"fa fa-btn fa-calendar\"></i>\n    </span>\n</div>\n\n\n\n\n\n    </div>\n";
+
+        $compiled = app('blade.compiler')->compileString($string);
+        $html = app('form')->datetime('input-field', null, ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label']);
+
+        $this->assertEquals($expected, $compiled);
+        $this->assertEquals($expectedHtml, $html);
+    }
+
+    public function testSignatureBladeDirective()
+    {
+        $string = "@signature ('input-field', null, ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label'])";
+        $expected = "<?php echo app('form')->signature('input-field', null, ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label']); ?>";
+        $expectedHtml = "<div class=\"form-group\">\n\n    \n<div class=\"signature input-field\">\n    <div class=\"embed-responsive embed-responsive-16by9 form-control\">\n        <canvas class=\"embed-responsive-item\"></canvas>\n        <div class=\"footer\">\n            <small>\n                <em>Text field label</em>\n                &nbsp;\n\n                            </small>\n            <button type=\"button\" class=\"btn btn-default btn-xs pull-right\" onclick=\"clearSignature('input-field');\">&nbsp;Clear&nbsp;</button>\n        </div>\n        <input name=\"input-field\" type=\"hidden\"><input name=\"input-field_date\" type=\"hidden\">\n    </div>\n</div>\n\n\n\n\n\n    </div>\n";
+
+        $compiled = app('blade.compiler')->compileString($string);
+        $html = app('form')->signature('input-field', null, ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label']);
+
+        $this->assertEquals($expected, $compiled);
+        $this->assertEquals($expectedHtml, $html);
+    }
+
+    public function testCechkboxBladeDirective()
+    {
+        $string = "@checkbox ('input-field', 'test', true, ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label'])";
+        $expected = "<?php echo app('form')->checkbox('input-field', 'test', true, ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label']); ?>";
+        $expectedHtml = "<div class=\"form-group\">\n\n    \n<div class=\"checkbox\">\n        <label>\n            <input class=\"blue\" checked=\"checked\" name=\"input-field\" type=\"checkbox\" value=\"test\"> Text field label\n        </label>\n    </div>\n\n    \n\n    </div>\n";
+
+        $compiled = app('blade.compiler')->compileString($string);
+        $html = app('form')->checkbox('input-field', 'test', true, ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label']);
+
+        $this->assertEquals($expected, $compiled);
+        $this->assertEquals($expectedHtml, $html);
+    }
+
+    public function testRadioBladeDirective()
+    {
+        $string = "@radio ('input-field[]', 'test', true, ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label'])";
+        $expected = "<?php echo app('form')->radio('input-field[]', 'test', true, ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label']); ?>";
+        $expectedHtml = "<div class=\"form-group\">\n\n    \n<div class=\"radio\">\n    <label>\n        <input class=\"blue\" checked=\"checked\" name=\"input-field[]\" type=\"radio\" value=\"test\"> Text field label\n    </label>\n</div>\n\n\n\n    </div>\n";
+
+        $compiled = app('blade.compiler')->compileString($string);
+        $html = app('form')->radio('input-field[]', 'test', true, ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label']);
+
+        $this->assertEquals($expected, $compiled);
+        $this->assertEquals($expectedHtml, $html);
+    }
+
+    public function testSwitchBladeDirective()
+    {
+        $string = "@switch ('input-field', 'test', true, ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label'])";
+        $expected = "<?php echo app('form')->switch('input-field', 'test', true, ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label']); ?>";
+        $expectedHtml = "<div class=\"form-group\">\n\n            <label for=\"input-field\" class=\"blue control-label\">Text field label</label>    \n<div>\n    <input class=\"blue\" checked=\"checked\" name=\"input-field\" type=\"checkbox\" value=\"test\"> \n</div>\n\n\n\n\n\n    </div>\n";
+
+        $compiled = app('blade.compiler')->compileString($string);
+        $html = app('form')->switch('input-field', 'test', true, ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label']);
+
+        $this->assertEquals($expected, $compiled);
+        $this->assertEquals($expectedHtml, $html);
+    }
+
+    public function testStaticTextBladeDirective()
+    {
+        $string = "@staticText ('input-field', ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label'])";
+        $expected = "<?php echo app('form')->staticText('input-field', ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label']); ?>";
+        $expectedHtml = "<div class=\"form-group\">\n\n            <label for=\"\" class=\"control-label\">Text field label</label>    \n<p class=\"form-control-static\">input-field</p>\n\n\n    </div>\n";
+
+        $compiled = app('blade.compiler')->compileString($string);
+        $html = app('form')->staticText('input-field', ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label']);
+
+        $this->assertEquals($expected, $compiled);
+        $this->assertEquals($expectedHtml, $html);
+    }
+
+    public function testSubmitBladeDirective()
+    {
+        $string = "@submit ('Submit')";
+        $expected = "<?php echo app('form')->submit('Submit'); ?>";
+        $expectedHtml = "<div class=\"form-group\">\n\n    \n<input class=\"btn btn-primary\" type=\"submit\" value=\"Submit\">\n\n\n    </div>\n";
+
+        $compiled = app('blade.compiler')->compileString($string);
+        $html = app('form')->submit('Submit');
+
+        $this->assertEquals($expected, $compiled);
+        $this->assertEquals($expectedHtml, $html);
+    }
+
+    public function testButtonBladeDirective()
+    {
+        $string = "@button ('Submit', ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label'])";
+        $expected = "<?php echo app('form')->button('Submit', ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label']); ?>";
+        $expectedHtml = "<div class=\"form-group\">\n\n            <label for=\"Text field label\" class=\"blue  control-label\">Text field label</label>    \n<div>\n\n        <button class=\"blue btn\" placeholder=\"Placeholder\" label=\"Text field label\" type=\"button\">Submit</button>\n\n    </div>\n\n    \n    </div>\n";
+
+        $compiled = app('blade.compiler')->compileString($string);
+        $html = app('form')->button('Submit', ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label']);
+
+        $this->assertEquals($expected, $compiled);
+        $this->assertEquals($expectedHtml, $html);
+    }
+
+    public function testButtonGroupBladeDirective()
+    {
+        $string = "@buttonGroup (['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label'])";
+        $expected = "<?php echo app('form')->buttonGroup(['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label']); ?>";
+        $expectedHtml = "<div class=\"form-group\">\n\n            <label for=\"\" class=\"blue -group control-label\">Text field label</label>    \n<div>\n        <div  class=\"blue btn-group\" placeholder=\"Placeholder\" label=\"Text field label\">\n\n";
+
+        $compiled = app('blade.compiler')->compileString($string);
+        $html = app('form')->buttonGroup(['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label']);
+
+        $this->assertEquals($expected, $compiled);
+        $this->assertEquals($expectedHtml, $html);
+    }
+
+    public function testEndButtonGroupBladeDirective()
+    {
+        $string = "@endButtonGroup ()";
+        $expected = "<?php echo app('form')->endButtonGroup(); ?>";
+        $expectedHtml = "</div>\n</div>\n\n\n    </div>\n";
+
+        $compiled = app('blade.compiler')->compileString($string);
+        $html = app('form')->endButtonGroup();
 
         $this->assertEquals($expected, $compiled);
         $this->assertEquals($expectedHtml, $html);
