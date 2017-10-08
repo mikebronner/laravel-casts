@@ -56,6 +56,7 @@ class LaravelCastsService extends ServiceProvider
         $this->registerBladeDirective('email');
         $this->registerBladeDirective('url');
         $this->registerBladeDirective('tel');
+        $this->registerBladeDirective('color');
         $this->registerBladeDirective('week');
         $this->registerBladeDirective('month');
         $this->registerBladeDirective('date');

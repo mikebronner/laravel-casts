@@ -163,6 +163,19 @@ class FormBuilderTest extends UnitTestCase
         $this->assertEquals($expectedHtml, $html);
     }
 
+    public function testColorBladeDirective()
+    {
+        $string = "@color ('input-field', '#ff0000', ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label'])";
+        $expected = "<?php echo app('form')->color('input-field', '#ff0000', ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label']); ?>";
+        $expectedHtml = "<div class=\"form-group\">\n\n            <label for=\"input-field\" class=\"blue control-label\">Text field label</label>    \n<input class=\"blue form-control\" placeholder=\"Placeholder\" name=\"input-field\" type=\"color\" value=\"#ff0000\">\n\n\n\n\n    </div>\n";
+
+        $compiled = app('blade.compiler')->compileString($string);
+        $html = app('form')->color('input-field', '#ff0000', ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label']);
+
+        $this->assertEquals($expected, $compiled);
+        $this->assertEquals($expectedHtml, $html);
+    }
+
     public function testEmailBladeDirective()
     {
         $string = "@email ('email-input', 'test email', ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label'])";

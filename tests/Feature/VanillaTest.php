@@ -56,21 +56,21 @@ class VanillaTest extends FeatureTestCase
         $this->visit('/genealabs/laravel-casts/examples/vanilla')
             ->seeElement('input', [
                 'type' => 'number',
-                'name' => 'number1',
+                'name' => 'number',
                 'placeholder' => 'Placeholder Text',
                 'value' => '5',
             ])
             ->dontSeeElement('input', [
                 'type' => 'number',
-                'name' => 'number1',
+                'name' => 'number',
                 'label' => 'Text Input',
             ])
             ->dontSeeElement('label', [
-                'for' => 'number1',
+                'for' => 'number',
                 'class' => 'col-sm-3 control-label',
             ])
             ->dontSeeElement('label', [
-                'for' => 'number1',
+                'for' => 'number',
                 'class' => 'col-sm-3 control-label',
                 'placeholder' => 'Placeholder Text',
             ])
