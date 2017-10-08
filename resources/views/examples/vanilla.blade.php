@@ -14,6 +14,7 @@
                 @email('email', '', ['placeholder' => 'Placeholder Text', 'label' => 'Email Input'])
                 @url('url', '', ['placeholder' => 'Placeholder Text', 'label' => 'Url Input'])
                 @file('file', ['placeholder' => 'Placeholder Text', 'label' => 'File Input'])
+                @search ('search', 'search term', ['placeholder' => 'Placeholder Text', 'label' => 'Search Input'])
                 @number ('number1', 5, ['placeholder' => 'Placeholder Text', 'label' => 'Number Input'])
                 @tel ('tel', '1234567890', ['placeholder' => 'Placeholder Text', 'label' => 'Tel Input'])
                 @week ('week', 3, ['placeholder' => 'Placeholder Text', 'label' => 'Week Input'])
