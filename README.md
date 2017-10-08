@@ -21,7 +21,7 @@ This package is an effort to streamline and make form development more
 
 ### Features
 - Support for common CSS frameworks. (At this time only Bootstrap 3 and
- Bootstrap 4.alpha.3, more coming soon.)
+ Bootstrap 4.beta, more coming soon.)
 - Blade directives for elegant Blade view integration, providing concise
  syntax, reducing form boilerplate 10-fold.
 - DateTime Picker for Bootstrap 3.

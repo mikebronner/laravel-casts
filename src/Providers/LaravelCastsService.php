@@ -52,11 +52,17 @@ class LaravelCastsService extends ServiceProvider
         $this->registerBladeDirective('label');
         $this->registerBladeDirective('text');
         $this->registerBladeDirective('number');
+        $this->registerBladeDirective('range');
         $this->registerBladeDirective('email');
         $this->registerBladeDirective('url');
+        $this->registerBladeDirective('tel');
+        $this->registerBladeDirective('color');
+        $this->registerBladeDirective('week');
+        $this->registerBladeDirective('month');
         $this->registerBladeDirective('date');
         $this->registerBladeDirective('datetime');
         $this->registerBladeDirective('password');
+        $this->registerBladeDirective('search');
         $this->registerBladeDirective('file');
         $this->registerBladeDirective('textarea');
         $this->registerBladeDirective('checkbox');

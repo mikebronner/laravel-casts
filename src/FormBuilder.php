@@ -159,6 +159,50 @@ class FormBuilder extends Form
         return $this->renderControl('text', $controlHtml, $name, $value, $options);
     }
 
+    public function tel($name, $value = null, $options = [])
+    {
+        $options = $this->setOptionClasses($name, $options, ['form-control']);
+        $controlOptions = array_filter($options, function ($key) {
+            return ($key !== 'label');
+        }, ARRAY_FILTER_USE_KEY);
+        $controlHtml = parent::tel($name, $value, $controlOptions);
+
+        return $this->renderControl('tel', $controlHtml, $name, $value, $options);
+    }
+
+    public function week($name, $value = null, $options = [])
+    {
+        $options = $this->setOptionClasses($name, $options, ['form-control']);
+        $controlOptions = array_filter($options, function ($key) {
+            return ($key !== 'label');
+        }, ARRAY_FILTER_USE_KEY);
+        $controlHtml = parent::input('week', $name, $value, $controlOptions);
+
+        return $this->renderControl('week', $controlHtml, $name, $value, $options);
+    }
+
+    public function month($name, $value = null, $options = [])
+    {
+        $options = $this->setOptionClasses($name, $options, ['form-control']);
+        $controlOptions = array_filter($options, function ($key) {
+            return ($key !== 'label');
+        }, ARRAY_FILTER_USE_KEY);
+        $controlHtml = parent::input('month', $name, $value, $controlOptions);
+
+        return $this->renderControl('month', $controlHtml, $name, $value, $options);
+    }
+
+    public function search($name, $value = null, $options = [])
+    {
+        $options = $this->setOptionClasses($name, $options, ['form-control']);
+        $controlOptions = array_filter($options, function ($key) {
+            return ($key !== 'label');
+        }, ARRAY_FILTER_USE_KEY);
+        $controlHtml = parent::search($name, $value, $controlOptions);
+
+        return $this->renderControl('search', $controlHtml, $name, $value, $options);
+    }
+
     public function number($name, $value = null, $options = [])
     {
         $options = $this->setOptionClasses($name, $options, ['form-control']);
@@ -168,6 +212,26 @@ class FormBuilder extends Form
         $controlHtml = parent::number($name, $value, $controlOptions);
 
         return $this->renderControl('number', $controlHtml, $name, $value, $options);
+    }
+
+    public function range($name, $value = null, $options = [])
+    {
+        $options = $this->setOptionClasses($name, $options, ['form-control']);
+        $controlOptions = array_filter($options, function ($key) {
+            return ($key !== 'label');
+        }, ARRAY_FILTER_USE_KEY);
+        $controlHtml = parent::input('range', $name, $value, $controlOptions);
+
+        return $this->renderControl('range', $controlHtml, $name, $value, $options);
+    }
+
+    public function color($name, $value = null, $options = [])
+    {
+        $options = $this->setOptionClasses($name, $options, ['form-control']);
+        $controlOptions = $this->getControlOptions(collect($options));
+        $controlHtml = parent::color($name, $value, $controlOptions->toArray());
+
+        return $this->renderControl('color', $controlHtml, $name, $value, $options);
     }
 
     public function email($name, $value = null, $options = [])
