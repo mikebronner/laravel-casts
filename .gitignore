@@ -4,6 +4,4 @@
 /storage/*.key
 /vendor
 composer.lock
-.DS_Store
-.idea
 yarn.lock
