@@ -3,7 +3,6 @@
 use Blade;
 use Exception;
 use GeneaLabs\LaravelCasts\Facades\FormFacade;
-use GeneaLabs\LaravelCasts\Facades\HtmlFacade;
 use GeneaLabs\LaravelCasts\FormBuilder;
 use Collective\Html\HtmlBuilder;
 use GeneaLabs\LaravelCasts\Console\Commands\Publish;

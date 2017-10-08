@@ -6,8 +6,8 @@
     convertNoticesToExceptions="true"
     convertWarningsToExceptions="true"
     processIsolation="false"
-    stopOnFailure="false"
-    syntaxCheck="false"
+    stopOnFailure="true"
+    syntaxCheck="true"
     bootstrap="vendor/autoload.php"
 >
 <testsuites>

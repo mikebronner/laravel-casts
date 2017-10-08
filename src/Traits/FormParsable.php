@@ -32,6 +32,24 @@ trait FormParsable
         return call_user_func_array($method, $parameters);
     }
 
+    protected function renderInput(string $type, string $name, $value = null, array $options = []) : string
+    {
+        $options = $this->setOptionClasses($name, $options, ['form-control']);
+        $controlOptions = array_filter($options, function ($key) {
+            return ($key !== 'label');
+        }, ARRAY_FILTER_USE_KEY);
+
+        if (in_array($type, ['range', 'week', 'month'])) {
+            $controlHtml = parent::input($type, $name, $value, $controlOptions);
+
+            return $this->renderControl($type, $controlHtml, $name, $value, $options);
+        }
+
+        $controlHtml = parent::{$type}($name, $value, $controlOptions);
+
+        return $this->renderControl($type, $controlHtml, $name, $value, $options);
+    }
+
     private function setOptionClasses(string $name, array $options, array $addClasses = []) : array
     {
         $this->framework = $options['framework'] ?? $this->framework;
