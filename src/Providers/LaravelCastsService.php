@@ -22,16 +22,16 @@ class LaravelCastsService extends ServiceProvider
     public function boot()
     {
         if (! headers_sent()) {
-            header('Link: <' . url('/genealabs-laravel-casts/app.js') . '>; rel=preload; as=script', false);
-            header('Link: <' . url('/genealabs-laravel-casts/bootstrap3.js') . '>; rel=preload; as=script', false);
-            header('Link: <' . url('/genealabs-laravel-casts/bootstrap3.css') . '>; rel=preload; as=style', false);
-            header('Link: <' . url('/genealabs-laravel-casts/bootstrap4.js') . '>; rel=preload; as=script', false);
-            header('Link: <' . url('/genealabs-laravel-casts/bootstrap4.css') . '>; rel=preload; as=style', false);
-            header('Link: <' . url('/genealabs-laravel-casts/bootstrap-switch.js') . '>; rel=preload; as=script', false);
-            header('Link: <' . url('/genealabs-laravel-casts/bootstrap3-datetimepicker.js') . '>; rel=preload; as=script', false);
-            header('Link: <' . url('/genealabs-laravel-casts/bootstrap3-datetimepicker.css') . '>; rel=preload; as=style', false);
-            header('Link: <' . url('/genealabs-laravel-casts/bootstrap4-datetimepicker.js') . '>; rel=preload; as=script', false);
-            header('Link: <' . url('/genealabs-laravel-casts/bootstrap4-datetimepicker.css') . '>; rel=preload; as=style', false);
+            $this->registerPreLoadHeader(url('/genealabs-laravel-casts/app.js'));
+            $this->registerPreLoadHeader(url('/genealabs-laravel-casts/bootstrap3.js'));
+            $this->registerPreLoadHeader(url('/genealabs-laravel-casts/bootstrap3.css'));
+            $this->registerPreLoadHeader(url('/genealabs-laravel-casts/bootstrap4.js'));
+            $this->registerPreLoadHeader(url('/genealabs-laravel-casts/bootstrap4.css'));
+            $this->registerPreLoadHeader(url('/genealabs-laravel-casts/bootstrap-switch.js'));
+            $this->registerPreLoadHeader(url('/genealabs-laravel-casts/bootstrap3-datetimepicker.js'));
+            $this->registerPreLoadHeader(url('/genealabs-laravel-casts/bootstrap3-datetimepicker.css'));
+            $this->registerPreLoadHeader(url('/genealabs-laravel-casts/bootstrap4-datetimepicker.js'));
+            $this->registerPreLoadHeader(url('/genealabs-laravel-casts/bootstrap4-datetimepicker.css'));
         }
 
         $this->loadViewsFrom(__DIR__ . '/../../resources/views', 'genealabs-laravel-casts');
@@ -69,6 +69,7 @@ class LaravelCastsService extends ServiceProvider
         $this->registerBladeDirective('cancel');
         $this->registerBladeDirective('select');
         $this->registerBladeDirective('selectMonths');
+        $this->registerBladeDirective('selectWeekdays');
         $this->registerBladeDirective('selectRange');
         $this->registerBladeDirective('selectRangeWithInterval');
         $this->registerBladeDirective('combobox');
@@ -95,6 +96,11 @@ class LaravelCastsService extends ServiceProvider
     public function provides() : array
     {
         return ['genealabs-laravel-casts'];
+    }
+
+    private function registerPreLoadHeader(string $url)
+    {
+        header("Link: <{$url}>; rel=preload; as=script", false);
     }
 
     private function registerHtmlBuilder()

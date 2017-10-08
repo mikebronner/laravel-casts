@@ -305,6 +305,62 @@ class Bootstrap3Test extends FeatureTestCase
             ->seeStatusCode('200');
     }
 
+    public function testSelectMonths()
+    {
+        $this->visit('/genealabs/laravel-casts/examples/bootstrap3')
+            ->seeElement('select', [
+                'class' => 'form-control',
+                'name' => 'selectMonths1',
+            ])
+            ->dontSeeElement('select', [
+                'label' => 'Url Input',
+            ])
+            ->dontSeeElement('select', [
+                'placeholder' => 'Placeholder Text',
+            ])
+            ->seeElement('label', [
+                'for' => 'selectMonths1',
+                'class' => 'col-sm-3 control-label',
+            ])
+            ->dontSeeElement('label', [
+                'for' => 'selectMonths1',
+                'placeholder' => 'Placeholder Text',
+            ])
+            ->seeInElement(
+                'label[for=selectMonths1][class="col-sm-3 control-label"]',
+                'Select'
+            )
+            ->seeStatusCode('200');
+    }
+
+    public function testSelectWeekdays()
+    {
+        $this->visit('/genealabs/laravel-casts/examples/bootstrap3')
+            ->seeElement('select', [
+                'class' => 'form-control',
+                'name' => 'selectWeekdays1',
+            ])
+            ->dontSeeElement('select', [
+                'label' => 'Url Input',
+            ])
+            ->dontSeeElement('select', [
+                'placeholder' => 'Placeholder Text',
+            ])
+            ->seeElement('label', [
+                'for' => 'selectWeekdays1',
+                'class' => 'col-sm-3 control-label',
+            ])
+            ->dontSeeElement('label', [
+                'for' => 'selectWeekdays1',
+                'placeholder' => 'Placeholder Text',
+            ])
+            ->seeInElement(
+                'label[for=selectWeekdays1][class="col-sm-3 control-label"]',
+                'Select'
+            )
+            ->seeStatusCode('200');
+    }
+
     public function testSelectRange()
     {
         $this->visit('/genealabs/laravel-casts/examples/bootstrap3')

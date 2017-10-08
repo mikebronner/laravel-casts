@@ -202,6 +202,19 @@ class FormBuilderTest extends UnitTestCase
         $this->assertEquals($expectedHtml, $html);
     }
 
+    public function testSelectWeekdaysBladeDirective()
+    {
+        $string = "@selectWeekdays ('input-field', 3, ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label'])";
+        $expected = "<?php echo app('form')->selectWeekdays('input-field', 3, ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label']); ?>";
+        $expectedHtml = "<div class=\"form-group\">\n\n            <label for=\"input-field\" class=\"blue control-label\">Text field label</label>    \n<select class=\"blue form-control\" label=\"Text field label\" name=\"input-field\"><option value=\"\">Placeholder</option><option value=\"1\">Sunday</option><option value=\"2\">Monday</option><option value=\"3\" selected=\"selected\">Tuesday</option><option value=\"4\">Wednesday</option><option value=\"5\">Thursday</option><option value=\"6\">Friday</option><option value=\"7\">Saturday</option></select>\n\n\n\n\n    </div>\n";
+
+        $compiled = app('blade.compiler')->compileString($string);
+        $html = app('form')->selectWeekdays('input-field', 3, ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label']);
+
+        $this->assertEquals($expected, $compiled);
+        $this->assertEquals($expectedHtml, $html);
+    }
+
     public function testSelectRangeWithIntervalMonthsBladeDirective()
     {
         $string = "@selectRangeWithInterval ('input-field', 1, 5, 2, 3, ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label'])";
