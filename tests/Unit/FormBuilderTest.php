@@ -85,6 +85,19 @@ class FormBuilderTest extends UnitTestCase
         $this->assertEquals($expectedHtml, $html);
     }
 
+    public function testTelBladeDirective()
+    {
+        $string = "@tel ('input-field', 'test text', ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label'])";
+        $expected = "<?php echo app('form')->tel('input-field', 'test text', ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label']); ?>";
+        $expectedHtml = "<div class=\"form-group\">\n\n            <label for=\"input-field\" class=\"blue control-label\">Text field label</label>    \n<input class=\"blue form-control\" placeholder=\"Placeholder\" name=\"input-field\" type=\"tel\" value=\"test text\">\n\n\n\n\n    </div>\n";
+
+        $compiled = app('blade.compiler')->compileString($string);
+        $html = app('form')->tel('input-field', 'test text', ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label']);
+
+        $this->assertEquals($expected, $compiled);
+        $this->assertEquals($expectedHtml, $html);
+    }
+
     public function testNumberBladeDirective()
     {
         $string = "@number ('input-field', 5, ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label'])";
