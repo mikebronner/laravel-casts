@@ -51,6 +51,32 @@ class VanillaTest extends FeatureTestCase
             ->seeStatusCode('200');
     }
 
+    public function testNumberInputWithLabel()
+    {
+        $this->visit('/genealabs/laravel-casts/examples/vanilla')
+            ->seeElement('input', [
+                'type' => 'number',
+                'name' => 'number1',
+                'placeholder' => 'Placeholder Text',
+                'value' => '5',
+            ])
+            ->dontSeeElement('input', [
+                'type' => 'number',
+                'name' => 'number1',
+                'label' => 'Text Input',
+            ])
+            ->dontSeeElement('label', [
+                'for' => 'number1',
+                'class' => 'col-sm-3 control-label',
+            ])
+            ->dontSeeElement('label', [
+                'for' => 'number1',
+                'class' => 'col-sm-3 control-label',
+                'placeholder' => 'Placeholder Text',
+            ])
+            ->seeStatusCode('200');
+    }
+
     public function testPasswordInput()
     {
         $this->visit('/genealabs/laravel-casts/examples/vanilla')

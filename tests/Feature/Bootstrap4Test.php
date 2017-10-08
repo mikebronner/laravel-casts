@@ -2,6 +2,9 @@
 
 use GeneaLabs\LaravelCasts\Tests\FeatureTestCase;
 
+/**
+ * @SuppressWarnings(PHPMD.TooManyPublicMethods)
+ */
 class Bootstrap4Test extends FeatureTestCase
 {
     public function testFormClose()
@@ -53,6 +56,36 @@ class Bootstrap4Test extends FeatureTestCase
             ->seeInElement(
                 'label[for=text1][class="col-sm-3 col-form-label"]',
                 'Text'
+            )
+            ->seeStatusCode('200');
+    }
+
+    public function testNumberInputWithLabel()
+    {
+        $this->visit('/genealabs/laravel-casts/examples/bootstrap4')
+            ->seeElement('input', [
+                'type' => 'number',
+                'name' => 'number1',
+                'placeholder' => 'Placeholder Text',
+                'value' => '5',
+            ])
+            ->dontSeeElement('input', [
+                'type' => 'number',
+                'name' => 'number1',
+                'label' => 'Number Input',
+            ])
+            ->seeElement('label', [
+                'for' => 'number1',
+                'class' => 'col-sm-3 col-form-label',
+            ])
+            ->dontSeeElement('label', [
+                'for' => 'number1',
+                'class' => 'col-sm-3 control-label',
+                'placeholder' => 'Placeholder Text',
+            ])
+            ->seeInElement(
+                'label[for=number1][class="col-sm-3 col-form-label"]',
+                'Number Input'
             )
             ->seeStatusCode('200');
     }
