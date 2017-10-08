@@ -170,6 +170,17 @@ class FormBuilder extends Form
         return $this->renderControl('tel', $controlHtml, $name, $value, $options);
     }
 
+    public function week($name, $value = null, $options = [])
+    {
+        $options = $this->setOptionClasses($name, $options, ['form-control']);
+        $controlOptions = array_filter($options, function ($key) {
+            return ($key !== 'label');
+        }, ARRAY_FILTER_USE_KEY);
+        $controlHtml = parent::input('week', $name, $value, $controlOptions);
+
+        return $this->renderControl('week', $controlHtml, $name, $value, $options);
+    }
+
     public function month($name, $value = null, $options = [])
     {
         $options = $this->setOptionClasses($name, $options, ['form-control']);
