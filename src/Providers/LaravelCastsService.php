@@ -80,7 +80,7 @@ class LaravelCastsService extends ServiceProvider
 
     public function register()
     {
-        if (app()->environment('testing')) {
+        if (app()->environment('testing', 'development', 'local')) {
             $routesPath = __DIR__ . '/../../routes/web.php';
 
             require($routesPath);
