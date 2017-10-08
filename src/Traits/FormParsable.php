@@ -4,6 +4,34 @@ use Illuminate\Support\Collection;
 
 trait FormParsable
 {
+    private function renderControl(
+        string $type,
+        string $controlHtml,
+        string $name,
+        $value = '',
+        array $options = []
+    ) : string {
+        $method = [
+            $this,
+            "{$this->framework}Control",
+        ];
+        $parameters = [
+            $type,
+            $controlHtml,
+            $name,
+            $value,
+            $options,
+            $this->fieldWidth,
+            $this->labelWidth,
+            $this->isHorizontal,
+            $this->isInline,
+            $this->isInButtonGroup,
+            $this->errors ?? collect(),
+        ];
+
+        return call_user_func_array($method, $parameters);
+    }
+
     private function setOptionClasses(string $name, array $options, array $addClasses = []) : array
     {
         $this->framework = $options['framework'] ?? $this->framework;
