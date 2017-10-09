@@ -55,26 +55,11 @@ class FormBuilder extends Form
         $this->errors = $this->session->get('errors', new MessageBag());
         $this->isHorizontal = false;
         $this->isInline = false;
-
-        if (array_key_exists('class', $options) && (strpos($options['class'], 'form-horizontal') !== false)) {
-            $this->isHorizontal = true;
-        }
-
-        if (array_key_exists('class', $options) && (strpos($options['class'], 'form-inline') !== false)) {
-            $this->isInline = true;
-        }
-
-        if (array_key_exists('offset', $options)) {
-            $this->offset = $options['offset'];
-        }
-
-        if (array_key_exists('labelWidth', $options)) {
-            $this->labelWidth = $options['labelWidth'];
-        }
-
-        if (array_key_exists('fieldWidth', $options)) {
-            $this->fieldWidth = $options['fieldWidth'];
-        }
+        $this->isHorizontal = (strpos($options['class'] ?? '', 'form-horizontal') !== false);
+        $this->isInline = (strpos($options['class'] ?? '', 'form-inline') !== false);
+        $this->offset = $options['offset'] ?? $this->offset;
+        $this->labelWidth = $options['labelWidth'] ?? $this->labelWidth;
+        $this->fieldWidth = $options['fieldWidth'] ?? $this->fieldWidth;
     }
 
     public function subForm(array $options = []) : string
@@ -226,35 +211,17 @@ class FormBuilder extends Form
 
     public function checkbox($name, $value = 1, $checked = null, $options = [])
     {
-        $additionalClasses = $this->usesBootstrap4() ? 'form-check-input' : '';
-        $options = $this->setOptionClasses($name, $options, [$additionalClasses]);
-        $label = $options['label'] ?? ucwords($name);
-        $controlOptions = $this->getControlOptions(collect($options), ['form-control', 'placeholder']);
-        $controlHtml = parent::checkbox($name, $value, $checked, $controlOptions->toArray()) . " {$label}";
-
-        return $this->renderControl('checkbox', $controlHtml, $name, $value, $options);
+        return $this->renderToggle('checkbox', $name, $value, $checked, $options);
     }
 
     public function radio($name, $value = 1, $checked = null, $options = [])
     {
-        $additionalClasses = $this->usesBootstrap4() ? 'form-check-input' : '';
-        $options = $this->setOptionClasses($name, $options, [$additionalClasses]);
-        $label = $options['label'];
-        $controlOptions = $this->getControlOptions(collect($options), ['form-control', 'placeholder']);
-        $controlHtml = parent::radio($name, $value, $checked, $controlOptions->toArray()) . " {$label}";
-
-        return $this->renderControl('radio', $controlHtml, $name, $value, $options);
+        return $this->renderToggle('radio', $name, $value, $checked, $options);
     }
 
     public function switch($name, $value = 1, $checked = null, $options = [])
     {
-        $additionalClasses = $this->usesBootstrap4() ? 'form-check-input' : '';
-        $options = $this->setOptionClasses($name, $options, [$additionalClasses]);
-        $label = '';
-        $controlOptions = $this->getControlOptions(collect($options), ['form-control', 'placeholder']);
-        $controlHtml = parent::checkbox($name, $value, $checked, $controlOptions->toArray()) . " {$label}";
-
-        return $this->renderControl('switch', $controlHtml, $name, $value, $options);
+        return $this->renderToggle('switch', $name, $value, $checked, $options);
     }
 
     public function combobox(string $name, array $list = [], $selected = null, array $options = [], array $optionOptions = [])
@@ -390,11 +357,12 @@ class FormBuilder extends Form
         array $options = [],
         array $optionOptions = []
     ) : string {
-        if ($interval == 0) {
+        if (in_array($interval, [0, 1])) {
             return parent::selectRange($name, $start, $end, $value, $options);
         }
 
         $items = [];
+
         if ($value !== null) {
             $items[$value] = $value;
         }

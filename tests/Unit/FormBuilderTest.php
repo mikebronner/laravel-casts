@@ -375,7 +375,7 @@ class FormBuilderTest extends UnitTestCase
     {
         $string = "@switch ('input-field', 'test', true, ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label'])";
         $expected = "<?php echo app('form')->switch('input-field', 'test', true, ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label']); ?>";
-        $expectedHtml = "<div class=\"form-group\">\n\n            <label for=\"input-field\" class=\"blue control-label\">Text field label</label>    \n<div>\n    <input class=\"blue\" checked=\"checked\" name=\"input-field\" type=\"checkbox\" value=\"test\"> \n</div>\n\n\n\n\n\n    </div>\n";
+        $expectedHtml = "<div class=\"form-group\">\n\n            <label for=\"input-field\" class=\"blue control-label\">Text field label</label>    \n<div>\n    <input class=\"blue\" checked=\"checked\" name=\"input-field\" type=\"checkbox\" value=\"test\">\n</div>\n\n\n\n\n\n    </div>\n";
 
         $compiled = app('blade.compiler')->compileString($string);
         $html = app('form')->switch('input-field', 'test', true, ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label']);
