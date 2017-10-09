@@ -219,7 +219,7 @@ class FormBuilderTest extends UnitTestCase
     {
         $string = "@file ('input-field', ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label'])";
         $expected = "<?php echo app('form')->file('input-field', ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label']); ?>";
-        $expectedHtml = "<div class=\"form-group\">\n\n            <label for=\"input-field\" class=\"blue control-label\">Text field label</label>    \n<input class=\"blue form-control form-control-file\" name=\"input-field\" type=\"file\">\n\n\n\n\n    </div>\n";
+        $expectedHtml = "<div class=\"form-group\">\n\n            <label for=\"input-field\" class=\"blue control-label\">Text field label</label>    \n<input class=\"blue form-control form-control-file\" placeholder=\"Placeholder\" name=\"input-field\" type=\"file\">\n\n\n\n\n    </div>\n";
 
         $compiled = app('blade.compiler')->compileString($string);
         $html = app('form')->file('input-field', ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label']);

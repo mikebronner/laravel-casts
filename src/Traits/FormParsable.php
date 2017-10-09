@@ -35,12 +35,17 @@ trait FormParsable
     protected function renderInput(string $type, string $name, $value = null, array $options = []) : string
     {
         $options = $this->setOptionClasses($name, $options, ['form-control']);
-        $controlOptions = array_filter($options, function ($key) {
-            return ($key !== 'label');
-        }, ARRAY_FILTER_USE_KEY);
+        $controlOptions = $this->getControlOptions(collect($options))
+            ->toArray();
 
         if (in_array($type, ['range', 'week', 'month'])) {
             $controlHtml = parent::input($type, $name, $value, $controlOptions);
+
+            return $this->renderControl($type, $controlHtml, $name, $value, $options);
+        }
+
+        if (in_array($type, ['password', 'file'])) {
+            $controlHtml = parent::{$type}($name, $controlOptions);
 
             return $this->renderControl($type, $controlHtml, $name, $value, $options);
         }
@@ -50,7 +55,7 @@ trait FormParsable
         return $this->renderControl($type, $controlHtml, $name, $value, $options);
     }
 
-    private function setOptionClasses(string $name, array $options, array $addClasses = []) : array
+    protected function setOptionClasses(string $name, array $options, array $addClasses = []) : array
     {
         $this->framework = $options['framework'] ?? $this->framework;
         $options = array_filter($options);
@@ -94,17 +99,17 @@ trait FormParsable
         return $options;
     }
 
-    private function usesBootstrap3()
+    protected function usesBootstrap3()
     {
         return ($this->framework === 'bootstrap3');
     }
 
-    private function usesBootstrap4()
+    protected function usesBootstrap4()
     {
         return ($this->framework === 'bootstrap4');
     }
 
-    private function setLabelOptionClasses(array $options)
+    protected function setLabelOptionClasses(array $options)
     {
         $classes = explode(' ', array_get($options, 'class'));
 
@@ -147,7 +152,7 @@ trait FormParsable
         return $options;
     }
 
-    private function getControlOptions(Collection $options, array $additionalExclusions = []) : Collection
+    protected function getControlOptions(Collection $options, array $additionalExclusions = []) : Collection
     {
         $additionalExclusions = collect($additionalExclusions)->flip();
 
