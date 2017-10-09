@@ -55,6 +55,24 @@ trait FormParsable
         return $this->renderControl($type, $controlHtml, $name, $value, $options);
     }
 
+    protected function renderToggle(string $type, string $name, $value = null, bool $checked = null, array $options = []) : string
+    {
+        $additionalClasses = $this->usesBootstrap4() ? 'form-check-input' : '';
+        $options = $this->setOptionClasses($name, $options, [$additionalClasses]);
+        $label = $options['label'] ?? ucwords($name);
+        $controlOptions = $this->getControlOptions(collect($options), ['form-control', 'placeholder']);
+
+        if (in_array($type, ['switch'])) {
+            $controlHtml = parent::checkbox($name, $value, $checked, $controlOptions->toArray());
+
+            return $this->renderControl($type, $controlHtml, $name, $value, $options);
+        }
+
+        $controlHtml = parent::{$type}($name, $value, $checked, $controlOptions->toArray()) . " {$label}";
+
+        return $this->renderControl($type, $controlHtml, $name, $value, $options);
+    }
+
     protected function setOptionClasses(string $name, array $options, array $addClasses = []) : array
     {
         $this->framework = $options['framework'] ?? $this->framework;
