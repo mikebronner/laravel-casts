@@ -189,16 +189,6 @@ class Bootstrap3Test extends FeatureTestCase
                 'name' => 'file1',
                 'type' => 'file',
             ])
-            ->dontSeeElement('input', [
-                'label' => 'Url Input',
-                'name' => 'file1',
-                'type' => 'file',
-            ])
-            ->dontSeeElement('input', [
-                'placeholder' => 'Placeholder Text',
-                'name' => 'file1',
-                'type' => 'file',
-            ])
             ->seeElement('label', [
                 'for' => 'file1',
                 'class' => 'col-sm-3 control-label',

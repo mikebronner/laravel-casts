@@ -193,22 +193,17 @@ class Bootstrap4Test extends FeatureTestCase
                 'name' => 'file1',
                 'type' => 'file',
             ])
-            ->dontSeeElement('input', [
-                'placeholder' => 'Placeholder Text',
-                'name' => 'file1',
-                'type' => 'file',
-            ])
             ->seeElement('label', [
                 'for' => 'file1',
-                'class' => 'col-sm-3 col-form-label',
+                'class' => 'custom-file-input col-sm-3 col-form-label',
             ])
             ->dontSeeElement('label', [
                 'for' => 'file1',
                 'placeholder' => 'Placeholder Text',
             ])
             ->seeInElement(
-                'label[for=file1][class="col-sm-3 col-form-label"]',
-                'File'
+                'label[for=file1][class="custom-file-input col-sm-3 col-form-label"]',
+                'File Input'
             )
             ->seeStatusCode('200');
     }

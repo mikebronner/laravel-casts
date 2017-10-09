@@ -168,11 +168,6 @@ class VanillaTest extends FeatureTestCase
                 'name' => 'file',
                 'type' => 'file',
             ])
-            ->dontSeeElement('input', [
-                'placeholder' => 'Placeholder Text',
-                'name' => 'file',
-                'type' => 'file',
-            ])
             ->dontSeeElement('label', [
                 'for' => 'file',
                 'class' => 'col-sm-3 control-label',

@@ -195,11 +195,7 @@ class FormBuilder extends Form
 
     public function password($name, $options = [])
     {
-        $options = $this->setOptionClasses($name, $options, ['form-control']);
-        $controlOptions = $this->getControlOptions(collect($options));
-        $controlHtml = parent::password($name, $controlOptions->toArray());
-
-        return $this->renderControl('password', $controlHtml, $name, '', $options);
+        return $this->renderInput('password', $name, null, $options);
     }
 
     public function url($name, $value = null, $options = [])
@@ -209,31 +205,23 @@ class FormBuilder extends Form
 
     public function file($name, $options = [])
     {
-        $options = $this->setOptionClasses($name, $options, ['form-control form-control-file']);
-        $controlOptions = $this->getControlOptions(collect($options), ['placeholder']);
+        $classes = 'form-control form-control-file';
 
         if ($this->framework === 'bootstrap4') {
-            $controlOptions = $controlOptions->map(function ($option, $index) {
-                if ($index === 'class') {
-                    $option = 'custom-file-input';
-                }
-
-                return $option;
-            });
+            $classes = 'custom-file-input';
         }
 
-        $controlHtml = parent::file($name, $controlOptions->toArray());
+        $options = $this->setOptionClasses($name, $options, [$classes]);
 
-        return $this->renderControl('file', $controlHtml, $name, '', $options);
+        $html = $this->renderInput('file', $name, null, $options);
+        $html = str_replace('custom-file-input form-control', 'custom-file-input', $html);
+
+        return $html;
     }
 
     public function textarea($name, $value = null, $options = [])
     {
-        $options = $this->setOptionClasses($name, $options, ['form-control']);
-        $controlOptions = $this->getControlOptions(collect($options));
-        $controlHtml = parent::textarea($name, $value, $controlOptions->toArray());
-
-        return $this->renderControl('textarea', $controlHtml, $name, $value, $options);
+        return $this->renderInput('textarea', $name, $value, $options);
     }
 
     public function checkbox($name, $value = 1, $checked = null, $options = [])
