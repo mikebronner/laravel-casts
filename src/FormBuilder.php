@@ -55,26 +55,11 @@ class FormBuilder extends Form
         $this->errors = $this->session->get('errors', new MessageBag());
         $this->isHorizontal = false;
         $this->isInline = false;
-
-        if (array_key_exists('class', $options) && (strpos($options['class'], 'form-horizontal') !== false)) {
-            $this->isHorizontal = true;
-        }
-
-        if (array_key_exists('class', $options) && (strpos($options['class'], 'form-inline') !== false)) {
-            $this->isInline = true;
-        }
-
-        if (array_key_exists('offset', $options)) {
-            $this->offset = $options['offset'];
-        }
-
-        if (array_key_exists('labelWidth', $options)) {
-            $this->labelWidth = $options['labelWidth'];
-        }
-
-        if (array_key_exists('fieldWidth', $options)) {
-            $this->fieldWidth = $options['fieldWidth'];
-        }
+        $this->isHorizontal = (strpos($options['class'] ?? '', 'form-horizontal') !== false);
+        $this->isInline = (strpos($options['class'] ?? '', 'form-inline') !== false);
+        $this->offset = $options['offset'] ?? $this->offset;
+        $this->labelWidth = $options['labelWidth'] ?? $this->labelWidth;
+        $this->fieldWidth = $options['fieldWidth'] ?? $this->fieldWidth;
     }
 
     public function subForm(array $options = []) : string
@@ -372,11 +357,12 @@ class FormBuilder extends Form
         array $options = [],
         array $optionOptions = []
     ) : string {
-        if ($interval == 0) {
+        if (in_array($interval, [0, 1])) {
             return parent::selectRange($name, $start, $end, $value, $options);
         }
 
         $items = [];
+
         if ($value !== null) {
             $items[$value] = $value;
         }
