@@ -32,12 +32,12 @@ abstract class DatePicker extends Component
             $this->name,
             $this->value,
             $options,
-            $this->fieldWidth,
-            $this->labelWidth,
-            $this->isHorizontal,
-            $this->isInline,
-            $this->isInButtonGroup,
-            $this->errors ?? collect(),
+            app('form')->fieldWidth,
+            app('form')->labelWidth,
+            app('form')->isHorizontal,
+            app('form')->isInline,
+            app('form')->isInButtonGroup,
+            app('form')->errors ?? collect(),
         ];
 
         return call_user_func_array($method, $parameters);
