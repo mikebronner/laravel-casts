@@ -1,8 +1,6 @@
 <?php namespace GeneaLabs\LaravelCasts;
 
 use Collective\Html\FormBuilder as Form;
-use GeneaLabs\LaravelCasts\Traits\FormParsable;
-use GeneaLabs\LaravelCasts\Color;
 use Illuminate\Support\MessageBag;
 use Illuminate\Support\Collection;
 use Carbon\Carbon;
@@ -26,7 +24,7 @@ class FormBuilder extends Form
     public $fieldWidth = 9;
     public $subFormClass = '';
 
-    public function callParentMethod($method, $arg1 = null, $arg2 = null, $arg3 = null, $arg4 = null, $arg5 = null)
+    public function callParentMethod($method, $arg1 = null, $arg2 = null, $arg3 = null, $arg4 = null, $arg5 = null) : string
     {
         return parent::{$method}($arg1, $arg2, $arg3, $arg4, $arg5);
     }

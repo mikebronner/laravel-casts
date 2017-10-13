@@ -81,23 +81,4 @@ class Label extends Component
     {
         return $this->renderBaseControl();
     }
-
-    public function getOptionsAttribute() : array
-    {
-        return collect(parent::getOptionsAttribute())
-            ->map(function ($value, $key) {
-                if ($key !== 'class') {
-                    return trim($value);
-                }
-
-                return collect(explode(' ', $value))
-                    ->filter(function ($class) {
-                        return ($this->excludedClasses->has($class) ? null : $class);
-                    })
-                    ->implode(' ');
-            })
-            ->unique()
-            ->filter()
-            ->toArray();
-    }
 }
