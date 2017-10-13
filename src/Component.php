@@ -72,7 +72,7 @@ abstract class Component extends Model
         return str_replace('genealabslaravelcasts', '', str_slug(basename(get_called_class())));
     }
 
-    public function getHasErrorAttribute() : boolean
+    public function getHasErrorAttribute() : bool
     {
         return $this->errors
             ->filter(function ($name) {
