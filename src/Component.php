@@ -56,12 +56,12 @@ abstract class Component extends Model
             $this->name,
             $this->value,
             $this->attributes['options'],
-            $this->fieldWidth,
-            $this->labelWidth,
-            $this->isHorizontal,
-            $this->isInline,
+            app('form')->fieldWidth,
+            app('form')->labelWidth,
+            app('form')->isHorizontal,
+            app('form')->isInline,
             app('form')->isInButtonGroup,
-            $this->errors ?? collect(),
+            app('form')->errors ?? collect(),
         ];
 
         return call_user_func_array($method, $parameters);
