@@ -45,7 +45,7 @@ class Combobox extends Dropdown
         $html = parent::getHtmlAttribute();
 
         if (array_key_exists('subFormAction', $this->attributes['options'])) {
-            $html .= (new Subform('', '', $this->attributes['options']))->html;
+            $html .= (new Subform($this->attributes['options']))->html;
         }
 
         return $html;
