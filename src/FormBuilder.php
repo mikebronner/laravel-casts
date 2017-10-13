@@ -26,6 +26,11 @@ class FormBuilder extends Form
     public $fieldWidth = 9;
     public $subFormClass = '';
 
+    public function callParentMethod($method, $arg1 = null, $arg2 = null, $arg3 = null, $arg4 = null, $arg5 = null)
+    {
+        return parent::{$method}($arg1, $arg2, $arg3, $arg4, $arg5);
+    }
+
     public function form()
     {
         if (func_num_args() > 1) {
