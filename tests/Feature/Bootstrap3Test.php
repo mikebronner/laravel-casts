@@ -262,7 +262,7 @@ class Bootstrap3Test extends FeatureTestCase
             )
             ->seeInElement(
                 '.checkbox',
-                '<input class="" checked name="checkbox1" type="checkbox" value="test">'
+                '<input checked name="checkbox1" type="checkbox" value="test">'
             )
             ->seeStatusCode('200');
     }
@@ -414,10 +414,9 @@ class Bootstrap3Test extends FeatureTestCase
     public function testSubmit()
     {
         $this->visit('/genealabs/laravel-casts/examples/bootstrap3')
-            ->seeElement('input', [
-                'class' => 'btn btn-success btn-primary',
-                'type' => 'submit',
-                'value' => 'submit1',
+            ->seeElement('button', [
+                'class' => 'btn btn-primary btn-success',
+                'type' => 'submit'
             ])
             ->dontSeeElement('input', [
                 'type' => 'submit',
@@ -449,14 +448,14 @@ class Bootstrap3Test extends FeatureTestCase
             ])
             ->seeElement('label', [
                 'for' => 'date1',
-                'class' => 'datetimepicker-input col-sm-3 control-label',
+                'class' => 'col-sm-3 control-label',
             ])
             ->dontSeeElement('label', [
                 'for' => 'date1',
                 'placeholder' => 'Placeholder Text',
             ])
             ->seeInElement(
-                'label[for=date1][class="datetimepicker-input col-sm-3 control-label"]',
+                'label[for=date1][class="col-sm-3 control-label"]',
                 'Date1'
             )
             ->seeStatusCode('200');
@@ -478,14 +477,14 @@ class Bootstrap3Test extends FeatureTestCase
             ])
             ->seeElement('label', [
                 'for' => 'datetime1',
-                'class' => 'datetimepicker-input col-sm-3 control-label',
+                'class' => 'col-sm-3 control-label',
             ])
             ->dontSeeElement('label', [
                 'for' => 'datetime1',
                 'placeholder' => 'Placeholder Text',
             ])
             ->seeInElement(
-                'label[for=datetime1][class="datetimepicker-input col-sm-3 control-label"]',
+                'label[for=datetime1][class="col-sm-3 control-label"]',
                 'Date'
             )
             ->seeStatusCode('200');

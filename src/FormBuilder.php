@@ -2,6 +2,7 @@
 
 use Collective\Html\FormBuilder as Form;
 use GeneaLabs\LaravelCasts\Traits\FormParsable;
+use GeneaLabs\LaravelCasts\Color;
 use Illuminate\Support\MessageBag;
 use Illuminate\Support\Collection;
 use Carbon\Carbon;
@@ -11,20 +12,24 @@ use Carbon\Carbon;
  * @SuppressWarnings(PHPMD.TooManyPublicMethods)
  * @SuppressWarnings(PHPMD.ExcessivePublicCount)
  * @SuppressWarnings(PHPMD.ExcessiveClassComplexity)
+ * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
 class FormBuilder extends Form
 {
-    use FormParsable;
+    public $offset = 0;
+    public $isHorizontal = false;
+    public $isInButtonGroup = false;
+    public $isInline = false;
+    public $errors;
+    public $framework = 'bootstrap3';
+    public $labelWidth = 3;
+    public $fieldWidth = 9;
+    public $subFormClass = '';
 
-    protected $errors;
-    protected $offset = 0;
-    protected $labelWidth = 3;
-    protected $fieldWidth = 9;
-    protected $isHorizontal = false;
-    protected $isInButtonGroup = false;
-    protected $isInline = false;
-    protected $framework = 'bootstrap3';
-    protected $subFormClass = '';
+    public function callParentMethod($method, $arg1 = null, $arg2 = null, $arg3 = null, $arg4 = null, $arg5 = null)
+    {
+        return parent::{$method}($arg1, $arg2, $arg3, $arg4, $arg5);
+    }
 
     public function form()
     {
@@ -66,7 +71,7 @@ class FormBuilder extends Form
     {
         $this->subFormClass = $options['subFormClass'];
 
-        return $this->renderControl('subForm', '', '', null, $options);
+        return (new Subform($options))->html;
     }
 
     public function endSubForm()
@@ -84,399 +89,182 @@ class FormBuilder extends Form
      */
     public function label($name, $label = null, $options = [], $escapeHtml = true)
     {
-        $this->framework = $options['framework'] ?? $this->framework;
-        $label = array_pull($options, 'label') ?? $label ?? '';
-        $options = $this->setLabelOptionClasses($options);
-        $name = str_replace('_id', '', $name);
-        $name = str_replace('[]', '', $name);
-        $excludeOptions = [
-            'list' => '',
-            'subFormAction' => '',
-            'subFormBlade' => '',
-            'subFormClass' => '',
-            'subFormFieldName' => '',
-            'subFormMethod' => '',
-            'subFormTitle' => '',
-            'subFormResponseObjectPrimaryKey' => '',
-        ];
-        $options = collect($options)->diffKeys($excludeOptions)
-            ->map(function ($option) {
-                if (is_array($option)) {
-                    return '';
-                }
-
-                $option = str_replace('btn-primary', '', $option);
-                $option = str_replace('btn-default', '', $option);
-                $option = str_replace('btn-danger', '', $option);
-                $option = str_replace('btn-warning', '', $option);
-                $option = str_replace('btn-success', '', $option);
-                $option = str_replace('btn-secondary', '', $option);
-                $option = str_replace('btn', '', $option);
-                $option = str_replace('form-control-success', '', $option);
-                $option = str_replace('form-control-warning', '', $option);
-                $option = str_replace('form-control-danger', '', $option);
-
-                return $option;
-            })
-            ->filter()
-            ->toArray();
-
-        return parent::label($name, $label, $options, $escapeHtml);
+        return (new Label($name, $label, $options, $escapeHtml))->html;
     }
 
     public function staticText(string $value, array $options = [])
     {
-        $this->framework = $options['framework'] ?? $this->framework;
-        $label = $options['label'] ?? '';
-        $controlHtml = $this->toHtmlString('<p class="form-control-static">' . $value . '</p>');
-
-        return $this->renderControl('staticText', $controlHtml, '', $label, []);
+        return (new StaticText($value, $options))->html;
     }
 
     public function text($name, $value = null, $options = [])
     {
-        return $this->renderInput('text', $name, $value, $options);
+        return (new Text($name, $value, $options))->html;
     }
 
     public function tel($name, $value = null, $options = [])
     {
-        return $this->renderInput('tel', $name, $value, $options);
+        return (new Tel($name, $value, $options))->html;
     }
 
     public function week($name, $value = null, $options = [])
     {
-        return $this->renderInput('week', $name, $value, $options);
+        return (new Week($name, $value, $options))->html;
     }
 
     public function month($name, $value = null, $options = [])
     {
-        return $this->renderInput('month', $name, $value, $options);
+        return (new Month($name, $value, $options))->html;
     }
 
     public function search($name, $value = null, $options = [])
     {
-        return $this->renderInput('search', $name, $value, $options);
+        return (new Search($name, $value, $options))->html;
     }
 
     public function number($name, $value = null, $options = [])
     {
-        return $this->renderInput('number', $name, $value, $options);
+        return (new Number($name, $value, $options))->html;
     }
 
     public function range($name, $value = null, $options = [])
     {
-        return $this->renderInput('range', $name, $value, $options);
+        return (new Range($name, $value, $options))->html;
     }
 
     public function color($name, $value = null, $options = [])
     {
-        return $this->renderInput('color', $name, $value, $options);
+        return (new Color($name, $value, $options))->html;
     }
 
     public function email($name, $value = null, $options = [])
     {
-        return $this->renderInput('email', $name, $value, $options);
+        return (new Email($name, $value, $options))->html;
     }
 
     public function password($name, $options = [])
     {
-        return $this->renderInput('password', $name, null, $options);
+        return (new Password($name, null, $options))->html;
     }
 
     public function url($name, $value = null, $options = [])
     {
-        return $this->renderInput('url', $name, $value, $options);
+        return (new Url($name, $value, $options))->html;
     }
 
     public function file($name, $options = [])
     {
-        $classes = 'form-control form-control-file';
-
-        if ($this->framework === 'bootstrap4') {
-            $classes = 'custom-file-input';
-        }
-
-        $options = $this->setOptionClasses($name, $options, [$classes]);
-
-        $html = $this->renderInput('file', $name, null, $options);
-        $html = str_replace('custom-file-input form-control', 'custom-file-input', $html);
-
-        return $html;
+        return (new File($name, null, $options))->html;
     }
 
     public function textarea($name, $value = null, $options = [])
     {
-        return $this->renderInput('textarea', $name, $value, $options);
+        return (new Textarea($name, $value, $options))->html;
     }
 
     public function checkbox($name, $value = 1, $checked = null, $options = [])
     {
-        return $this->renderToggle('checkbox', $name, $value, $checked, $options);
+        return (new Checkbox($name, $value, $checked, $options))->html;
     }
 
     public function radio($name, $value = 1, $checked = null, $options = [])
     {
-        return $this->renderToggle('radio', $name, $value, $checked, $options);
+        return (new Radio($name, $value, $checked, $options))->html;
     }
 
     public function switch($name, $value = 1, $checked = null, $options = [])
     {
-        return $this->renderToggle('switch', $name, $value, $checked, $options);
+        return (new Switchbutton($name, $value, $checked, $options))->html;
     }
 
     public function combobox(string $name, array $list = [], $selected = null, array $options = [], array $optionOptions = [])
     {
-        $options = $this->setOptionClasses($name, $options, ['form-control']);
-        $options['multiple'] = array_key_exists('multiple', $options) ? 'multiple' : null;
-
-        if (array_key_exists('subFormAction', $options)) {
-            $options['subFormMethod'] = $options['subFormMethod'] ?? 'POST';
-            $options['subFormClass'] = '.' . str_random(6);
-            $options['subFormResponseObjectPrimaryKey'] = $options['subFormResponseObjectPrimaryKey'] ?? 'id';
-        }
-
-        $options['list'] = collect($list)->transform(function ($item, $index) {
-            return [
-                'text' => $item,
-                'value' => $index,
-            ];
-        })->values()->toJson();
-        $options['selected'] = collect($selected)->transform(function ($item, $index) {
-            return [
-                'text' => $item,
-                'value' => $index,
-            ];
-        })->values()->toJson();
-        array_filter($options);
-        $controlOptions = $this->getControlOptions(collect($options), ['list', 'selected']);
-        $controlHtml = parent::select($name, $list, $selected, $controlOptions->toArray(), $optionOptions);
-        $renderedHtml = $this->renderControl('combobox', $controlHtml, $name, null, $options);
-
-        if (array_key_exists('subFormAction', $options)) {
-            $renderedHtml .= $this->subform($options);
-        }
-
-        return $renderedHtml;
+        return (new Combobox($name, $list, $selected, $options, $optionOptions))->html;
     }
 
     public function select($name, $list = [], $selected = null, array $options = [], array $optionOptions = [])
     {
-        $this->framework = $options['framework'] ?? $this->framework;
-        $options = $this->setOptionClasses($name, $options, ['form-control']);
-        $controlOptions = collect($options);
-
-        if ($this->framework === 'bootstrap4' && ! $controlOptions->has('multiple')) {
-            $controlOptions = $controlOptions->map(function ($option, $index) {
-                if ($index === 'class') {
-                    $option .= ' custom-select';
-                }
-
-                return $option;
-            });
-        }
-
-        $controlHtml = parent::select($name, $list, $selected, $controlOptions->toArray(), $optionOptions);
-
-        if (array_key_exists('placeholder', $options)) {
-            $controlHtml = str_replace('<option selected="selected" value="">' . $options['placeholder'] . '</option>', '<option selected="selected" value="" disabled="disabled">' . $options['placeholder'] . '</option>', $controlHtml);
-        }
-
-        return $this->renderControl('select', $controlHtml, $name, '', $options);
+        return (new Select($name, $list, $selected, $options, $optionOptions))->html;
     }
 
     public function selectMonths($name, $value = null, array $options = [], array $optionOptions = [])
     {
-        $monthOptions = [
-            '1' => 'January',
-            '2' => 'February',
-            '3' => 'March',
-            '4' => 'April',
-            '5' => 'May',
-            '6' => 'June',
-            '7' => 'July',
-            '8' => 'August',
-            '9' => 'September',
-            '10' => 'October',
-            '11' => 'November',
-            '12' => 'December',
-        ];
-
-        if (($options['optionsFormat'] ?? '') === 'slugs') {
-            $monthOptions = [
-                'january' => 'January',
-                'february' => 'February',
-                'march' => 'March',
-                'april' => 'April',
-                'may' => 'May',
-                'june' => 'June',
-                'july' => 'July',
-                'august' => 'August',
-                'september' => 'September',
-                'october' => 'October',
-                'november' => 'November',
-                'december' => 'December',
-            ];
-        }
-
-        return $this->select($name, $monthOptions, $value, $options, $optionOptions);
+        return (new SelectMonths($name, $value, $options, $optionOptions))->html;
     }
 
     public function selectWeekdays($name, $value = null, array $options = [], array $optionOptions = [])
     {
-        $monthOptions = [
-            '1' => 'Sunday',
-            '2' => 'Monday',
-            '3' => 'Tuesday',
-            '4' => 'Wednesday',
-            '5' => 'Thursday',
-            '6' => 'Friday',
-            '7' => 'Saturday',
-        ];
+        return (new SelectWeekdays($name, $value, $options, $optionOptions))->html;
+    }
 
-        if (($options['optionsFormat'] ?? '') === 'slugs') {
-            $monthOptions = [
-                'sunday' => 'Sunday',
-                'monday' => 'Monday',
-                'tuesday' => 'Tuesday',
-                'wednesday' => 'Wednesday',
-                'thursday' => 'Thursday',
-                'friday' => 'Friday',
-                'saturday' => 'Saturday',
-            ];
-        }
-
-        return $this->select($name, $monthOptions, $value, $options, $optionOptions);
+    public function selectRange(
+        $name,
+        $begin,
+        $end,
+        $value = null,
+        $options = []
+    ) : string {
+        return (new SelectRange($name, $begin, $end, $value, $options))->html;
     }
 
     public function selectRangeWithInterval(
         string $name,
-        int $start,
-        int $end,
-        int $interval,
+        $begin,
+        $end,
+        $interval,
         int $value = null,
         array $options = [],
         array $optionOptions = []
     ) : string {
-        if (in_array($interval, [0, 1])) {
-            return parent::selectRange($name, $start, $end, $value, $options);
-        }
-
-        $items = [];
-
-        if ($value !== null) {
-            $items[$value] = $value;
-        }
-
-        $startValue = $start;
-        $endValue = $end;
-        $interval *= ($interval < 0) ? -1 : 1;
-
-        if ($start > $end) {
-            $interval *= ($interval > 0) ? -1 : 1;
-            $startValue = $end;
-            $endValue = $start;
-        }
-
-        for ($i=$startValue; $i<$endValue; $i+=$interval) {
-            $items[$i . ""] = $i;
-        }
-
-        $items[$endValue] = $endValue;
-
-        return $this->select($name, $items, $value, $options, $optionOptions);
+        return (new SelectRangeWithInterval($name, $begin, $end, $interval, $value, $options, $optionOptions))->html;
     }
 
     public function date($name, $value = null, $options = [])
     {
-        $options = $this->setOptionClasses($name, $options, ['form-control', 'datetimepicker-input']);
-        $options['autocomplete'] = 'noway';
-        $options['data-target'] = "#datetimepicker-{$name}";
-        $controlOptions = array_filter($options, function ($key) {
-            return ($key !== 'label');
-        }, ARRAY_FILTER_USE_KEY);
-        $controlHtml = parent::date($name, $value, $controlOptions);
-        $options['value'] = $this->getValueAttribute($name, $value);
-
-        return $this->renderControl('date', $controlHtml, $name, $value, $options);
+        return (new Date($name, $value, $options))->html;
     }
 
     public function datetime($name, $value = null, $options = [])
     {
-        $options = $this->setOptionClasses($name, $options, ['form-control', 'datetimepicker-input']);
-        $options['autocomplete'] = 'noway';
-        $options['subFormClass'] = $this->subFormClass;
-        $options['data-target'] = ($this->subFormClass ?: '') . " #datetimepicker-{$name}";
-        $controlOptions = array_filter($options, function ($key) {
-            return ($key !== 'label');
-        }, ARRAY_FILTER_USE_KEY);
-        $controlHtml = parent::datetime($name, $value, $controlOptions);
-        $options['value'] = $this->getValueAttribute($name, $value);
+        return (new Datetime($name, $value, $options))->html;
+    }
 
-        return $this->renderControl('datetime', $controlHtml, $name, $value, $options);
+    public function hidden($name, $value = null, $options = [])
+    {
+        return (new Hidden($name, $value, $options))->html;
     }
 
     public function signature($name, $value = null, $options = [])
     {
-        if (! array_key_exists('label', $options)) {
-            $options['label'] = ucwords(str_replace('_id', '', str_replace('[]', '', $name)));
-        }
-
-        if (! array_key_exists('clearButton', $options)) {
-            $options['clearButton'] = 'Clear';
-        }
-
-        $options = $this->setOptionClasses($name, $options, ['form-control']);
-        $controlHtml = $this->hidden($name) . $this->hidden($name . '_date');
-
-        return $this->renderControl('signature', $controlHtml, $name, $value, $options);
+        return (new Signature($name, $value, $options))->html;
     }
 
     public function submit($value = null, $options = [])
     {
-        $options = $this->setOptionClasses('', $options, ['btn', 'btn-primary']);
-        $controlOptions = $this->getControlOptions(collect($options));
-        $controlOptions = $controlOptions->map(function ($option) {
-            $option = str_replace('form-control-success', '', $option);
-            $option = str_replace('form-control-warning', '', $option);
-            $option = str_replace('form-control-danger', '', $option);
-
-            return $option;
-        });
-        $controlHtml = parent::submit($value, $controlOptions->toArray());
-
-        return $this->renderControl('submit', $controlHtml, '', '', $options);
+        return (new Submit($value, $options))->html;
     }
 
     public function cancelButton($returnUrl = '')
     {
-        return '<a href="' . ($returnUrl ?: $this->url->previous()) . '">' .
-                $this->button('Cancel', ['class' => 'btn btn-cancel   pull-right']) .
-                '</a>';
+        return (new CancelButton($returnUrl))->html;
     }
 
     public function button($value = null, $options = [])
     {
-        $options = $this->setOptionClasses('', $options, ['btn']);
-        $label = $options['label'] ?? '';
-        $controlHtml = parent::button($value, $options);
-
-        return $this->renderControl('button', $controlHtml, $label, '', $options);
+        return (new Button($value, $options))->html;
     }
 
     public function buttonGroup(array $options = [])
     {
-        $label = $options['label'] ?? '';
-        $options = $this->setOptionClasses('', $options, ['btn-group']);
-        $controlHtml = $this->toHtmlString('<div ' . $this->html->attributes($options) . '>');
         $this->isInButtonGroup = true;
 
-        return $this->renderControl('buttonGroup', $controlHtml, '', $label, $options);
+        return (new ButtonGroup($options))->html;
     }
 
     public function endButtonGroup()
     {
         $this->isInButtonGroup = false;
 
-        return $this->renderControl('endButtonGroup', '', '', '', []);
+        return (new EndButtonGroup)->html;
     }
 }
