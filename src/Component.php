@@ -30,6 +30,7 @@ abstract class Component extends Model
         $this->attributes['options'] = $options;
         $this->labelWidth = $options['labelWidth'] ?? app('form')->labelWidth;
         $this->fieldWidth = $options['labelWidth'] ?? app('form')->fieldWidth;
+        $this->errors = app('form')->errors ?: collect();
     }
 
     protected function renderBaseControl() : string
@@ -60,7 +61,7 @@ abstract class Component extends Model
             app('form')->isHorizontal,
             app('form')->isInline,
             app('form')->isInButtonGroup,
-            app('form')->errors ?? collect(),
+            $this->errors,
         ];
 
         return call_user_func_array($method, $parameters);
@@ -80,7 +81,7 @@ abstract class Component extends Model
             ->isNotEmpty();
     }
 
-    public function getErrorClasses() : string
+    public function getErrorClassesAttribute() : string
     {
         return $this->errors
             ->isNotEmpty()
@@ -104,7 +105,7 @@ abstract class Component extends Model
     {
         $classes = collect(explode(' ', $this->classes));
         $options = $this->attributes['options'];
-        $options['subFormClass'] = $this->subFormClass;
+        $options['subFormClass'] = app('form')->subFormClass;
         $classes = $classes->merge(collect(explode(' ', $options['class'] ?? '')));
         $classes = $classes->merge(collect(explode(' ', $this->errorClasses)));
         $options['class'] = $classes->filter()
