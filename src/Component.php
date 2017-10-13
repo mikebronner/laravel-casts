@@ -1,8 +1,6 @@
 <?php namespace GeneaLabs\LaravelCasts;
 
 use Jenssegers\Model\Model;
-use Illuminate\Support\Collection;
-use Collective\Html\FormBuilder;
 
 abstract class Component extends Model
 {
@@ -10,7 +8,9 @@ abstract class Component extends Model
     protected $errors;
     protected $excludedKeys;
     protected $excludedClasses;
+    protected $fieldWidth;
     protected $framework;
+    protected $labelWidth;
     protected $name;
     protected $value;
 
@@ -30,7 +30,6 @@ abstract class Component extends Model
         $this->attributes['options'] = $options;
         $this->labelWidth = $options['labelWidth'] ?? app('form')->labelWidth;
         $this->fieldWidth = $options['labelWidth'] ?? app('form')->fieldWidth;
-        $this->errors = app('form')->errors;
     }
 
     protected function renderBaseControl() : string
@@ -56,8 +55,8 @@ abstract class Component extends Model
             $this->name,
             $this->value,
             $this->attributes['options'],
-            app('form')->fieldWidth,
-            app('form')->labelWidth,
+            $this->fieldWidth,
+            $this->labelWidth,
             app('form')->isHorizontal,
             app('form')->isInline,
             app('form')->isInButtonGroup,
