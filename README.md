@@ -1,6 +1,8 @@
 ![laravel-casts](https://cloud.githubusercontent.com/assets/1791050/18258832/b7c177d6-7391-11e6-99ba-ea7e63735cd8.jpg)
 
 # Laravel Casts
+
+[![Join the chat at https://gitter.im/GeneaLabs/laravel-casts](https://badges.gitter.im/GeneaLabs/laravel-casts.svg)](https://gitter.im/GeneaLabs/laravel-casts?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![Travis](https://img.shields.io/travis/GeneaLabs/laravel-casts.svg)](https://travis-ci.org/GeneaLabs/laravel-casts)
 [![SensioLabs Insight](https://img.shields.io/sensiolabs/i/e67916ac-4439-45f6-809f-ca48f8f55758.svg)](https://insight.sensiolabs.com/projects/e67916ac-4439-45f6-809f-ca48f8f55758)
 [![Scrutinizer](https://img.shields.io/scrutinizer/g/GeneaLabs/laravel-casts.svg)](https://scrutinizer-ci.com/g/GeneaLabs/laravel-casts)
