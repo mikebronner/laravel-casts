@@ -195,14 +195,14 @@ class Bootstrap4Test extends FeatureTestCase
             ])
             ->seeElement('label', [
                 'for' => 'file1',
-                'class' => 'custom-file-input col-sm-3 col-form-label',
+                'class' => 'col-sm-3 col-form-label',
             ])
             ->dontSeeElement('label', [
                 'for' => 'file1',
                 'placeholder' => 'Placeholder Text',
             ])
             ->seeInElement(
-                'label[for=file1][class="custom-file-input col-sm-3 col-form-label"]',
+                'label[for=file1][class="col-sm-3 col-form-label"]',
                 'File Input'
             )
             ->seeStatusCode('200');
@@ -418,10 +418,9 @@ class Bootstrap4Test extends FeatureTestCase
     public function testSubmit()
     {
         $this->visit('/genealabs/laravel-casts/examples/bootstrap4')
-            ->seeElement('input', [
-                'class' => 'btn btn-success btn-primary',
+            ->seeElement('button', [
+                'class' => 'btn btn-primary btn-success',
                 'type' => 'submit',
-                'value' => 'submit',
             ])
             ->dontSeeElement('input', [
                 'type' => 'submit',

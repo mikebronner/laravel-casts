@@ -159,7 +159,6 @@ class VanillaTest extends FeatureTestCase
     {
         $this->visit('/genealabs/laravel-casts/examples/vanilla')
             ->seeElement('input', [
-                'class' => 'form-control form-control-file',
                 'name' => 'file',
                 'type' => 'file',
             ])
@@ -309,10 +308,9 @@ class VanillaTest extends FeatureTestCase
     public function testSubmit()
     {
         $this->visit('/genealabs/laravel-casts/examples/vanilla')
-            ->seeElement('input', [
-                'class' => 'btn btn-success btn-primary',
+            ->seeElement('button', [
+                'class' => 'btn btn-primary btn-success',
                 'type' => 'submit',
-                'value' => 'submit',
             ])
             ->dontSeeElement('input', [
                 'type' => 'submit',
