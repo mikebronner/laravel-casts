@@ -12,7 +12,7 @@ class Label extends Component
     {
         $name = str_replace('_id', '', $name);
         $name = str_replace('[]', '', $name);
-        $value = $options['label'] ?? ucwords($name);
+        $value = $options['label'] ?? (ucwords($name) ?: '');
         $options['class'] = '';
 
         parent::__construct($name, $value, $options);
