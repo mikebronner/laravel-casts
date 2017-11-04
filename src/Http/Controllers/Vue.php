@@ -1,5 +1,6 @@
 <?php namespace GeneaLabs\LaravelCasts\Http\Controllers;
 
+use GeneaLabs\LaravelCasts\Http\Requests\FormsExample;
 use Illuminate\Routing\Controller;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
