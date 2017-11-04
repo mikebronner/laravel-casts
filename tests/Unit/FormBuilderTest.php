@@ -245,7 +245,7 @@ class FormBuilderTest extends UnitTestCase
     {
         $string = "@combobox ('input-field', ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label'])";
         $expected = "<?php echo app('form')->combobox('input-field', ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label']); ?>";
-        $expectedHtml = "<div class=\"form-group\">\n\n            <label for=\"input-field\" class=\"col-sm-3 control-label\">Input-field</label>    \n<select class=\"form-control\" name=\"input-field\"><option value=\"class\">blue</option><option value=\"placeholder\">Placeholder</option><option value=\"label\">Text field label</option></select>\n\n\n\n\n    </div>\n";
+        $expectedHtml = "<div class=\"form-group\">\n\n            <label for=\"input-field\" class=\"col-sm-3 control-label\">Input-field</label>    \n<select class=\"form-control selectize\" name=\"input-field\"><option value=\"class\">blue</option><option value=\"placeholder\">Placeholder</option><option value=\"label\">Text field label</option></select>\n\n\n\n\n\n\n    </div>\n";
 
         $compiled = app('blade.compiler')->compileString($string);
         $html = app('form')->combobox('input-field', ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label']);

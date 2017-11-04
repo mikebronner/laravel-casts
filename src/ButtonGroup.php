@@ -9,10 +9,9 @@ class ButtonGroup extends Component
         parent::__construct('', $label, $options);
 
         $this->classes = 'btn-group';
-        $this->excludedKeys = collect([
-            'label' => '',
+        $this->excludedKeys = $this->excludedKeys->merge(collect([
             'placeholder' => '',
-        ]);
+        ]));
     }
 
     public function getTypeAttribute() : string

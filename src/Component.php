@@ -50,12 +50,17 @@ abstract class Component extends Model
             app('form'),
             "{$this->framework}Control",
         ];
+        $options = collect($this->attributes['options'])
+            ->filter(function ($value, $key) {
+                return (bool) $value;
+            })
+            ->toArray();
         $parameters = [
             $this->type,
             $controlHtml,
             $this->name,
             $this->value,
-            $this->attributes['options'],
+            $options,
             $this->fieldWidth,
             $this->labelWidth,
             app('form')->isHorizontal,

@@ -7,10 +7,9 @@ class Button extends Component
         parent::__construct('', $value, $options);
 
         $this->classes = 'btn';
-        $this->excludedKeys = collect([
-            'label' => '',
+        $this->excludedKeys = $this->excludedKeys->merge(collect([
             'placeholder' => '',
-        ]);
+        ]));
     }
 
     protected function renderBaseControl() : string

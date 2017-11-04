@@ -33,11 +33,10 @@ class Combobox extends Dropdown
 
         parent::__construct($name, $list, $value, $options, $optionOptions);
 
-        $this->excludedKeys = collect([
-            'label' => '',
+        $this->excludedKeys = $this->excludedKeys->merge(collect([
             'list' => '',
             'selected' => '',
-        ]);
+        ]));
     }
 
     protected function renderBaseControl() : string
@@ -54,18 +53,18 @@ class Combobox extends Dropdown
 
     public function getOptionsAttribute() : array
     {
-        $class = $this->attributes['options']['class'] ?? '';
-        $this->attributes['options']['class'] = $class ? $class . ' selectize' : '';
+        $options = parent::getOptionsAttribute();
+        $options['class'] = trim(($options['class'] ?? '') . ' selectize');
 
-        return $this->attributes['options'];
+        return $options;
     }
 
     public function getHtmlAttribute() : string
     {
         $html = parent::getHtmlAttribute();
 
-        if (array_key_exists('subFormAction', $this->attributes['options'])) {
-            $html .= (new Subform($this->attributes['options']))->html;
+        if (array_key_exists('subFormAction', $this->options)) {
+            $html .= (new Subform($this->options))->html;
         }
 
         return $html;
