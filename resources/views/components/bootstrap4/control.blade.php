@@ -3,7 +3,6 @@
 
     @if($type !== 'checkbox' && $type !== 'submit')
         @label ($name, $name, $options, $options['escapeLabel'] ?? false)
-        {{-- @include('genealabs-laravel-casts::components.bootstrap4.label') --}}
     @endif
 @endif
 
