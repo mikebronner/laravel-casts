@@ -40,6 +40,26 @@ class Combobox extends Dropdown
         ]);
     }
 
+    protected function renderBaseControl() : string
+    {
+        return app('form')->callParentMethod(
+            'select',
+            $this->name,
+            $this->list,
+            $this->value,
+            $this->options,
+            $this->optionOptions
+        );
+    }
+
+    public function getOptionsAttribute() : array
+    {
+        $class = $this->attributes['options']['class'] ?? '';
+        $this->attributes['options']['class'] = $class ? $class . ' selectize' : '';
+
+        return $this->attributes['options'];
+    }
+
     public function getHtmlAttribute() : string
     {
         $html = parent::getHtmlAttribute();

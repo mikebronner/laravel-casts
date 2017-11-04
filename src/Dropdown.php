@@ -55,6 +55,8 @@ abstract class Dropdown extends Component
 
     public function getTypeAttribute() : string
     {
-        return 'select';
+        $type = parent::getTypeAttribute();
+
+        return $type === 'dropdown' ? 'select' : $type;
     }
 }

@@ -14,4 +14,9 @@ class SelectRange extends Dropdown
 
         parent::__construct($name, $list, $value, $options, $optionOptions);
     }
+
+    public function getTypeAttribute() : string
+    {
+        return 'select';
+    }
 }
