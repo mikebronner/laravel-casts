@@ -10,9 +10,9 @@ class Label extends Component
      */
     public function __construct(string $name, $value = null, array $options = [], bool $escapeHtml = true)
     {
-        $name = str_replace('_id', '', $name);
-        $name = str_replace('[]', '', $name);
-        $value = $options['label'] ?? (ucwords($name) ?: '');
+        $value = str_replace('_id', '', $value);
+        $value = str_replace('[]', '', $value);
+        $value = $options['label'] ?? ($value ?: '');
         $options['class'] = '';
 
         parent::__construct($name, $value, $options);
@@ -27,10 +27,9 @@ class Label extends Component
             $this->classes = 'col-sm-' . app('form')->labelWidth . ' col-form-label';
         }
 
-        $this->excludedKeys = collect([
+        $this->excludedKeys = $this->excludedKeys->merge(collect([
             'autocomplete' => '',
             'data-target' => '',
-            'label' => '',
             'list' => '',
             'placeholder' => '',
             'selected' => '',
@@ -41,7 +40,7 @@ class Label extends Component
             'subFormMethod' => '',
             'subFormTitle' => '',
             'subFormResponseObjectPrimaryKey' => '',
-        ]);
+        ]));
         $this->excludedClasses = collect([
             'custom-file-input' => '',
             'custom-select' => '',

@@ -14,10 +14,9 @@ abstract class Toggle extends Component
 
         $this->isChecked = $isChecked;
         $this->classes = '';
-        $this->excludedKeys = collect([
-            'label' => '',
+        $this->excludedKeys = $this->excludedKeys->merge(collect([
             'placeholder' => '',
-        ]);
+        ]));
 
         if ($this->framework === 'bootstrap4') {
             $this->classes = 'form-check-input';

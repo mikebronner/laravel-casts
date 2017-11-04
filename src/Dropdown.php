@@ -17,6 +17,10 @@ abstract class Dropdown extends Component
         $this->list = $list;
         $this->optionOptions = $optionOptions;
 
+        $this->excludedKeys = $this->excludedKeys->merge(collect([
+            'list' => '',
+        ]));
+
         if ($this->framework === 'bootstrap4' && ! collect($this->options)->has('multiple')) {
             $this->classes .= ' custom-select';
         }
