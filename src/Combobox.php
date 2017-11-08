@@ -10,6 +10,8 @@ class Combobox extends Dropdown
         array $optionOptions = []
     ) {
         $options['multiple'] = array_key_exists('multiple', $options) ? 'multiple' : null;
+        $options['class'] = ($options['class'] ?? '');
+        $options['subFormClass'] = ($options['subFormClass'] ?? '');
 
         if (array_key_exists('subFormAction', $options)) {
             $options['subFormMethod'] = $options['subFormMethod'] ?? 'POST';
@@ -30,9 +32,8 @@ class Combobox extends Dropdown
             ];
         })->values()->toJson();
         array_filter($options);
-
         parent::__construct($name, $list, $value, $options, $optionOptions);
-
+        $this->attributes['options'] = $options;
         $this->excludedKeys = $this->excludedKeys->merge(collect([
             'list' => '',
             'selected' => '',
@@ -53,18 +54,34 @@ class Combobox extends Dropdown
 
     public function getOptionsAttribute() : array
     {
-        $options = parent::getOptionsAttribute();
-        $options['class'] = trim(($options['class'] ?? '') . ' selectize');
+        $options = collect($this->attributes['options']);
+        $options = $options->merge(collect(parent::getOptionsAttribute()))->toArray();
 
-        return $options;
+        return collect($options)->map(function ($value, $key) {
+            if ($key !== 'class') {
+                return trim($value);
+            }
+
+            return collect(explode(' ', $value))
+                ->filter(function ($class) {
+                    return ($this->excludedClasses->has($class) ? null : $class);
+                })
+                ->push('selectize')
+                ->implode(' ');
+        })
+        ->filter(function ($value, $key) {
+            return ($this->excludedKeys->has($key) ? null : $value);
+        })
+        ->unique()
+        ->toArray();
     }
 
     public function getHtmlAttribute() : string
     {
         $html = parent::getHtmlAttribute();
 
-        if (array_key_exists('subFormAction', $this->options)) {
-            $html .= (new Subform($this->options))->html;
+        if (array_key_exists('subFormAction', $this->attributes['options'])) {
+            $html .= (new Subform($this->attributes['options']))->html;
         }
 
         return $html;

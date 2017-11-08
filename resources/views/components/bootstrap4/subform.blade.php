@@ -1,5 +1,5 @@
 @include ('genealabs-laravel-casts::components.bootstrap4.form-group-close')
-@include ('genealabs-laravel-casts::components.bootstrap4.form-group-open', ['classes' => str_replace('.', '', $options['subFormClass']) . ' d-none'])
+@include ('genealabs-laravel-casts::components.bootstrap4.form-group-open', ['classes' => str_replace('.', '', ($options['subFormClass'] ?? '')) . ' d-none'])
 
 <div class="col-sm-12">
     <div class="popover popover-static popover-bottom">
