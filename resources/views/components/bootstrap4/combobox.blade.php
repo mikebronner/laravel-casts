@@ -25,7 +25,7 @@
         window.genealabsLaravelCasts['comboboxLoaders'] = window.genealabsLaravelCasts.comboboxLoaders || [];
         window.genealabsLaravelCasts['framework'] = window.genealabsLaravelCasts.framework || 'bootstrap4';
         window.genealabsLaravelCasts.comboboxLoaders.push(function () {
-            @if (array_key_exists('subFormAction', $options))
+            @if (array_key_exists('subFormAction', $options) && array_key_exists('subFormClass', $options))
                 $('{{ $options['subFormClass'] }}').find('input,textarea,select').attr('disabled', 'disabled');
             @endif
 
@@ -61,7 +61,6 @@
                     @endif
 
                     @if (array_key_exists('subFormClass', $options))
-                    console.log(value);
                         if (value == -1) {
                             $('{{ $options['subFormClass'] }}').find('input,textarea,select').removeAttr('disabled');
                             $('{{ $options['subFormClass'] }}').removeClass('d-none');
@@ -84,7 +83,7 @@
                 }
             });
 
-            @if (array_key_exists('subFormAction', $options))
+            @if (array_key_exists('subFormAction', $options) && array_key_exists('subFormClass', $options))
                 $('{!! $options['subFormClass'] !!} input[type="submit"]').on('click', function (event) {
                     event.preventDefault();
                     event.stopPropagation();

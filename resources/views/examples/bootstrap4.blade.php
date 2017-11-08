@@ -1,6 +1,6 @@
 @extends('genealabs-laravel-casts::examples.layout')
 
-@section('head')
+@section('css')
     <link href="/css/bootstrap4.css" rel="stylesheet" type="text/css" media="all">
 @endsection
 

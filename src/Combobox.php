@@ -10,6 +10,8 @@ class Combobox extends Dropdown
         array $optionOptions = []
     ) {
         $options['multiple'] = array_key_exists('multiple', $options) ? 'multiple' : null;
+        $options['class'] = ($options['class'] ?? '');
+        $options['subFormClass'] = ($options['subFormClass'] ?? '');
 
         if (array_key_exists('subFormAction', $options)) {
             $options['subFormMethod'] = $options['subFormMethod'] ?? 'POST';
@@ -54,10 +56,26 @@ class Combobox extends Dropdown
 
     public function getOptionsAttribute() : array
     {
-        $options = $this->attributes['options'];
-        $options['class'] = trim(($options['class'] ?? '') . ' selectize');
+        $options = collect($this->attributes['options']);
+        $options = $options->merge(collect(parent::getOptionsAttribute()))->toArray();
 
-        return $options;
+        return collect($options)->map(function ($value, $key) {
+            if ($key !== 'class') {
+                return trim($value);
+            }
+
+            return collect(explode(' ', $value))
+                ->filter(function ($class) {
+                    return ($this->excludedClasses->has($class) ? null : $class);
+                })
+                ->push('selectize')
+                ->implode(' ');
+        })
+        ->filter(function ($value, $key) {
+            return ($this->excludedKeys->has($key) ? null : $value);
+        })
+        ->unique()
+        ->toArray();
     }
 
     public function getHtmlAttribute() : string

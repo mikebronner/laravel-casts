@@ -51,7 +51,7 @@ abstract class Component extends Model
             "{$this->framework}Control",
         ];
         $options = collect($this->attributes['options'])
-            ->filter(function ($value, $key) {
+            ->filter(function ($value) {
                 return (bool) $value;
             })
             ->toArray();
