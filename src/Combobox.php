@@ -32,10 +32,8 @@ class Combobox extends Dropdown
             ];
         })->values()->toJson();
         array_filter($options);
-// dump($options);
         parent::__construct($name, $list, $value, $options, $optionOptions);
         $this->attributes['options'] = $options;
-// dd($options);
         $this->excludedKeys = $this->excludedKeys->merge(collect([
             'list' => '',
             'selected' => '',
