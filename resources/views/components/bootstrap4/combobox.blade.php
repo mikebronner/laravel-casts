@@ -61,6 +61,7 @@
                     @endif
 
                     @if (array_key_exists('subFormClass', $options))
+                    console.log(value);
                         if (value == -1) {
                             $('{{ $options['subFormClass'] }}').find('input,textarea,select').removeAttr('disabled');
                             $('{{ $options['subFormClass'] }}').removeClass('d-none');

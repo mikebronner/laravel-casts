@@ -11,6 +11,7 @@
                 <h1 class="page-title">Horizontal Form</h1>
 
                 @form(['url' => 'genealabs/laravel-casts/examples/bootstrap4', 'class' => 'form-horizontal', 'framework' => 'bootstrap4'])
+                    @combobox ('subform1', [1, 2, 3, 4], null, ['placeholder' => 'Placeholder Text', 'subFormAction' => 'testurl', 'subFormBlade' => 'genealabs-laravel-casts::examples.subform', 'subFormFieldName' => 'name', 'subFormTitle' => 'Add New Address'])
                     @text('text1', '', ['placeholder' => 'Placeholder Text', 'label' => 'Text Input'])
                     @password('password1', ['placeholder' => 'Placeholder Text', 'label' => 'Password Input'])
                     @email('email1', '', ['placeholder' => 'Placeholder Text', 'label' => 'Email Input'])
@@ -45,9 +46,11 @@
                     @staticText ('Show me the text!', ['label' => 'What?'])
                     @submit ('submit', ['class' => 'btn btn-success', 'label' => 'Submit Button'], '/bs3')
                 @endform
+
             </div>
             <div class="col-sm-6">
                 <h1 class="page-title">Normal Form</h1>
+
                 @form(['url' => 'genealabs/laravel-casts/examples/bootstrap4'])
                     @text('text2', '', ['placeholder' => 'Placeholder Text', 'label' => 'Text Input'])
                     @password('password2', ['placeholder' => 'Placeholder Text', 'label' => 'Password Input'])

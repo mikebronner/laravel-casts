@@ -30,9 +30,10 @@ class Combobox extends Dropdown
             ];
         })->values()->toJson();
         array_filter($options);
-
+// dump($options);
         parent::__construct($name, $list, $value, $options, $optionOptions);
-
+        $this->attributes['options'] = $options;
+// dd($options);
         $this->excludedKeys = $this->excludedKeys->merge(collect([
             'list' => '',
             'selected' => '',
@@ -53,7 +54,7 @@ class Combobox extends Dropdown
 
     public function getOptionsAttribute() : array
     {
-        $options = parent::getOptionsAttribute();
+        $options = $this->attributes['options'];
         $options['class'] = trim(($options['class'] ?? '') . ' selectize');
 
         return $options;
@@ -63,8 +64,8 @@ class Combobox extends Dropdown
     {
         $html = parent::getHtmlAttribute();
 
-        if (array_key_exists('subFormAction', $this->options)) {
-            $html .= (new Subform($this->options))->html;
+        if (array_key_exists('subFormAction', $this->attributes['options'])) {
+            $html .= (new Subform($this->attributes['options']))->html;
         }
 
         return $html;
