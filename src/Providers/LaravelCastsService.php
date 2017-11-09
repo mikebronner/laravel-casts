@@ -171,6 +171,12 @@ class LaravelCastsService extends ServiceProvider
         );
 
         app('form')->component(
+            "tailwindControl",
+            "genealabs-laravel-casts::components.tailwind.control",
+            $options
+        );
+
+        app('form')->component(
             "vanillaControl",
             "genealabs-laravel-casts::components.vanilla.control",
             $options

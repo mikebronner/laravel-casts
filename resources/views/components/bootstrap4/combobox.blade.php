@@ -16,6 +16,9 @@
 @if ($isHorizontal)
     </div>
 @endif
+@php
+    dump($options);
+@endphp
 
 @section ('genealabs-laravel-casts')
     @parent

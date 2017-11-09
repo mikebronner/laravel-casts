@@ -12,19 +12,18 @@ class Label extends Component
     {
         $value = str_replace('_id', '', $value);
         $value = str_replace('[]', '', $value);
+        $value = str_replace('-', ' ', $value);
         $value = $options['label'] ?? (ucwords($value) ?: '');
-        $options['class'] = '';
+        $options['class'] = $options['class'] ?? '';
 
         parent::__construct($name, $value, $options);
 
-        $this->classes = '';
-
         if ($this->framework === 'bootstrap3') {
-            $this->classes = 'col-sm-' . app('form')->labelWidth . ' control-label';
+            $options['class'] .= ' col-sm-' . app('form')->labelWidth . ' control-label';
         }
 
         if ($this->framework === 'bootstrap4') {
-            $this->classes = 'col-sm-' . app('form')->labelWidth . ' col-form-label';
+            $options['class'] .= ' col-sm-' . app('form')->labelWidth . ' col-form-label';
         }
 
         $this->excludedKeys = $this->excludedKeys->merge(collect([
