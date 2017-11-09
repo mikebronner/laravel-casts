@@ -12,6 +12,7 @@ class Label extends Component
     {
         $value = str_replace('_id', '', $value);
         $value = str_replace('[]', '', $value);
+        $value = str_replace('-', ' ', $value);
         $value = $options['label'] ?? (ucwords($value) ?: '');
         $options['class'] = $options['class'] ?? '';
 
