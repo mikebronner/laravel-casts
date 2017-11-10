@@ -32,7 +32,7 @@
                     @radio('radio1', 'test', true, ['placeholder' => 'Placeholder Text', 'label' => 'Radio'])
                     @switch('switch1', 'test1', true, ['label' => 'Switch'])
                     @select('select1', [1, 2, 3, 4], null, ['placeholder' => 'Placeholder Text', 'label' => 'Select'])
-                    @selectMonths('selectMonths1', 3, ['placeholder' => 'Placeholder Text', 'label' => 'Select Months'])
+                    @selectMonths('selectMonths1', 3, ['placeholder' => 'Placeholder Text', 'label' => 'Select Months', 'optionsFormat' => 'slugs'])
                     @selectWeekdays('selectWeekdays1', 3, ['placeholder' => 'Placeholder Text', 'label' => 'Select Weekdays'])
                     @selectRange('select_range1', 1, 21, null, ['class' => 'form-control', 'placeholder' => 'Placeholder Text', 'label' => 'Select Range'])
                     @selectRangeWithInterval('select_range_with_interval1', 1, 21, 3, null, ['class' => 'form-control', 'placeholder' => 'Placeholder Text', 'label' => 'Select Range With Interval'])
