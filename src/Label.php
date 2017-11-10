@@ -26,6 +26,8 @@ class Label extends Component
             $options['class'] .= ' col-sm-' . app('form')->labelWidth . ' col-form-label';
         }
 
+        $this->attributes['options'] = $options;
+
         $this->excludedKeys = $this->excludedKeys->merge(collect([
             'autocomplete' => '',
             'data-target' => '',
