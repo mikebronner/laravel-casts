@@ -23,7 +23,11 @@ class Label extends Component
         }
 
         if ($this->framework === 'bootstrap4') {
-            $options['class'] .= ' col-sm-' . app('form')->labelWidth . ' col-form-label';
+            if (app('form')->isHorizontal) {
+                $options['class'] .= ' col-sm-' . app('form')->labelWidth;
+            }
+
+            $options['class'] .= ' col-form-label';
         }
 
         $this->attributes['options'] = $options;
