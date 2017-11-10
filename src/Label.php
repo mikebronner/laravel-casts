@@ -27,7 +27,6 @@ class Label extends Component
         }
 
         if ($this->framework === 'bootstrap4') {
-
             $options['class'] .= ' col-form-label';
         }
 

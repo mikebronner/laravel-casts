@@ -45,16 +45,17 @@ abstract class Component extends Model
 
     public function getHtmlAttribute() : string
     {
-        $controlHtml = $this->renderBaseControl();
-        $method = [
-            app('form'),
-            "{$this->framework}Control",
-        ];
         $options = collect($this->attributes['options'])
             ->filter(function ($value) {
                 return (bool) $value;
             })
             ->toArray();
+        $controlHtml = $this->renderBaseControl();
+        $method = [
+            app('form'),
+            "{$this->framework}Control",
+        ];
+
         $parameters = [
             $this->type,
             $controlHtml,
@@ -110,12 +111,17 @@ abstract class Component extends Model
     {
         $classes = collect(explode(' ', $this->classes));
         $options = $this->attributes['options'];
-        $options['subFormClass'] = app('form')->subFormClass;
         $classes = $classes->merge(collect(explode(' ', $options['class'] ?? '')));
-        $classes = $classes->merge(collect(explode(' ', $this->errorClasses)));
-        $options['class'] = $classes->filter()
+        $classes = $classes->merge(collect(explode(' ', $this->errorClasses)))
+            ->filter()
             ->unique()
             ->implode(' ');
+        unset($options['class']);
+
+        if ($classes) {
+            $options['class'] = $classes;
+        }
+
         $this->attributes['options'] = $options;
 
         return collect($this->attributes['options'])
@@ -126,12 +132,12 @@ abstract class Component extends Model
 
                 return collect(explode(' ', $value))
                     ->filter(function ($class) {
-                        return ($this->excludedClasses->has($class) ? null : $class);
+                        return ! $this->excludedClasses->has($class);
                     })
                     ->implode(' ');
             })
             ->filter(function ($value, $key) {
-                return ($this->excludedKeys->has($key) ? null : $value);
+                return ! $this->excludedKeys->has($key);
             })
             ->unique()
             ->toArray();

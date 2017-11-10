@@ -44,7 +44,8 @@ class LaravelCastsService extends ServiceProvider
         $this->mergeConfigFrom($configPath, 'genealabs-laravel-casts');
 
         $this->registerBladeDirective('form');
-        $this->registerBladeDirective('endSubForm');
+        $this->registerBladeDirective('subform');
+        $this->registerBladeDirective('endsubform');
         $this->registerBladeDirective('model');
         $this->registerBladeDirective('token');
         $this->registerBladeDirective('hidden');

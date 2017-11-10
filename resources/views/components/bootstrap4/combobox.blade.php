@@ -17,6 +17,10 @@
     </div>
 @endif
 
+@if ($options['subFormAction'] ?? false)
+    @subform ($options)
+@endif
+
 @section ('genealabs-laravel-casts')
     @parent
 
@@ -29,7 +33,7 @@
                 $('{{ $options['subFormClass'] }}').find('input,textarea,select').attr('disabled', 'disabled');
             @endif
 
-            $('{!! array_key_exists('subFormClass', $options) ? '[subFormClass="' . $options['subFormClass'] . '"]' : '' !!}[name="{{ $name }}"]').selectize({
+            $('[name="{{ $name }}"]').selectize({
                 options: {!! $options['list'] !!},
                 list: {!! $options['selected'] !!},
                 labelField: 'text',

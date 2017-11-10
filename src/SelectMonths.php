@@ -24,20 +24,12 @@ class SelectMonths extends Dropdown
         ];
 
         if (($options['optionsFormat'] ?? '') === 'slugs') {
-            $list = [
-                'january' => 'January',
-                'february' => 'February',
-                'march' => 'March',
-                'april' => 'April',
-                'may' => 'May',
-                'june' => 'June',
-                'july' => 'July',
-                'august' => 'August',
-                'september' => 'September',
-                'october' => 'October',
-                'november' => 'November',
-                'december' => 'December',
-            ];
+            $keys = array_map('str_slug', array_values($list));
+            $list = array_combine($keys, array_values($list));
+        }
+
+        if (($options['optionsFormat'] ?? '') === 'names') {
+            $list = array_combine(array_values($list), array_values($list));
         }
 
         if (($options['optionsFormat'] ?? '') === 'names') {

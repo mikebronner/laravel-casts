@@ -32,7 +32,7 @@
                     @datetime('datetime1')
                     @combobox ('combobox1', [1, 2, 3, 4], [1, 2], ['placeholder' => 'Placeholder Text', 'multiple' => 'multiple'])
                     @select ('select1', [1, 2, 3, 4], null, ['placeholder' => 'Placeholder Text', 'label' => 'Select'])
-                    @selectMonths ('selectMonths1', 3, ['placeholder' => 'Placeholder Text', 'label' => 'Select Months'])
+                    @selectMonths ('selectMonths1', 3, ['placeholder' => 'Placeholder Text', 'label' => 'Select Months', 'optionsFormat' => 'names'])
                     @selectWeekdays ('selectWeekdays1', 3, ['placeholder' => 'Placeholder Text', 'label' => 'Select Weekdays'])
                     @selectRange ('select_range1', 1, 21, null, ['class' => 'form-control', 'placeholder' => 'Placeholder Text', 'label' => 'Select Range'])
                     @selectRangeWithInterval ('select_range_with_interval1', 1, 21, 3, null, ['class' => 'form-control', 'placeholder' => 'Placeholder Text', 'label' => 'Select Range With Interval'])

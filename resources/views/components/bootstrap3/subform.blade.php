@@ -1,6 +1,3 @@
-{{-- @include ('genealabs-laravel-casts::components.bootstrap3.form-group-close') --}}
-{{-- @include ('genealabs-laravel-casts::components.bootstrap3.form-group-open', ['classes' => str_replace('.', '', ($options['subFormClass'] ?? '')) . ' hidden']) --}}
-
 <div class="col-sm-12 {{ str_replace('.', '', ($options['subFormClass'] ?? '')) . ' hidden' }}">
     <div class="popover popover-static bottom">
         <div class="arrow"></div>
@@ -12,7 +9,7 @@
             {!! csrf_field() !!}
 
             @include ($options['subFormBlade'])
-            @endSubForm
+            @endsubform
 
         </div>
     </div>
