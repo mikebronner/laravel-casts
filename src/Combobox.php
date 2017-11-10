@@ -9,45 +9,62 @@ class Combobox extends Dropdown
         array $options = [],
         array $optionOptions = []
     ) {
-        $options['multiple'] = array_key_exists('multiple', $options) ? 'multiple' : null;
-        $options['class'] = ($options['class'] ?? '');
-        $options['subFormClass'] = ($options['subFormClass'] ?? '');
+        parent::__construct($name, $list, $value, $options, $optionOptions);
 
-        if (array_key_exists('subFormAction', $options)) {
-            $options['subFormMethod'] = $options['subFormMethod'] ?? 'POST';
-            $options['subFormClass'] = '.' . str_random(6);
-            $options['subFormResponseObjectPrimaryKey'] = $options['subFormResponseObjectPrimaryKey'] ?? 'id';
+        if (array_key_exists('multiple', $this->attributes['options'])) {
+            $this->attributes['options']['multiple'] = 'multiple';
         }
 
-        $options['list'] = collect($list)->transform(function ($item, $index) {
+        $this->attributes['options']['class'] = $this->attributes['options']['class'] ?? '';
+        // $this->attributes['options']['subFormClass'] = $this->attributes['options']['subFormClass'] ?? '';
+
+        if (array_key_exists('subFormAction', $this->attributes['options'])) {
+            $this->attributes['options']['subFormMethod'] = $this->attributes['options']['subFormMethod'] ?? 'POST';
+            $this->attributes['options']['subFormClass'] = '.' . str_random(6);
+            $this->attributes['options']['subFormResponseObjectPrimaryKey'] = $this->attributes['options']['subFormResponseObjectPrimaryKey'] ?? 'id';
+        }
+        $this->attributes['options']['list'] = collect($list)->transform(function ($item, $index) {
             return [
                 'text' => $item,
                 'value' => $index,
             ];
         })->values()->toJson();
-        $options['selected'] = collect($value)->transform(function ($item, $index) {
+        $this->attributes['options']['selected'] = collect($value)->transform(function ($item, $index) {
             return [
                 'text' => $item,
                 'value' => $index,
             ];
         })->values()->toJson();
-        array_filter($options);
-        parent::__construct($name, $list, $value, $options, $optionOptions);
-        $this->attributes['options'] = $options;
-        $this->excludedKeys = $this->excludedKeys->merge(collect([
+        // array_filter($this->attributes['options']);
+
+        // dd($this->options);
+        $this->excludedKeys = collect([
+            'label' => '',
             'list' => '',
             'selected' => '',
-        ]));
+        ]);
     }
 
     protected function renderBaseControl() : string
     {
+        $options = $this->attributes['options'];
+        unset($options['list']);
+
+        if (! ($options['subFormAction'] ?? '')) {
+            unset($options['subFormClass']);
+            unset($options['subFormAction']);
+            unset($options['subFormMethod']);
+            unset($options['subFormFieldName']);
+            unset($options['subFormBlade']);
+        }
+
+// dd($this->options, $this->attributes['options'], $options);
         return app('form')->callParentMethod(
             'select',
             $this->name,
             $this->list,
             $this->value,
-            $this->options,
+            $this->attributes['options'],
             $this->optionOptions
         );
     }
@@ -56,24 +73,25 @@ class Combobox extends Dropdown
     {
         $options = collect($this->attributes['options']);
         $options = $options->merge(collect(parent::getOptionsAttribute()))->toArray();
-
-        return collect($options)->map(function ($value, $key) {
+        $options = collect($options)->map(function ($value, $key) {
             if ($key !== 'class') {
                 return trim($value);
             }
 
             return collect(explode(' ', $value))
                 ->filter(function ($class) {
-                    return ($this->excludedClasses->has($class) ? null : $class);
+                    return ! $this->excludedClasses->has($class);
                 })
                 ->push('selectize')
                 ->implode(' ');
         })
         ->filter(function ($value, $key) {
-            return ($this->excludedKeys->has($key) ? null : $value);
+            return ! $this->excludedKeys->has($key);
         })
         ->unique()
         ->toArray();
+
+        return $options;
     }
 
     public function getHtmlAttribute() : string

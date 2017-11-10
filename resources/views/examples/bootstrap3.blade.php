@@ -1,7 +1,9 @@
 @extends('genealabs-laravel-casts::examples.layout')
 
-@section('head')
-    <link href="/css/bootstrap3.css" rel="stylesheet" type="text/css" media="all">
+@section('css')
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    {{-- <link href="/css/bootstrap3.css" rel="stylesheet" type="text/css" media="all"> --}}
 @endsection
 
 @section('content')
@@ -10,6 +12,7 @@
             <div class="col-sm-6">
                 <h1 class="page-header">Horizontal Form</h1>
                 @form(['url' => 'genealabs/laravel-casts/examples/bootstrap3', 'class' => 'form-horizontal', 'framework' => 'bootstrap3'])
+                    @combobox ('subform1', [1, 2, 3, 4], null, ['placeholder' => 'Placeholder Text', 'subFormAction' => 'testurl', 'subFormBlade' => 'genealabs-laravel-casts::examples.subform', 'subFormFieldName' => 'name', 'subFormTitle' => 'Add New Address'])
                     @text('text1', '', ['placeholder' => 'Placeholder Text', 'label' => 'Text Input'])
                     @password('password1', ['placeholder' => 'Placeholder Text', 'label' => 'Password Input'])
                     @date('date1')

@@ -16,9 +16,6 @@
 @if ($isHorizontal)
     </div>
 @endif
-@php
-    dump($options);
-@endphp
 
 @section ('genealabs-laravel-casts')
     @parent
@@ -28,7 +25,7 @@
         window.genealabsLaravelCasts['comboboxLoaders'] = window.genealabsLaravelCasts.comboboxLoaders || [];
         window.genealabsLaravelCasts['framework'] = window.genealabsLaravelCasts.framework || 'bootstrap4';
         window.genealabsLaravelCasts.comboboxLoaders.push(function () {
-            @if (array_key_exists('subFormAction', $options) && array_key_exists('subFormClass', $options))
+            @if ($options['subFormClass'] ?? false)
                 $('{{ $options['subFormClass'] }}').find('input,textarea,select').attr('disabled', 'disabled');
             @endif
 
