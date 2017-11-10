@@ -4,6 +4,10 @@
     max-width: none;
     position: relative;
     z-index: 1;
+
+    .arrow {
+        left: 50%;
+    }
 }
 
 .custom-file-input {

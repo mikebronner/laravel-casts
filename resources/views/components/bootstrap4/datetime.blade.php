@@ -26,7 +26,7 @@
         window.genealabsLaravelCasts['framework'] = 'bootstrap4';
         window.genealabsLaravelCasts['dateTimeLoaders'] = window.genealabsLaravelCasts.dateTimeLoaders || [];
         window.genealabsLaravelCasts.dateTimeLoaders.push(function () {
-            $("{{ $options['subFormClass'] }} #datetimepicker-{{ $name }}").datetimepicker({
+            $("{{ $options['subFormClass'] ?? '' }} #datetimepicker-{{ $name }}").datetimepicker({
                 format: 'lll',
                 date: '{{ $options['value'] }}',
                 sideBySide: true,
