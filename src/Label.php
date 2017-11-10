@@ -18,14 +18,15 @@ class Label extends Component
 
         parent::__construct($name, $value, $options);
 
+        if (app('form')->isHorizontal) {
+            $options['class'] .= ' col-sm-' . app('form')->labelWidth;
+        }
+
         if ($this->framework === 'bootstrap3') {
-            $options['class'] .= ' col-sm-' . app('form')->labelWidth . ' control-label';
+            $options['class'] .= ' control-label';
         }
 
         if ($this->framework === 'bootstrap4') {
-            if (app('form')->isHorizontal) {
-                $options['class'] .= ' col-sm-' . app('form')->labelWidth;
-            }
 
             $options['class'] .= ' col-form-label';
         }
