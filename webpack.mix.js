@@ -1,4 +1,5 @@
 let mix = require('laravel-mix');
+let tailwindcss = require('tailwindcss');
 
 /*
  |--------------------------------------------------------------------------
@@ -30,8 +31,15 @@ mix.setPublicPath('public')
     .copy('node_modules/selectize/dist/js/standalone/selectize.min.js', 'public/bootstrap-combobox.js')
     .sass('resources/assets/scss/font-awesome.scss', 'public')
     .sass('resources/assets/scss/bootstrap3.scss', 'public')
+    .sass('resources/assets/scss/tailwind.scss', 'public')
     .sass('resources/assets/scss/signature-pad.scss', 'public')
     .copy('resources/assets/js/app.js', 'public/app.js')
+    .options({
+        processCssUrls: false,
+        postCss: [
+            tailwindcss('tailwind.js')
+        ],
+    })
     // .js('resources/assets/js/bootstrap3-datetimepicker.js', '')
     // .version()
    ;

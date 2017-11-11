@@ -27,6 +27,7 @@ abstract class Component extends Model
         $this->framework = $options['framework'] ?? app('form')->framework;
         $this->name = $name;
         $this->value = $value;
+        $options['id'] = $options['id'] ?? $name;
         $this->attributes['options'] = $options;
         $this->labelWidth = $options['labelWidth'] ?? app('form')->labelWidth;
         $this->fieldWidth = $options['labelWidth'] ?? app('form')->fieldWidth;

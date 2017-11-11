@@ -1,0 +1,88 @@
+.form-group {
+    @apply mb-4;
+
+label {
+    @apply .block .text-grey-darker .text-sm .font-bold .mb-1;
+}
+
+.submit-primary {
+    @apply .w-full .bg-blue .text-white .font-bold .py-2 .px-4 .rounded .mt-4;
+}
+
+.submit-primary:hover {
+    @apply .bg-blue-dark;
+}
+
+.form-control {
+    @apply .appearance-none .block .w-full .bg-grey-lighter .border-2 .border-grey-lighter .text-grey-darker .rounded .py-3 .px-4;
+
+    & + .help-text {
+        @apply .mt-1;
+    }
+
+
+    &.success {
+        @apply .text-green-dark;
+
+        .form-control {
+            @apply .border-green-dark .text-green-dark .bg-green-lightest;
+
+            & + .help-text {
+                @apply italic;
+            }
+        }
+    }
+
+    &.info {
+        @apply .text-blue-dark;
+
+        .form-control {
+            @apply .border-blue-dark .text-blue-dark .bg-blue-lightest;
+
+            & + .help-text {
+                @apply italic;
+            }
+        }
+    }
+
+    &.warning {
+        @apply .text-orange-dark;
+
+        .form-control {
+            @apply .border-orange-dark .text-orange-dark .bg-orange-lightest;
+
+            & + .help-text {
+                @apply italic;
+            }
+        }
+    }
+
+    &.failure {
+        @apply .text-red-dark;
+
+        .form-control {
+            @apply .border-red-dark .text-red-dark .bg-red-lightest;
+
+            & + .help-text {
+                @apply italic;
+            }
+        }
+    }
+}
+}
+.form-horizontal > div {
+    @apply .flex .flex-wrap .items-center;
+
+    label {
+        @apply .w-1/3 .text-right .pr-3;
+    }
+
+    .form-control {
+        @apply .w-2/3;
+    }
+
+    label:hover + .form-control,
+    .form-control:hover {
+        @apply .border-blue-lighter;
+    }
+}
