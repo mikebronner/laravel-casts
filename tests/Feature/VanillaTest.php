@@ -309,7 +309,6 @@ class VanillaTest extends FeatureTestCase
     {
         $this->visit('/genealabs/laravel-casts/examples/vanilla')
             ->seeElement('button', [
-                'class' => 'btn btn-primary btn-success',
                 'type' => 'submit',
             ])
             ->dontSeeElement('input', [
