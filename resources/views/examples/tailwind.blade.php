@@ -1,7 +1,7 @@
 @extends('genealabs-laravel-casts::examples.layout')
 
 @section('css')
-    <link href="{{ asset('genealabs-laravel-casts/tailwind.css') }}" rel="stylesheet" type="text/css" media="all">
+    <link href="{{ mix('tailwind.css', 'genealabs-laravel-casts') }}" rel="stylesheet" type="text/css" media="all">
 @endsection
 
 @section('content')
@@ -22,7 +22,7 @@
                 @week ('week1', 3, ['placeholder' => 'Placeholder Text', 'label' => 'Week Input'])
                 @month ('month1', 'January', ['placeholder' => 'Placeholder Text', 'label' => 'Month Input'])
                 @textarea ('textarea1', '', ['placeholder' => 'Placeholder Text', 'label' => 'Textarea', 'rows' => 7])
-                @submit ('submit', ['class' => 'btn btn-success', 'label' => 'Submit Button'], '/bs3')
+                @submit ('submit', ['class' => 'primary', 'label' => 'Submit Button'], '/bs3')
                 {{-- @date ('date1')
                 @datetime ('datetime1') --}}
                 {{-- @checkbox ('checkbox1', 'test', true, ['placeholder' => 'Placeholder Text', 'label' => 'Checkbox'])
@@ -64,7 +64,7 @@
                 @week ('week2', 3, ['placeholder' => 'Placeholder Text', 'label' => 'Week Input'])
                 @month ('month2', 'January', ['placeholder' => 'Placeholder Text', 'label' => 'Month Input'])
                 @textarea('textarea2', '', ['placeholder' => 'Placeholder Text', 'label' => 'Textarea', 'rows' => 7])
-                @submit('submit2', ['class' => 'btn btn-success', 'label' => 'Submit Button'], '/bs3')
+                @submit('submit2', ['class' => 'primary', 'label' => 'Submit Button'], '/bs3')
                 {{-- @date('date2')
                 @datetime('datetime2') --}}
                 {{-- @checkbox('checkbox2', 'test', true, ['placeholder' => 'Placeholder Text', 'label' => 'Checkbox']) --}}

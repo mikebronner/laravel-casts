@@ -42,6 +42,7 @@ class FormBuilder extends Form
     public function open(array $options = [])
     {
         $this->initializeForm($options);
+        unset($options['framework']);
 
         return parent::open($options);
     }
@@ -49,6 +50,7 @@ class FormBuilder extends Form
     public function model($model, array $options = [])
     {
         $this->initializeForm($options);
+        unset($options['framework']);
 
         return parent::model($model, $options);
     }

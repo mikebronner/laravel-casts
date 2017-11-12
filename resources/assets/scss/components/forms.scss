@@ -1,25 +1,36 @@
 .form-group {
     @apply mb-4;
 
-label {
-    @apply .block .text-grey-darker .text-sm .font-bold .mb-1;
-}
-
-.submit-primary {
-    @apply .w-full .bg-blue .text-white .font-bold .py-2 .px-4 .rounded .mt-4;
-}
-
-.submit-primary:hover {
-    @apply .bg-blue-dark;
-}
-
-.form-control {
-    @apply .appearance-none .block .w-full .bg-grey-lighter .border-2 .border-grey-lighter .text-grey-darker .rounded .py-3 .px-4;
-
-    & + .help-text {
-        @apply .mt-1;
+    label {
+        @apply .block .text-grey-darker .text-sm .font-bold .mb-1;
     }
 
+    label:hover + .form-control,
+    .form-control:hover {
+        @apply .border-blue-lighter;
+    }
+
+    .btn,
+    button[type=submit] {
+        @apply .w-full .py-2 .px-4 .rounded;
+
+        &.primary {
+            @apply .bg-blue .text-white .font-bold;
+        }
+
+        &.primary:hover {
+            @apply .bg-blue-dark;
+        }
+    }
+
+
+    .form-control {
+        @apply .appearance-none .block .w-full .bg-grey-lighter .border-2 .border-grey-lighter .text-grey-darker .rounded .py-3 .px-4;
+
+        & + .help-text {
+            @apply .mt-1;
+        }
+    }
 
     &.success {
         @apply .text-green-dark;
@@ -69,20 +80,23 @@ label {
         }
     }
 }
-}
-.form-horizontal > div {
+
+.form-horizontal .form-group {
     @apply .flex .flex-wrap .items-center;
 
     label {
         @apply .w-1/3 .text-right .pr-3;
     }
 
+    button[type=submit] {
+        @apply .w-auto;
+    }
+
     .form-control {
         @apply .w-2/3;
     }
 
-    label:hover + .form-control,
-    .form-control:hover {
-        @apply .border-blue-lighter;
+    .help-text {
+        @apply .ml-1/3 .w-2/3;
     }
 }

@@ -41,7 +41,7 @@ mix.setPublicPath('public')
         ],
     })
     // .js('resources/assets/js/bootstrap3-datetimepicker.js', '')
-    // .version()
+    .version()
    ;
 
 // Full API

@@ -513,20 +513,30 @@ button,
   margin-bottom: 0.25rem;
 }
 
-.form-group .submit-primary {
+.form-group label:hover + .form-control,
+.form-group .form-control:hover {
+  border-color: #bcdefa;
+}
+
+.form-group .btn,
+.form-group button[type=submit] {
   width: 100%;
-  background-color: #3490dc;
-  color: #ffffff;
-  font-weight: 700;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
   padding-left: 1rem;
   padding-right: 1rem;
   border-radius: .25rem;
-  margin-top: 1rem;
 }
 
-.form-group .submit-primary:hover {
+.form-group .btn.primary,
+.form-group button[type=submit].primary {
+  background-color: #3490dc;
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.form-group .btn.primary:hover,
+.form-group button[type=submit].primary:hover {
   background-color: #2779bd;
 }
 
@@ -551,63 +561,63 @@ button,
   margin-top: 0.25rem;
 }
 
-.form-group .form-control.success {
+.form-group.success {
   color: #1f9d55;
 }
 
-.form-group .form-control.success .form-control {
+.form-group.success .form-control {
   border-color: #1f9d55;
   color: #1f9d55;
   background-color: #e3fcec;
 }
 
-.form-group .form-control.success .form-control + .help-text {
+.form-group.success .form-control + .help-text {
   font-style: italic;
 }
 
-.form-group .form-control.info {
+.form-group.info {
   color: #2779bd;
 }
 
-.form-group .form-control.info .form-control {
+.form-group.info .form-control {
   border-color: #2779bd;
   color: #2779bd;
   background-color: #eff8ff;
 }
 
-.form-group .form-control.info .form-control + .help-text {
+.form-group.info .form-control + .help-text {
   font-style: italic;
 }
 
-.form-group .form-control.warning {
+.form-group.warning {
   color: #de751f;
 }
 
-.form-group .form-control.warning .form-control {
+.form-group.warning .form-control {
   border-color: #de751f;
   color: #de751f;
   background-color: #fff5eb;
 }
 
-.form-group .form-control.warning .form-control + .help-text {
+.form-group.warning .form-control + .help-text {
   font-style: italic;
 }
 
-.form-group .form-control.failure {
+.form-group.failure {
   color: #cc1f1a;
 }
 
-.form-group .form-control.failure .form-control {
+.form-group.failure .form-control {
   border-color: #cc1f1a;
   color: #cc1f1a;
   background-color: #fcebea;
 }
 
-.form-group .form-control.failure .form-control + .help-text {
+.form-group.failure .form-control + .help-text {
   font-style: italic;
 }
 
-.form-horizontal > div {
+.form-horizontal .form-group {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -618,19 +628,23 @@ button,
           align-items: center;
 }
 
-.form-horizontal > div label {
+.form-horizontal .form-group label {
   width: 33.33333%;
   text-align: right;
   padding-right: 0.75rem;
 }
 
-.form-horizontal > div .form-control {
+.form-horizontal .form-group button[type=submit] {
+  width: auto;
+}
+
+.form-horizontal .form-group .form-control {
   width: 66.66667%;
 }
 
-.form-horizontal > div label:hover + .form-control,
-.form-horizontal > div .form-control:hover {
-  border-color: #bcdefa;
+.form-horizontal .form-group .help-text {
+  margin-left: 33.333%;
+  width: 66.66667%;
 }
 
 /**
@@ -3707,6 +3721,10 @@ button,
  * @import "utilities/backgrond-patterns";
  * @import "utilities/skew-transforms";
  */
+.ml-1\/3 {
+  margin-left: 33.333%;
+}
+
 @media (min-width: 576px) {
   .sm\:list-reset {
     list-style: none;

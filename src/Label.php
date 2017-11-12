@@ -46,6 +46,7 @@ class Label extends Component
             'subFormMethod' => '',
             'subFormTitle' => '',
             'subFormResponseObjectPrimaryKey' => '',
+            'type' => '',
         ]));
         $this->excludedClasses = collect([
             'custom-file-input' => '',
