@@ -27,6 +27,7 @@
                     <ul class="navbar-nav mr-auto">
                         <li><a class="nav-link" href="{{ url('/genealabs/laravel-casts/examples/bootstrap3') }}">Bootstrap 3</a></li>
                         <li><a class="nav-link" href="{{ url('/genealabs/laravel-casts/examples/bootstrap4') }}">Bootstrap 4</a></li>
+                        <li><a class="nav-link" href="{{ url('/genealabs/laravel-casts/examples/tailwind') }}">TailwindCSS</a></li>
                     </ul>
                 </div>
             </nav>

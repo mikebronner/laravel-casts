@@ -6,7 +6,10 @@ class Button extends Component
     {
         parent::__construct('', $value, $options);
 
-        $this->classes = 'btn';
+        if (in_array($this->framework, ['bootstrap3', 'bootstrap4'])) {
+            $this->classes = 'btn';
+        }
+
         $this->excludedKeys = $this->excludedKeys->merge(collect([
             'placeholder' => '',
         ]));

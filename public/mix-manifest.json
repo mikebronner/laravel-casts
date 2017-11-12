@@ -1,7 +1,22 @@
 {
-  "/mix.js": "/mix.js",
-  "/bootstrap4-custom.css": "/bootstrap4-custom.css",
-  "/font-awesome.css": "/font-awesome.css",
-  "/bootstrap3.css": "/bootstrap3.css",
-  "/signature-pad.css": "/signature-pad.css"
+    "/bootstrap4-custom.css": "/bootstrap4-custom.css?id=4ff6bdb0e83035dc566d",
+    "/font-awesome.css": "/font-awesome.css?id=34c7cfc186bd738c3412",
+    "/bootstrap3.css": "/bootstrap3.css?id=7cf5cfbf8e4b56ad17e5",
+    "/signature-pad.css": "/signature-pad.css?id=6a6fad8e6278d52eee15",
+    "/bootstrap3-datetimepicker.js": "/bootstrap3-datetimepicker.js?id=c94917a7607427b379ab",
+    "/bootstrap3-datetimepicker.css": "/bootstrap3-datetimepicker.css?id=d12ac6f3390ac28c3126",
+    "/bootstrap4-datetimepicker.js": "/bootstrap4-datetimepicker.js?id=f593214a02f41e797159",
+    "/bootstrap4-datetimepicker.css": "/bootstrap4-datetimepicker.css?id=f08e684ed8a2aa6b56f0",
+    "/bootstrap3.js": "/bootstrap3.js?id=5869c96cc8f19086aee6",
+    "/moment.js": "/moment.js?id=2ca656d29bd6f1ab8c81",
+    "/tether.js": "/tether.js?id=f615cefa04b10d1111c6",
+    "/bootstrap4.js": "/bootstrap4.js?id=46b549bdc90920f18a91",
+    "/bootstrap4.css": "/bootstrap4.css?id=95df726a7936892cf645",
+    "/bootstrap-switch.css": "/bootstrap-switch.css?id=17fc6e5330ede6f875a0",
+    "/bootstrap-switch.js": "/bootstrap-switch.js?id=27d0f1f3f774af8d8305",
+    "/signature-pad.js": "/signature-pad.js?id=ed53f2b3fc0ca5079f42",
+    "/bootstrap3-combobox.css": "/bootstrap3-combobox.css?id=ac38ad19469b8c594246",
+    "/bootstrap-combobox.js": "/bootstrap-combobox.js?id=5949ba84ac0fd20b5585",
+    "/app.js": "/app.js?id=b26349a91cd7082c4c58",
+    "/tailwind.css": "/tailwind.css?id=0c2186f5312e33e0c517"
 }

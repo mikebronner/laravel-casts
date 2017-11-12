@@ -15,10 +15,11 @@ class Label extends Component
         $value = str_replace('-', ' ', $value);
         $value = $options['label'] ?? (ucwords($value) ?: '');
         $options['class'] = $options['class'] ?? '';
+        unset($options['id']);
 
         parent::__construct($name, $value, $options);
 
-        if (app('form')->isHorizontal) {
+        if (app('form')->isHorizontal && ($this->framework === 'bootstrap3' || $this->framework === 'bootstrap4')) {
             $options['class'] .= ' col-sm-' . app('form')->labelWidth;
         }
 
@@ -45,6 +46,7 @@ class Label extends Component
             'subFormMethod' => '',
             'subFormTitle' => '',
             'subFormResponseObjectPrimaryKey' => '',
+            'type' => '',
         ]));
         $this->excludedClasses = collect([
             'custom-file-input' => '',

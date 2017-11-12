@@ -22,7 +22,6 @@ class Bootstrap4Test extends FeatureTestCase
                 'action' => 'http://localhost/genealabs/laravel-casts/examples/bootstrap4',
                 'accept-charset' => 'UTF-8',
                 'class' => 'form-horizontal',
-                'framework' => 'bootstrap4',
             ])
             ->seeElement('input', [
                 'name' => '_token',
@@ -266,7 +265,7 @@ class Bootstrap4Test extends FeatureTestCase
             )
             ->seeInElement(
                 'label[class="form-check-label"]',
-                '<input class="form-check-input" checked name="checkbox1" type="checkbox" value="test">'
+                '<input id="checkbox1" class="form-check-input" checked name="checkbox1" type="checkbox" value="test">'
             )
             ->seeStatusCode('200');
     }
