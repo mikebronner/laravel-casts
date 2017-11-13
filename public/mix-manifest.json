@@ -1,8 +1,9 @@
 {
-    "/bootstrap4-custom.css": "/bootstrap4-custom.css?id=4ff6bdb0e83035dc566d",
-    "/font-awesome.css": "/font-awesome.css?id=34c7cfc186bd738c3412",
-    "/bootstrap3.css": "/bootstrap3.css?id=7cf5cfbf8e4b56ad17e5",
-    "/signature-pad.css": "/signature-pad.css?id=6a6fad8e6278d52eee15",
+    "/bootstrap4-custom.css": "/bootstrap4-custom.css?id=6a0f59af00f5e37f8233",
+    "/font-awesome.css": "/font-awesome.css?id=ffeef3e0d07468c6b45f",
+    "/bootstrap3.css": "/bootstrap3.css?id=3b81a25fb54d87d415e8",
+    "/tailwind.css": "/tailwind.css?id=79ec4fbe25a3b4d19be8",
+    "/signature-pad.css": "/signature-pad.css?id=5d2bf26358b8c5315d32",
     "/bootstrap3-datetimepicker.js": "/bootstrap3-datetimepicker.js?id=c94917a7607427b379ab",
     "/bootstrap3-datetimepicker.css": "/bootstrap3-datetimepicker.css?id=d12ac6f3390ac28c3126",
     "/bootstrap4-datetimepicker.js": "/bootstrap4-datetimepicker.js?id=f593214a02f41e797159",
@@ -17,6 +18,5 @@
     "/signature-pad.js": "/signature-pad.js?id=ed53f2b3fc0ca5079f42",
     "/bootstrap3-combobox.css": "/bootstrap3-combobox.css?id=ac38ad19469b8c594246",
     "/bootstrap-combobox.js": "/bootstrap-combobox.js?id=5949ba84ac0fd20b5585",
-    "/app.js": "/app.js?id=b26349a91cd7082c4c58",
-    "/tailwind.css": "/tailwind.css?id=0c2186f5312e33e0c517"
+    "/app.js": "/app.js?id=b26349a91cd7082c4c58"
 }

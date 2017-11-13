@@ -140,6 +140,7 @@ abstract class Component extends Model
             ->filter(function ($value, $key) {
                 return ! $this->excludedKeys->has($key);
             })
+            ->filter()
             ->unique()
             ->toArray();
     }

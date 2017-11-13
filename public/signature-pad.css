@@ -1,13 +1,1 @@
-.signature {
-  position: relative;
-}
-
-.signature .footer {
-  border-top: 1px dashed #ccc;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 15px;
-  position: absolute;
-  text-align: center;
-}
+.signature{position:relative}.signature .footer{border-top:1px dashed #ccc;bottom:0;left:0;right:0;padding:15px;position:absolute;text-align:center}
