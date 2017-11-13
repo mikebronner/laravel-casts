@@ -3,6 +3,10 @@
 
     label {
         @apply .block .text-grey-darker .text-sm .font-bold .mb-1;
+
+        &.checkbox {
+            @apply .text-left .font-normal;
+        }
     }
 
     label:hover + .form-control,
@@ -12,7 +16,7 @@
 
     .btn,
     button[type=submit] {
-        @apply .w-full .py-2 .px-4 .rounded;
+        @apply .w-full .py-3 .px-4 .rounded;
 
         &.primary {
             @apply .bg-blue .text-white .font-bold;
@@ -130,7 +134,7 @@
 .form-horizontal .form-group {
     @apply .flex .flex-wrap .items-center;
 
-    label {
+    label:not(.checkbox) {
         @apply .w-1/3 .text-right .pr-3;
     }
 

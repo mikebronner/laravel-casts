@@ -24,9 +24,9 @@
                 @textarea ('textarea1', '', ['placeholder' => 'Placeholder Text', 'label' => 'Textarea', 'rows' => 7])
                 @file ('file1', ['placeholder' => 'Placeholder Text', 'label' => 'File Input'])
                 @submit ('submit1', ['class' => 'primary', 'label' => 'Submit Button'], '/bs3')
+                @checkbox ('checkbox1', 'test', true, ['placeholder' => 'Placeholder Text', 'label' => 'Checkbox'])
                 {{-- @date ('date1')
-                @datetime ('datetime1') --}}
-                {{-- @checkbox ('checkbox1', 'test', true, ['placeholder' => 'Placeholder Text', 'label' => 'Checkbox'])
+                @datetime ('datetime1')
                 @file ('file1', ['placeholder' => 'Placeholder Text', 'label' => 'File Input'])
                 @combobox ('subform1', [1, 2, 3, 4], null, ['placeholder' => 'Placeholder Text', 'subFormAction' => 'testurl', 'subFormBlade' => 'genealabs-laravel-casts::examples.subform', 'subFormFieldName' => 'name', 'subFormTitle' => 'Add New Address'])
                 @radio ('radio1', 'test', true, ['placeholder' => 'Placeholder Text', 'label' => 'Radio'])
@@ -66,9 +66,9 @@
                 @month ('month2', 'January', ['placeholder' => 'Placeholder Text', 'label' => 'Month Input'])
                 @textarea ('textarea2', '', ['placeholder' => 'Placeholder Text', 'label' => 'Textarea', 'rows' => 7])
                 @submit ('submit2', ['class' => 'primary', 'label' => 'Submit Button'], '/bs3')
+                @checkbox('checkbox2', 'test', true, ['placeholder' => 'Placeholder Text', 'label' => 'Checkbox'])
                 {{-- @date('date2')
                 @datetime('datetime2') --}}
-                {{-- @checkbox('checkbox2', 'test', true, ['placeholder' => 'Placeholder Text', 'label' => 'Checkbox']) --}}
                 {{-- @radio('radio2', 'test', true, ['placeholder' => 'Placeholder Text', 'label' => 'Radio']) --}}
                 {{-- @switch('switch2', 'test', true, ['label' => 'Switch', 'onText' => 'Available', 'offText' => 'Unavailable', 'onColor' => 'success', 'offColor' => 'danger']) --}}
                 {{-- @combobox('combobox2', [1, 2, 3, 4], [], ['placeholder' => 'Placeholder Text'])
