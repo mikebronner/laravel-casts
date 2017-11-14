@@ -34,13 +34,13 @@ abstract class Component extends Model
         $options['offsetClass'] = '';
 
         if ($this->framework === 'bootstrap3') {
-            $options['offsetClass'] = trim($options['label'] ?? '') === ''
+            $options['offsetClass'] = trim($options['label'] ?? '') === ' '
                 ? ' col-sm-offset-' . $this->labelWidth
                 : '';
         }
 
         if ($this->framework === 'bootstrap4') {
-            $options['offsetClass'] = trim($options['label'] ?? '') === ''
+            $options['offsetClass'] = trim($options['label'] ?? '') === ' '
                 ? ' offset-sm-' . $this->labelWidth
                 : '';
         }
