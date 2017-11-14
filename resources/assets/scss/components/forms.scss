@@ -1,4 +1,3 @@
-@import "select";
 
 .form-group {
     @apply .flex .flex-wrap .items-center .mb-4 .relative;
@@ -15,19 +14,6 @@
     label:hover + .form-control,
     .form-control:hover {
         @apply .border-blue;
-    }
-
-    .btn,
-    button[type=submit] {
-        @apply .w-full .py-3 .px-4 .rounded;
-
-        &.primary {
-            @apply .bg-blue .text-white .font-bold;
-        }
-
-        &.primary:hover {
-            @apply .bg-blue-dark;
-        }
     }
 
     .file-field {
@@ -63,11 +49,11 @@
         }
 
         :first-child {
-            @apply .rounded .rounded-l .border-r .text-grey-darker;
+            @apply .rounded .rounded-l .border-r;
         }
 
         :last-child {
-            @apply .rounded .rounded-r .text-grey-darker;
+            @apply .rounded .rounded-r;
         }
 
         input:not([type=file], [type=submit], [type=button]) {
@@ -78,11 +64,6 @@
             @apply .border-blue;
         }
 
-        button:hover,
-        input[type=submit]:hover,
-        input[type=button]:hover {
-            @apply .bg-grey .text-white;
-        }
     }
 
     &.success {
@@ -148,11 +129,11 @@
         @apply .w-auto;
     }
 
+    .help-text,
     .form-control {
-        @apply .w-2/3;
-    }
-
-    .help-text {
-        @apply .ml-auto .w-2/3;
+        @apply .w-2/3 .ml-auto;
     }
 }
+
+@import "button";
+@import "select";
