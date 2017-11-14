@@ -25,12 +25,26 @@ abstract class Component extends Model
         ]);
         $this->excludedClasses = collect();
         $this->framework = $options['framework'] ?? app('form')->framework;
+        $this->labelWidth = $options['labelWidth'] ?? app('form')->labelWidth;
+        $this->fieldWidth = $options['labelWidth'] ?? app('form')->fieldWidth;
         $this->name = $name;
         $this->value = $value;
         $options['id'] = $options['id'] ?? $name;
+        $options['offsetClass'] = '';
+
+        if ($this->framework === 'bootstrap3') {
+            $options['offsetClass'] = trim($options['label'] ?? '') === ''
+                ? ' col-sm-offset-' . $this->labelWidth
+                : '';
+        }
+
+        if ($this->framework === 'bootstrap4') {
+            $options['offsetClass'] = trim($options['label'] ?? '') === ''
+                ? ' offset-sm-' . $this->labelWidth
+                : '';
+        }
+
         $this->attributes['options'] = $options;
-        $this->labelWidth = $options['labelWidth'] ?? app('form')->labelWidth;
-        $this->fieldWidth = $options['labelWidth'] ?? app('form')->fieldWidth;
         $this->errors = app('form')->errors ?: collect();
     }
 
