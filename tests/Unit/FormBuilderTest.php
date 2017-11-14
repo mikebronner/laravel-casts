@@ -76,7 +76,7 @@ class FormBuilderTest extends UnitTestCase
     {
         $string = "@text ('input-field', 'test text', ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label'])";
         $expected = "<?php echo app('form')->text('input-field', 'test text', ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label']); ?>";
-        $expectedHtml = "<div class=\"form-group\">\n\n            <label for=\"input-field\" class=\"control-label\">Text field label</label>    \n<input placeholder=\"Placeholder\" id=\"input-field\" class=\"form-control blue\" name=\"input-field\" type=\"text\" value=\"test text\">\n\n\n\n\n    </div>\n";
+        $expectedHtml = "<div class=\"form-group\">\n\n            <label for=\"input-field\" class=\"control-label\">Text Field Label</label>    \n<input placeholder=\"Placeholder\" id=\"input-field\" class=\"form-control blue\" name=\"input-field\" type=\"text\" value=\"test text\">\n\n\n\n\n    </div>\n";
 
         $compiled = app('blade.compiler')->compileString($string);
         $html = app('form')->text('input-field', 'test text', ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label']);
@@ -89,7 +89,7 @@ class FormBuilderTest extends UnitTestCase
     {
         $string = "@tel ('input-field', 'test text', ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label'])";
         $expected = "<?php echo app('form')->tel('input-field', 'test text', ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label']); ?>";
-        $expectedHtml = "<div class=\"form-group\">\n\n            <label for=\"input-field\" class=\"control-label\">Text field label</label>    \n<input placeholder=\"Placeholder\" id=\"input-field\" class=\"form-control blue\" name=\"input-field\" type=\"tel\" value=\"test text\">\n\n\n\n\n    </div>\n";
+        $expectedHtml = "<div class=\"form-group\">\n\n            <label for=\"input-field\" class=\"control-label\">Text Field Label</label>    \n<input placeholder=\"Placeholder\" id=\"input-field\" class=\"form-control blue\" name=\"input-field\" type=\"tel\" value=\"test text\">\n\n\n\n\n    </div>\n";
 
         $compiled = app('blade.compiler')->compileString($string);
         $html = app('form')->tel('input-field', 'test text', ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label']);
@@ -102,7 +102,7 @@ class FormBuilderTest extends UnitTestCase
     {
         $string = "@month ('input-field', 'test text', ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label'])";
         $expected = "<?php echo app('form')->month('input-field', 'test text', ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label']); ?>";
-        $expectedHtml = "<div class=\"form-group\">\n\n            <label for=\"input-field\" class=\"control-label\">Text field label</label>    \n<input placeholder=\"Placeholder\" id=\"input-field\" class=\"form-control blue\" name=\"input-field\" type=\"month\" value=\"test text\">\n\n\n\n\n    </div>\n";
+        $expectedHtml = "<div class=\"form-group\">\n\n            <label for=\"input-field\" class=\"control-label\">Text Field Label</label>    \n<input placeholder=\"Placeholder\" id=\"input-field\" class=\"form-control blue\" name=\"input-field\" type=\"month\" value=\"test text\">\n\n\n\n\n    </div>\n";
 
         $compiled = app('blade.compiler')->compileString($string);
         $html = app('form')->month('input-field', 'test text', ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label']);
@@ -115,7 +115,7 @@ class FormBuilderTest extends UnitTestCase
     {
         $string = "@week ('input-field', 3, ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label'])";
         $expected = "<?php echo app('form')->week('input-field', 3, ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label']); ?>";
-        $expectedHtml = "<div class=\"form-group\">\n\n            <label for=\"input-field\" class=\"control-label\">Text field label</label>    \n<input placeholder=\"Placeholder\" id=\"input-field\" class=\"form-control blue\" name=\"input-field\" type=\"week\" value=\"3\">\n\n\n\n\n    </div>\n";
+        $expectedHtml = "<div class=\"form-group\">\n\n            <label for=\"input-field\" class=\"control-label\">Text Field Label</label>    \n<input placeholder=\"Placeholder\" id=\"input-field\" class=\"form-control blue\" name=\"input-field\" type=\"week\" value=\"3\">\n\n\n\n\n    </div>\n";
 
         $compiled = app('blade.compiler')->compileString($string);
         $html = app('form')->week('input-field', 3, ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label']);
@@ -128,7 +128,7 @@ class FormBuilderTest extends UnitTestCase
     {
         $string = "@search ('input-field', 3, ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label'])";
         $expected = "<?php echo app('form')->search('input-field', 3, ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label']); ?>";
-        $expectedHtml = "<div class=\"form-group\">\n\n            <label for=\"input-field\" class=\"control-label\">Text field label</label>    \n<input placeholder=\"Placeholder\" id=\"input-field\" class=\"form-control blue\" name=\"input-field\" type=\"search\" value=\"3\">\n\n\n\n\n    </div>\n";
+        $expectedHtml = "<div class=\"form-group\">\n\n            <label for=\"input-field\" class=\"control-label\">Text Field Label</label>    \n<input placeholder=\"Placeholder\" id=\"input-field\" class=\"form-control blue\" name=\"input-field\" type=\"search\" value=\"3\">\n\n\n\n\n    </div>\n";
 
         $compiled = app('blade.compiler')->compileString($string);
         $html = app('form')->search('input-field', 3, ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label']);
@@ -141,7 +141,7 @@ class FormBuilderTest extends UnitTestCase
     {
         $string = "@range ('input-field', 3, ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label'])";
         $expected = "<?php echo app('form')->range('input-field', 3, ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label']); ?>";
-        $expectedHtml = "<div class=\"form-group\">\n\n            <label for=\"input-field\" class=\"control-label\">Text field label</label>    \n<input placeholder=\"Placeholder\" id=\"input-field\" class=\"form-control blue\" name=\"input-field\" type=\"range\" value=\"3\">\n\n\n\n\n    </div>\n";
+        $expectedHtml = "<div class=\"form-group\">\n\n            <label for=\"input-field\" class=\"control-label\">Text Field Label</label>    \n<input placeholder=\"Placeholder\" id=\"input-field\" class=\"form-control blue\" name=\"input-field\" type=\"range\" value=\"3\">\n\n\n\n\n    </div>\n";
 
         $compiled = app('blade.compiler')->compileString($string);
         $html = app('form')->range('input-field', 3, ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label']);
@@ -154,7 +154,7 @@ class FormBuilderTest extends UnitTestCase
     {
         $string = "@number ('input-field', 5, ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label'])";
         $expected = "<?php echo app('form')->number('input-field', 5, ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label']); ?>";
-        $expectedHtml = "<div class=\"form-group\">\n\n            <label for=\"input-field\" class=\"control-label\">Text field label</label>    \n<input placeholder=\"Placeholder\" id=\"input-field\" class=\"form-control blue\" name=\"input-field\" type=\"number\" value=\"5\">\n\n\n\n\n    </div>\n";
+        $expectedHtml = "<div class=\"form-group\">\n\n            <label for=\"input-field\" class=\"control-label\">Text Field Label</label>    \n<input placeholder=\"Placeholder\" id=\"input-field\" class=\"form-control blue\" name=\"input-field\" type=\"number\" value=\"5\">\n\n\n\n\n    </div>\n";
 
         $compiled = app('blade.compiler')->compileString($string);
         $html = app('form')->number('input-field', 5, ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label']);
@@ -167,7 +167,7 @@ class FormBuilderTest extends UnitTestCase
     {
         $string = "@color ('input-field', '#ff0000', ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label'])";
         $expected = "<?php echo app('form')->color('input-field', '#ff0000', ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label']); ?>";
-        $expectedHtml = "<div class=\"form-group\">\n\n            <label for=\"input-field\" class=\"control-label\">Text field label</label>    \n<input placeholder=\"Placeholder\" id=\"input-field\" class=\"form-control blue\" name=\"input-field\" type=\"color\" value=\"#ff0000\">\n\n\n\n\n    </div>\n";
+        $expectedHtml = "<div class=\"form-group\">\n\n            <label for=\"input-field\" class=\"control-label\">Text Field Label</label>    \n<input placeholder=\"Placeholder\" id=\"input-field\" class=\"form-control blue\" name=\"input-field\" type=\"color\" value=\"#ff0000\">\n\n\n\n\n    </div>\n";
 
         $compiled = app('blade.compiler')->compileString($string);
         $html = app('form')->color('input-field', '#ff0000', ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label']);
@@ -180,7 +180,7 @@ class FormBuilderTest extends UnitTestCase
     {
         $string = "@email ('email-input', 'test email', ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label'])";
         $expected = "<?php echo app('form')->email('email-input', 'test email', ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label']); ?>";
-        $expectedHtml = "<div class=\"form-group\">\n\n            <label for=\"input-field\" class=\"control-label\">Text field label</label>    \n<input placeholder=\"Placeholder\" id=\"input-field\" class=\"form-control blue\" name=\"input-field\" type=\"email\" value=\"test text\">\n\n\n\n\n    </div>\n";
+        $expectedHtml = "<div class=\"form-group\">\n\n            <label for=\"input-field\" class=\"control-label\">Text Field Label</label>    \n<input placeholder=\"Placeholder\" id=\"input-field\" class=\"form-control blue\" name=\"input-field\" type=\"email\" value=\"test text\">\n\n\n\n\n    </div>\n";
 
         $compiled = app('blade.compiler')->compileString($string);
         $html = app('form')->email('input-field', 'test text', ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label']);
@@ -193,7 +193,7 @@ class FormBuilderTest extends UnitTestCase
     {
         $string = "@password ('input-field', ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label'])";
         $expected = "<?php echo app('form')->password('input-field', ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label']); ?>";
-        $expectedHtml = "<div class=\"form-group\">\n\n            <label for=\"input-field\" class=\"control-label\">Text field label</label>    \n<input placeholder=\"Placeholder\" id=\"input-field\" class=\"form-control blue\" name=\"input-field\" type=\"password\" value=\"\">\n\n\n\n\n    </div>\n";
+        $expectedHtml = "<div class=\"form-group\">\n\n            <label for=\"input-field\" class=\"control-label\">Text Field Label</label>    \n<input placeholder=\"Placeholder\" id=\"input-field\" class=\"form-control blue\" name=\"input-field\" type=\"password\" value=\"\">\n\n\n\n\n    </div>\n";
 
         $compiled = app('blade.compiler')->compileString($string);
         $html = app('form')->password('input-field', ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label']);
@@ -206,7 +206,7 @@ class FormBuilderTest extends UnitTestCase
     {
         $string = "@url ('input-field', 'test url', ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label'])";
         $expected = "<?php echo app('form')->url('input-field', 'test url', ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label']); ?>";
-        $expectedHtml = "<div class=\"form-group\">\n\n            <label for=\"input-field\" class=\"control-label\">Text field label</label>    \n<input placeholder=\"Placeholder\" id=\"input-field\" class=\"form-control blue\" name=\"input-field\" type=\"url\" value=\"test url\">\n\n\n\n\n    </div>\n";
+        $expectedHtml = "<div class=\"form-group\">\n\n            <label for=\"input-field\" class=\"control-label\">Text Field Label</label>    \n<input placeholder=\"Placeholder\" id=\"input-field\" class=\"form-control blue\" name=\"input-field\" type=\"url\" value=\"test url\">\n\n\n\n\n    </div>\n";
 
         $compiled = app('blade.compiler')->compileString($string);
         $html = app('form')->url('input-field', 'test url', ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label']);
@@ -219,7 +219,7 @@ class FormBuilderTest extends UnitTestCase
     {
         $string = "@file ('input-field', ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label'])";
         $expected = "<?php echo app('form')->file('input-field', ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label']); ?>";
-        $expectedHtml = "<div class=\"form-group\">\n\n            <label for=\"input-field\" class=\"control-label\">Text field label</label>    \n<input placeholder=\"Placeholder\" id=\"input-field\" class=\"form-control form-control-file blue\" name=\"input-field\" type=\"file\">\n\n\n\n\n    </div>\n";
+        $expectedHtml = "<div class=\"form-group\">\n\n            <label for=\"input-field\" class=\"control-label\">Text Field Label</label>    \n<input placeholder=\"Placeholder\" id=\"input-field\" class=\"form-control form-control-file blue\" name=\"input-field\" type=\"file\">\n\n\n\n\n    </div>\n";
 
         $compiled = app('blade.compiler')->compileString($string);
         $html = app('form')->file('input-field', ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label']);
@@ -232,7 +232,7 @@ class FormBuilderTest extends UnitTestCase
     {
         $string = "@textarea ('input-field', 'example text', ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label'])";
         $expected = "<?php echo app('form')->textarea('input-field', 'example text', ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label']); ?>";
-        $expectedHtml = "<div class=\"form-group\">\n\n            <label for=\"input-field\" class=\"control-label\">Text field label</label>    \n<textarea placeholder=\"Placeholder\" id=\"input-field\" class=\"form-control blue\" name=\"input-field\" cols=\"50\" rows=\"10\">example text</textarea>\n\n\n\n\n    </div>\n";
+        $expectedHtml = "<div class=\"form-group\">\n\n            <label for=\"input-field\" class=\"control-label\">Text Field Label</label>    \n<textarea placeholder=\"Placeholder\" id=\"input-field\" class=\"form-control blue\" name=\"input-field\" cols=\"50\" rows=\"10\">example text</textarea>\n\n\n\n\n    </div>\n";
 
         $compiled = app('blade.compiler')->compileString($string);
         $html = app('form')->textarea('input-field', 'example text', ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label']);
@@ -245,7 +245,7 @@ class FormBuilderTest extends UnitTestCase
     {
         $string = "@combobox ('input-field', ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label'])";
         $expected = "<?php echo app('form')->combobox('input-field', ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label']); ?>";
-        $expectedHtml = "<div class=\"form-group\">\n\n            <label for=\"input-field\" class=\"control-label\">Input-field</label>    \n<select id=\"input-field\" class=\"form-control selectize\" name=\"input-field\"><option value=\"class\">blue</option><option value=\"placeholder\">Placeholder</option><option value=\"label\">Text field label</option></select>\n\n\n\n\n\n\n    </div>\n";
+        $expectedHtml = "<div class=\"form-group\">\n\n            <label for=\"input-field\" class=\"control-label\">Input Field</label>    \n<select id=\"input-field\" class=\"form-control selectize\" name=\"input-field\"><option value=\"class\">blue</option><option value=\"placeholder\">Placeholder</option><option value=\"label\">Text field label</option></select>\n\n\n\n\n\n\n    </div>\n";
 
         $compiled = app('blade.compiler')->compileString($string);
         $html = app('form')->combobox('input-field', ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label']);
@@ -258,7 +258,7 @@ class FormBuilderTest extends UnitTestCase
     {
         $string = "@select ('input-field', ['test1', 'test2', 'test3'], 'test1', ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label'])";
         $expected = "<?php echo app('form')->select('input-field', ['test1', 'test2', 'test3'], 'test1', ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label']); ?>";
-        $expectedHtml = "<div class=\"form-group\">\n\n            <label for=\"input-field\" class=\"control-label\">Text field label</label>    \n<select id=\"input-field\" class=\"form-control blue\" name=\"input-field\"><option value=\"\">Placeholder</option><option value=\"0\">test1</option><option value=\"1\">test2</option><option value=\"2\">test3</option></select>\n\n\n\n\n    </div>\n";
+        $expectedHtml = "<div class=\"form-group\">\n\n            <label for=\"input-field\" class=\"control-label\">Text Field Label</label>    \n<select id=\"input-field\" class=\"form-control blue\" name=\"input-field\"><option value=\"\" disabled=\"disabled\">Placeholder</option><option value=\"0\">test1</option><option value=\"1\">test2</option><option value=\"2\">test3</option></select>\n\n\n\n\n    </div>\n";
 
         $compiled = app('blade.compiler')->compileString($string);
         $html = app('form')->select('input-field', ['test1', 'test2', 'test3'], 'test1', ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label']);
@@ -271,7 +271,7 @@ class FormBuilderTest extends UnitTestCase
     {
         $string = "@selectMonths ('input-field', 3, ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label'])";
         $expected = "<?php echo app('form')->selectMonths('input-field', 3, ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label']); ?>";
-        $expectedHtml = "<div class=\"form-group\">\n\n            <label for=\"input-field\" class=\"control-label\">Text field label</label>    \n<select id=\"input-field\" class=\"form-control blue\" name=\"input-field\"><option value=\"\">Placeholder</option><option value=\"1\">January</option><option value=\"2\">February</option><option value=\"3\" selected=\"selected\">March</option><option value=\"4\">April</option><option value=\"5\">May</option><option value=\"6\">June</option><option value=\"7\">July</option><option value=\"8\">August</option><option value=\"9\">September</option><option value=\"10\">October</option><option value=\"11\">November</option><option value=\"12\">December</option></select>\n\n\n\n\n    </div>\n";
+        $expectedHtml = "<div class=\"form-group\">\n\n            <label for=\"input-field\" class=\"control-label\">Text Field Label</label>    \n<select id=\"input-field\" class=\"form-control blue\" name=\"input-field\"><option value=\"\" disabled=\"disabled\">Placeholder</option><option value=\"1\">January</option><option value=\"2\">February</option><option value=\"3\" selected=\"selected\">March</option><option value=\"4\">April</option><option value=\"5\">May</option><option value=\"6\">June</option><option value=\"7\">July</option><option value=\"8\">August</option><option value=\"9\">September</option><option value=\"10\">October</option><option value=\"11\">November</option><option value=\"12\">December</option></select>\n\n\n\n\n    </div>\n";
 
         $compiled = app('blade.compiler')->compileString($string);
         $html = app('form')->selectMonths('input-field', 3, ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label']);
@@ -284,7 +284,7 @@ class FormBuilderTest extends UnitTestCase
     {
         $string = "@selectWeekdays ('input-field', 3, ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label'])";
         $expected = "<?php echo app('form')->selectWeekdays('input-field', 3, ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label']); ?>";
-        $expectedHtml = "<div class=\"form-group\">\n\n            <label for=\"input-field\" class=\"control-label\">Text field label</label>    \n<select id=\"input-field\" class=\"form-control blue\" name=\"input-field\"><option value=\"\">Placeholder</option><option value=\"1\">Sunday</option><option value=\"2\">Monday</option><option value=\"3\" selected=\"selected\">Tuesday</option><option value=\"4\">Wednesday</option><option value=\"5\">Thursday</option><option value=\"6\">Friday</option><option value=\"7\">Saturday</option></select>\n\n\n\n\n    </div>\n";
+        $expectedHtml = "<div class=\"form-group\">\n\n            <label for=\"input-field\" class=\"control-label\">Text Field Label</label>    \n<select id=\"input-field\" class=\"form-control blue\" name=\"input-field\"><option value=\"\" disabled=\"disabled\">Placeholder</option><option value=\"1\">Sunday</option><option value=\"2\">Monday</option><option value=\"3\" selected=\"selected\">Tuesday</option><option value=\"4\">Wednesday</option><option value=\"5\">Thursday</option><option value=\"6\">Friday</option><option value=\"7\">Saturday</option></select>\n\n\n\n\n    </div>\n";
 
         $compiled = app('blade.compiler')->compileString($string);
         $html = app('form')->selectWeekdays('input-field', 3, ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label']);
@@ -297,7 +297,7 @@ class FormBuilderTest extends UnitTestCase
     {
         $string = "@selectRangeWithInterval ('input-field', 1, 5, 2, 3, ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label'])";
         $expected = "<?php echo app('form')->selectRangeWithInterval('input-field', 1, 5, 2, 3, ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label']); ?>";
-        $expectedHtml = "<div class=\"form-group\">\n\n            <label for=\"input-field\" class=\"control-label\">Text field label</label>    \n<select id=\"input-field\" class=\"form-control blue\" name=\"input-field\"><option value=\"\">Placeholder</option><option value=\"1\">1</option><option value=\"3\" selected=\"selected\">3</option><option value=\"5\">5</option></select>\n\n\n\n\n    </div>\n";
+        $expectedHtml = "<div class=\"form-group\">\n\n            <label for=\"input-field\" class=\"control-label\">Text Field Label</label>    \n<select id=\"input-field\" class=\"form-control blue\" name=\"input-field\"><option value=\"\" disabled=\"disabled\">Placeholder</option><option value=\"1\">1</option><option value=\"3\" selected=\"selected\">3</option><option value=\"5\">5</option></select>\n\n\n\n\n    </div>\n";
 
         $compiled = app('blade.compiler')->compileString($string);
         $html = app('form')->selectRangeWithInterval('input-field', 1, 5, 2, 3, ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label']);
@@ -310,7 +310,7 @@ class FormBuilderTest extends UnitTestCase
     {
         $string = "@date ('input-field', null, ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label'])";
         $expected = "<?php echo app('form')->date('input-field', null, ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label']); ?>";
-        $expectedHtml = "<div class=\"form-group\">\n\n            <label for=\"input-field\" class=\"control-label\">Text field label</label>    \n<div class=\"input-group date\" id=\"datetimepicker-input-field\" data-target-input=\"nearest\">\n    <input placeholder=\"Placeholder\" autocomplete=\"noway\" data-target=\"#datetimepicker-input-field\" id=\"input-field\" class=\"form-control datetimepicker-input blue\" name=\"input-field\" type=\"date\">\n    <span class=\"input-group-addon\" data-target=\"#datetimepicker-input-field\" data-toggle=\"datetimepicker\">\n        <i class=\"fa fa-btn fa-calendar\"></i>\n    </span>\n</div>\n\n\n\n\n\n    </div>\n";
+        $expectedHtml = "<div class=\"form-group\">\n\n            <label for=\"input-field\" class=\"control-label\">Text Field Label</label>    \n<div class=\"input-group date\" id=\"datetimepicker-input-field\" data-target-input=\"nearest\">\n    <input placeholder=\"Placeholder\" autocomplete=\"noway\" data-target=\"#datetimepicker-input-field\" id=\"input-field\" class=\"form-control datetimepicker-input blue\" name=\"input-field\" type=\"date\">\n    <span class=\"input-group-addon\" data-target=\"#datetimepicker-input-field\" data-toggle=\"datetimepicker\">\n        <i class=\"fa fa-btn fa-calendar\"></i>\n    </span>\n</div>\n\n\n\n\n\n    </div>\n";
 
         $compiled = app('blade.compiler')->compileString($string);
         $html = app('form')->date('input-field', null, ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label']);
@@ -323,7 +323,7 @@ class FormBuilderTest extends UnitTestCase
     {
         $string = "@datetime ('input-field', null, ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label'])";
         $expected = "<?php echo app('form')->datetime('input-field', null, ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label']); ?>";
-        $expectedHtml = "<div class=\"form-group\">\n\n            <label for=\"input-field\" class=\"control-label\">Text field label</label>    \n<div class=\"input-group date\" id=\"datetimepicker-input-field\" data-target-input=\"nearest\">\n    <input placeholder=\"Placeholder\" autocomplete=\"noway\" data-target=\"#datetimepicker-input-field\" id=\"input-field\" class=\"form-control datetimepicker-input blue\" name=\"input-field\" type=\"datetime\">\n    <span class=\"input-group-addon\" data-target=\"#datetimepicker-input-field\" data-toggle=\"datetimepicker\">\n        <i class=\"fa fa-btn fa-calendar\"></i>\n    </span>\n</div>\n\n\n\n\n\n    </div>\n";
+        $expectedHtml = "<div class=\"form-group\">\n\n            <label for=\"input-field\" class=\"control-label\">Text Field Label</label>    \n<div class=\"input-group date\" id=\"datetimepicker-input-field\" data-target-input=\"nearest\">\n    <input placeholder=\"Placeholder\" autocomplete=\"noway\" data-target=\"#datetimepicker-input-field\" id=\"input-field\" class=\"form-control datetimepicker-input blue\" name=\"input-field\" type=\"datetime\">\n    <span class=\"input-group-addon\" data-target=\"#datetimepicker-input-field\" data-toggle=\"datetimepicker\">\n        <i class=\"fa fa-btn fa-calendar\"></i>\n    </span>\n</div>\n\n\n\n\n\n    </div>\n";
 
         $compiled = app('blade.compiler')->compileString($string);
         $html = app('form')->datetime('input-field', null, ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label']);
@@ -375,7 +375,7 @@ class FormBuilderTest extends UnitTestCase
     {
         $string = "@switch ('input-field', 'test', true, ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label'])";
         $expected = "<?php echo app('form')->switch('input-field', 'test', true, ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label']); ?>";
-        $expectedHtml = "<div class=\"form-group\">\n\n            <label for=\"input-field\" class=\"control-label\">Text field label</label>    \n<div>\n    <input id=\"input-field\" class=\"blue\" checked=\"checked\" name=\"input-field\" type=\"checkbox\" value=\"test\">\n</div>\n\n\n\n\n\n    </div>\n";
+        $expectedHtml = "<div class=\"form-group\">\n\n            <label for=\"input-field\" class=\"control-label\">Text Field Label</label>    \n<div>\n    <input id=\"input-field\" class=\"blue\" checked=\"checked\" name=\"input-field\" type=\"checkbox\" value=\"test\">\n</div>\n\n\n\n\n\n    </div>\n";
 
         $compiled = app('blade.compiler')->compileString($string);
         $html = app('form')->switch('input-field', 'test', true, ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label']);
@@ -388,7 +388,7 @@ class FormBuilderTest extends UnitTestCase
     {
         $string = "@staticText ('input-field', ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label'])";
         $expected = "<?php echo app('form')->staticText('input-field', ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label']); ?>";
-        $expectedHtml = "<div class=\"form-group\">\n\n            <label for=\"\" class=\"control-label\">Text field label</label>    \n<p class=\"form-control-static\">input-field</p>\n\n\n    </div>\n";
+        $expectedHtml = "<div class=\"form-group\">\n\n            <label for=\"\" class=\"control-label\">Text Field Label</label>    \n<p class=\"form-control-static\">input-field</p>\n\n\n    </div>\n";
 
         $compiled = app('blade.compiler')->compileString($string);
         $html = app('form')->staticText('input-field', ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label']);
@@ -401,7 +401,7 @@ class FormBuilderTest extends UnitTestCase
     {
         $string = "@submit ('Submit')";
         $expected = "<?php echo app('form')->submit('Submit'); ?>";
-        $expectedHtml = "<div class=\"form-group\">\n\n                \n<div>\n\n        <button type=\"submit\" id=\"\" class=\"btn btn-primary\">Submit</button>\n\n    </div>\n\n    \n    </div>\n";
+        $expectedHtml = "<div class=\"form-group\">\n\n                \n<div>\n\n        <button type=\"submit\" class=\"btn btn-primary\">Submit</button>\n\n    </div>\n\n    \n    </div>\n";
 
         $compiled = app('blade.compiler')->compileString($string);
         $html = app('form')->submit('Submit');
@@ -414,7 +414,7 @@ class FormBuilderTest extends UnitTestCase
     {
         $string = "@button ('Submit', ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label'])";
         $expected = "<?php echo app('form')->button('Submit', ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label']); ?>";
-        $expectedHtml = "<div class=\"form-group\">\n\n            <label for=\"\" class=\"control-label\">Text field label</label>    \n<div>\n\n        <button id=\"\" class=\"btn blue\" type=\"button\">Submit</button>\n\n    </div>\n\n    \n    </div>\n";
+        $expectedHtml = "<div class=\"form-group\">\n\n            <label for=\"\" class=\"control-label\">Text Field Label</label>    \n<div>\n\n        <button class=\"btn blue\" type=\"button\">Submit</button>\n\n    </div>\n\n    \n    </div>\n";
 
         $compiled = app('blade.compiler')->compileString($string);
         $html = app('form')->button('Submit', ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label']);
@@ -427,7 +427,7 @@ class FormBuilderTest extends UnitTestCase
     {
         $string = "@buttonGroup (['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label'])";
         $expected = "<?php echo app('form')->buttonGroup(['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label']); ?>";
-        $expectedHtml = "<div class=\"form-group\">\n\n            <label for=\"\" class=\"control-label\">Text field label</label>    \n<div>\n        <div id=\"\" class=\"btn-group blue\">\n\n";
+        $expectedHtml = "<div class=\"form-group\">\n\n            <label for=\"\" class=\"control-label\">Text Field Label</label>    \n<div>\n        <div class=\"btn-group blue\">\n\n";
 
         $compiled = app('blade.compiler')->compileString($string);
         $html = app('form')->buttonGroup(['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label']);

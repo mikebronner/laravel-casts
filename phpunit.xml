@@ -10,20 +10,23 @@
     syntaxCheck="true"
     bootstrap="vendor/autoload.php"
 >
-<testsuites>
-    <testsuite name="Feature">
-        <directory suffix="Test.php">./tests/Feature</directory>
-    </testsuite>
+    <testsuites>
+        <testsuite name="Feature">
+            <directory suffix="Test.php">./tests/Feature</directory>
+        </testsuite>
 
-    <testsuite name="Unit">
-        <directory suffix="Test.php">./tests/Unit</directory>
-    </testsuite>
-</testsuites>
-<filter>
-    <whitelist processUncoveredFilesFromWhitelist="true">
-        <directory suffix=".php">./src</directory>
-    </whitelist>
-</filter>
+        <testsuite name="Unit">
+            <directory suffix="Test.php">./tests/Unit</directory>
+        </testsuite>
+    </testsuites>
+    <filter>
+        <whitelist processUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">./src</directory>
+        </whitelist>
+    </filter>
+    <listeners>
+        <listener class="NunoMaduro\Collision\Adapters\Phpunit\Listener" />
+    </listeners>
     <php>
         <env name="APP_KEY" value="base64:Xgs1LQt1GdVHhD6qyYCXnyq61DE3UKqJ5k2SJc+Nw2g="/>
         <env name="APP_ENV" value="testing"/>
