@@ -1,5 +1,5 @@
 @if($isHorizontal)
-<div class="col-sm-{{ $fieldWidth }}">
+    <div class="col-sm-{{ $fieldWidth }}{{ (trim($options['label'] ?? '') === '' ? ' offset-sm-' . $labelWidth : '') }}">
 @endif
 
     {!! $controlHtml !!}
@@ -9,5 +9,5 @@
     @endif
 
 @if($isHorizontal)
-</div>
+    </div>
 @endif

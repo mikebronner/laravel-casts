@@ -1,16 +1,12 @@
 @if(! $isInButtonGroup)
     @if($isHorizontal)
-        <div class="col-sm-{{ $fieldWidth }}">
+        <div class="col-sm-{{ $fieldWidth }}{{ (trim($options['label'] ?? '') === '' ? ' offset-sm-' . $labelWidth : '') }}">
     @endif
-
-    <div>
 @endif
 
 {!! $controlHtml !!}
 
 @if(! $isInButtonGroup)
-    </div>
-
     @if($isHorizontal)
         </div>
     @endif
