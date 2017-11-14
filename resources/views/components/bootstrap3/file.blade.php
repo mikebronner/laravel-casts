@@ -1,1 +1,1 @@
-@include('genealabs-laravel-casts::components.bootstrap3.input')on>
+@include ('genealabs-laravel-casts::components.bootstrap3.input')

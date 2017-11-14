@@ -23,7 +23,8 @@
         "phpunit/phpunit": "6.*",
         "satooshi/php-coveralls" : "dev-master@dev",
         "sebastian/phpcpd": "*",
-        "laravel/browser-kit-testing": "^2.0"
+        "laravel/browser-kit-testing": "^2.0",
+        "nunomaduro/collision": "^1.1"
     },
     "autoload": {
         "classmap": [],
