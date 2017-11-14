@@ -32,6 +32,23 @@ class SelectMonths extends Dropdown
             $list = array_combine(array_values($list), array_values($list));
         }
 
+        if (($options['optionsFormat'] ?? '') === 'names') {
+            $list = [
+                'January' => 'January',
+                'February' => 'February',
+                'March' => 'March',
+                'April' => 'April',
+                'May' => 'May',
+                'June' => 'June',
+                'July' => 'July',
+                'August' => 'August',
+                'September' => 'September',
+                'October' => 'October',
+                'November' => 'November',
+                'December' => 'December',
+            ];
+        }
+
         parent::__construct($name, $list, $value, $options, $optionOptions);
     }
 
