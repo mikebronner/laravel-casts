@@ -8,7 +8,9 @@
 
 <div class="form-group{{ $wrapperClass }}">
 
-    @label ($name, $name, $options, $options['escapeLabel'] ?? false)
+    @if ($type !== 'checkbox' && $type !== 'radio')
+        @label ($name, $name, $options, $options['escapeLabel'] ?? false)
+    @endif
 
     @include("genealabs-laravel-casts::components.tailwind.{$type}")
 

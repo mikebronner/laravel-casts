@@ -1,0 +1,20 @@
+.btn,
+input[type=submit]:hover,
+input[type=button]:hover,
+button {
+    @apply .w-full .py-3 .px-4 .rounded;
+    @apply .bg-grey-light .text-grey-darker;
+
+    &:hover {
+        @apply .bg-grey .text-white;
+    }
+
+    &.primary,
+    &[type=submit] {
+        @apply .bg-blue .text-white .font-bold;
+
+        &:hover {
+            @apply .bg-blue-dark;
+        }
+    }
+}

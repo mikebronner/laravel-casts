@@ -1,0 +1,11 @@
+select {
+    @apply .overflow-visible;
+
+    & + .arrow {
+        @apply .pointer-events-none .absolute .my-auto .w-4 .h-4 .pin-y .pin-r .px-8 .text-grey-darker;
+
+        &:after {
+            content: "▾";
+        }
+    }
+}

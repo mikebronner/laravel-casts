@@ -1,1 +1,3 @@
-@include('genealabs-laravel-casts::components.tailwind.input')
+<label class="radio">
+    {!! $controlHtml !!}
+</label>

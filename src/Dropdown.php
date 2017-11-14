@@ -38,6 +38,16 @@ abstract class Dropdown extends Component
                 '</option>',
                 $html
             );
+
+            $html = str_replace(
+                '<option value="">' .
+                $this->options['placeholder'] .
+                '</option>',
+                '<option value="" disabled="disabled">' .
+                $this->options['placeholder'] .
+                '</option>',
+                $html
+            );
         }
 
         return $html;

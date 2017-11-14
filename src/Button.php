@@ -10,6 +10,9 @@ class Button extends Component
             $this->classes = 'btn';
         }
 
+        $this->excludedClasses = $this->excludedKeys->merge(collect([
+            'form-control' => '',
+        ]));
         $this->excludedKeys = $this->excludedKeys->merge(collect([
             'placeholder' => '',
         ]));
