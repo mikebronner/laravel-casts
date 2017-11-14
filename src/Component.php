@@ -22,6 +22,7 @@ abstract class Component extends Model
         $this->classes = 'form-control';
         $this->excludedKeys = collect([
             'label' => '',
+            'offsetClass' => '',
         ]);
         $this->excludedClasses = collect();
         $this->framework = $options['framework'] ?? app('form')->framework;
