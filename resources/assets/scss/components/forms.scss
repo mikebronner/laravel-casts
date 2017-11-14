@@ -1,11 +1,14 @@
+@import "select";
+
 .form-group {
-    @apply mb-4;
+    @apply .flex .flex-wrap .items-center .mb-4 .relative;
 
     label {
         @apply .block .text-grey-darker .text-sm .font-bold .mb-1;
 
+        &.radio,
         &.checkbox {
-            @apply .text-left .font-normal;
+            @apply .w-full .font-normal .ml-auto;
         }
     }
 
@@ -132,10 +135,13 @@
 }
 
 .form-horizontal .form-group {
-    @apply .flex .flex-wrap .items-center;
-
-    label:not(.checkbox) {
+    label:not(.checkbox, .radio) {
         @apply .w-1/3 .text-right .pr-3;
+    }
+
+    label.radio,
+    label.checkbox {
+        @apply .w-2/3;
     }
 
     button[type=submit] {
