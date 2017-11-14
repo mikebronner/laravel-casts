@@ -10,6 +10,7 @@ class Label extends Component
      */
     public function __construct(string $name, $value = null, array $options = [], bool $escapeHtml = true)
     {
+        $value = $value ?: $name;
         $value = str_replace('_id', '', $value);
         $value = str_replace('[]', '', $value);
         $value = str_replace('-', ' ', $value);
