@@ -137,7 +137,12 @@ class LaravelCastsService extends ServiceProvider
         }
 
         app('blade.compiler')->directive($alias, function ($parameters) use ($formMethod) {
-            $parameters = trim($parameters, "()");
+            $matches = [];
+            preg_match('/(\(([^()]|(?R))*\))/', $parameters, $matches);
+
+            if (($matches[0] ?? '') === $parameters) {
+                $parameters = substr($parameters, 1, -1);
+            }
 
             return "<?php echo app('form')->{$formMethod}({$parameters}); ?>";
         });
