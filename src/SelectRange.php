@@ -11,6 +11,7 @@ class SelectRange extends Dropdown
         array $optionOptions = []
     ) {
         $list = range($start, $end);
+        $list = array_combine($list, $list);
 
         parent::__construct($name, $list, $value, $options, $optionOptions);
     }
