@@ -20,8 +20,8 @@
 @endif
 
 @if(array_key_exists('subFormClass', $options))
-    @include ('genealabs-laravel-casts::components.bootstrap4.form-group-close')
-    @include ('genealabs-laravel-casts::components.bootstrap4.form-group-open', ['classes' => str_replace('.', '', $options['subFormClass']) . ' hidden-xs-up'])
+    @include ('genealabs-laravel-casts::components.bootstrap3.form-group-close')
+    @include ('genealabs-laravel-casts::components.bootstrap3.form-group-open', ['classes' => str_replace('.', '', $options['subFormClass']) . ' hidden-xs-up'])
 
     <div class="col-sm-12">
         <div class="popover popover-static popover-bottom">
@@ -79,6 +79,15 @@
                             return {'text': name, 'value': -1};
                         },
                     @endif
+                load: function(query, callback) {
+                    @if (array_key_exists('loadCallback', $options))
+                        if (! query.length) {
+                            return callback();
+                        }
+
+                        {{ $options['loadCallback'] }}(query, callback);
+                    @endif
+                },
                 onChange: function (value) {
                     @if(array_key_exists('changeCallback', $options))
                         {{ $options['changeCallback'] }}(value);
