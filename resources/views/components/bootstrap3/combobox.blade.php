@@ -61,6 +61,17 @@
                             return {'text': name, 'value': -1};
                         },
                     @endif
+
+                load: function (query, callback) {
+                    if (! query.length) {
+                        return callback();
+                    }
+
+                    @if (array_key_exists('loadCallback', $options))
+                        {{ $options['loadCallback'] }}(query, callback);
+                    @endif
+                },
+
                 onChange: function (value) {
                     @if (array_key_exists('changeCallback', $options))
                         {{ $options['changeCallback'] }}(value);
