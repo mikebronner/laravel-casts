@@ -19,26 +19,8 @@
     </div>
 @endif
 
-@if(array_key_exists('subFormClass', $options))
-    @include ('genealabs-laravel-casts::components.bootstrap3.form-group-close')
-    @include ('genealabs-laravel-casts::components.bootstrap3.form-group-open', ['classes' => str_replace('.', '', $options['subFormClass']) . ' hidden-xs-up'])
-
-    <div class="col-sm-12">
-        <div class="popover popover-static popover-bottom">
-
-            @if (array_key_exists('subFormTitle', $options))
-                <h3 class="popover-title">{{ $options['subFormTitle'] }}</h3>
-            @endif
-
-            <div class="popover-content">
-                <?= csrf_field() ?>
-
-                @subForm ($options['subFormBlade'], $options['subFormClass'])
-                @endSubForm
-
-            </div>
-        </div>
-    </div>
+@if ($options['subFormAction'] ?? false)
+    @subform ($options)
 @endif
 
 @section ('genealabs-laravel-casts')
@@ -49,11 +31,11 @@
         window.genealabsLaravelCasts['comboboxLoaders'] = window.genealabsLaravelCasts.comboboxLoaders || [];
         window.genealabsLaravelCasts['framework'] = window.genealabsLaravelCasts.framework || 'bootstrap4';
         window.genealabsLaravelCasts.comboboxLoaders.push(function () {
-            @if(array_key_exists('subFormClass', $options))
+            @if ($options['subFormClass'] ?? false)
                 $('{{ $options['subFormClass'] }}').find('input,textarea,select').attr('disabled', 'disabled');
             @endif
 
-            $('{!! array_key_exists('subFormClass', $options) ? '[subFormClass="' . $options['subFormClass'] . '"]' : '' !!}[name="{{ $name }}"]').selectize({
+            $('[name="{{ $name }}"]').selectize({
                 options: {!! $options['list'] !!},
                 list: {!! $options['selected'] !!},
                 labelField: 'text',
@@ -68,7 +50,7 @@
                     }
                 ],
                 create:
-                    @if(array_key_exists('multiple', $options) && $options['multiple'] === 'multiple')
+                    @if (array_key_exists('multiple', $options) && $options['multiple'] === 'multiple')
                         false,
                     @else
                         function (name) {
@@ -79,37 +61,47 @@
                             return {'text': name, 'value': -1};
                         },
                     @endif
-                load: function(query, callback) {
-                    @if (array_key_exists('loadCallback', $options))
-                        if (! query.length) {
-                            return callback();
-                        }
 
+                load: function (query, callback) {
+                    if (! query.length) {
+                        return callback();
+                    }
+
+                    @if (array_key_exists('loadCallback', $options))
                         {{ $options['loadCallback'] }}(query, callback);
                     @endif
                 },
+
                 onChange: function (value) {
-                    @if(array_key_exists('changeCallback', $options))
+                    @if (array_key_exists('changeCallback', $options))
                         {{ $options['changeCallback'] }}(value);
                     @endif
 
-                    @if(array_key_exists('subFormClass', $options))
+                    @if (array_key_exists('subFormClass', $options))
                         if (value == -1) {
                             $('{{ $options['subFormClass'] }}').find('input,textarea,select').removeAttr('disabled');
-                            $('{{ $options['subFormClass'] }}').removeClass('hidden-xs-up');
-                            $('{{ $options['subFormClass'] }} [name="{{ $options['subFormFieldName'] }}"]').val($('[name={{ $name }}]').text());
+                            $('{{ $options['subFormClass'] }}').removeClass('hidden');
+
+                            @if ($options['subFormFieldName'] ?? false)
+                                $('{{ $options['subFormClass'] }} [name="{{ $options['subFormFieldName'] }}"]').val($('[name={{ $name }}]').text());
+                            @endif
+
                         } else {
                             $('[name={{ $name }}]').selectize()[0].selectize.removeOption(-1);
-                            $('{{ $options['subFormClass'] }}').addClass('hidden-xs-up');
-                            $('{{ $options['subFormClass'] }} [name="{{ $options['subFormFieldName'] }}"]').val('');
+                            $('{{ $options['subFormClass'] }}').addClass('hidden');
+
+                            @if ($options['subFormFieldName'] ?? false)
+                                $('{{ $options['subFormClass'] }} [name="{{ $options['subFormFieldName'] }}"]').val('');
+                            @endif
+
                             $('{{ $options['subFormClass'] }}').find('input,textarea,select').attr('disabled', 'disabled');
                         }
                     @endif
                 }
             });
 
-            @if(array_key_exists('subFormClass', $options))
-            $('{!! $options['subFormClass'] !!} input[type="submit"]').on('click', function (event) {
+            @if (array_key_exists('subFormAction', $options) && array_key_exists('subFormClass', $options))
+                $('{!! $options['subFormClass'] !!} input[type="submit"]').on('click', function (event) {
                     event.preventDefault();
                     event.stopPropagation();
 
@@ -145,6 +137,7 @@
                     return false;
                 });
             @endif
+
         });
     </script>
 @endsection

@@ -9,34 +9,44 @@ class Combobox extends Dropdown
         array $options = [],
         array $optionOptions = []
     ) {
-        $options['multiple'] = array_key_exists('multiple', $options) ? 'multiple' : null;
-
-        if (array_key_exists('subFormAction', $options)) {
-            $options['subFormMethod'] = $options['subFormMethod'] ?? 'POST';
-            $options['subFormClass'] = '.' . str_random(6);
-            $options['subFormResponseObjectPrimaryKey'] = $options['subFormResponseObjectPrimaryKey'] ?? 'id';
-        }
-
-        $options['list'] = collect($list)->transform(function ($item, $index) {
-            return [
-                'text' => $item,
-                'value' => $index,
-            ];
-        })->values()->toJson();
-        $options['selected'] = collect($value)->transform(function ($item, $index) {
-            return [
-                'text' => $item,
-                'value' => $index,
-            ];
-        })->values()->toJson();
-        array_filter($options);
-
         parent::__construct($name, $list, $value, $options, $optionOptions);
 
-        $this->excludedKeys = $this->excludedKeys->merge(collect([
+        if (array_key_exists('multiple', $this->attributes['options'])) {
+            $this->attributes['options']['multiple'] = 'multiple';
+        }
+
+        $this->attributes['options']['class'] = ($this->attributes['options']['class'] ?? '') . ' selectize';
+
+        if (array_key_exists('subFormAction', $this->attributes['options'])) {
+            $this->attributes['options']['subFormMethod'] = $this->attributes['options']['subFormMethod'] ?? 'POST';
+            $this->attributes['options']['subFormClass'] = '.' . str_random(6);
+            $this->attributes['options']['subFormResponseObjectPrimaryKey'] = $this->attributes['options']['subFormResponseObjectPrimaryKey'] ?? 'id';
+        }
+        $this->attributes['options']['list'] = collect($list)->transform(function ($item, $index) {
+            return [
+                'text' => $item,
+                'value' => $index,
+            ];
+        })->values()->toJson();
+        $this->attributes['options']['selected'] = collect($value)->transform(function ($item, $index) {
+            return [
+                'text' => $item,
+                'value' => $index,
+            ];
+        })->values()->toJson();
+        $this->excludedKeys = collect([
+            'label' => '',
             'list' => '',
             'selected' => '',
-        ]));
+            'subFormClass' => '',
+            'subFormAction' => '',
+            'subFormMethod' => '',
+            'subFormFieldName' => '',
+            'subFormBlade' => '',
+            'subFormHtml' => '',
+            'subFormTitle' => '',
+            'subFormResponseObjectPrimaryKey' => '',
+        ]);
     }
 
     protected function renderBaseControl() : string
@@ -49,24 +59,5 @@ class Combobox extends Dropdown
             $this->options,
             $this->optionOptions
         );
-    }
-
-    public function getOptionsAttribute() : array
-    {
-        $options = parent::getOptionsAttribute();
-        $options['class'] = trim(($options['class'] ?? '') . ' selectize');
-
-        return $options;
-    }
-
-    public function getHtmlAttribute() : string
-    {
-        $html = parent::getHtmlAttribute();
-
-        if (array_key_exists('subFormAction', $this->options)) {
-            $html .= (new Subform($this->options))->html;
-        }
-
-        return $html;
     }
 }

@@ -17,6 +17,10 @@
     </div>
 @endif
 
+@if ($options['subFormAction'] ?? false)
+    @subform ($options)
+@endif
+
 @section ('genealabs-laravel-casts')
     @parent
 
@@ -25,11 +29,11 @@
         window.genealabsLaravelCasts['comboboxLoaders'] = window.genealabsLaravelCasts.comboboxLoaders || [];
         window.genealabsLaravelCasts['framework'] = window.genealabsLaravelCasts.framework || 'bootstrap4';
         window.genealabsLaravelCasts.comboboxLoaders.push(function () {
-            @if (array_key_exists('subFormAction', $options))
+            @if ($options['subFormClass'] ?? false)
                 $('{{ $options['subFormClass'] }}').find('input,textarea,select').attr('disabled', 'disabled');
             @endif
 
-            $('{!! array_key_exists('subFormClass', $options) ? '[subFormClass="' . $options['subFormClass'] . '"]' : '' !!}[name="{{ $name }}"]').selectize({
+            $('[name="{{ $name }}"]').selectize({
                 options: {!! $options['list'] !!},
                 list: {!! $options['selected'] !!},
                 labelField: 'text',
@@ -83,7 +87,7 @@
                 }
             });
 
-            @if (array_key_exists('subFormAction', $options))
+            @if (array_key_exists('subFormAction', $options) && array_key_exists('subFormClass', $options))
                 $('{!! $options['subFormClass'] !!} input[type="submit"]').on('click', function (event) {
                     event.preventDefault();
                     event.stopPropagation();

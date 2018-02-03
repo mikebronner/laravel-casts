@@ -1,0 +1,5 @@
+@text('street_address', $address->street_address ?? '', ['label' => 'Street Address'])
+@text('street_address2', $address->street_address2 ?? '', ['label' => 'Street Address 2'])
+@text('city', $address->city ?? '', ['label' => 'City'])
+@text('state', $address->state ?? '', ['label' => 'State'])
+@text('zip', $address->zip ?? '', ['label' => 'Zip'])

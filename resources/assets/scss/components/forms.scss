@@ -1,0 +1,139 @@
+
+.form-group {
+    @apply .flex .flex-wrap .items-center .mb-4 .relative;
+
+    label {
+        @apply .block .text-grey-darker .text-sm .font-bold .mb-1;
+
+        &.radio,
+        &.checkbox {
+            @apply .w-full .font-normal .ml-auto;
+        }
+    }
+
+    label:hover + .form-control,
+    .form-control:hover {
+        @apply .border-blue;
+    }
+
+    .file-field {
+        // @apply .w-2/3 .flex;
+        //
+        // .file-name {
+        //     @apply .flex-grow;
+        // }
+
+        .file-button {
+            // @apply px-4;
+
+            input[type=file] {
+                @apply .invisible .w-0 .h-0 .absolute .m-0 .p-0;
+            }
+        }
+    }
+
+    .form-control {
+        @apply .appearance-none .block .w-full .bg-grey-lightest .border .border-grey-light .text-grey-darker .rounded .py-3 .px-4;
+
+        & + .help-text {
+            @apply .mt-1;
+        }
+    }
+
+    .form-control-group {
+        @apply .w-2/3 .flex .border .border-grey-light .rounded;
+
+        button:not(:first-child, :last-child),
+        input:not(:first-child, :last-child) {
+            @apply .rounded-none .text-grey-darker;
+        }
+
+        :first-child {
+            @apply .rounded .rounded-l .border-r;
+        }
+
+        :last-child {
+            @apply .rounded .rounded-r;
+        }
+
+        input:not([type=file], [type=submit], [type=button]) {
+            @apply .flex-grow .border .border-grey-lightest .bg-grey-lightest;
+        }
+
+        input:not([type=file],[type=submit],[type=button]):hover {
+            @apply .border-blue;
+        }
+
+    }
+
+    &.success {
+        @apply .text-green-dark;
+
+        .form-control {
+            @apply .border-green-dark .text-green-dark .bg-green-lightest;
+
+            & + .help-text {
+                @apply italic;
+            }
+        }
+    }
+
+    &.info {
+        @apply .text-blue-dark;
+
+        .form-control {
+            @apply .border-blue-dark .text-blue-dark .bg-blue-lightest;
+
+            & + .help-text {
+                @apply italic;
+            }
+        }
+    }
+
+    &.warning {
+        @apply .text-orange-dark;
+
+        .form-control {
+            @apply .border-orange-dark .text-orange-dark .bg-orange-lightest;
+
+            & + .help-text {
+                @apply italic;
+            }
+        }
+    }
+
+    &.failure {
+        @apply .text-red-dark;
+
+        .form-control {
+            @apply .border-red-dark .text-red-dark .bg-red-lightest;
+
+            & + .help-text {
+                @apply italic;
+            }
+        }
+    }
+}
+
+.form-horizontal .form-group {
+    label:not(.checkbox, .radio) {
+        @apply .w-1/3 .text-right .pr-3;
+    }
+
+    label.radio,
+    label.checkbox {
+        @apply .w-2/3;
+    }
+
+    button[type=submit] {
+        @apply .w-auto;
+    }
+
+    .help-text,
+    .form-control {
+        @apply .w-2/3 .ml-auto;
+    }
+}
+
+@import "button";
+@import "select";

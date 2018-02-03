@@ -1,1 +1,1 @@
-@include('genealabs-laravel-casts::components.bootstrap4.input')
+@include('genealabs-laravel-casts::components.bootstrap4.checkbox')

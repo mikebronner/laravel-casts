@@ -4,6 +4,7 @@ use Collective\Html\FormBuilder as Form;
 use Illuminate\Support\MessageBag;
 use Illuminate\Support\Collection;
 use Carbon\Carbon;
+use GeneaLabs\LaravelCasts\Subform;
 
 /**
  * @SuppressWarnings(PHPMD.TooManyMethods)
@@ -41,6 +42,7 @@ class FormBuilder extends Form
     public function open(array $options = [])
     {
         $this->initializeForm($options);
+        unset($options['framework']);
 
         return parent::open($options);
     }
@@ -48,6 +50,7 @@ class FormBuilder extends Form
     public function model($model, array $options = [])
     {
         $this->initializeForm($options);
+        unset($options['framework']);
 
         return parent::model($model, $options);
     }
@@ -65,14 +68,14 @@ class FormBuilder extends Form
         $this->fieldWidth = $options['fieldWidth'] ?? $this->fieldWidth;
     }
 
-    public function subForm(array $options = []) : string
+    public function subform(array $options = []) : string
     {
-        $this->subFormClass = $options['subFormClass'];
+        $this->subFormClass = $options['subFormClass'] ?? '';
 
         return (new Subform($options))->html;
     }
 
-    public function endSubForm()
+    public function endsubform()
     {
         $this->subFormClass = '';
     }

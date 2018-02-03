@@ -10,22 +10,39 @@ class Label extends Component
      */
     public function __construct(string $name, $value = null, array $options = [], bool $escapeHtml = true)
     {
+        $value = $value ?: $name;
         $value = str_replace('_id', '', $value);
         $value = str_replace('[]', '', $value);
-        $value = $options['label'] ?? (ucwords($value) ?: '');
-        $options['class'] = '';
+        $value = str_replace('-', ' ', $value);
+        $value = str_replace('_', ' ', $value);
+
+        if ($options['label'] ?? '' === ' ') {
+            $value = '';
+        }
+
+        if ($options['label'] ?? false) {
+            $value = $options['label'];
+        }
+
+        $value = ucwords($value);
+        $options['class'] = $options['class'] ?? '';
+        unset($options['id']);
 
         parent::__construct($name, $value, $options);
 
-        $this->classes = '';
+        if (app('form')->isHorizontal && ($this->framework === 'bootstrap3' || $this->framework === 'bootstrap4')) {
+            $options['class'] .= ' col-sm-' . app('form')->labelWidth;
+        }
 
         if ($this->framework === 'bootstrap3') {
-            $this->classes = 'col-sm-' . app('form')->labelWidth . ' control-label';
+            $options['class'] .= ' control-label';
         }
 
         if ($this->framework === 'bootstrap4') {
-            $this->classes = 'col-sm-' . app('form')->labelWidth . ' col-form-label';
+            $options['class'] .= ' col-form-label';
         }
+
+        $this->attributes['options'] = $options;
 
         $this->excludedKeys = $this->excludedKeys->merge(collect([
             'autocomplete' => '',
@@ -40,6 +57,7 @@ class Label extends Component
             'subFormMethod' => '',
             'subFormTitle' => '',
             'subFormResponseObjectPrimaryKey' => '',
+            'type' => '',
         ]));
         $this->excludedClasses = collect([
             'custom-file-input' => '',

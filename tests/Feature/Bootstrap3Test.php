@@ -23,7 +23,6 @@ class Bootstrap3Test extends FeatureTestCase
                 'action' => 'http://localhost/genealabs/laravel-casts/examples/bootstrap3',
                 'accept-charset' => 'UTF-8',
                 'class' => 'form-horizontal',
-                'framework' => 'bootstrap3',
             ])
             ->seeElement('input', [
                 'name' => '_token',
@@ -262,7 +261,7 @@ class Bootstrap3Test extends FeatureTestCase
             )
             ->seeInElement(
                 '.checkbox',
-                '<input checked name="checkbox1" type="checkbox" value="test">'
+                '<input id="checkbox1" checked name="checkbox1" type="checkbox" value="test">'
             )
             ->seeStatusCode('200');
     }

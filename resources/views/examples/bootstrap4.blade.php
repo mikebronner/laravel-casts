@@ -1,6 +1,6 @@
 @extends('genealabs-laravel-casts::examples.layout')
 
-@section('head')
+@section('css')
     <link href="/css/bootstrap4.css" rel="stylesheet" type="text/css" media="all">
 @endsection
 
@@ -11,6 +11,7 @@
                 <h1 class="page-title">Horizontal Form</h1>
 
                 @form(['url' => 'genealabs/laravel-casts/examples/bootstrap4', 'class' => 'form-horizontal', 'framework' => 'bootstrap4'])
+                    @combobox ('subform1', [1, 2, 3, 4], null, ['placeholder' => 'Placeholder Text', 'subFormAction' => 'testurl', 'subFormBlade' => 'genealabs-laravel-casts::examples.subform', 'subFormFieldName' => 'name', 'subFormTitle' => 'Add New Address'])
                     @text('text1', '', ['placeholder' => 'Placeholder Text', 'label' => 'Text Input'])
                     @password('password1', ['placeholder' => 'Placeholder Text', 'label' => 'Password Input'])
                     @email('email1', '', ['placeholder' => 'Placeholder Text', 'label' => 'Email Input'])
@@ -31,7 +32,7 @@
                     @datetime('datetime1')
                     @combobox ('combobox1', [1, 2, 3, 4], [1, 2], ['placeholder' => 'Placeholder Text', 'multiple' => 'multiple'])
                     @select ('select1', [1, 2, 3, 4], null, ['placeholder' => 'Placeholder Text', 'label' => 'Select'])
-                    @selectMonths ('selectMonths1', 3, ['placeholder' => 'Placeholder Text', 'label' => 'Select Months'])
+                    @selectMonths ('selectMonths1', 3, ['placeholder' => 'Placeholder Text', 'label' => 'Select Months', 'optionsFormat' => 'names'])
                     @selectWeekdays ('selectWeekdays1', 3, ['placeholder' => 'Placeholder Text', 'label' => 'Select Weekdays'])
                     @selectRange ('select_range1', 1, 21, null, ['class' => 'form-control', 'placeholder' => 'Placeholder Text', 'label' => 'Select Range'])
                     @selectRangeWithInterval ('select_range_with_interval1', 1, 21, 3, null, ['class' => 'form-control', 'placeholder' => 'Placeholder Text', 'label' => 'Select Range With Interval'])
@@ -45,9 +46,11 @@
                     @staticText ('Show me the text!', ['label' => 'What?'])
                     @submit ('submit', ['class' => 'btn btn-success', 'label' => 'Submit Button'], '/bs3')
                 @endform
+
             </div>
             <div class="col-sm-6">
                 <h1 class="page-title">Normal Form</h1>
+
                 @form(['url' => 'genealabs/laravel-casts/examples/bootstrap4'])
                     @text('text2', '', ['placeholder' => 'Placeholder Text', 'label' => 'Text Input'])
                     @password('password2', ['placeholder' => 'Placeholder Text', 'label' => 'Password Input'])

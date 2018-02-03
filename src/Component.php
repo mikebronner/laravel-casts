@@ -22,14 +22,30 @@ abstract class Component extends Model
         $this->classes = 'form-control';
         $this->excludedKeys = collect([
             'label' => '',
+            'offsetClass' => '',
         ]);
         $this->excludedClasses = collect();
         $this->framework = $options['framework'] ?? app('form')->framework;
-        $this->name = $name;
-        $this->value = $value;
-        $this->attributes['options'] = $options;
         $this->labelWidth = $options['labelWidth'] ?? app('form')->labelWidth;
         $this->fieldWidth = $options['labelWidth'] ?? app('form')->fieldWidth;
+        $this->name = $name;
+        $this->value = $value;
+        $options['id'] = $options['id'] ?? $name;
+        $options['offsetClass'] = '';
+
+        if ($this->framework === 'bootstrap3') {
+            $options['offsetClass'] = trim($options['label'] ?? '') === ' '
+                ? ' col-sm-offset-' . $this->labelWidth
+                : '';
+        }
+
+        if ($this->framework === 'bootstrap4') {
+            $options['offsetClass'] = trim($options['label'] ?? '') === ' '
+                ? ' offset-sm-' . $this->labelWidth
+                : '';
+        }
+
+        $this->attributes['options'] = $options;
         $this->errors = app('form')->errors ?: collect();
     }
 
@@ -45,16 +61,17 @@ abstract class Component extends Model
 
     public function getHtmlAttribute() : string
     {
+        $options = collect($this->attributes['options'])
+            ->filter(function ($value) {
+                return (bool) $value;
+            })
+            ->toArray();
         $controlHtml = $this->renderBaseControl();
         $method = [
             app('form'),
             "{$this->framework}Control",
         ];
-        $options = collect($this->attributes['options'])
-            ->filter(function ($value, $key) {
-                return (bool) $value;
-            })
-            ->toArray();
+
         $parameters = [
             $this->type,
             $controlHtml,
@@ -110,12 +127,17 @@ abstract class Component extends Model
     {
         $classes = collect(explode(' ', $this->classes));
         $options = $this->attributes['options'];
-        $options['subFormClass'] = app('form')->subFormClass;
         $classes = $classes->merge(collect(explode(' ', $options['class'] ?? '')));
-        $classes = $classes->merge(collect(explode(' ', $this->errorClasses)));
-        $options['class'] = $classes->filter()
+        $classes = $classes->merge(collect(explode(' ', $this->errorClasses)))
+            ->filter()
             ->unique()
             ->implode(' ');
+        unset($options['class']);
+
+        if ($classes) {
+            $options['class'] = $classes;
+        }
+
         $this->attributes['options'] = $options;
 
         return collect($this->attributes['options'])
@@ -126,13 +148,14 @@ abstract class Component extends Model
 
                 return collect(explode(' ', $value))
                     ->filter(function ($class) {
-                        return ($this->excludedClasses->has($class) ? null : $class);
+                        return ! $this->excludedClasses->has($class);
                     })
                     ->implode(' ');
             })
             ->filter(function ($value, $key) {
-                return ($this->excludedKeys->has($key) ? null : $value);
+                return ! $this->excludedKeys->has($key);
             })
+            ->filter()
             ->unique()
             ->toArray();
     }

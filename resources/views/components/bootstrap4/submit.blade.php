@@ -11,7 +11,7 @@
     {!! link_to(collect($options)->get('cancelUrl'), 'Cancel', ['class' => 'btn btn-default']) !!}
 @endif
 
-    {!! $controlHtml !!}
+{!! $controlHtml !!}
 
 @if ($isHorizontal)
     </div>
