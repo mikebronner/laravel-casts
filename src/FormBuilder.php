@@ -183,9 +183,9 @@ class FormBuilder extends Form
         return (new Combobox($name, $list, $selected, $options, $optionOptions))->html;
     }
 
-    public function select($name, $list = [], $selected = null, array $options = [], array $optionOptions = [])
+    public function select($name, $list = [], $selected = null,  array $selectAttributes = [], array $optionsAttributes = [], array $optgroupsAttributes = [])
     {
-        return (new Select($name, $list, $selected, $options, $optionOptions))->html;
+        return (new Select($name, $list, $selected, $selectAttributes, $optionsAttributes, $optgroupsAttributes))->html;
     }
 
     public function selectMonths($name, $value = null, array $options = [], array $optionOptions = [])

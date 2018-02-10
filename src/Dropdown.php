@@ -3,6 +3,7 @@
 abstract class Dropdown extends Component
 {
     protected $list;
+    protected $optionGroupOptions;
     protected $optionOptions;
 
     public function __construct(
@@ -10,11 +11,13 @@ abstract class Dropdown extends Component
         array $list = [],
         $value = null,
         array $options = [],
-        array $optionOptions = []
+        array $optionOptions = [],
+        array $optionGroupOptions = []
     ) {
         parent::__construct($name, $value, $options);
 
         $this->list = $list;
+        $this->optionGroupOptions = $optionGroupOptions;
         $this->optionOptions = $optionOptions;
 
         $this->excludedKeys = $this->excludedKeys->merge(collect([
@@ -48,6 +51,16 @@ abstract class Dropdown extends Component
                 '</option>',
                 $html
             );
+
+            $html = str_replace(
+                '<option value="" hidden="hidden">' .
+                $this->options['placeholder'] .
+                '</option>',
+                '<option value="" disabled="disabled">' .
+                $this->options['placeholder'] .
+                '</option>',
+                $html
+            );
         }
 
         return $html;
@@ -61,7 +74,8 @@ abstract class Dropdown extends Component
             $this->list,
             $this->value,
             $this->options,
-            $this->optionOptions
+            $this->optionOptions,
+            $this->optionGroupOptions
         );
 
         return $this->disablePlaceholderOption($html);
