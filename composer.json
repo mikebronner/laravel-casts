@@ -9,22 +9,24 @@
         }
     ],
     "require": {
-        "php": ">=7.0.0",
-        "illuminate/support": "5.5.*",
-        "laravelcollective/html": "5.5.*",
-        "symfony/dom-crawler": "^3.2",
+        "php": ">=7.1.3",
+        "illuminate/support": "5.5 - 5.6",
+        "laravelcollective/html": "5.5 - 5.6",
         "jenssegers/model": "^1.1"
     },
     "require-dev": {
+        "codedungeon/phpunit-result-printer": "*",
         "fzaninotto/faker": "~1.4",
-        "laravel/laravel": "5.5.*",
         "mockery/mockery": "0.9.*",
-        "phpmd/phpmd": "^2.6",
-        "phpunit/phpunit": "6.*",
-        "satooshi/php-coveralls" : "dev-master@dev",
+        "orchestra/database": "3.6.x-dev@dev",
+        "orchestra/testbench-browser-kit": "3.6.x-dev@dev",
+        "orchestra/testbench-dusk": "3.6.x-dev@dev",
+        "orchestra/testbench": "^3.6",
+        "php-coveralls/php-coveralls" : "*",
+        "phpmd/phpmd": "*",
+        "phpunit/phpunit": "*",
         "sebastian/phpcpd": "*",
-        "laravel/browser-kit-testing": "^2.0",
-        "nunomaduro/collision": "^1.1"
+        "symfony/thanks": "^1.0"
     },
     "autoload": {
         "classmap": [],
@@ -39,7 +41,7 @@
                 "laravelcollective/html"
             ],
             "providers": [
-                "GeneaLabs\\LaravelCasts\\Providers\\LaravelCastsService"
+                "GeneaLabs\\LaravelCasts\\Providers\\Service"
             ],
             "aliases": {
                 "Form": "GeneaLabs\\LaravelCasts\\FormFacade",

@@ -1,17 +1,18 @@
 <?php namespace GeneaLabs\LaravelCasts\Tests;
 
-use GeneaLabs\LaravelCasts\Providers\LaravelCastsService;
-use Illuminate\Contracts\Console\Kernel;
-use Illuminate\Database\Eloquent\Factory;
+use GeneaLabs\LaravelCasts\Providers\Service as LaravelCastsService;
+use Orchestra\Database\ConsoleServiceProvider;
 
 trait CreatesApplication
 {
-    public function createApplication()
+    /**
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+     */
+    protected function getPackageProviders($app)
     {
-        $app = require __DIR__ . '/../vendor/laravel/laravel/bootstrap/app.php';
-        $app->make(Kernel::class)->bootstrap();
-        $app->register(LaravelCastsService::class);
-
-        return $app;
+        return [
+            LaravelCastsService::class,
+            ConsoleServiceProvider::class,
+        ];
     }
 }

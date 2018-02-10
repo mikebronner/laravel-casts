@@ -12,8 +12,8 @@
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/GeneaLabs/laravel-casts/master/LICENSE)
 
 ## Requirements
-- PHP >= 7.0.0
-- Laravel 5.5
+- PHP >= 7.1.3
+- Laravel >= 5.5
 - `jQuery` needs to be already loaded in your project
 - `Bootstrap JS` (3 or 4) needs to be already loaded, if being used
 

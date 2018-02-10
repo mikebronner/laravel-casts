@@ -14,7 +14,7 @@ use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Event;
 
-class LaravelCastsService extends ServiceProvider
+class Service extends ServiceProvider
 {
     protected $defer = false;
 

@@ -1,8 +1,8 @@
 <?php namespace GeneaLabs\LaravelCasts\Tests;
 
-use Illuminate\Foundation\Testing\TestCase;
+use Orchestra\Testbench\TestCase as BaseTestCase;
 
-abstract class UnitTestCase extends TestCase
+abstract class UnitTestCase extends BaseTestCase
 {
     use CreatesApplication;
 }
