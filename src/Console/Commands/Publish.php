@@ -2,7 +2,7 @@
 
 use Illuminate\Console\Command;
 use Illuminate\Contracts\Console\Kernel;
-use GeneaLabs\LaravelCasts\Providers\LaravelCastsService;
+use GeneaLabs\LaravelCasts\Providers\Service;
 use File;
 
 class Publish extends Command
@@ -15,7 +15,7 @@ class Publish extends Command
         if ($this->option('assets')) {
             $this->delTree(public_path('genealabs-laravel-casts'));
             $this->call('vendor:publish', [
-                '--provider' => LaravelCastsService::class,
+                '--provider' => Service::class,
                 '--tag' => ['assets'],
                 '--force' => true,
             ]);
@@ -23,7 +23,7 @@ class Publish extends Command
 
         if ($this->option('config')) {
             $this->call('vendor:publish', [
-                '--provider' => LaravelCastsService::class,
+                '--provider' => Service::class,
                 '--tag' => ['config'],
                 '--force' => true,
             ]);
