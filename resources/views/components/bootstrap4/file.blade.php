@@ -4,6 +4,7 @@
 
     <div class="custom-file" style="display: block;">
         {!! $controlHtml !!}
+        <label class="custom-file-label" for="{{ $name }}">{{ $options["label"] }}</label>
         <span class="custom-file-control{{ $errors->isEmpty() ? '' : $errors->has($name) ? ' form-control-danger' : ' form-control-success' }}"></span>
     </div>
 
