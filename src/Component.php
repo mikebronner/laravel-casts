@@ -25,11 +25,15 @@ abstract class Component extends Model
             'offsetClass' => '',
         ]);
         $this->excludedClasses = collect();
-        $this->framework = $options['framework'] ?? app('form')->framework;
-        $this->labelWidth = $options['labelWidth'] ?? app('form')->labelWidth;
-        $this->fieldWidth = $options['labelWidth'] ?? app('form')->fieldWidth;
+        $this->framework = $options['framework']
+            ?? app('form')->framework;
+        $this->labelWidth = $options['labelWidth']
+            ?? app('form')->labelWidth;
+        $this->fieldWidth = $options['labelWidth']
+            ?? app('form')->fieldWidth;
         $this->name = $name;
-        $this->value = $value;
+        $this->value = $value
+            ?? app("form")->getModel()->$name;
         $options['id'] = $options['id'] ?? $name;
         $options['offsetClass'] = '';
 

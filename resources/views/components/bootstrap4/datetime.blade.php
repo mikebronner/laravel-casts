@@ -2,19 +2,20 @@
     <div class="col-sm-{{ $fieldWidth }}">
 @endif
 
-<div class="input-group date" id="datetimepicker-{{ $name }}" data-target-input="nearest">
+<div class="input-group date" id="{{ $options['data-target'] }}" data-target-input="nearest">
     {!! $controlHtml !!}
-    <span class="input-group-addon" data-target="{{ $options['data-target'] }}" data-toggle="datetimepicker">
-        <i class="fa fa-btn fa-calendar"></i>
-    </span>
+    <div class="input-group-append" data-target="#{{ $options['data-target'] }}" data-toggle="datetimepicker">
+        <div class="input-group-text">
+            <i class="fa fa-btn fa-calendar"></i>
+        </div>
+    </div>
 </div>
 
-
-@if(! $errors->isEmpty() && $errors->has($name))
+@if (! $errors->isEmpty() && $errors->has($name))
     <div class="invalid-feedback">{{ implode(' ', $errors->get($name)) }}</div>
 @endif
 
-@if($isHorizontal)
+@if ($isHorizontal)
     </div>
 @endif
 
@@ -26,7 +27,8 @@
         window.genealabsLaravelCasts['framework'] = 'bootstrap4';
         window.genealabsLaravelCasts['dateTimeLoaders'] = window.genealabsLaravelCasts.dateTimeLoaders || [];
         window.genealabsLaravelCasts.dateTimeLoaders.push(function () {
-            $("{{ $options['subFormClass'] ?? '' }} #datetimepicker-{{ $name }}").datetimepicker({
+            $("#{{ $options['data-target'] }}").datetimepicker({
+                allowInputToggle: true,
                 format: 'lll',
                 date: '{{ $options['value'] }}',
                 sideBySide: true,
