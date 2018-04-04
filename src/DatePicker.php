@@ -7,8 +7,9 @@ abstract class DatePicker extends Component
         $value = null,
         array $options = []
     ) {
+        $random = str_random(12);
         $options['autocomplete'] = 'noway';
-        $options['data-target'] = "#datetimepicker-{$name}";
+        $options['data-target'] = "datetimepicker-{$name}-{$random}";
 
         parent::__construct($name, $value, $options);
 
@@ -20,7 +21,7 @@ abstract class DatePicker extends Component
         $controlHtml = $this->renderBaseControl();
 
         $options = $this->attributes['options'];
-        $options['value'] = $this->value ?: '';
+        $options['value'] = $this->value;
 
         $method = [
             app('form'),
@@ -42,6 +43,4 @@ abstract class DatePicker extends Component
 
         return call_user_func_array($method, $parameters);
     }
-
-
 }
