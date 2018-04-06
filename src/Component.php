@@ -33,7 +33,7 @@ abstract class Component extends Model
             ?? app('form')->fieldWidth;
         $this->name = $name;
         $this->value = $value
-            ?? app("form")->getModel()->$name;
+            ?? data_get(app("form")->getModel(), $name);
         $options['id'] = $options['id'] ?? $name;
         $options['offsetClass'] = '';
 
