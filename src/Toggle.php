@@ -25,15 +25,18 @@ abstract class Toggle extends Component
 
     protected function renderBaseControl() : string
     {
-        $label = $this->attributes['options']['label'] ?? ucwords($this->name);
+        $label = $this->attributes['options']['label']
+            ?? ucwords($this->name);
 
-        return app('form')->callParentMethod(
-            $this->type,
-            $this->name,
-            $this->value,
-            $this->isChecked,
-            $this->options
-        ) .
-        " {$label}";
+        return '<label>' .
+            app('form')->callParentMethod(
+                $this->type,
+                $this->name,
+                $this->value,
+                $this->isChecked,
+                $this->options
+            ) .
+            " {$label}" .
+            '</label>';
     }
 }
