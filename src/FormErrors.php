@@ -1,18 +1,38 @@
 <?php namespace GeneaLabs\LaravelCasts;
 
+use Illuminate\Support\MessageBag;
+
 class FormErrors extends Component
 {
+    protected $errorOptions;
+
+    public function __construct($options = [])
+    {
+        parent::__construct("", null, $options);
+
+        $this->errorOptions = $options;
+    }
+
     public function renderBaseControl() : string
     {
-        $controlHtml = '<ul>';
+        $controlHtml = "";
+        $html = "";
 
-        foreach (app("form")->errors as $error) {
+        foreach (session("errors", new MessageBag())->all() as $error) {
             $controlHtml .= "<li>{$error}</li>";
         }
 
-        $controlHtml .= '</ul>';
+        if ($controlHtml) {
+            $html = "<ul";
 
-        return $controlHtml;
+            foreach ($this->errorOptions as $attribute => $value) {
+                $html .= " {$attribute}=\"{$value}\"";
+            }
+
+            $html .= ">{$controlHtml}</ul>";
+        }
+
+        return $html;
     }
 
     public function getHtmlAttribute() : string

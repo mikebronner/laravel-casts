@@ -93,7 +93,7 @@ class FormBuilder extends Form
         return (new Label($name, $label, $options, $escapeHtml))->html;
     }
 
-    public function formErrors() : string
+    public function formErrors(array $options = []) : string
     {
         return (new FormErrors())->html;
     }
