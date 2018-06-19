@@ -2,7 +2,7 @@
 
 use Illuminate\Support\MessageBag;
 
-class FormErrors extends Component
+class Errors extends Component
 {
     protected $errorOptions;
     protected $intro;

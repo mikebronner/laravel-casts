@@ -55,9 +55,9 @@ class Service extends ServiceProvider
         $this->registerBladeDirective('email');
         $this->registerBladeDirective('endButtonGroup');
         $this->registerBladeDirective('endsubform');
+        $this->registerBladeDirective('errors');
         $this->registerBladeDirective('file');
         $this->registerBladeDirective('form');
-        $this->registerBladeDirective('formErrors');
         $this->registerBladeDirective('hidden');
         $this->registerBladeDirective('label');
         $this->registerBladeDirective('model');
