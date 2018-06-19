@@ -5,12 +5,14 @@ use Illuminate\Support\MessageBag;
 class FormErrors extends Component
 {
     protected $errorOptions;
+    protected $intro;
 
-    public function __construct($options = [])
+    public function __construct(string $intro = "", array $options = [])
     {
         parent::__construct("", null, $options);
 
         $this->errorOptions = $options;
+        $this->intro = $intro;
     }
 
     public function renderBaseControl() : string
@@ -23,13 +25,13 @@ class FormErrors extends Component
         }
 
         if ($controlHtml) {
-            $html = "<ul";
+            $html = "<div";
 
             foreach ($this->errorOptions as $attribute => $value) {
                 $html .= " {$attribute}=\"{$value}\"";
             }
 
-            $html .= ">{$controlHtml}</ul>";
+            $html .= ">{$this->intro}<ul>{$controlHtml}</ul></div>";
         }
 
         return $html;
