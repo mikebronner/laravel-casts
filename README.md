@@ -48,6 +48,7 @@ The following shows all elements using Bootstrap 3:
 The following Blade directives developing forms a snap:
 ```blade
 @form(['url' => ''])
+    @errors("intro text", ["html" => "attributes"])
     @text('text', '', ['placeholder' => 'Placeholder Text', 'label' => 'Text Input'])
     @number('number', '', ['placeholder' => 'Placeholder Text', 'label' => 'Number Input'])
     @password('password', ['placeholder' => 'Placeholder Text', 'label' => 'Password Input'])
@@ -85,6 +86,13 @@ The following Blade directives developing forms a snap:
 - `labelWidth`: (optional, default: 3)
 - `fieldWidth`: (optional, default: 9)
 - `framework`: (optional)
+
+#### `@errors` / `{!! Form::errors() !!}`
+```blade
+@errors (string $intro = "", array $options = [])
+```
+- `$intro`: an optional brief pre-text to the errors list.
+- `$options`: (default: []) will be rendered as html tag attributes.
 
 #### `@label` / `{!! Form::label() !!}`
 ```blade
