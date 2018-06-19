@@ -93,6 +93,11 @@ class FormBuilder extends Form
         return (new Label($name, $label, $options, $escapeHtml))->html;
     }
 
+    public function formErrors() : string
+    {
+        return (new FormErrors())->html;
+    }
+
     public function staticText(string $value, array $options = [])
     {
         return (new StaticText($value, $options))->html;
