@@ -9,7 +9,7 @@ class Errors extends Component
 
     public function __construct(string $intro = "", array $options = [])
     {
-        parent::__construct("", null, $options);
+        parent::__construct("errors", null, $options);
 
         $this->errorOptions = $options;
         $this->intro = $intro;
