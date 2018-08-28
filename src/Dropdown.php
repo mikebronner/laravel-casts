@@ -17,6 +17,11 @@ abstract class Dropdown extends Component
         parent::__construct($name, $value, $options);
 
         $this->list = $list;
+
+        if (array_key_exists("deselector", $options)) {
+            $this->list = ["" => $options["deselector"]] + $list;
+        }
+
         $this->optionGroupOptions = $optionGroupOptions;
         $this->optionOptions = $optionOptions;
 
