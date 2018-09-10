@@ -310,10 +310,11 @@ class FormBuilderTest extends UnitTestCase
     {
         $string = "@date ('input-field', null, ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label'])";
         $expected = "<?php echo app('form')->date('input-field', null, ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label']); ?>";
-        $expectedHtml = "<div class=\"form-group\">\n\n            <label for=\"input-field\" class=\"control-label\">Text Field Label</label>    \n<div class=\"input-group date\" id=\"datetimepicker-input-field\" data-target-input=\"nearest\">\n    <input placeholder=\"Placeholder\" autocomplete=\"noway\" data-target=\"#datetimepicker-input-field\" id=\"input-field\" class=\"form-control datetimepicker-input blue\" name=\"input-field\" type=\"date\">\n    <span class=\"input-group-addon\" data-target=\"#datetimepicker-input-field\" data-toggle=\"datetimepicker\">\n        <i class=\"fa fa-btn fa-calendar\"></i>\n    </span>\n</div>\n\n\n\n\n\n    </div>\n";
+        $expectedHtml = "<div class=\"form-group\">\n\n            <label for=\"input-field\" class=\"control-label\">Text Field Label</label>    \n<div class=\"input-group date\" id=\"datetimepicker-input-field\" data-target-input=\"nearest\">\n    <input placeholder=\"Placeholder\" autocomplete=\"noway\" data-target=\"datetimepicker-input-field\" id=\"input-field\" class=\"form-control datetimepicker-input blue\" name=\"input-field\" type=\"date\">\n    <span class=\"input-group-addon\" data-target=\"#datetimepicker-input-field\" data-toggle=\"datetimepicker\">\n        <i class=\"fa fa-btn fa-calendar\"></i>\n    </span>\n</div>\n\n\n\n\n\n    </div>\n";
 
         $compiled = app('blade.compiler')->compileString($string);
         $html = app('form')->date('input-field', null, ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label']);
+        $html = preg_replace('/data-target="datetimepicker-input-field(.*?)"/', "data-target=\"datetimepicker-input-field\"", $html);
 
         $this->assertEquals($expected, $compiled);
         $this->assertEquals($expectedHtml, $html);
@@ -323,10 +324,11 @@ class FormBuilderTest extends UnitTestCase
     {
         $string = "@datetime ('input-field', null, ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label'])";
         $expected = "<?php echo app('form')->datetime('input-field', null, ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label']); ?>";
-        $expectedHtml = "<div class=\"form-group\">\n\n            <label for=\"input-field\" class=\"control-label\">Text Field Label</label>    \n<div class=\"input-group date\" id=\"datetimepicker-input-field\" data-target-input=\"nearest\">\n    <input placeholder=\"Placeholder\" autocomplete=\"noway\" data-target=\"#datetimepicker-input-field\" id=\"input-field\" class=\"form-control datetimepicker-input blue\" name=\"input-field\" type=\"datetime\">\n    <span class=\"input-group-addon\" data-target=\"#datetimepicker-input-field\" data-toggle=\"datetimepicker\">\n        <i class=\"fa fa-btn fa-calendar\"></i>\n    </span>\n</div>\n\n\n\n\n\n    </div>\n";
+        $expectedHtml = "<div class=\"form-group\">\n\n            <label for=\"input-field\" class=\"control-label\">Text Field Label</label>    \n<div class=\"input-group date\" id=\"datetimepicker-input-field\" data-target-input=\"nearest\">\n    <input placeholder=\"Placeholder\" autocomplete=\"noway\" data-target=\"datetimepicker-input-field\" id=\"input-field\" class=\"form-control datetimepicker-input blue\" name=\"input-field\" type=\"datetime\">\n    <span class=\"input-group-addon\" data-target=\"#datetimepicker-input-field\" data-toggle=\"datetimepicker\">\n        <i class=\"fa fa-btn fa-calendar\"></i>\n    </span>\n</div>\n\n\n\n\n\n    </div>\n";
 
         $compiled = app('blade.compiler')->compileString($string);
         $html = app('form')->datetime('input-field', null, ['class' => 'blue', 'placeholder' => 'Placeholder', 'label' => 'Text field label']);
+        $html = preg_replace('/data-target="datetimepicker-input-field(.*?)"/', "data-target=\"datetimepicker-input-field\"", $html);
 
         $this->assertEquals($expected, $compiled);
         $this->assertEquals($expectedHtml, $html);

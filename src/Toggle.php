@@ -28,15 +28,14 @@ abstract class Toggle extends Component
         $label = $this->attributes['options']['label']
             ?? ucwords($this->name);
 
-        return '<label>' .
-            app('form')->callParentMethod(
+        return app('form')
+            ->callParentMethod(
                 $this->type,
                 $this->name,
                 $this->value,
                 $this->isChecked,
                 $this->options
             ) .
-            " {$label}" .
-            '</label>';
+            " {$label}";
     }
 }
