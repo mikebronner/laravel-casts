@@ -43,4 +43,15 @@ abstract class DatePicker extends Component
 
         return call_user_func_array($method, $parameters);
     }
+    
+    
+    protected function renderBaseControl() : string
+    {
+        return app('form')->callParentMethod(
+            "text",
+            $this->name,
+            $this->value,
+            $this->options
+        );
+    }
 }
