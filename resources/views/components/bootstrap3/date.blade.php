@@ -39,7 +39,8 @@
                     up: "fa fa-btn fa-arrow-up",
                     down: "fa fa-btn fa-arrow-down"
                 },
-                locale: "{{ config('app.locale') }}"
+                locale: "{{ config('app.locale') }}",
+                useCurrent: false,
             });
         });
     </script>
