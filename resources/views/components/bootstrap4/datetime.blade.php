@@ -39,6 +39,7 @@
                     down: "fa fa-btn fa-arrow-down"
                 },
                 locale: "{{ config('app.locale') }}",
+                useCurrent: false,
                 widgetPositioning: {horizontal: 'left'}
             });
         });
