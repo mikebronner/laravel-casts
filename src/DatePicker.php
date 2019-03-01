@@ -43,4 +43,9 @@ abstract class DatePicker extends Component
 
         return call_user_func_array($method, $parameters);
     }
+
+    public function getTypeAttribute() : string
+    {
+        return "text";
+    }
 }

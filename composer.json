@@ -10,23 +10,21 @@
     ],
     "require": {
         "php": ">=7.1.3",
-        "illuminate/support": "5.5 - 5.7",
-        "laravelcollective/html": "5.5 - 5.7",
+        "illuminate/support": "5.5 - 5.8",
+        "laravelcollective/html": "5.5 - 5.8",
         "jenssegers/model": "*"
     },
     "require-dev": {
-        "codedungeon/phpunit-result-printer": "*",
         "fzaninotto/faker": "*",
         "mockery/mockery": "*",
-        "orchestra/database": "3.7.x-dev",
-        "orchestra/testbench-browser-kit": "3.7.x-dev",
-        "orchestra/testbench-dusk": "3.7.x-dev",
-        "orchestra/testbench": "3.7.*",
+        "orchestra/database": "3.8.x-dev",
+        "orchestra/testbench-browser-kit": "3.8.*",
+        "orchestra/testbench": "3.8.*",
         "php-coveralls/php-coveralls" : "*",
         "phpmd/phpmd": "*",
         "phpunit/phpunit": "*",
         "sebastian/phpcpd": "*",
-        "symfony/thanks": "^1.0"
+        "symfony/thanks": "*"
     },
     "autoload": {
         "classmap": [],

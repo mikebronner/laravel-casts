@@ -437,13 +437,13 @@ class Bootstrap3Test extends FeatureTestCase
             ->seeElement('input', [
                 'class' => 'form-control datetimepicker-input',
                 'name' => 'date1',
-                'type' => 'date',
+                'type' => 'text',
                 'value' => '',
             ])
             ->dontSeeElement('input', [
                 'label' => 'Date Input',
                 'name' => 'date1',
-                'type' => 'date',
+                'type' => 'text',
             ])
             ->seeElement('label', [
                 'for' => 'date1',
@@ -466,13 +466,13 @@ class Bootstrap3Test extends FeatureTestCase
             ->seeElement('input', [
                 'class' => 'form-control datetimepicker-input',
                 'name' => 'datetime1',
-                'type' => 'datetime',
+                'type' => 'text',
                 'value' => '',
             ])
             ->dontSeeElement('input', [
                 'label' => 'DateTime Input',
                 'name' => 'datetime1',
-                'type' => 'datetime',
+                'type' => 'text',
             ])
             ->seeElement('label', [
                 'for' => 'datetime1',
