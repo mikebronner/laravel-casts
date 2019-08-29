@@ -16,7 +16,6 @@
     "require-dev": {
         "fzaninotto/faker": "*",
         "mockery/mockery": "*",
-        "orchestra/database": "3.9.x-dev@dev",
         "orchestra/testbench-browser-kit": "3.9.x-dev@dev",
         "orchestra/testbench": "3.9.x-dev@dev",
         "php-coveralls/php-coveralls" : "*",
