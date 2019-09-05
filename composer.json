@@ -9,15 +9,15 @@
         }
     ],
     "require": {
-        "illuminate/support": "6.0",
+        "illuminate/support": "^6.0",
         "jenssegers/model": "~1.2.1",
-        "laravelcollective/html": "6.0"
+        "laravelcollective/html": "^6.0"
     },
     "require-dev": {
         "fzaninotto/faker": "*",
         "mockery/mockery": "*",
-        "orchestra/testbench-browser-kit": "3.9.x-dev@dev",
-        "orchestra/testbench": "3.9.x-dev@dev",
+        "orchestra/testbench-browser-kit": "^3.9",
+        "orchestra/testbench": "^3.9",
         "php-coveralls/php-coveralls" : "*",
         "phpmd/phpmd": "*",
         "phpunit/phpunit": "^8.0",
