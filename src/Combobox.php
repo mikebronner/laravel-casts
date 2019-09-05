@@ -1,5 +1,7 @@
 <?php namespace GeneaLabs\LaravelCasts;
 
+use Illuminate\Support\Str;
+
 class Combobox extends Dropdown
 {
     public function __construct(
@@ -19,7 +21,7 @@ class Combobox extends Dropdown
 
         if (array_key_exists('subFormAction', $this->attributes['options'])) {
             $this->attributes['options']['subFormMethod'] = $this->attributes['options']['subFormMethod'] ?? 'POST';
-            $this->attributes['options']['subFormClass'] = '.' . str_random(6);
+            $this->attributes['options']['subFormClass'] = '.' . Str::random(6);
             $this->attributes['options']['subFormResponseObjectPrimaryKey'] = $this->attributes['options']['subFormResponseObjectPrimaryKey'] ?? 'id';
         }
         $this->attributes['options']['list'] = collect($list)->transform(function ($item, $index) {

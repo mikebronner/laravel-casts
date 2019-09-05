@@ -1,7 +1,6 @@
 <?php namespace GeneaLabs\LaravelCasts\Tests;
 
 use GeneaLabs\LaravelCasts\Providers\Service as LaravelCastsService;
-use Orchestra\Database\ConsoleServiceProvider;
 
 trait CreatesApplication
 {
@@ -12,7 +11,6 @@ trait CreatesApplication
     {
         return [
             LaravelCastsService::class,
-            ConsoleServiceProvider::class,
         ];
     }
 }

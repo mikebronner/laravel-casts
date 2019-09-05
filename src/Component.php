@@ -1,5 +1,6 @@
 <?php namespace GeneaLabs\LaravelCasts;
 
+use Illuminate\Support\Str;
 use Jenssegers\Model\Model;
 
 abstract class Component extends Model
@@ -95,7 +96,7 @@ abstract class Component extends Model
 
     public function getTypeAttribute() : string
     {
-        return str_replace('genealabslaravelcasts', '', str_slug(basename(get_called_class())));
+        return str_replace('genealabslaravelcasts', '', Str::slug(basename(get_called_class())));
     }
 
     public function getHasErrorAttribute() : bool

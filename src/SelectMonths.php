@@ -1,5 +1,7 @@
 <?php namespace GeneaLabs\LaravelCasts;
 
+use Illuminate\Support\Str;
+
 class SelectMonths extends Dropdown
 {
     public function __construct(
@@ -24,7 +26,9 @@ class SelectMonths extends Dropdown
         ];
 
         if (($options['optionsFormat'] ?? '') === 'slugs') {
-            $keys = array_map('str_slug', array_values($list));
+            $keys = array_map(function ($item) {
+                return Str::slug($item);
+            }, array_values($list));
             $list = array_combine($keys, array_values($list));
         }
 
