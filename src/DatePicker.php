@@ -1,5 +1,7 @@
 <?php namespace GeneaLabs\LaravelCasts;
 
+use Illuminate\Support\Str;
+
 abstract class DatePicker extends Component
 {
     public function __construct(
@@ -7,7 +9,7 @@ abstract class DatePicker extends Component
         $value = null,
         array $options = []
     ) {
-        $random = str_random(12);
+        $random = Str::random(12);
         $options['autocomplete'] = 'noway';
         $options['data-target'] = "datetimepicker-{$name}-{$random}";
 

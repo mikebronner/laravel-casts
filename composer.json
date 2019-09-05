@@ -9,9 +9,9 @@
         }
     ],
     "require": {
-        "illuminate/support": "5.5 - 6.0",
-        "jenssegers/model": "*",
-        "laravelcollective/html": "5.5 - 6.0"
+        "illuminate/support": "6.0",
+        "jenssegers/model": "~1.2.1",
+        "laravelcollective/html": "6.0"
     },
     "require-dev": {
         "fzaninotto/faker": "*",
@@ -20,7 +20,7 @@
         "orchestra/testbench": "3.9.x-dev@dev",
         "php-coveralls/php-coveralls" : "*",
         "phpmd/phpmd": "*",
-        "phpunit/phpunit": "*",
+        "phpunit/phpunit": "^8.0",
         "sebastian/phpcpd": "*",
         "symfony/thanks": "*"
     },
