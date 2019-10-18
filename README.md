@@ -1,6 +1,4 @@
-![laravel-casts](https://cloud.githubusercontent.com/assets/1791050/18258832/b7c177d6-7391-11e6-99ba-ea7e63735cd8.jpg)
-
-# Laravel Casts
+# Casts for Laravel
 
 [![Join the chat at https://gitter.im/GeneaLabs/laravel-casts](https://badges.gitter.im/GeneaLabs/laravel-casts.svg)](https://gitter.im/GeneaLabs/laravel-casts?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![Travis](https://img.shields.io/travis/GeneaLabs/laravel-casts.svg)](https://travis-ci.org/GeneaLabs/laravel-casts)
@@ -10,6 +8,8 @@
 [![GitHub (pre-)release](https://img.shields.io/github/release/GeneaLabs/laravel-casts/all.svg)](https://github.com/GeneaLabs/laravel-casts)
 [![Packagist](https://img.shields.io/packagist/dt/GeneaLabs/laravel-casts.svg)](https://packagist.org/packages/genealabs/laravel-casts)
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/GeneaLabs/laravel-casts/master/LICENSE)
+
+![Casts for Laravel masthead image.](https://repository-images.githubusercontent.com/54227416/9eab2600-f1b2-11e9-9aa3-2da687ef463c)
 
 ## Requirements
 - PHP >= 7.1.3
