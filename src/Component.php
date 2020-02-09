@@ -20,6 +20,10 @@ abstract class Component extends Model
         $value = null,
         array $options = []
     ) {
+        if (! $this->framework) {
+            $this->framework = config('genealabs-laravel-casts.framework');
+        }
+
         $this->classes = 'form-control';
         $this->excludedKeys = collect([
             'label' => '',
@@ -50,6 +54,9 @@ abstract class Component extends Model
                 : '';
         }
 
+        if ($this->framework === 'tailwind') {
+            $this->classes = str_replace("form-control", "", $this->classes);
+        }
         $this->attributes['options'] = $options;
         $this->errors = app('form')->errors ?: collect();
     }

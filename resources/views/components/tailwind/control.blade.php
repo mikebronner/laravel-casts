@@ -1,21 +1,13 @@
-@php
-    $wrapperClass = (! $errors->isEmpty() && $errors->has($name))
-        ? ' failure'
-        : (! $errors->isEmpty() && ! $errors->has($name)
-            ? ' success'
-            : '');
-@endphp
+@if (((! $isInButtonGroup && $type !== 'endButtonGroup') || ($isInButtonGroup && $type === 'buttonGroup')) && $type !== 'subform')
+    @include ('genealabs-laravel-casts::components.tailwind.form-group-open')
 
-<div class="form-group{{ $wrapperClass }}">
-
-    @if ($type !== 'checkbox' && $type !== 'radio')
-        @label ($name, $name, $options, $options['escapeLabel'] ?? false)
+    @if ($type !== 'checkbox' && $type !== 'submit')
+        @label ($name, $name, ['label' => $options['label'] ?? ''], $options['escapeLabel'] ?? false)
     @endif
+@endif
 
-    @include("genealabs-laravel-casts::components.tailwind.{$type}")
+@include ("genealabs-laravel-casts::components.tailwind.{$type}")
 
-    @if(! $errors->isEmpty() && $errors->has($name))
-        <p class="help-text">{{ implode(' ', $errors->get($name)) }}</p>
-    @endif
-
-</div>
+@if (! $isInButtonGroup && $type !== 'subform')
+    @include('genealabs-laravel-casts::components.tailwind.form-group-close')
+@endif

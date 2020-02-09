@@ -42,6 +42,10 @@ class Label extends Component
             $options['class'] .= ' col-form-label';
         }
 
+        if ($this->framework === 'tailwind') {
+            $options['class'] .= ' block';
+        }
+
         $this->attributes['options'] = $options;
 
         $this->excludedKeys = $this->excludedKeys->merge(collect([

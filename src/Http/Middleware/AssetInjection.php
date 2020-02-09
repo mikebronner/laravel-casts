@@ -1,7 +1,8 @@
 <?php namespace GeneaLabs\LaravelCasts\Http\Middleware;
 
 use Closure;
-use Symfony\Component\HttpFoundation\RedirectResponse;
+use Illuminate\Support\Str;
+use Livewire\LivewireManager;
 
 class AssetInjection
 {
@@ -9,19 +10,28 @@ class AssetInjection
     {
         $response = $next($request);
 
-        if (! method_exists($response, 'content')) {
+        if (! method_exists($response, 'getContent')) {
             return $response;
         }
 
-        $content = $response->content();
+        $content = $response->getContent();
+        $castsScripts = '<script src="' . asset('genealabs-laravel-casts/app.js') . '"></script></body>';
+        $livewireScripts = (new LivewireManager)->scripts();
+        $livewireStyles = (new LivewireManager)->styles();
 
-        if (preg_match('/<form/', $content)) {
-            return $response->setContent(str_replace(
-                '</body>',
-                '<script src="' . asset('genealabs-laravel-casts/app.js') . '"></script></body>',
-                $content
-            ));
+        if (! Str::contains($content, $livewireStyles)) {
+            $content = str_replace("</head>", "{$livewireStyles}</head>", $content);
         }
+
+        if (! Str::contains($content, $livewireScripts)) {
+            $content = str_replace("</body>", "{$livewireScripts}</body>", $content);
+        }
+
+        if (! Str::contains($content, $castsScripts)) {
+            $content = str_replace("</body>", "{$castsScripts}</body>", $content);
+        }
+
+        $response->setContent($content);
 
         return $response;
     }

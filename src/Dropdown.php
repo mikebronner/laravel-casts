@@ -29,8 +29,21 @@ abstract class Dropdown extends Component
             'list' => '',
         ]));
 
-        if ($this->framework === 'bootstrap4' && ! collect($this->options)->has('multiple')) {
+        if ($this->framework === 'bootstrap4'
+            && ! collect($this->options)->has('multiple')
+        ) {
             $this->classes .= ' custom-select';
+        }
+
+        if ($this->framework === 'tailwind'
+        ) {
+            $tailwindClass = ' form-select';
+
+            if (collect($this->options)->has('multiple')) {
+                $tailwindClass = ' form-multiselect';
+            }
+
+            $this->classes .= $tailwindClass;
         }
     }
 

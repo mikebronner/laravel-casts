@@ -1,17 +1,13 @@
-{{-- @if(! $isInButtonGroup)
+@if(! $isInButtonGroup)
     @if($isHorizontal)
-        <div class="col-sm-{{ $fieldWidth }}">
+        <div class="col-sm-{{ $fieldWidth }}{{ $options['offsetClass'] ?? '' }}">
     @endif
-
-    <div>
-@endif --}}
+@endif
 
 {!! $controlHtml !!}
 
-{{-- @if(! $isInButtonGroup)
-    </div>
-
+@if(! $isInButtonGroup)
     @if($isHorizontal)
         </div>
     @endif
-@endif --}}
+@endif

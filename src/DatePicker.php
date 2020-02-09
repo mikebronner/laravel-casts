@@ -15,7 +15,15 @@ abstract class DatePicker extends Component
 
         parent::__construct($name, $value, $options);
 
-        $this->classes = 'form-control datetimepicker-input';
+        $this->classes = 'datetimepicker-input';
+
+        if ($this->framework === 'bootstrap4') {
+            $this->classes .= ' form-control';
+        }
+
+        if ($this->framework === 'tailwind') {
+            $this->classes .= ' form-input';
+        }
     }
 
     public function getHtmlAttribute() : string
@@ -45,8 +53,8 @@ abstract class DatePicker extends Component
 
         return call_user_func_array($method, $parameters);
     }
-    
-    
+
+
     protected function renderBaseControl() : string
     {
         return app('form')->callParentMethod(

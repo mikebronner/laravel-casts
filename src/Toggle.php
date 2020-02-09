@@ -21,6 +21,10 @@ abstract class Toggle extends Component
         if ($this->framework === 'bootstrap4') {
             $this->classes = 'form-check-input';
         }
+
+        if ($this->framework === 'tailwind') {
+            $this->classes = 'form-checkbox';
+        }
     }
 
     protected function renderBaseControl() : string

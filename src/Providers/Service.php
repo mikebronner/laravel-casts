@@ -36,6 +36,7 @@ class Service extends ServiceProvider
         $this->loadViewsFrom(__DIR__ . '/../../resources/views', 'genealabs-laravel-casts');
         $this->publishes([
             __DIR__ . '/../../public/' => public_path('genealabs-laravel-casts'),
+            __DIR__ . '/../Http/Livewire/' => app_path('Http/Livewire'),
         ], 'assets');
         $configPath = __DIR__ . '/../../config/genealabs-laravel-casts.php';
         $this->publishes([
@@ -45,7 +46,7 @@ class Service extends ServiceProvider
 
         $this->registerBladeDirective('button');
         $this->registerBladeDirective('buttonGroup');
-        $this->registerBladeDirective('cancel');
+        $this->registerBladeDirective('cancelButton');
         $this->registerBladeDirective('checkbox');
         $this->registerBladeDirective('close', 'endform');
         $this->registerBladeDirective('color');

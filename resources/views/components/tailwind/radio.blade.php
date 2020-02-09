@@ -1,3 +1,1 @@
-<label class="radio">
-    {!! $controlHtml !!}
-</label>
+@include('genealabs-laravel-casts::components.tailwind.checkbox')
