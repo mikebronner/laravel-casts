@@ -2,17 +2,13 @@
 
 use Blade;
 use Exception;
-use GeneaLabs\LaravelCasts\Facades\FormFacade;
 use GeneaLabs\LaravelCasts\FormBuilder;
 use Collective\Html\HtmlBuilder;
+use GeneaLabs\LaravelCasts\Http\Livewire\Combobox;
 use GeneaLabs\LaravelCasts\Console\Commands\Publish;
 use GeneaLabs\LaravelCasts\Http\Middleware\AssetInjection;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 use Illuminate\Contracts\Http\Kernel;
-use Illuminate\Foundation\AliasLoader;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Event;
 
 class Service extends ServiceProvider
 {
@@ -36,7 +32,6 @@ class Service extends ServiceProvider
         $this->loadViewsFrom(__DIR__ . '/../../resources/views', 'genealabs-laravel-casts');
         $this->publishes([
             __DIR__ . '/../../public/' => public_path('genealabs-laravel-casts'),
-            __DIR__ . '/../Http/Livewire/' => app_path('Http/Livewire'),
         ], 'assets');
         $configPath = __DIR__ . '/../../config/genealabs-laravel-casts.php';
         $this->publishes([
@@ -85,6 +80,7 @@ class Service extends ServiceProvider
         $this->registerBladeDirective('url');
         $this->registerBladeDirective('week');
         $this->registerComponents();
+        $this->registerLivewireComponents();
     }
 
     public function register()
@@ -189,5 +185,14 @@ class Service extends ServiceProvider
             "genealabs-laravel-casts::components.vanilla.control",
             $options
         );
+    }
+
+    private function registerLivewireComponents() : void
+    {
+        app("livewire")
+            ->component(
+                "genealabs-laravel-casts::combobox",
+                Combobox::class
+            );
     }
 }

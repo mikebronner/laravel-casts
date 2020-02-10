@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace GeneaLabs\LaravelCasts\Http\Livewire;
 
 use Livewire\Component;
 
@@ -49,7 +49,7 @@ class Combobox extends Component
                 ->get();
         }
 
-        return view('genealabs-laravel-casts:livewire.combobox')
+        return view('genealabs-laravel-casts::livewire.combobox')
             ->with([
                 "results" => $results,
             ]);

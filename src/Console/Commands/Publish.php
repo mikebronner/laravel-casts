@@ -19,7 +19,6 @@ class Publish extends Command
                 '--tag' => ['assets'],
                 '--force' => true,
             ]);
-            $this->call("livewire:discover");
         }
 
         if ($this->option('config')) {
