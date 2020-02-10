@@ -24,7 +24,6 @@ abstract class Component extends Model
             $this->framework = config('genealabs-laravel-casts.framework');
         }
 
-        $this->classes = 'form-control';
         $this->excludedKeys = collect([
             'label' => '',
             'offsetClass' => '',
@@ -43,12 +42,14 @@ abstract class Component extends Model
         $options['offsetClass'] = '';
 
         if ($this->framework === 'bootstrap3') {
+            $this->classes .= ' form-control';
             $options['offsetClass'] = trim($options['label'] ?? '') === ' '
                 ? ' col-sm-offset-' . $this->labelWidth
                 : '';
         }
 
         if ($this->framework === 'bootstrap4') {
+            $this->classes .= ' form-control';
             $options['offsetClass'] = trim($options['label'] ?? '') === ' '
                 ? ' offset-sm-' . $this->labelWidth
                 : '';

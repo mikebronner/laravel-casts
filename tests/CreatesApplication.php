@@ -1,6 +1,7 @@
 <?php namespace GeneaLabs\LaravelCasts\Tests;
 
 use GeneaLabs\LaravelCasts\Providers\Service as LaravelCastsService;
+use Livewire\LivewireServiceProvider;
 
 trait CreatesApplication
 {
@@ -11,6 +12,7 @@ trait CreatesApplication
     {
         return [
             LaravelCastsService::class,
+            LivewireServiceProvider::class,
         ];
     }
 }

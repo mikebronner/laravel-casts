@@ -9,6 +9,7 @@
         }
     ],
     "require": {
+        "illuminate/config": "^6.0",
         "illuminate/support": "^6.0",
         "jenssegers/model": "^1.2",
         "laravelcollective/html": "^6.0",

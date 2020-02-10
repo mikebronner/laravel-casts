@@ -93,7 +93,7 @@ class TailwindTest extends FeatureTestCase
         $this->visit('/genealabs/laravel-casts/examples/tailwind')
             ->seeElement('input', [
                 'placeholder' => 'Placeholder Text',
-                'class' => 'form-control',
+                'class' => 'form-input',
                 'name' => 'password1',
                 'type' => 'password',
                 'value' => '',
@@ -123,7 +123,7 @@ class TailwindTest extends FeatureTestCase
         $this->visit('/genealabs/laravel-casts/examples/tailwind')
             ->seeElement('input', [
                 'placeholder' => 'Placeholder Text',
-                'class' => 'form-control',
+                'class' => 'form-input w-full',
                 'name' => 'email1',
                 'type' => 'email',
                 'value' => '',
@@ -153,7 +153,7 @@ class TailwindTest extends FeatureTestCase
         $this->visit('/genealabs/laravel-casts/examples/tailwind')
             ->seeElement('input', [
                 'placeholder' => 'Placeholder Text',
-                'class' => 'form-control',
+                'class' => 'form-input w-full',
                 'name' => 'url1',
                 'type' => 'url',
                 'value' => '',
@@ -182,9 +182,8 @@ class TailwindTest extends FeatureTestCase
     {
         $this->visit('/genealabs/laravel-casts/examples/tailwind')
             ->seeElement('input', [
-                'class' => 'form-control file-name',
                 'name' => 'file1',
-                'type' => 'text',
+                'type' => 'file',
             ])
             ->seeElement('input', [
                 'id' => 'file1',
@@ -210,7 +209,7 @@ class TailwindTest extends FeatureTestCase
     {
         $this->visit('/genealabs/laravel-casts/examples/tailwind')
             ->seeElement('textarea', [
-                'class' => 'form-control',
+                'class' => 'form-textarea w-full',
                 'name' => 'textarea1',
                 'placeholder' => 'Placeholder Text',
                 'rows' => '7',
@@ -238,7 +237,7 @@ class TailwindTest extends FeatureTestCase
     {
         $this->visit('/genealabs/laravel-casts/examples/tailwind')
             ->seeElement('input', [
-                'class' => '',
+                'class' => 'm-0 form-checkbox',
                 'name' => 'checkbox1',
                 'type' => 'checkbox',
                 'checked' => 'checked',
@@ -253,18 +252,18 @@ class TailwindTest extends FeatureTestCase
                 'type' => 'checkbox',
             ])
             ->seeElement('label', [
-                'class' => 'checkbox',
+                'class' => 'm-0 leading-none',
             ])
             ->dontSeeElement('label', [
                 'for' => 'checkbox1',
             ])
             ->seeInElement(
-                'label.checkbox',
+                'label.m-0.leading-none',
                 'Checkbox'
             )
             ->seeInElement(
-                '.checkbox',
-                '<input id="checkbox1" checked name="checkbox1" type="checkbox" value="test">'
+                '.m-0.leading-none',
+                '<input id="checkbox1" class="m-0 form-checkbox" checked name="checkbox1" type="checkbox" value="test">'
             )
             ->seeStatusCode('200');
     }
@@ -273,7 +272,7 @@ class TailwindTest extends FeatureTestCase
     {
         $this->visit('/genealabs/laravel-casts/examples/tailwind')
             ->seeElement('select', [
-                'class' => 'form-control',
+                'class' => 'form-select',
                 'name' => 'select1',
             ])
             ->dontSeeElement('select', [
@@ -300,7 +299,7 @@ class TailwindTest extends FeatureTestCase
     {
         $this->visit('/genealabs/laravel-casts/examples/tailwind')
             ->seeElement('select', [
-                'class' => 'form-control',
+                'class' => 'form-select',
                 'name' => 'selectMonths1',
             ])
             ->dontSeeElement('select', [
@@ -327,7 +326,7 @@ class TailwindTest extends FeatureTestCase
     {
         $this->visit('/genealabs/laravel-casts/examples/tailwind')
             ->seeElement('select', [
-                'class' => 'form-control',
+                'class' => 'form-select',
                 'name' => 'selectWeekdays1',
             ])
             ->dontSeeElement('select', [
@@ -354,7 +353,7 @@ class TailwindTest extends FeatureTestCase
     {
         $this->visit('/genealabs/laravel-casts/examples/tailwind')
             ->seeElement('select', [
-                'class' => 'form-control',
+                'class' => 'form-select',
                 'name' => 'select_range1',
             ])
             ->dontSeeElement('select', [
@@ -383,7 +382,7 @@ class TailwindTest extends FeatureTestCase
     {
         $this->visit('/genealabs/laravel-casts/examples/tailwind')
             ->seeElement('select', [
-                'class' => 'form-control',
+                'class' => 'form-select',
                 'name' => 'select_range_with_interval1',
             ])
             ->dontSeeElement('select', [

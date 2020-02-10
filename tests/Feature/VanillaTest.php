@@ -82,7 +82,6 @@ class VanillaTest extends FeatureTestCase
         $this->visit('/genealabs/laravel-casts/examples/vanilla')
             ->seeElement('input', [
                 'placeholder' => 'Placeholder Text',
-                'class' => 'form-control',
                 'name' => 'password',
                 'type' => 'password',
                 'value' => '',
@@ -108,7 +107,6 @@ class VanillaTest extends FeatureTestCase
         $this->visit('/genealabs/laravel-casts/examples/vanilla')
             ->seeElement('input', [
                 'placeholder' => 'Placeholder Text',
-                'class' => 'form-control',
                 'name' => 'email',
                 'type' => 'email',
                 'value' => '',
@@ -134,7 +132,6 @@ class VanillaTest extends FeatureTestCase
         $this->visit('/genealabs/laravel-casts/examples/vanilla')
             ->seeElement('input', [
                 'placeholder' => 'Placeholder Text',
-                'class' => 'form-control',
                 'name' => 'url',
                 'type' => 'url',
                 'value' => '',
@@ -182,7 +179,6 @@ class VanillaTest extends FeatureTestCase
     {
         $this->visit('/genealabs/laravel-casts/examples/vanilla')
             ->seeElement('textarea', [
-                'class' => 'form-control',
                 'name' => 'textarea',
                 'placeholder' => 'Placeholder Text',
                 'rows' => '7',
@@ -233,7 +229,6 @@ class VanillaTest extends FeatureTestCase
     {
         $this->visit('/genealabs/laravel-casts/examples/vanilla')
             ->seeElement('select', [
-                'class' => 'form-control',
                 'name' => 'select',
             ])
             ->dontSeeElement('select', [
@@ -257,7 +252,6 @@ class VanillaTest extends FeatureTestCase
     {
         $this->visit('/genealabs/laravel-casts/examples/vanilla')
             ->seeElement('select', [
-                'class' => 'form-control',
                 'name' => 'selectRange',
             ])
             ->dontSeeElement('select', [
@@ -283,7 +277,6 @@ class VanillaTest extends FeatureTestCase
     {
         $this->visit('/genealabs/laravel-casts/examples/vanilla')
             ->seeElement('select', [
-                'class' => 'form-control',
                 'name' => 'selectRangeWithInterval',
             ])
             ->dontSeeElement('select', [

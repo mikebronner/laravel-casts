@@ -3,7 +3,7 @@
 @endif
 
     <div class="signature {{ $name }}">
-        <div class="embed-responsive embed-responsive-16by9 form-control">
+        <div class="embed-responsive embed-responsive-16by9">
             <canvas class="embed-responsive-item"></canvas>
             <div class="footer">
                 <small><em>{{ $options['label'] }}</em></small>

@@ -435,7 +435,7 @@ class Bootstrap3Test extends FeatureTestCase
     {
         $this->visit('/genealabs/laravel-casts/examples/bootstrap3')
             ->seeElement('input', [
-                'class' => 'form-control datetimepicker-input',
+                'class' => 'datetimepicker-input',
                 'name' => 'date1',
                 'type' => 'text',
                 'value' => '',
@@ -464,7 +464,7 @@ class Bootstrap3Test extends FeatureTestCase
     {
         $this->visit('/genealabs/laravel-casts/examples/bootstrap3')
             ->seeElement('input', [
-                'class' => 'form-control datetimepicker-input',
+                'class' => 'datetimepicker-input',
                 'name' => 'datetime1',
                 'type' => 'text',
                 'value' => '',
