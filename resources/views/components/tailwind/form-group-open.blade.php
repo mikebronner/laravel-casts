@@ -1,1 +1,1 @@
-<div class="form-group my-4 {{ $isHorizontal ? 'row' : '' }} {{ ! $errors->isEmpty() ? ($errors->has($name) ? 'has-danger' : 'has-success' ) : '' }} {{ $classes ?? '' }}">
+<div class="mb-4 {{ ! $errors->isEmpty() ? ($errors->has($name) ? 'has-danger' : 'has-success' ) : '' }} {{ $classes ?? '' }}">
