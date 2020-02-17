@@ -9,7 +9,7 @@
                 <small><em>{{ $options['label'] }}</em></small>
 
                 @if(! $errors->isEmpty() && $errors->has($name))
-                    <div class="invalid-feedback">{{ implode(' ', $errors->get($name)) }}</div>
+                    <div class="text-sm text-red-600 italic">{{ implode(' ', $errors->get($name)) }}</div>
                 @endif
 
                 <button type="button" class="btn btn-outline-secondary btn-sm pull-right" onclick="clearSignature('{{ $name }}');">&nbsp;{{ $options['clearButton'] }}&nbsp;</button>

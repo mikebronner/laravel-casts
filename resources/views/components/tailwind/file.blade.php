@@ -9,7 +9,7 @@
     </div>
 
     @if(! $errors->isEmpty() && $errors->has($name))
-        <div class="invalid-feedback">{{ implode(' ', $errors->get($name)) }}</div>
+        <div class="text-sm text-red-600 italic">{{ implode(' ', $errors->get($name)) }}</div>
     @endif
 
 @if($isHorizontal)

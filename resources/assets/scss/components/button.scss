@@ -3,18 +3,18 @@ input[type=submit]:hover,
 input[type=button]:hover,
 button {
     @apply .w-full .py-3 .px-4 .rounded;
-    @apply .bg-grey-light .text-grey-darker;
+    @apply .bg-gray-300 .text-gray-500;
 
     &:hover {
-        @apply .bg-grey .text-white;
+        @apply .bg-gray-500 .text-white;
     }
 
     &.primary,
     &[type=submit] {
-        @apply .bg-blue .text-white .font-bold;
+        @apply .bg-blue-500 .text-white .font-bold;
 
         &:hover {
-            @apply .bg-blue-dark;
+            @apply .bg-blue-700;
         }
     }
 }

@@ -10,7 +10,7 @@
 
 @if (! $errors->isEmpty() && $errors->has($name))
     <span id="inputError2Status" class="sr-only">(error)</span>
-    <span class="invalid-feedback">{{ implode(' ', $errors->get($name)) }}</span>
+    <span class="text-sm text-red-600 italic">{{ implode(' ', $errors->get($name)) }}</span>
 @endif
 
 @if ($isHorizontal)

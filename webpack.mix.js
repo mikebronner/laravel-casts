@@ -37,7 +37,7 @@ mix.setPublicPath('public')
     .options({
         processCssUrls: false,
         postCss: [
-            tailwindcss('tailwind.js')
+            tailwindcss('tailwind.config.js')
         ],
     })
     // .js('resources/assets/js/bootstrap3-datetimepicker.js', '')

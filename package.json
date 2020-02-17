@@ -10,14 +10,16 @@
         "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
     },
     "devDependencies": {
+        "bootstrap": "4.*",
         "bootstrap-sass": "3.*",
         "bootstrap-switch": "3.*",
-        "bootstrap": "4.*",
         "cross-env": "5.*",
         "font-awesome": "4.*",
         "laravel-mix": "*",
         "moment": "*",
         "popper.js": "*",
+        "sass": "^1.25.0",
+        "sass-loader": "^8.0.2",
         "selectize": "*",
         "signature_pad": "*",
         "tailwindcss": "*",
