@@ -14,6 +14,7 @@
         type="text"
         placeholder="{{ $placeholder }}"
         autocomplete="off"
+        name="search"
     >
 
     @if (! $createFormIsVisible && ! $selectedValue && $search)

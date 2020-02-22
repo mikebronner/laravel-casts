@@ -13,6 +13,7 @@ class Combobox extends Component
     public $labelField;
     public $model;
     public $placeholder = "Search ...";
+    public $query;
     public $search;
     public $selectedValue;
     public $valueField;
@@ -21,10 +22,11 @@ class Combobox extends Component
         string $label,
         string $fieldName,
         string $labelField,
-        string $model,
-        string $valueField,
+        string $model = "",
+        string $valueField = "id",
         string $placeholder = "",
-        string $createFormView = ""
+        string $createFormView = "",
+        string $query = ""
     ) : void {
         $this->createFormView = $createFormView;
         $this->fieldName = $fieldName;
@@ -32,6 +34,7 @@ class Combobox extends Component
         $this->labelField = $labelField;
         $this->model = $model;
         $this->valueField = $valueField;
+        $this->query = $query;
 
         if ($placeholder) {
             $this->placeholder = $placeholder;
@@ -43,10 +46,22 @@ class Combobox extends Component
         $results = collect();
 
         if ($this->search && ! $this->selectedValue) {
-            $results = (new $this->model)
-                ->where($this->labelField, "LIKE", "%{$this->search}%")
-                ->orderBy($this->labelField)
-                ->get();
+            $query = "";
+
+            if ($this->model) {
+                $query = (new $this->model);
+            }
+
+            if ($this->query) {
+                eval("\$query = {$this->query};");
+            }
+        
+            if ($query) {
+                $results = $query
+                    ->where($this->labelField, "LIKE", "%{$this->search}%")
+                    ->orderBy($this->labelField)
+                    ->get();
+            }
         }
 
         return view('genealabs-laravel-casts::livewire.combobox')
