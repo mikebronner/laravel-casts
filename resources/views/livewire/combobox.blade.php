@@ -13,6 +13,7 @@
         wire:model="search"
         type="text"
         placeholder="{{ $placeholder }}"
+        autocomplete="off"
     >
 
     @if (! $createFormIsVisible && ! $selectedValue && $search)
