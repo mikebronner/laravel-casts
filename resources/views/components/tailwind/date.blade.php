@@ -2,13 +2,11 @@
     <div class="col-sm-{{ $fieldWidth }}">
 @endif
 
-<div class="input-group date" id="{{ $options['data-target'] }}" data-target-input="nearest">
+<div class="relative">
     {!! $controlHtml !!}
-    <div class="input-group-append" data-target="#{{ $options['data-target'] }}" data-toggle="datetimepicker">
-        <div class="input-group-text">
-            <i class="fa fa-btn fa-calendar"></i>
-        </div>
-    </div>
+    <i
+        class="p-3 -ml-10 absolute block fa fa-calendar text-gray-400 pointer-events-none"
+    ></i>
 </div>
 
 @if (! $errors->isEmpty() && $errors->has($name))
@@ -24,23 +22,13 @@
 
     <script>
         window['genealabsLaravelCasts'] = window.genealabsLaravelCasts || {};
-        window.genealabsLaravelCasts['framework'] = 'bootstrap4';
+        window.genealabsLaravelCasts['framework'] = 'tailwind';
         window.genealabsLaravelCasts['dateTimeLoaders'] = window.genealabsLaravelCasts.dateTimeLoaders || [];
         window.genealabsLaravelCasts.dateTimeLoaders.push(function () {
-            $("#{{ $options['data-target'] }}").datetimepicker({
-                format: 'll',
-                allowInputToggle: true,
-                date: '{{ $options['value'] }}',
-                sideBySide: true,
-                icons: {
-                    time: "fa fa-btn fa-clock-o",
-                    date: "fa fa-btn fa-calendar",
-                    up: "fa fa-btn fa-arrow-up",
-                    down: "fa fa-btn fa-arrow-down"
-                },
-                locale: "{{ config('app.locale') }}",
-                useCurrent: false,
-                widgetPositioning: {horizontal: 'left'}
+            flatpickr("[data-target='{{ $options['data-target'] }}'", {
+                altInput: true,
+                altFormat: "j F Y",
+                dateFormat: "Y-m-d",
             });
         });
     </script>

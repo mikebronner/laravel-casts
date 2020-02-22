@@ -271,7 +271,9 @@ module.exports.plugins = (module.exports.plugins || []).concat([
     new webpack.ProvidePlugin(Mix.autoload || {
         jQuery: 'jquery',
         $: 'jquery',
-        jquery: 'jquery'
+        jquery: 'jquery',
+        'window.jquery': 'jquery',
+        Popper: ['popper.js', 'default']
     }),
 
     new plugins.FriendlyErrorsWebpackPlugin(),

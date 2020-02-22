@@ -10,19 +10,17 @@ abstract class DatePicker extends Component
         array $options = []
     ) {
         $random = Str::random(12);
-        $options['autocomplete'] = 'noway';
+        $options['autocomplete'] = 'off';
         $options['data-target'] = "datetimepicker-{$name}-{$random}";
 
         parent::__construct($name, $value, $options);
-
-        $this->classes = 'datetimepicker-input';
 
         if ($this->framework === 'bootstrap4') {
             $this->classes .= ' form-control';
         }
 
         if ($this->framework === 'tailwind') {
-            $this->classes .= ' form-input';
+            $this->classes .= ' form-input w-full';
         }
     }
 

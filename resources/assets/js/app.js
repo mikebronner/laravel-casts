@@ -1,3 +1,5 @@
+window.flatpickr = require("flatpickr");
+
 function getCssProperty(element, property)
 {
     return window.getComputedStyle(element, null).getPropertyValue(property);
@@ -51,6 +53,15 @@ if ((window.genealabsLaravelCasts.dateTimeLoaders || false) !== false) {
     if (window.genealabsLaravelCasts.framework === "bootstrap4") {
         insertCssLink('/genealabs-laravel-casts/bootstrap4-datetimepicker.css');
         $.getScript('/genealabs-laravel-casts/bootstrap4-datetimepicker.js', function() {
+            window.genealabsLaravelCasts.dateTimeLoaders.forEach(function(dateTimeLoader) {
+                dateTimeLoader();
+            });
+        });
+    }
+
+    if (window.genealabsLaravelCasts.framework === "tailwind") {
+        insertCssLink('/genealabs-laravel-casts/datetimepicker.css');
+        $.getScript('/genealabs-laravel-casts/datetimepicker.js', function() {
             window.genealabsLaravelCasts.dateTimeLoaders.forEach(function(dateTimeLoader) {
                 dateTimeLoader();
             });
