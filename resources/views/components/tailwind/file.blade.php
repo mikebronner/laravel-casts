@@ -5,7 +5,7 @@
     <div class="custom-file" style="display: block;">
         {!! $controlHtml !!}
         <label class="custom-file-label" id="{{ $name }}-file-name" for="{{ $name }}"></label>
-        <span class="custom-file-control{{ $errors->isEmpty() ? '' : $errors->has($name) ? ' form-control-danger' : ' form-control-success' }}"></span>
+        <span class="custom-file-control{{ $errors->isEmpty() ? '' : ($errors->has($name) ? ' form-control-danger' : ' form-control-success') }}"></span>
     </div>
 
     @if(! $errors->isEmpty() && $errors->has($name))
