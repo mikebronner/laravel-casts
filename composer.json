@@ -13,7 +13,7 @@
         "illuminate/support": "^6.0",
         "jenssegers/model": "^1.2",
         "laravelcollective/html": "^6.0",
-        "livewire/livewire": "^0.7.3",
+        "livewire/livewire": "^1.0.1",
         "php": "^7.2"
     },
     "require-dev": {
