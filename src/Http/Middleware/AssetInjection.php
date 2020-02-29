@@ -1,7 +1,6 @@
 <?php namespace GeneaLabs\LaravelCasts\Http\Middleware;
 
 use Closure;
-use Illuminate\Support\Str;
 use Livewire\LivewireManager;
 use Wa72\HtmlPageDom\HtmlPageCrawler;
 
