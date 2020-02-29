@@ -3,6 +3,7 @@
 use Closure;
 use Illuminate\Support\Str;
 use Livewire\LivewireManager;
+use Wa72\HtmlPageDom\HtmlPageCrawler;
 
 class AssetInjection
 {
@@ -19,17 +20,12 @@ class AssetInjection
         $livewireScripts = (new LivewireManager)->scripts();
         $livewireStyles = (new LivewireManager)->styles();
 
-        if (! Str::contains($content, $livewireStyles)) {
-            $content = str_replace("</head>", "{$livewireStyles}</head>", $content);
-        }
-
-        if (! Str::contains($content, $livewireScripts)) {
-            $content = str_replace("</body>", "{$livewireScripts}</body>", $content);
-        }
-
-        if (! Str::contains($content, $castsScripts)) {
-            $content = str_replace("</body>", "{$castsScripts}</body>", $content);
-        }
+        $html = new HtmlPageCrawler($content);
+        $html->filter("html > head")->append($livewireStyles);
+        $html->filter("html > head")->append($livewireStyles);
+        $html->filter("html > body")->append($livewireScripts);
+        $html->filter("html > body")->append($castsScripts);
+        $content = $html->saveHTML();
 
         $response->setContent($content);
 

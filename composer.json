@@ -9,18 +9,19 @@
         }
     ],
     "require": {
-        "illuminate/config": "^6.0",
-        "illuminate/support": "^6.0",
+        "illuminate/config": "^6.0|^7.0",
+        "illuminate/support": "^6.0|^7.0",
         "jenssegers/model": "^1.2",
-        "laravelcollective/html": "^6.0",
-        "livewire/livewire": "^0.7.3",
-        "php": "^7.2"
+        "laravelcollective/html": "^6.0|^7.0",
+        "livewire/livewire": "^1.0",
+        "php": "^7.2.5",
+        "wa72/htmlpagedom": "^2.0"
     },
     "require-dev": {
         "fzaninotto/faker": "^1.9",
         "mockery/mockery": "^1.3",
-        "orchestra/testbench-browser-kit": "^3.9",
-        "orchestra/testbench": "^3.9",
+        "orchestra/testbench-browser-kit": ">=3.9",
+        "orchestra/testbench": ">=3.9",
         "php-coveralls/php-coveralls" : "^2.2",
         "phpmd/phpmd": "^2.8",
         "phpunit/phpunit": "^8.0",
