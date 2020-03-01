@@ -20,11 +20,14 @@ class AssetInjection
         $livewireStyles = (new LivewireManager)->styles();
 
         $html = new HtmlPageCrawler($content);
-        $html->filter("html > head")->append($livewireStyles);
-        $html->filter("html > head")->append($livewireStyles);
-        $html->filter("html > body")->append($livewireScripts);
-        $html->filter("html > body")->append($castsScripts);
-        $content = $html->saveHTML();
+
+        if ($html->filter("html > head")->count()) {
+            $html->filter("html > head")->append($livewireStyles);
+            $html->filter("html > head")->append($livewireStyles);
+            $html->filter("html > body")->append($livewireScripts);
+            $html->filter("html > body")->append($castsScripts);
+            $content = $html->saveHTML();
+        }
 
         $response->setContent($content);
 

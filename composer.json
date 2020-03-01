@@ -19,8 +19,8 @@
         }
     ],
     "require": {
-        "illuminate/config": "^7.0",
-        "illuminate/support": "^7.0",
+        "illuminate/config": "^6.0|^7.0",
+        "illuminate/support": "^6.0|^7.0",
         "jenssegers/model": "dev-master@dev",
         "laravelcollective/html": "dev-patch-2@dev",
         "livewire/livewire": "^1.0",
@@ -29,8 +29,8 @@
     },
     "require-dev": {
         "fzaninotto/faker": "^1.9",
-        "orchestra/testbench-browser-kit": "^5.0",
-        "orchestra/testbench": "^5.0",
+        "orchestra/testbench-browser-kit": "^4.0|^5.0",
+        "orchestra/testbench": "^4.0|^5.0",
         "php-coveralls/php-coveralls" : "^2.2",
         "phpmd/phpmd": "^2.8",
         "phpunit/phpunit": "^8.0",
