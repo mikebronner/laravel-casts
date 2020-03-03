@@ -12,19 +12,14 @@
         {
             "type": "vcs",
             "url": "https://github.com/GeneaLabs/model"
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/hebbet/html"
         }
     ],
     "require": {
         "illuminate/config": "^6.0|^7.0",
         "illuminate/support": "^6.0|^7.0",
         "jenssegers/model": "dev-master@dev",
-        "laravelcollective/html": "dev-patch-2@dev",
+        "laravelcollective/html": "^6.1",
         "livewire/livewire": "^1.0",
-        "php": "^7.2.5",
         "wa72/htmlpagedom": "^2.0"
     },
     "require-dev": {

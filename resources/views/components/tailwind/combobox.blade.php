@@ -2,7 +2,16 @@
     <div class="col-sm-{{ $fieldWidth }}">
 @endif
 
-@livewire ("genealabs-laravel-casts::combobox", $options["label"] ?? "", $name, $options["labelField"] ?? "name", $options["model"] ?? "", $options["valueField"] ?? "id", $options["placeholder"] ?? "", $options["createForm"] ?? "", $options["query"] ?? "")
+@livewire ("genealabs-laravel-casts::combobox", [
+    "label" => $options["label"] ?? "",
+    "fieldName" => $name,
+    "labelField" => $options["labelField"] ?? "name",
+    "model" => $options["model"] ?? "",
+    "valueField" => $options["valueField"] ?? "id",
+    "placeholder" => $options["placeholder"] ?? "",
+    "createFormView" => $options["createForm"] ?? "",
+    "query" => $options["query"] ?? ""
+])
 
 @if (! $errors->isEmpty() && ! $errors->has($name))
     <span id="inputSuccess2Status" class="sr-only">(success)</span>
