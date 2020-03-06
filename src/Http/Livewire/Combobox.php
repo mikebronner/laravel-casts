@@ -19,22 +19,22 @@ class Combobox extends Component
     public $valueField;
 
     public function mount(
-        string $label,
-        string $fieldName,
-        string $labelField,
+        string $label = "",
+        string $fieldName = "",
+        string $labelField = "",
         string $model = "",
         string $valueField = "id",
         string $placeholder = "",
         string $createFormView = "",
         string $query = ""
     ) : void {
-        $this->createFormView = $createFormView;
-        $this->fieldName = $fieldName;
-        $this->label = $label;
-        $this->labelField = $labelField;
-        $this->model = $model;
-        $this->valueField = $valueField;
-        $this->query = $query;
+        $this->createFormView = $createFormView ?: "";
+        $this->fieldName = $fieldName ?: "";
+        $this->label = $label ?: "";
+        $this->labelField = $labelField ?: "";
+        $this->model = $model ?: "";
+        $this->valueField = $valueField ?: "id";
+        $this->query = $query ?: "";
 
         if ($placeholder) {
             $this->placeholder = $placeholder;
@@ -58,7 +58,7 @@ class Combobox extends Component
         
             if ($query) {
                 $results = $query
-                    ->where($this->labelField, "LIKE", "%{$this->search}%")
+                    ->where($this->labelField, "ILIKE", "%{$this->search}%")
                     ->orderBy($this->labelField)
                     ->get();
             }
