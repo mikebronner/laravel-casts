@@ -6,6 +6,7 @@
     "label" => $options["label"] ?? "",
     "fieldName" => $name,
     "labelField" => $options["labelField"] ?? "name",
+    "searchField" => $options["searchField"] ?? "name",
     "model" => $options["model"] ?? "",
     "valueField" => $options["valueField"] ?? "id",
     "placeholder" => $options["placeholder"] ?? "",
