@@ -29,7 +29,9 @@ class AssetInjection
             $content = $html->saveHTML();
         }
 
+        $original = $response->original;
         $response->setContent($content);
+        $response->original = $original;
 
         return $response;
     }
