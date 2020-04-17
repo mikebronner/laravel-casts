@@ -30,7 +30,7 @@ class Combobox extends Component
         string $query = "",
         string $searchField = "",
         string $valueField = "id",
-        string $value = ""
+        $value = null
     ) : void {
         $this->createFormView = $createFormView ?: "";
         $this->fieldName = $fieldName ?: "";
