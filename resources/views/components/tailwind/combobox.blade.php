@@ -11,7 +11,8 @@
     "valueField" => $options["valueField"] ?? "id",
     "placeholder" => $options["placeholder"] ?? "",
     "createFormView" => $options["createForm"] ?? "",
-    "query" => $options["query"] ?? ""
+    "query" => $options["query"] ?? "",
+    "value" => $value ?? null
 ])
 
 @if (! $errors->isEmpty() && ! $errors->has($name))

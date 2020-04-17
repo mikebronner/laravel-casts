@@ -1,5 +1,6 @@
 <?php namespace GeneaLabs\LaravelCasts;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
 class Combobox extends Dropdown
@@ -7,7 +8,7 @@ class Combobox extends Dropdown
     public function __construct(
         string $name,
         array $list = [],
-        $value = null,
+        Model $value = null,
         array $options = [],
         array $optionOptions = []
     ) {

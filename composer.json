@@ -9,6 +9,7 @@
         }
     ],
     "require": {
+        "fico7489/laravel-eloquent-join": "^4.1",
         "illuminate/config": "^7.0",
         "illuminate/support": "^7.0",
         "jenssegers/model": "^1.3",

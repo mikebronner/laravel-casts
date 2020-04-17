@@ -3,6 +3,7 @@
 namespace GeneaLabs\LaravelCasts\Http\Livewire;
 
 use Livewire\Component;
+use Illuminate\Support\Str;
 
 class Combobox extends Component
 {
@@ -28,7 +29,8 @@ class Combobox extends Component
         string $placeholder = "",
         string $query = "",
         string $searchField = "",
-        string $valueField = "id"
+        string $valueField = "id",
+        string $value = ""
     ) : void {
         $this->createFormView = $createFormView ?: "";
         $this->fieldName = $fieldName ?: "";
@@ -38,6 +40,12 @@ class Combobox extends Component
         $this->query = $query ?: "";
         $this->searchField = $searchField ?: "";
         $this->valueField = $valueField ?: "id";
+
+        if ($value) {
+            $value = json_decode($value, false);
+            $this->search = $value->{$this->labelField};
+            $this->selectedValue = $value->{$this->valueField};
+        }
 
         if ($placeholder) {
             $this->placeholder = $placeholder;
@@ -60,9 +68,18 @@ class Combobox extends Component
             }
 
             if ($query) {
+                if ($this->searchField) {
+                    if (Str::contains($this->searchField, ".")) {
+                        $query = $query->whereJoin($this->searchField, "ILIKE", "%{$this->search}%")
+                            ->orderByJoin($this->searchField);
+                    } else {
+                        // TODO: refactor out from if-else.
+                        $query = $query->where($this->searchField, "ILIKE", "%{$this->search}%")
+                            ->orderBy($this->searchField);
+                    }
+                }
+
                 $results = $query
-                    ->where($this->searchField, "ILIKE", "%{$this->search}%")
-                    ->orderBy($this->searchField)
                     ->limit(100)
                     ->get();
             }
