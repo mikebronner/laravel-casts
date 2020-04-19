@@ -23,12 +23,20 @@
         >
 
             @if ($search && $results->isEmpty())
-                <div
-                    wire:click="showCreateForm"
-                    class="px-3 py-1 block cursor-pointer bg-transparent hover:bg-gray-300"
-                >
-                    Add {{ $search }} ...
-                </div>
+                @if ($createFormView)
+                    <div
+                        wire:click="showCreateForm"
+                        class="px-3 py-1 block cursor-pointer bg-transparent hover:bg-gray-300"
+                    >
+                        Add {{ $search }} ...
+                    </div>
+                @else
+                    <div
+                        class="px-3 py-1 block bg-transparent"
+                    >
+                        No results found.
+                    </div>
+                @endif
             @endif
 
             @foreach ($results as $result)
@@ -48,7 +56,8 @@
         <fieldset
             class="mt-4 mb-8 border-4 border-blue-400 rounded-lg"
             id="{{ \Illuminate\Support\Str::slug($label) }}"
-            x-data="subFormController('{{ route(\Illuminate\Support\Str::plural(\Illuminate\Support\Str::slug($label)) . ".store") }}')"
+            x-data="subFormController('{{ $createFormUrl }}')"
+            x-init="() => {loadForm('{{ $search }}');}"
         >
             <legend>Add New {{ $label }}</legend>
             @form
@@ -64,19 +73,35 @@
 
 <script>
     function subFormController(postUrl) {
+
         return {
             action : postUrl,
-            
+
+            formElements: document.getElementById("{{ \Illuminate\Support\Str::slug($label) }}").elements,
 
             formData: {
                 _token: document.querySelector("meta[name=csrf_token]").getAttribute('content'),
             },
 
+            loadForm: function (value) {
+                var hasFocused = false;
+
+                for (var i = 0, formElement; formElement = this.formElements[i++];) {
+                    if (hasFocused == false && formElement.type !== "hidden") {
+                        formElement.focus();
+                        hasFocused = true;
+                    }
+
+                    if (formElement.name == "{{ $labelField }}") {
+                        formElement.value = value;
+                    }
+                }
+            },
+
             submitForm: function (targetId) {
                 var formData = new FormData();
-                var formElements = document.getElementById("repository").elements;
 
-                for (var i = 0, formElement; formElement = formElements[i++];) {
+                for (var i = 0, formElement; formElement = this.formElements[i++];) {
                     if (formElement.name.length > 0
                         && formElement.value.length > 0
                     ) {
@@ -91,13 +116,13 @@
                 axios
                     .post(this.action, formData)
                     .then(function (response) {
-                        console.log(response.data);
+                        window.livewire.emit('updateSelectedItem', response.data);
                     })
                     .catch(function (error) {
-                        if (error.response.status === 422) {
+                        if ((((error || {}).response || {}).status || 200) === 422) {
                             window.livewire.emit('setErrors', error.response.data);
                         } else {
-                            console.error(error.response);
+                            console.error(error);
                         }
                     });
             },

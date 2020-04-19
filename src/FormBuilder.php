@@ -45,6 +45,13 @@ class FormBuilder extends Form
         return parent::open($options);
     }
 
+    public function close()
+    {
+        $this->session->forget("customErrors");
+        
+        return parent::close();
+    }
+
     public function model($model, array $options = [])
     {
         $this->initializeForm($options);
@@ -77,6 +84,7 @@ class FormBuilder extends Form
 
     public function endsubform()
     {
+        $this->session->forget("customErrors");
         $this->subFormClass = '';
     }
 

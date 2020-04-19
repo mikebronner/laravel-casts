@@ -10,7 +10,8 @@
     "model" => $options["model"] ?? "",
     "valueField" => $options["valueField"] ?? "id",
     "placeholder" => $options["placeholder"] ?? "",
-    "createFormView" => $options["createForm"] ?? "",
+    "createFormView" => $options["createFormView"] ?? "",
+    "createFormUrl" => $options["createFormUrl"] ?? "",
     "query" => $options["query"] ?? "",
     "value" => $value ?? null
 ])
