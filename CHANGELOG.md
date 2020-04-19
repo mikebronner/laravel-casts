@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [0.11.9] - 2020-04-19
+### Added
+- implementation of combobox subforms.
+
+## [0.11.8] - 2020-04-17
+### Fixed
+- combobox having a null value.
+
 ## [0.11.7] - 2020-04-16
 ### Fixed
 - combobox handling of existing selection.
