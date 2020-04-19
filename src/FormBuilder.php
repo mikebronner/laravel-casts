@@ -1,8 +1,8 @@
 <?php namespace GeneaLabs\LaravelCasts;
 
 use Collective\Html\FormBuilder as Form;
-use Illuminate\Support\MessageBag;
 use GeneaLabs\LaravelCasts\Subform;
+use Illuminate\Support\MessageBag;
 
 /**
  * @SuppressWarnings(PHPMD.TooManyMethods)
@@ -53,11 +53,11 @@ class FormBuilder extends Form
         return parent::model($model, $options);
     }
 
-    public function initializeForm(array $options)
+    public function initializeForm(array $options = [])
     {
         $this->framework = $options['framework']
             ?? config('genealabs-laravel-casts.framework');
-        $this->errors = $this->session->get('errors', new MessageBag());
+        $this->errors = $this->session->get('customErrors', $this->session->get('errors', new MessageBag));
         $this->isHorizontal = false;
         $this->isInline = false;
         $this->isHorizontal = (strpos($options['class'] ?? '', 'form-horizontal') !== false);
@@ -69,6 +69,7 @@ class FormBuilder extends Form
 
     public function subform(array $options = []) : string
     {
+        $this->initializeForm($options);
         $this->subFormClass = $options['subFormClass'] ?? '';
 
         return (new Subform($options))->html;

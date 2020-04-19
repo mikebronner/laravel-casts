@@ -15,12 +15,12 @@
     "value" => $value ?? null
 ])
 
-@if (! $errors->isEmpty() && ! $errors->has($name))
+{{-- @if (! $errors->isEmpty() && ! $errors->has($name))
     <span id="inputSuccess2Status" class="sr-only">(success)</span>
-@endif
+@endif --}}
 
 @if (! $errors->isEmpty() && $errors->has($name))
-    <span id="inputError2Status" class="sr-only">(error)</span>
+    {{-- <span id="inputError2Status" class="sr-only">(error)</span> --}}
     <span class="text-sm text-red-600 italic">{{ implode(' ', $errors->get($name)) }}</span>
 @endif
 

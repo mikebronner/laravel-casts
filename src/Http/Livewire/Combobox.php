@@ -2,13 +2,17 @@
 
 namespace GeneaLabs\LaravelCasts\Http\Livewire;
 
-use Livewire\Component;
+use Illuminate\Support\MessageBag;
 use Illuminate\Support\Str;
+use Livewire\Component;
 
 class Combobox extends Component
 {
+    protected $listeners = ['setErrors' => 'setErrors'];
+
     public $createFormIsVisible = false;
     public $createFormView;
+    public $errors = [];
     public $fieldName;
     public $label;
     public $labelField;
@@ -85,6 +89,16 @@ class Combobox extends Component
             }
         }
 
+        if ($this->errors["errors"] ?? false) {
+            $messageBag = new MessageBag();
+
+            foreach ($this->errors["errors"] ?? [] as $key => $message) {
+                $messageBag->add($key, $message[0]);
+            }
+
+            session(["customErrors" => $messageBag]);
+        }
+
         return view('genealabs-laravel-casts::livewire.combobox')
             ->with([
                 "results" => $results,
@@ -105,5 +119,16 @@ class Combobox extends Component
     public function showCreateForm() : void
     {
         $this->createFormIsVisible = true;
+    }
+
+    public function cancelForm() : void
+    {
+        $this->createFormIsVisible = false;
+        $this->search = "";
+    }
+
+    public function setErrors(array $errors = []) : void
+    {
+        $this->errors = $errors;
     }
 }

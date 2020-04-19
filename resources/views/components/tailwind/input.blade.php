@@ -1,5 +1,4 @@
 @if($isHorizontal)
-    {{-- <div class="col-sm-{{ $fieldWidth }}{{ $options['offsetClass'] ?? '' }}"> --}}
     <div class="my-4">
 @endif
 

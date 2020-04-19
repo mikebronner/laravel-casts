@@ -1,5 +1,6 @@
 <?php namespace GeneaLabs\LaravelCasts;
 
+use Illuminate\Support\MessageBag;
 use Illuminate\Support\Str;
 use Jenssegers\Model\Model;
 
@@ -29,8 +30,6 @@ abstract class Component extends Model
             'offsetClass' => '',
         ]);
         $this->excludedClasses = collect();
-        $this->framework = $options['framework']
-            ?? app('form')->framework;
         $this->labelWidth = $options['labelWidth']
             ?? app('form')->labelWidth;
         $this->fieldWidth = $options['labelWidth']
@@ -58,8 +57,9 @@ abstract class Component extends Model
         if ($this->framework === 'tailwind') {
             $this->classes = str_replace("form-control", "", $this->classes);
         }
+
         $this->attributes['options'] = $options;
-        $this->errors = app('form')->errors ?: collect();
+        $this->errors = app('form')->errors ?: new MessageBag;
     }
 
     protected function renderBaseControl() : string
