@@ -65,7 +65,7 @@
             @form
             @include ($createFormView)
             <div class="flex">
-                @button ("Add New {{ $label }}", ["x-on:click" => "submitForm('" . \Illuminate\Support\Str::slug($label) . "-" . $key . "', '" . $key . "', '" . \Illuminate\Support\Str::slug($label) . "');", "class" => "button button-primary button-outlined"])
+                @button ("Add New {$label}", ["x-on:click" => "submitForm('" . \Illuminate\Support\Str::slug($label) . "-" . $key . "', '" . $key . "', '" . \Illuminate\Support\Str::slug($label) . "');", "class" => "button button-primary button-outlined"])
                 @button ("Cancel", ["wire:click" => "cancelForm('{$key}')", "class" => "button button-secondary button-link"])
             </div>
             @endform
