@@ -13,6 +13,7 @@ class Combobox extends Component
     public $createFormView;
     public $errors = [];
     public $fieldName;
+    public $key;
     public $label;
     public $labelField;
     public $model;
@@ -26,8 +27,8 @@ class Combobox extends Component
     protected function getListeners()
     {
         return [
-            'setErrors-' . $this->id => 'setErrors',
-            'updateSelectedItem-' . $this->id => 'updateSelectedItem',
+            "setErrors{$this->key}" => "setErrors",
+            "updateSelectedItem{$this->key}" => "updateSelectedItem",
         ];
     }
 
@@ -44,6 +45,7 @@ class Combobox extends Component
         string $valueField = "id",
         $value = null
     ) : void {
+        $this->key = Str::random();
         $this->createFormView = $createFormView ?: "";
         $this->createFormUrl = $createFormUrl ?: "";
         $this->fieldName = $fieldName ?: "";
@@ -117,7 +119,7 @@ class Combobox extends Component
 
     public function resetSearch(string $id) : void
     {
-        if ($id !== $this->id) {
+        if ($id !== $this->key) {
             return;
         }
 
@@ -126,7 +128,7 @@ class Combobox extends Component
 
     public function select(string $value, string $search, string $id) : void
     {
-        if ($id !== $this->id) {
+        if ($id !== $this->key) {
             return;
         }
 
@@ -136,7 +138,7 @@ class Combobox extends Component
 
     public function showCreateForm(string $id) : void
     {
-        if ($id !== $this->id) {
+        if ($id !== $this->key) {
             return;
         }
 
@@ -145,7 +147,7 @@ class Combobox extends Component
 
     public function cancelForm(string $id) : void
     {
-        if ($id !== $this->id) {
+        if ($id !== $this->key) {
             return;
         }
 
@@ -155,7 +157,7 @@ class Combobox extends Component
 
     public function setErrors(array $errors = [], string $id) : void
     {
-        if ($id !== $this->id) {
+        if ($id !== $this->key) {
             return;
         }
 
@@ -164,7 +166,7 @@ class Combobox extends Component
 
     public function updateSelectedItem(array $data = [], string $id) : void
     {
-        if ($id !== $this->id) {
+        if ($id !== $this->key) {
             return;
         }
 
