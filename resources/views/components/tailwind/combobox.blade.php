@@ -2,19 +2,23 @@
     <div class="col-sm-{{ $fieldWidth }}">
 @endif
 
-@livewire ("genealabs-laravel-casts::combobox", [
-    "label" => $options["label"] ?? "",
-    "fieldName" => $name,
-    "labelField" => $options["labelField"] ?? "name",
-    "searchField" => $options["searchField"] ?? "name",
-    "model" => $options["model"] ?? "",
-    "valueField" => $options["valueField"] ?? "id",
-    "placeholder" => $options["placeholder"] ?? "",
-    "createFormView" => $options["createFormView"] ?? "",
-    "createFormUrl" => $options["createFormUrl"] ?? "",
-    "query" => $options["query"] ?? "",
-    "value" => $value ?? null
-])
+@livewire (
+    "genealabs-laravel-casts::combobox",
+    [
+        "label" => $options["label"] ?? "",
+        "fieldName" => $name,
+        "labelField" => $options["labelField"] ?? "name",
+        "searchField" => $options["searchField"] ?? "name",
+        "model" => $options["model"] ?? "",
+        "valueField" => $options["valueField"] ?? "id",
+        "placeholder" => $options["placeholder"] ?? "",
+        "createFormView" => $options["createFormView"] ?? "",
+        "createFormUrl" => $options["createFormUrl"] ?? "",
+        "query" => $options["query"] ?? "",
+        "value" => $value ?? null
+    ],
+    key($name . '-' . rand())
+)
 
 {{-- @if (! $errors->isEmpty() && ! $errors->has($name))
     <span id="inputSuccess2Status" class="sr-only">(success)</span>

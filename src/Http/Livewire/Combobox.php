@@ -2,18 +2,12 @@
 
 namespace GeneaLabs\LaravelCasts\Http\Livewire;
 
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\MessageBag;
 use Illuminate\Support\Str;
 use Livewire\Component;
 
 class Combobox extends Component
 {
-    protected $listeners = [
-        'setErrors' => 'setErrors',
-        'updateSelectedItem' => 'updateSelectedItem',
-    ];
-
     public $createFormIsVisible = false;
     public $createFormUrl;
     public $createFormView;
@@ -28,6 +22,14 @@ class Combobox extends Component
     public $searchField;
     public $selectedValue;
     public $valueField;
+
+    protected function getListeners()
+    {
+        return [
+            'setErrors-' . $this->id => 'setErrors',
+            'updateSelectedItem-' . $this->id => 'updateSelectedItem',
+        ];
+    }
 
     public function mount(
         string $createFormView = "",
@@ -109,57 +111,65 @@ class Combobox extends Component
         return view('genealabs-laravel-casts::livewire.combobox')
             ->with([
                 "results" => $results,
+                "id" => $this->id,
             ]);
     }
 
-    public function resetSearch() : void
+    public function resetSearch(string $id) : void
     {
+        if ($id !== $this->id) {
+            return;
+        }
+
         $this->selectedValue = null;
     }
 
-    public function select(string $value, string $search) : void
+    public function select(string $value, string $search, string $id) : void
     {
+        if ($id !== $this->id) {
+            return;
+        }
+
         $this->search = $search;
         $this->selectedValue = $value;
     }
 
-    public function showCreateForm() : void
+    public function showCreateForm(string $id) : void
     {
+        if ($id !== $this->id) {
+            return;
+        }
+
         $this->createFormIsVisible = true;
     }
 
-    public function cancelForm() : void
+    public function cancelForm(string $id) : void
     {
+        if ($id !== $this->id) {
+            return;
+        }
+
         $this->createFormIsVisible = false;
         $this->search = "";
     }
 
-    public function setErrors(array $errors = []) : void
+    public function setErrors(array $errors = [], string $id) : void
     {
+        if ($id !== $this->id) {
+            return;
+        }
+
         $this->errors = $errors;
     }
 
-    public function updateSelectedItem(array $data = []) : void
+    public function updateSelectedItem(array $data = [], string $id) : void
     {
-        $model = null;
-
-        if ($this->model) {
-            $model = new $this->model;
-        }
-
-        if ($this->query) {
-            eval("\$query = {$this->query};");
-            $model = $query->getModel();
-        }
-
-        if (! $model) {
+        if ($id !== $this->id) {
             return;
         }
 
         $this->selectedValue = $data[$this->valueField];
-        $this->search = (new $model)
-            ->find($this->selectedValue)
-            ->{$this->labelField};
+        $this->search = $data[$this->labelField];
         $this->createFormIsVisible = false;
     }
 }

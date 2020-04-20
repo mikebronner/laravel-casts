@@ -9,7 +9,7 @@
     <input
         id="{{ $fieldName }}"
         class="form-input w-full font-normal"
-        wire:keydown.backspace="resetSearch"
+        wire:keydown.backspace="resetSearch('{{ $id }}')"
         wire:model="search"
         type="text"
         placeholder="{{ $placeholder }}"
@@ -25,7 +25,7 @@
             @if ($search && $results->isEmpty())
                 @if ($createFormView)
                     <div
-                        wire:click="showCreateForm"
+                        wire:click="showCreateForm('{{ $id }}')"
                         class="px-3 py-1 block cursor-pointer bg-transparent hover:bg-gray-300"
                     >
                         Add {{ $search }} ...
@@ -42,7 +42,7 @@
             @foreach ($results as $result)
                 <div
                     class="px-3 py-1 block cursor-pointer bg-transparent hover:bg-gray-300"
-                    wire:click="select('{{ $result->$valueField }}', '{{ $result->$labelField }}')"
+                    wire:click="select('{{ $result->$valueField }}', '{{ $result->$labelField }}', '{{ $id }}')"
                 >
                     {{ $result->$labelField }}
                 </div>
@@ -52,41 +52,38 @@
     @endif
 
     @if ($createFormIsVisible)
-
         <fieldset
             class="mt-4 mb-8 border-4 border-blue-400 rounded-lg"
-            id="{{ \Illuminate\Support\Str::slug($label) }}"
+            id="{{ \Illuminate\Support\Str::slug($label) . "-" . $id }}"
             x-data="subFormController('{{ $createFormUrl }}')"
-            x-init="() => {loadForm('{{ $search }}');}"
+            x-init="() => {loadForm('{{ \Illuminate\Support\Str::slug($label) . "-" . $id }}', '{{ $search }}');}"
         >
             <legend>Add New {{ $label }}</legend>
             @form
             @include ($createFormView)
             <div class="flex">
-                @button ("Add New Repository", ["x-on:click" => "submitForm('" . \Illuminate\Support\Str::slug($label) . "');", "class" => "button button-primary button-outlined"])
-                @button ("Cancel", ["wire:click" => "cancelForm", "class" => "button button-secondary button-link"])
+                @button ("Add New Repository", ["x-on:click" => "submitForm('" . \Illuminate\Support\Str::slug($label) . "-" . $id . "', '" . \Illuminate\Support\Str::slug($label) . "');", "class" => "button button-primary button-outlined"])
+                @button ("Cancel", ["wire:click" => "cancelForm('{$id}')", "class" => "button button-secondary button-link"])
             </div>
             @endform
         </fieldset>
     @endif
 </div>
 
-<script>
+<script scoped>
     function subFormController(postUrl) {
-
         return {
             action : postUrl,
-
-            formElements: document.getElementById("{{ \Illuminate\Support\Str::slug($label) }}").elements,
 
             formData: {
                 _token: document.querySelector("meta[name=csrf_token]").getAttribute('content'),
             },
 
-            loadForm: function (value) {
+            loadForm: function (id, value) {
                 var hasFocused = false;
-
-                for (var i = 0, formElement; formElement = this.formElements[i++];) {
+                var formElements = document.getElementById(id).elements;
+console.log(id, formElements);
+                for (var i = 0, formElement; formElement = formElements[i++];) {
                     if (hasFocused == false && formElement.type !== "hidden") {
                         formElement.focus();
                         hasFocused = true;
@@ -98,10 +95,15 @@
                 }
             },
 
-            submitForm: function (targetId) {
-                var formData = new FormData();
+            submitForm: function (id, targetId) {
+                if (id != '{{ \Illuminate\Support\Str::slug($label) . "-" . $id }}', '{{ $search }}') {
+                    return;
+                }
 
-                for (var i = 0, formElement; formElement = this.formElements[i++];) {
+                var formData = new FormData();
+                var formElements = document.getElementById(id).elements;
+
+                for (var i = 0, formElement; formElement = formElements[i++];) {
                     if (formElement.name.length > 0
                         && formElement.value.length > 0
                     ) {
@@ -116,11 +118,11 @@
                 axios
                     .post(this.action, formData)
                     .then(function (response) {
-                        window.livewire.emit('updateSelectedItem', response.data);
+                        window.livewire.emit('updateSelectedItem-{{ $id }}', response.data, '{{ $id }}');
                     })
                     .catch(function (error) {
                         if ((((error || {}).response || {}).status || 200) === 422) {
-                            window.livewire.emit('setErrors', error.response.data);
+                            window.livewire.emit('setErrors-{{ $id }}', error.response.data, '{{ $id }}');
                         } else {
                             console.error(error);
                         }
