@@ -15,6 +15,11 @@ class AssetInjection
         }
 
         $content = $response->getContent();
+
+        if (! is_string($content)) {
+            return $response;
+        }
+        
         $castsScripts = '<script src="' . asset('genealabs-laravel-casts/app.js') . '"></script></body>';
         $livewireScripts = (new LivewireManager)->scripts();
         $livewireStyles = (new LivewireManager)->styles();
