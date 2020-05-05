@@ -45,6 +45,6 @@ class AssetInjection
 
     protected function isNotOnErrorPage(string $html) : bool
     {
-        return strpos($html, "ErrorException") === false;
+        return strpos($html, "window.Ignition") === false;
     }
 }
