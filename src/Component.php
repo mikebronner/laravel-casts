@@ -40,20 +40,6 @@ abstract class Component extends Model
         $options['id'] = $options['id'] ?? $name;
         $options['offsetClass'] = '';
 
-        if ($this->framework === 'bootstrap3') {
-            $this->classes .= ' form-control';
-            $options['offsetClass'] = trim($options['label'] ?? '') === ' '
-                ? ' col-sm-offset-' . $this->labelWidth
-                : '';
-        }
-
-        if ($this->framework === 'bootstrap4') {
-            $this->classes .= ' form-control';
-            $options['offsetClass'] = trim($options['label'] ?? '') === ' '
-                ? ' offset-sm-' . $this->labelWidth
-                : '';
-        }
-
         if ($this->framework === 'tailwind') {
             $this->classes = str_replace("form-control", "", $this->classes);
         }
@@ -118,22 +104,9 @@ abstract class Component extends Model
 
     public function getErrorClassesAttribute() : string
     {
-        return $this->errors
-            ->isNotEmpty()
-                ? ($this->framework === 'bootstrap3'
-                    ? ($this->hasErrors
-                        ? 'has-error'
-                        : 'has-success'
-                    )
-                    : ($this->framework === 'bootstrap4'
-                        ? ($this->hasErrors
-                            ? 'form-control is-invalid'
-                            : 'form-control is-valid'
-                        )
-                        : ''
-                    )
-                )
-                : '';
+        return $this->hasErrors
+            ? 'has-error'
+            : 'has-success';
     }
 
     public function getOptionsAttribute() : array

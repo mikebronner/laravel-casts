@@ -119,9 +119,7 @@
                 axios
                     .post(this.action, formData)
                     .then(function (response) {
-                        console.log("test1");
                         window.livewire.emit('updateSelectedItem' + id, response.data, id);
-                        console.log("test2");
                     })
                     .catch(function (error) {
                         if ((((error || {}).response || {}).status || 200) === 422) {

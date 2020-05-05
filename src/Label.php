@@ -30,18 +30,6 @@ class Label extends Component
 
         parent::__construct($name, $value, $options);
 
-        if (app('form')->isHorizontal && ($this->framework === 'bootstrap3' || $this->framework === 'bootstrap4')) {
-            $options['class'] .= ' col-sm-' . app('form')->labelWidth;
-        }
-
-        if ($this->framework === 'bootstrap3') {
-            $options['class'] .= ' control-label';
-        }
-
-        if ($this->framework === 'bootstrap4') {
-            $options['class'] .= ' col-form-label';
-        }
-
         if ($this->framework === 'tailwind') {
             $options['class'] .= ' block';
         }

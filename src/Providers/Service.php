@@ -18,15 +18,6 @@ class Service extends ServiceProvider
     {
         if (! headers_sent()) {
             $this->registerPreLoadHeader(url('/genealabs-laravel-casts/app.js'));
-            $this->registerPreLoadHeader(url('/genealabs-laravel-casts/bootstrap3.js'));
-            $this->registerPreLoadHeader(url('/genealabs-laravel-casts/bootstrap3.css'));
-            $this->registerPreLoadHeader(url('/genealabs-laravel-casts/bootstrap4.js'));
-            $this->registerPreLoadHeader(url('/genealabs-laravel-casts/bootstrap4.css'));
-            $this->registerPreLoadHeader(url('/genealabs-laravel-casts/bootstrap-switch.js'));
-            $this->registerPreLoadHeader(url('/genealabs-laravel-casts/bootstrap3-datetimepicker.js'));
-            $this->registerPreLoadHeader(url('/genealabs-laravel-casts/bootstrap3-datetimepicker.css'));
-            $this->registerPreLoadHeader(url('/genealabs-laravel-casts/bootstrap4-datetimepicker.js'));
-            $this->registerPreLoadHeader(url('/genealabs-laravel-casts/bootstrap4-datetimepicker.css'));
         }
 
         $this->loadViewsFrom(__DIR__ . '/../../resources/views', 'genealabs-laravel-casts');
@@ -161,18 +152,6 @@ class Service extends ServiceProvider
             'isInButtonGroup' => false,
             'errors' => [],
         ];
-
-        app('form')->component(
-            "bootstrap3Control",
-            "genealabs-laravel-casts::components.bootstrap3.control",
-            $options
-        );
-
-        app('form')->component(
-            "bootstrap4Control",
-            "genealabs-laravel-casts::components.bootstrap4.control",
-            $options
-        );
 
         app('form')->component(
             "tailwindControl",

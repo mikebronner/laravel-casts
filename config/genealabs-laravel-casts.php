@@ -11,10 +11,10 @@ return [
     | This allows you to switch or upgrade frameworks without having to
     | recreate all your forms.
     |
-    | Available Settings: "vanilla", "bootstrap3", "bootstrap4"
+    | Available Settings: "vanilla", "tailwind"
     |
     */
 
-    'framework' => 'bootstrap3',
+    'framework' => 'tailwind',
     'javascript-blade-section' => 'js',
 ];

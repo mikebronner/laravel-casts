@@ -11,9 +11,6 @@
     },
     "devDependencies": {
         "@popperjs/core": "^2.0.6",
-        "bootstrap": "4.*",
-        "bootstrap-sass": "3.*",
-        "bootstrap-switch": "3.*",
         "cross-env": "5.*",
         "flatpickr": "^4.6.3",
         "font-awesome": "4.*",
@@ -22,11 +19,8 @@
         "popper.js": "*",
         "sass": "^1.25.0",
         "sass-loader": "^8.0.2",
-        "selectize": "*",
         "signature_pad": "*",
         "tailwindcss": "*",
-        "tempusdominus-bootstrap-3": "*",
-        "tempusdominus-bootstrap-4": "*",
         "tether": "^1.4.3",
         "vue-template-compiler": "^2.6.11"
     }

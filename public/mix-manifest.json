@@ -1,24 +1,11 @@
 {
-    "/app.js": "/app.js?id=f19234a9f2033b190f64",
-    "/bootstrap4-custom.css": "/bootstrap4-custom.css?id=6a0f59af00f5e37f8233",
+    "/app.js": "/app.js?id=f4730d5f238ae68d684b",
     "/font-awesome.css": "/font-awesome.css?id=d2add846641f922c9a01",
-    "/bootstrap3.css": "/bootstrap3.css?id=efdeab4a80173d7c16ea",
     "/tailwind.css": "/tailwind.css?id=76c7b25d6eeb43b4daa3",
     "/signature-pad.css": "/signature-pad.css?id=5d2bf26358b8c5315d32",
-    "/bootstrap3-datetimepicker.js": "/bootstrap3-datetimepicker.js?id=dcb0440d3ed465bde7b7",
-    "/bootstrap3-datetimepicker.css": "/bootstrap3-datetimepicker.css?id=c78de7cf8688c1ae1f5f",
-    "/bootstrap4-datetimepicker.js": "/bootstrap4-datetimepicker.js?id=ac4d4d755b70ee1a00f7",
-    "/bootstrap4-datetimepicker.css": "/bootstrap4-datetimepicker.css?id=be1a1448dd867946cb6a",
     "/datetimepicker.js": "/datetimepicker.js?id=da3c57326c30dcf6d59a",
     "/datetimepicker.css": "/datetimepicker.css?id=30f64a741bc93036f312",
-    "/bootstrap3.js": "/bootstrap3.js?id=2f34b630ffe30ba2ff2b",
     "/moment.js": "/moment.js?id=761502841c035afcf6a9",
     "/tether.js": "/tether.js?id=b3a78da5dec859b979ed",
-    "/bootstrap4.js": "/bootstrap4.js?id=61f338f870fcd0ff4636",
-    "/bootstrap4.css": "/bootstrap4.css?id=7cc40c199d128af6b01e",
-    "/bootstrap-switch.css": "/bootstrap-switch.css?id=37f2cbce3fa4443735e0",
-    "/bootstrap-switch.js": "/bootstrap-switch.js?id=0da1e8f2e4778d64ecd8",
-    "/signature-pad.js": "/signature-pad.js?id=88260ea3d187ff9ac33e",
-    "/bootstrap3-combobox.css": "/bootstrap3-combobox.css?id=b56701547ce540e9a115",
-    "/bootstrap-combobox.js": "/bootstrap-combobox.js?id=9961578f08c06ceae73c"
+    "/signature-pad.js": "/signature-pad.js?id=88260ea3d187ff9ac33e"
 }

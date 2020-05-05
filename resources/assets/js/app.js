@@ -41,24 +41,6 @@ if ((window.genealabsLaravelCasts.dateTimeLoaders || false) !== false) {
         $.getScript('/genealabs-laravel-casts/moment.js', function() {});
     }
 
-    if (window.genealabsLaravelCasts.framework === "bootstrap3") {
-        insertCssLink('/genealabs-laravel-casts/bootstrap3-datetimepicker.css');
-        $.getScript('/genealabs-laravel-casts/bootstrap3-datetimepicker.js', function() {
-            window.genealabsLaravelCasts.dateTimeLoaders.forEach(function(dateTimeLoader) {
-                dateTimeLoader();
-            });
-        });
-    }
-
-    if (window.genealabsLaravelCasts.framework === "bootstrap4") {
-        insertCssLink('/genealabs-laravel-casts/bootstrap4-datetimepicker.css');
-        $.getScript('/genealabs-laravel-casts/bootstrap4-datetimepicker.js', function() {
-            window.genealabsLaravelCasts.dateTimeLoaders.forEach(function(dateTimeLoader) {
-                dateTimeLoader();
-            });
-        });
-    }
-
     if (window.genealabsLaravelCasts.framework === "tailwind") {
         insertCssLink('/genealabs-laravel-casts/datetimepicker.css');
         $.getScript('/genealabs-laravel-casts/datetimepicker.js', function() {
@@ -74,25 +56,6 @@ if ((window.genealabsLaravelCasts.signatureLoaders || false) !== false) {
     $.getScript('/genealabs-laravel-casts/signature-pad.js', function() {
         window.genealabsLaravelCasts.signatureLoaders.forEach(function(signatureLoader) {
             signatureLoader();
-        });
-    });
-}
-
-if ((window.genealabsLaravelCasts.switchLoaders || false) !== false) {
-    insertCssLink('/genealabs-laravel-casts/bootstrap-switch.css');
-    $.getScript('/genealabs-laravel-casts/bootstrap-switch.js', function() {
-        window.genealabsLaravelCasts.switchLoaders.forEach(function(switchLoader) {
-            switchLoader();
-        });
-    });
-}
-
-if ((window.genealabsLaravelCasts.comboboxLoaders || false) !== false) {
-    insertCssLink('/genealabs-laravel-casts/bootstrap3-combobox.css');
-    insertCssLink('/genealabs-laravel-casts/bootstrap4-custom.css');
-    $.getScript('/genealabs-laravel-casts/bootstrap-combobox.js', function() {
-        window.genealabsLaravelCasts.comboboxLoaders.forEach(function(comboboxLoader) {
-            comboboxLoader();
         });
     });
 }

@@ -18,10 +18,6 @@ abstract class Toggle extends Component
             'placeholder' => '',
         ]));
 
-        if ($this->framework === 'bootstrap4') {
-            $this->classes = 'form-check-input';
-        }
-
         if ($this->framework === 'tailwind') {
             $this->classes = 'form-checkbox';
         }

@@ -8,10 +8,6 @@ class Submit extends Button
 
         parent::__construct($value, $options);
 
-        if (in_array($this->framework, ['bootstrap3', 'bootstrap4'])) {
-            $this->classes = 'btn btn-primary';
-        }
-
         $this->excludedClasses = collect([
             'form-control' => '',
             'form-control-success' => '',

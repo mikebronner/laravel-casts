@@ -18,7 +18,7 @@ class FormBuilder extends Form
     public $isInButtonGroup = false;
     public $isInline = false;
     public $errors;
-    public $framework = 'bootstrap3';
+    public $framework = 'tailwind';
     public $labelWidth = 3;
     public $fieldWidth = 9;
     public $subFormClass = '';

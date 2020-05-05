@@ -15,10 +15,6 @@ abstract class DatePicker extends Component
 
         parent::__construct($name, $value, $options);
 
-        if ($this->framework === 'bootstrap4') {
-            $this->classes .= ' form-control';
-        }
-
         if ($this->framework === 'tailwind') {
             $this->classes .= ' form-input w-full';
         }
