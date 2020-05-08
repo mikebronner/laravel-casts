@@ -193,6 +193,10 @@ class FormBuilder extends Form
 
     public function combobox(string $name, array $list = [], $selected = null, array $options = [], array $optionOptions = [])
     {
+        if ($selected && $options["model"]) {
+            $selected = (new $options["model"])->find($selected);
+        }
+
         return (new Combobox($name, $list, $selected, $options, $optionOptions))->html;
     }
 
