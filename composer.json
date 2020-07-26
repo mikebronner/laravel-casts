@@ -22,6 +22,7 @@
         "orchestra/testbench-browser-kit": "^5.0",
         "orchestra/testbench": "^5.0",
         "php-coveralls/php-coveralls" : "^2.2",
+        "phan/phan": "^3.1",
         "phpmd/phpmd": "^2.8",
         "phpunit/phpunit": "^8.0",
         "sebastian/phpcpd": "^5.0",

@@ -55,9 +55,13 @@ class Combobox extends Component
         $this->query = $query ?: "";
         $this->searchField = $searchField ?: "";
         $this->valueField = $valueField ?: "id";
+        $value = json_decode($value, false);
+
+        if ($value && ! is_object($value)) {
+            $value = (new $this->model)->find($value);
+        }
 
         if ($value) {
-            $value = json_decode($value, false);
             $this->search = $value->{$this->labelField};
             $this->selectedValue = $value->{$this->valueField};
         }
