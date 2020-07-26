@@ -46,7 +46,7 @@
                     wire:click="select('{{ $result->$valueField }}', '{{ $result->$labelField }}', '{{ $key }}')"
                     wire:key="search-option-{{ $result->getKey() }}-{{ $key }}"
                 >
-                    {{ $result->$labelField }}
+                    {{ $result->$optionField }}
                 </div>
             @endforeach
 
@@ -77,6 +77,11 @@
 @push ("scripts")
 <script>
     function subFormController(postUrl) {
+
+        if ("{{ $callback }}".length > 0) {
+            window.{{ $callback }}();
+        }
+
         return {
             action : postUrl,
 

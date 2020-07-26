@@ -10,6 +10,7 @@
         "labelField" => $options["labelField"] ?? "name",
         "searchField" => $options["searchField"] ?? "name",
         "model" => $options["model"] ?? "",
+        "optionField" => $options["valueField"] ?? "name",
         "valueField" => $options["valueField"] ?? "id",
         "placeholder" => $options["placeholder"] ?? "",
         "createFormView" => $options["createFormView"] ?? "",
