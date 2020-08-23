@@ -3,7 +3,7 @@
 <div class="my-4">
 @endif
 
-    <label class="m-0 leading-none">
+    <label class="{{ $options["labelClass"] ?? "" }}">
         {!! $controlHtml !!}
     </label>
 

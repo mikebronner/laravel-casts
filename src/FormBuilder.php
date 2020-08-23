@@ -48,7 +48,7 @@ class FormBuilder extends Form
     public function close()
     {
         $this->session->forget("customErrors");
-        
+
         return parent::close();
     }
 

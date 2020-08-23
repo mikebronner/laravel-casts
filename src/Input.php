@@ -1,4 +1,6 @@
-<?php namespace GeneaLabs\LaravelCasts;
+<?php
+
+namespace GeneaLabs\LaravelCasts;
 
 abstract class Input extends Component
 {
@@ -10,7 +12,7 @@ abstract class Input extends Component
         parent::__construct($name, $value, $options);
 
         if ($this->framework === 'tailwind') {
-            $this->classes .= ' form-input w-full';
+            $this->classes .= ' form-input mt-1 block w-full';
         }
     }
 }

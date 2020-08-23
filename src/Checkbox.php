@@ -1,4 +1,6 @@
-<?php namespace GeneaLabs\LaravelCasts;
+<?php
+
+namespace GeneaLabs\LaravelCasts;
 
 class Checkbox extends Toggle
 {
@@ -11,7 +13,7 @@ class Checkbox extends Toggle
         parent::__construct($name, $value, $isChecked, $options);
 
         if ($this->framework === 'tailwind') {
-            $this->classes = 'm-0 form-checkbox';
+            $this->classes = 'form-checkbox';
         }
     }
 }

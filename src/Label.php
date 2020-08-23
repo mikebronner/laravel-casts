@@ -1,4 +1,6 @@
-<?php namespace GeneaLabs\LaravelCasts;
+<?php
+
+namespace GeneaLabs\LaravelCasts;
 
 class Label extends Component
 {

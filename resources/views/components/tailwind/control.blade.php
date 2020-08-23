@@ -2,7 +2,7 @@
     @include ('genealabs-laravel-casts::components.tailwind.form-group-open')
 
     @if ($type !== 'checkbox' && $type !== 'button')
-        @label ($name, $name, ['label' => $options['label'] ?? ''], $options['escapeLabel'] ?? false)
+        @label ($name, $name, ['label' => $options['label'] ?? '', "class" => $options["labelClass"] ?? ""], $options['escapeLabel'] ?? false)
     @endif
 @endif
 
