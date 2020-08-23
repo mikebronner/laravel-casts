@@ -1,0 +1,5 @@
+<div
+    {!! $fieldAttributes !!}
+>
+    {!! $slot !!}
+</div>

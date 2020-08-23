@@ -7,6 +7,9 @@ use Collective\Html\HtmlBuilder;
 use GeneaLabs\LaravelCasts\Http\Livewire\Combobox;
 use GeneaLabs\LaravelCasts\Console\Commands\Publish;
 use GeneaLabs\LaravelCasts\Http\Middleware\AssetInjection;
+use GeneaLabs\LaravelCasts\View\Components\Group;
+use GeneaLabs\LaravelCasts\View\Components\Label;
+use GeneaLabs\LaravelCasts\View\Components\Text;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Contracts\Http\Kernel;
 
@@ -20,7 +23,7 @@ class Service extends ServiceProvider
             $this->registerPreLoadHeader(url('/genealabs-laravel-casts/app.js'));
         }
 
-        $this->loadViewsFrom(__DIR__ . '/../../resources/views', 'genealabs-laravel-casts');
+        $this->loadViewsFrom(__DIR__ . '/../../resources/views', 'laravel-forms');
         $this->publishes([
             __DIR__ . '/../../public/' => public_path('genealabs-laravel-casts'),
         ], 'assets');
@@ -28,50 +31,59 @@ class Service extends ServiceProvider
         $this->publishes([
             $configPath => config_path('genealabs-laravel-casts.php')
         ], 'config');
-        $this->mergeConfigFrom($configPath, 'genealabs-laravel-casts');
+        $this->mergeConfigFrom($configPath, 'laravel-forms');
 
-        $this->registerBladeDirective('button');
-        $this->registerBladeDirective('buttonGroup');
-        $this->registerBladeDirective('cancelButton');
-        $this->registerBladeDirective('checkbox');
-        $this->registerBladeDirective('close', 'endform');
-        $this->registerBladeDirective('color');
-        $this->registerBladeDirective('combobox');
-        $this->registerBladeDirective('date');
-        $this->registerBladeDirective('datetime');
-        $this->registerBladeDirective('email');
-        $this->registerBladeDirective('endButtonGroup');
-        $this->registerBladeDirective('endsubform');
-        $this->registerBladeDirective('errors');
-        $this->registerBladeDirective('file');
-        $this->registerBladeDirective('form');
-        $this->registerBladeDirective('hidden');
-        $this->registerBladeDirective('label');
-        $this->registerBladeDirective('model');
-        $this->registerBladeDirective('month');
-        $this->registerBladeDirective('number');
-        $this->registerBladeDirective('password');
-        $this->registerBladeDirective('radio');
-        $this->registerBladeDirective('range');
-        $this->registerBladeDirective('search');
-        $this->registerBladeDirective('select');
-        $this->registerBladeDirective('selectMonths');
-        $this->registerBladeDirective('selectRange');
-        $this->registerBladeDirective('selectRangeWithInterval');
-        $this->registerBladeDirective('selectWeekdays');
-        $this->registerBladeDirective('signature');
-        $this->registerBladeDirective('staticText');
-        $this->registerBladeDirective('subform');
-        $this->registerBladeDirective('submit');
-        $this->registerBladeDirective('switch');
-        $this->registerBladeDirective('tel');
-        $this->registerBladeDirective('text');
-        $this->registerBladeDirective('textarea');
-        $this->registerBladeDirective('token');
-        $this->registerBladeDirective('url');
-        $this->registerBladeDirective('week');
-        $this->registerComponents();
-        $this->registerLivewireComponents();
+        // $this->registerBladeDirective('button');
+        // $this->registerBladeDirective('buttonGroup');
+        // $this->registerBladeDirective('cancelButton');
+        // $this->registerBladeDirective('checkbox');
+        // $this->registerBladeDirective('close', 'endform');
+        // $this->registerBladeDirective('color');
+        // $this->registerBladeDirective('combobox');
+        // $this->registerBladeDirective('date');
+        // $this->registerBladeDirective('datetime');
+        // $this->registerBladeDirective('email');
+        // $this->registerBladeDirective('endButtonGroup');
+        // $this->registerBladeDirective('endsubform');
+        // $this->registerBladeDirective('errors');
+        // $this->registerBladeDirective('file');
+        // $this->registerBladeDirective('form');
+        // $this->registerBladeDirective('hidden');
+        // $this->registerBladeDirective('label');
+        // $this->registerBladeDirective('model');
+        // $this->registerBladeDirective('month');
+        // $this->registerBladeDirective('number');
+        // $this->registerBladeDirective('password');
+        // $this->registerBladeDirective('radio');
+        // $this->registerBladeDirective('range');
+        // $this->registerBladeDirective('search');
+        // $this->registerBladeDirective('select');
+        // $this->registerBladeDirective('selectMonths');
+        // $this->registerBladeDirective('selectRange');
+        // $this->registerBladeDirective('selectRangeWithInterval');
+        // $this->registerBladeDirective('selectWeekdays');
+        // $this->registerBladeDirective('signature');
+        // $this->registerBladeDirective('staticText');
+        // $this->registerBladeDirective('subform');
+        // $this->registerBladeDirective('submit');
+        // $this->registerBladeDirective('switch');
+        // $this->registerBladeDirective('tel');
+        // $this->registerBladeDirective('text');
+        // $this->registerBladeDirective('textarea');
+        // $this->registerBladeDirective('token');
+        // $this->registerBladeDirective('url');
+        // $this->registerBladeDirective('week');
+        // $this->registerComponents();
+        // $this->registerLivewireComponents();
+
+        $this->loadViewComponentsAs(
+            'form',
+            [
+                Group::class,
+                Label::class,
+                Text::class,
+            ]
+        );
     }
 
     public function register()
@@ -90,7 +102,7 @@ class Service extends ServiceProvider
 
     public function provides() : array
     {
-        return ['genealabs-laravel-casts'];
+        return ['laravel-forms'];
     }
 
     private function registerPreLoadHeader(string $url)
