@@ -1,6 +1,6 @@
 <textarea
     :name="$name"
-    {{ $attributes }}
+    {!! $fieldAttributes !!}
 >
     {{ $value }}
 </textarea>

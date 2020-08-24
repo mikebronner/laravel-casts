@@ -2,5 +2,5 @@
     type="time"
     :name="$name"
     :value="$value"
-    {{ $attributes }}
+    {!! $fieldAttributes !!}
 >

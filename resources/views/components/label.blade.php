@@ -2,6 +2,6 @@
     for="{{ $field }}"
     {!! $fieldAttributes !!}
 >
-    {{ $value }}
     {!! $slot !!}
+    {!! $value !!}
 </label>

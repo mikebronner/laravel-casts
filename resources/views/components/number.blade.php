@@ -2,5 +2,5 @@
     type="number"
     :name="$name"
     :value="$value"
-    {{ $attributes }}
+    {!! $fieldAttributes !!}
 >

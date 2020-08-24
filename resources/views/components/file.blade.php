@@ -2,5 +2,5 @@
     type="file"
     :name="$name"
     :value="$value"
-    {{ $attributes }}
+    {!! $fieldAttributes !!}
 >

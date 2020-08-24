@@ -7,11 +7,17 @@ use Collective\Html\HtmlBuilder;
 use GeneaLabs\LaravelCasts\Http\Livewire\Combobox;
 use GeneaLabs\LaravelCasts\Console\Commands\Publish;
 use GeneaLabs\LaravelCasts\Http\Middleware\AssetInjection;
+use GeneaLabs\LaravelCasts\View\Components\Checkbox;
+use GeneaLabs\LaravelCasts\View\Components\Email;
+use GeneaLabs\LaravelCasts\View\Components\Form;
 use GeneaLabs\LaravelCasts\View\Components\Group;
 use GeneaLabs\LaravelCasts\View\Components\Label;
+use GeneaLabs\LaravelCasts\View\Components\Password;
+use GeneaLabs\LaravelCasts\View\Components\Submit;
 use GeneaLabs\LaravelCasts\View\Components\Text;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Contracts\Http\Kernel;
+use Illuminate\Support\Facades\Blade as FacadesBlade;
 
 class Service extends ServiceProvider
 {
@@ -76,11 +82,16 @@ class Service extends ServiceProvider
         // $this->registerComponents();
         // $this->registerLivewireComponents();
 
+        FacadesBlade::component('form', Form::class);
         $this->loadViewComponentsAs(
             'form',
             [
+                Checkbox::class,
+                Email::class,
                 Group::class,
                 Label::class,
+                Password::class,
+                Submit::class,
                 Text::class,
             ]
         );

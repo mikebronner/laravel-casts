@@ -28,7 +28,7 @@ abstract class BaseComponent extends Component
         $this->options = $options;
         $this->value = $value;
         $this->label = $options["label"]
-            ?? ucwords($name);
+            ?? ucwords(str_replace("_id", " ", str_replace("_", " ", $name)));
         $this->labelClasses = $options["labelClasses"]
             ?? "";
         $this->groupClasses = $options["groupClasses"]

@@ -2,5 +2,5 @@
     type="search"
     :name="$name"
     :value="$value"
-    {{ $attributes }}
+    {!! $fieldAttributes !!}
 >

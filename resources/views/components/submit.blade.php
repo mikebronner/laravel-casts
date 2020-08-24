@@ -1,6 +1,6 @@
 <input
     type="submit"
-    :name="$name"
-    :value="$value"
-    {{ $attributes }}
+    name="{{ $name }}"
+    value="{{ $value }}"
+    {!! $fieldAttributes !!}
 >

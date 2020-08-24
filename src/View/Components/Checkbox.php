@@ -13,14 +13,24 @@ class Checkbox extends BaseComponent
         string $value = "",
         bool $isChecked = false,
         array $attributes = [],
+        array $options = [],
         Model $model = null
     ) {
-        parent::__construct($name, $value, $attributes);
+        parent::__construct($name, $value, $attributes, $options);
         // TODO: get model from Form component
         if ($isChecked
-            || $model->$name === $value
+            || ($model && $model->$name === $value)
         ) {
             $this->checked = "checked";
         }
+    }
+
+    public function handle() : void
+    {
+        $class = $this->fieldAttributes["class"]
+            ?? "";
+
+        $class = "form-checkbox {$class}";
+        $this->fieldAttributes["class"] = $class;
     }
 }

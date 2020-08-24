@@ -2,5 +2,5 @@
     type="tel"
     :name="$name"
     :value="$value"
-    {{ $attributes }}
+    {!! $fieldAttributes !!}
 >

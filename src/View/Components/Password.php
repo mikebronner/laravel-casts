@@ -2,7 +2,7 @@
 
 namespace GeneaLabs\LaravelCasts\View\Components;
 
-class Password extends BaseComponent
+class Password extends Input
 {
     //
 }

@@ -2,7 +2,7 @@
 
 namespace GeneaLabs\LaravelCasts\View\Components;
 
-class Email extends BaseComponent
+class Email extends Input
 {
     //
 }
