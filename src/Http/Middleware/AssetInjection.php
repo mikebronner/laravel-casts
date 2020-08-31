@@ -32,7 +32,6 @@ class AssetInjection
 
         if ($html->filter("html > head")->count()) {
             $html->filter("html > head")->append($livewireStyles);
-            $html->filter("html > head")->append($livewireStyles);
             $html->filter("html > body")->append($livewireScripts);
             $html->filter("html > body")->append($castsScripts);
             $content = $html->saveHTML();
