@@ -21,8 +21,6 @@ class AssetInjection
         }
 
         $castsScripts = '<script src="' . asset('genealabs-laravel-casts/app.js') . '"></script></body>';
-        $livewireScripts = (new LivewireManager)->scripts();
-        $livewireStyles = (new LivewireManager)->styles();
 
         $html = (new HtmlPageCrawler)->create($content);
 
@@ -31,8 +29,6 @@ class AssetInjection
         }
 
         if ($html->filter("html > head")->count()) {
-            $html->filter("html > head")->append($livewireStyles);
-            $html->filter("html > body")->append($livewireScripts);
             $html->filter("html > body")->append($castsScripts);
             $content = $html->saveHTML();
         }
