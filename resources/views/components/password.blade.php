@@ -1,5 +1,6 @@
 <x-form-group
-    :attributes="['class' => $groupClasses]"
+    :class="$groupClasses"
+    :errors="$errors"
 >
     @if ($label)
         <x-form-label

@@ -3,4 +3,5 @@
     name="{{ $name }}"
     value="{{ $value }}"
     {!! $fieldAttributes !!}
+    {{ $attributes }}
 >

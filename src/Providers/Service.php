@@ -9,10 +9,12 @@ use GeneaLabs\LaravelCasts\Console\Commands\Publish;
 use GeneaLabs\LaravelCasts\Http\Middleware\AssetInjection;
 use GeneaLabs\LaravelCasts\View\Components\Checkbox;
 use GeneaLabs\LaravelCasts\View\Components\Email;
+use GeneaLabs\LaravelCasts\View\Components\Errors;
 use GeneaLabs\LaravelCasts\View\Components\Form;
 use GeneaLabs\LaravelCasts\View\Components\Group;
 use GeneaLabs\LaravelCasts\View\Components\Label;
 use GeneaLabs\LaravelCasts\View\Components\Password;
+use GeneaLabs\LaravelCasts\View\Components\Select;
 use GeneaLabs\LaravelCasts\View\Components\Submit;
 use GeneaLabs\LaravelCasts\View\Components\Text;
 use Illuminate\Support\ServiceProvider;
@@ -51,7 +53,7 @@ class Service extends ServiceProvider
         // $this->registerBladeDirective('email');
         // $this->registerBladeDirective('endButtonGroup');
         // $this->registerBladeDirective('endsubform');
-        // $this->registerBladeDirective('errors');
+        $this->registerBladeDirective('errors');
         // $this->registerBladeDirective('file');
         // $this->registerBladeDirective('form');
         // $this->registerBladeDirective('hidden');
@@ -88,9 +90,11 @@ class Service extends ServiceProvider
             [
                 Checkbox::class,
                 Email::class,
+                Errors::class,
                 Group::class,
                 Label::class,
                 Password::class,
+                Select::class,
                 Submit::class,
                 Text::class,
             ]

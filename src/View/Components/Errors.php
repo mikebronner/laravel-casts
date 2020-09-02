@@ -4,7 +4,7 @@ namespace GeneaLabs\LaravelCasts\View\Components;
 
 use Illuminate\View\Component;
 
-class Group extends Component
+class Errors extends Component
 {
     public $errors;
 
@@ -16,6 +16,6 @@ class Group extends Component
 
     public function render()
     {
-        return view("laravel-forms::components.group");
+        return view("laravel-forms::components.errors");
     }
 }

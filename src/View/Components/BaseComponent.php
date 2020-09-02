@@ -2,12 +2,14 @@
 
 namespace GeneaLabs\LaravelCasts\View\Components;
 
+use Illuminate\Support\MessageBag;
 use Illuminate\Support\Str;
 use Illuminate\View\Component;
 use ReflectionClass;
 
 abstract class BaseComponent extends Component
 {
+    public $errors;
     public $name;
     public $value;
     public $label;
@@ -20,10 +22,12 @@ abstract class BaseComponent extends Component
     public function __construct(
         string $name,
         string $value = "",
-        array $attributes = [],
+        array $fieldAttributes = [],
         array $options = []
     ) {
-        $this->fieldAttributes = $attributes;
+        $this->errors = session("errors", new MessageBag)
+            ->get($name);
+        $this->fieldAttributes = $fieldAttributes;
         $this->name = $name;
         $this->options = $options;
         $this->value = $value;

@@ -1,6 +1,11 @@
-<textarea
-    :name="$name"
-    {!! $fieldAttributes !!}
+<x-form-group
+    :class="$groupClasses"
+    :errors="$errors"
 >
-    {{ $value }}
-</textarea>
+    <textarea
+        :name="$name"
+        {!! $fieldAttributes !!}
+    >
+        {{ $value }}
+    </textarea>
+</x-form-group>
