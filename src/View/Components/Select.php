@@ -2,15 +2,17 @@
 
 namespace GeneaLabs\LaravelCasts\View\Components;
 
+use Illuminate\Support\Str;
 use Illuminate\Support\Collection;
 
 class Select extends BaseComponent
 {
-    public $name;
-    public $placeholder;
-    public $options;
-    public $selectedValues;
+    public $id;
     public $isMultiSelect;
+    public $name;
+    public $options;
+    public $placeholder;
+    public $selectedValues;
 
     public function __construct(
         string $name = "",
@@ -30,5 +32,6 @@ class Select extends BaseComponent
             ? "No Options Available"
             : $placeholder;
         $this->isMultiSelect = $isMultiSelect;
+        $this->id = $this->name . "-" . Str::random(12);
     }
 }

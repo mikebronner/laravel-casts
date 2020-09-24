@@ -13,7 +13,7 @@ class Publish extends Command
     public function handle()
     {
         if ($this->option('assets')) {
-            $this->delTree(public_path('genealabs-laravel-casts'));
+            $this->delTree(public_path('vendor/laravel-casts'));
             $this->call('vendor:publish', [
                 '--provider' => Service::class,
                 '--tag' => ['assets'],

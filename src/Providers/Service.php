@@ -28,12 +28,12 @@ class Service extends ServiceProvider
     public function boot()
     {
         if (! headers_sent()) {
-            $this->registerPreLoadHeader(url('/genealabs-laravel-casts/app.js'));
+            $this->registerPreLoadHeader(url('/vendor/laravel-casts/app.js'));
         }
 
         $this->loadViewsFrom(__DIR__ . '/../../resources/views', 'laravel-forms');
         $this->publishes([
-            __DIR__ . '/../../public/' => public_path('genealabs-laravel-casts'),
+            __DIR__ . '/../../public/' => public_path('vendor/laravel-casts'),
         ], 'assets');
         $configPath = __DIR__ . '/../../config/genealabs-laravel-casts.php';
         $this->publishes([

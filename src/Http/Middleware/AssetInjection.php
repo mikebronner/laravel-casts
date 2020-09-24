@@ -20,7 +20,7 @@ class AssetInjection
             return $response;
         }
 
-        $castsScripts = '<script src="' . asset('genealabs-laravel-casts/app.js') . '"></script>';
+        $castsScripts = '<script src="' . asset('vendor/laravel-casts/app.js') . '"></script>';
 
         $html = new HtmlPageCrawler($content);
 

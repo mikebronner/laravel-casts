@@ -14,7 +14,7 @@
         "cross-env": "5.*",
         "flatpickr": "^4.6.3",
         "font-awesome": "4.*",
-        "laravel-mix": "*",
+        "laravel-mix": "^5.0.5",
         "moment": "*",
         "popper.js": "*",
         "sass": "^1.25.0",
@@ -23,5 +23,8 @@
         "tailwindcss": "*",
         "tether": "^1.4.3",
         "vue-template-compiler": "^2.6.11"
+    },
+    "dependencies": {
+        "choices.js": "^9.0.1"
     }
 }

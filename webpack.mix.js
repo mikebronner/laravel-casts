@@ -19,6 +19,7 @@ mix.setPublicPath('public')
     .copy('node_modules/moment/min/moment.min.js', 'public/moment.js')
     .copy('node_modules/tether/dist/js/tether.min.js', 'public/tether.js')
     .copy('node_modules/signature_pad/dist/signature_pad.min.js', 'public/signature-pad.js')
+    .copy('resources/assets/js/choices.min.js', 'public')
     .sass('resources/assets/scss/font-awesome.scss', 'public')
     .sass('resources/assets/scss/tailwind.scss', 'public')
     .sass('resources/assets/scss/signature-pad.scss', 'public')
@@ -30,7 +31,7 @@ mix.setPublicPath('public')
         ],
     })
     .version()
-   ;
+;
 
 // Full API
 // mix.js(src, output);

@@ -1,7 +1,7 @@
 @extends('genealabs-laravel-casts::examples.layout')
 
 @section('css')
-    <link href="/genealabs-laravel-casts/tailwind.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/vendor/laravel-casts/tailwind.css" rel="stylesheet" type="text/css" media="all">
 @endsection
 
 @section('content')

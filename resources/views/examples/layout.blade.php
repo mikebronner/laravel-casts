@@ -36,8 +36,7 @@
 
         <script src="{{ asset('js/app.js') }}"></script>
 
-        @yield ('js')
-        @yield ('genealabs-laravel-casts')
+        @stack ('js')
 
     </body>
 </html>
