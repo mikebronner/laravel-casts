@@ -6,9 +6,10 @@ class Label extends BaseComponent
 {
     public $field;
 
-    public function __construct(string $value, string $field = "", array $attributes = [])
+    public function __construct(string $value, string $field = "")
     {
-        parent::__construct("", $value, $attributes);
+        parent::__construct("", $value);
+
         $this->field = $field;
     }
 }

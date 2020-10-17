@@ -1,7 +1,7 @@
 <x-form-label
     :field="$name"
     :value="$label"
-    :attributes="['class' => $labelClasses]"
+    class="{{ $labelClass }}"
 >
     <input
         x-data
@@ -12,8 +12,7 @@
         name="{{ $name }}"
         value="{{ $value }}"
         {{ $checked }}
-        {!! $fieldAttributes !!}
-        {{ $attributes }}
+        {{ $attributes->merge(['class' => 'form-checkbox']) }}
         wire:ignore
     >
 </x-form-label>

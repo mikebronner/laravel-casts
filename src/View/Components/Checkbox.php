@@ -7,16 +7,19 @@ use Illuminate\Database\Eloquent\Model;
 class Checkbox extends BaseComponent
 {
     public $checked = "";
+    public $labelClass = "";
 
     public function __construct(
         string $name,
         string $value = "",
+        string $labelClass = "",
         bool $isChecked = false,
-        array $fieldAttributes = [],
         array $options = [],
         Model $model = null
     ) {
-        parent::__construct($name, $value, $fieldAttributes, $options);
+        parent::__construct($name, $value, $options);
+
+        $this->labelClass = $labelClass;
 
         // TODO: get model from Form component
         if ($isChecked
@@ -24,14 +27,5 @@ class Checkbox extends BaseComponent
         ) {
             $this->checked = "checked";
         }
-    }
-
-    public function handle() : void
-    {
-        $class = $this->fieldAttributes["class"]
-            ?? "";
-
-        $class = "form-checkbox {$class}";
-        $this->fieldAttributes["class"] = $class;
     }
 }

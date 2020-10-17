@@ -11,6 +11,7 @@
     },
     "devDependencies": {
         "@popperjs/core": "^2.0.6",
+        "@tailwindcss/custom-forms": "^0.2.1",
         "cross-env": "5.*",
         "flatpickr": "^4.6.3",
         "font-awesome": "4.*",
@@ -20,11 +21,8 @@
         "sass": "^1.25.0",
         "sass-loader": "^8.0.2",
         "signature_pad": "*",
-        "tailwindcss": "*",
+        "tailwindcss": "^1.8.10",
         "tether": "^1.4.3",
         "vue-template-compiler": "^2.6.11"
-    },
-    "dependencies": {
-        "choices.js": "^9.0.1"
     }
 }

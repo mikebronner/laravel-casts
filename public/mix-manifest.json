@@ -1,12 +1,10 @@
 {
-    "/app.js": "/app.js?id=b4bb75282d989869be19",
-    "/font-awesome.css": "/font-awesome.css?id=c1cd7e9d698193d957da",
-    "/tailwind.css": "/tailwind.css?id=555bc1ab85975f43e98d",
+    "/laravel-forms.js": "/laravel-forms.js?id=226525fbfa93fea0e1d2",
+    "/laravel-forms.css": "/laravel-forms.css?id=f0791fd08e09d8bd4b06",
     "/signature-pad.css": "/signature-pad.css?id=5d2bf26358b8c5315d32",
     "/datetimepicker.js": "/datetimepicker.js?id=da3c57326c30dcf6d59a",
     "/datetimepicker.css": "/datetimepicker.css?id=30f64a741bc93036f312",
     "/moment.js": "/moment.js?id=761502841c035afcf6a9",
     "/tether.js": "/tether.js?id=b3a78da5dec859b979ed",
-    "/signature-pad.js": "/signature-pad.js?id=88260ea3d187ff9ac33e",
-    "/choices.min.js": "/choices.min.js?id=7bcba9d6c2bc441c2deb"
+    "/signature-pad.js": "/signature-pad.js?id=88260ea3d187ff9ac33e"
 }

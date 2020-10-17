@@ -1,6 +1,6 @@
 <label
     for="{{ $field }}"
-    {!! $fieldAttributes !!}
+    {{ $attributes }}
 >
     {!! $slot !!}
     {!! $value !!}

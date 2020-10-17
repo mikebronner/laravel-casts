@@ -14,7 +14,6 @@
         "illuminate/support": "^8.0",
         "jenssegers/model": "^1.4",
         "laravelcollective/html": "^6.1",
-        "livewire/livewire": "^1.0",
         "wa72/htmlpagedom": "^2.0",
         "symfony/thanks": "^1.2"
     },

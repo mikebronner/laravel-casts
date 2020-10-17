@@ -6,7 +6,7 @@
         <x-form-label
             :field="$name"
             :value="$label"
-            :attributes="['class' => $labelClasses]"
+            class="{{ $labelClasses }}"
         />
     @endif
 
@@ -14,6 +14,6 @@
         type="password"
         id="{{ $name }}"
         name="{{ $name }}"
-        {!! $fieldAttributes !!}
+        {{ $attributes }}
     >
 </x-form-group>

@@ -7,12 +7,12 @@ use Illuminate\Support\Collection;
 
 class Select extends BaseComponent
 {
-    public $id;
     public $isMultiSelect;
     public $name;
     public $options;
     public $placeholder;
     public $selectedValues;
+    public $livewireModel;
 
     public function __construct(
         string $name = "",
@@ -32,6 +32,6 @@ class Select extends BaseComponent
             ? "No Options Available"
             : $placeholder;
         $this->isMultiSelect = $isMultiSelect;
-        $this->id = $this->name . "-" . Str::random(12);
+        $this->livewireModel = $this->attributes;
     }
 }
