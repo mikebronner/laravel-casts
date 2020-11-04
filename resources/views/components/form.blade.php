@@ -5,8 +5,10 @@
     enctype="{{ $enctype }}"
     method="{{ $method }}"
     target="{{ $target }}"
-    {{ $novalidate }}
 >
-    @csrf
+    @csrf()
+    @method($method)
+
     {!! $slot !!}
+
 </form>
