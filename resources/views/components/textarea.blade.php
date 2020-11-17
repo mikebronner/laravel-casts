@@ -2,9 +2,17 @@
     :class="$groupClasses"
     :errors="$errors"
 >
+    @if ($label)
+        <x-form-label
+            :field="$name"
+            :value="$label"
+            class="{{ $labelClasses }}"
+        />
+    @endif
+
     <textarea
-        :name="$name"
-        {!! $fieldAttributes !!}
+        name="{{ $name }}"
+        {{ $attributes }}
     >
         {{ $value }}
     </textarea>

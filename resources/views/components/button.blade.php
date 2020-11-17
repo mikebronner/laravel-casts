@@ -1,6 +1,5 @@
 <input
+    {{ $attributes }}
     type="button"
-    :name="$name"
-    :value="$value"
-    {!! $fieldAttributes !!}
+    value="{{ $value }}"
 >

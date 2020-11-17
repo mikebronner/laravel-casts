@@ -1,12 +1,13 @@
 <?php namespace GeneaLabs\LaravelCasts\Providers;
 
 use Blade;
-use Exception;
-use GeneaLabs\LaravelCasts\FormBuilder;
 use Collective\Html\HtmlBuilder;
-use GeneaLabs\LaravelCasts\Http\Livewire\Combobox;
+use Exception;
 use GeneaLabs\LaravelCasts\Console\Commands\Publish;
+use GeneaLabs\LaravelCasts\FormBuilder;
+use GeneaLabs\LaravelCasts\Http\Livewire\Combobox;
 use GeneaLabs\LaravelCasts\Http\Middleware\AssetInjection;
+use GeneaLabs\LaravelCasts\View\Components\Button;
 use GeneaLabs\LaravelCasts\View\Components\Checkbox;
 use GeneaLabs\LaravelCasts\View\Components\Email;
 use GeneaLabs\LaravelCasts\View\Components\Errors;
@@ -17,9 +18,10 @@ use GeneaLabs\LaravelCasts\View\Components\Password;
 use GeneaLabs\LaravelCasts\View\Components\Select;
 use GeneaLabs\LaravelCasts\View\Components\Submit;
 use GeneaLabs\LaravelCasts\View\Components\Text;
-use Illuminate\Support\ServiceProvider;
+use GeneaLabs\LaravelCasts\View\Components\Textarea;
 use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Support\Facades\Blade as FacadesBlade;
+use Illuminate\Support\ServiceProvider;
 
 class Service extends ServiceProvider
 {
@@ -88,6 +90,7 @@ class Service extends ServiceProvider
         $this->loadViewComponentsAs(
             'form',
             [
+                Button::class,
                 Checkbox::class,
                 Email::class,
                 Errors::class,
@@ -97,6 +100,7 @@ class Service extends ServiceProvider
                 Select::class,
                 Submit::class,
                 Text::class,
+                Textarea::class,
             ]
         );
     }
