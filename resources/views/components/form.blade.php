@@ -3,7 +3,7 @@
     autocomplete="{{ $autocomplete }}"
     class="{{ $class }}"
     enctype="{{ $enctype }}"
-    method="{{ $method }}"
+    method="POST"
     target="{{ $target }}"
 >
     @csrf()
