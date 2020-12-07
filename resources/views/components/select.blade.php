@@ -218,10 +218,6 @@
                     // this.field.dispatchEvent(new Event('input'));
                     // dispatcher(this.value);
 
-                    if (@this || false) {
-                        @this.set(this.livewireModel, this.getValue());
-                    }
-
                     this.setOptions();
                     this.$refs.input.focus();
                     this.highlighted = 0;
@@ -230,10 +226,6 @@
                 remove: function (option) {
                     this.field.options[option.index].removeAttribute('selected');
                     this.field.options[option.index].selected = false;
-
-                    if (@this || false) {
-                        @this.set(this.livewireModel, this.getValue());
-                    }
 
                     this.setOptions();
                 },
