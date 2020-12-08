@@ -22,12 +22,4 @@ abstract class Input extends BaseComponent
         $this->labelClasses = $labelClasses;
         $this->groupClasses = $groupClasses;
     }
-
-    public function handle() : void
-    {
-        $class = $this->fieldAttributes["class"]
-            ?? "";
-        $class = "form-input {$class}";
-        $this->fieldAttributes["class"] = $class;
-    }
 }

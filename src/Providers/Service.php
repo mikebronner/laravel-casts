@@ -13,6 +13,7 @@ use GeneaLabs\LaravelCasts\View\Components\Email;
 use GeneaLabs\LaravelCasts\View\Components\Errors;
 use GeneaLabs\LaravelCasts\View\Components\Form;
 use GeneaLabs\LaravelCasts\View\Components\Group;
+use GeneaLabs\LaravelCasts\View\Components\Hidden;
 use GeneaLabs\LaravelCasts\View\Components\Label;
 use GeneaLabs\LaravelCasts\View\Components\Password;
 use GeneaLabs\LaravelCasts\View\Components\Select;
@@ -95,6 +96,7 @@ class Service extends ServiceProvider
                 Email::class,
                 Errors::class,
                 Group::class,
+                Hidden::class,
                 Label::class,
                 Password::class,
                 Select::class,

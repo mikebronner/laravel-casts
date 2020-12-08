@@ -12,9 +12,9 @@
 
     @if (! $isMultiSelect)
         <select
+            {{ $attributes }}
             x-cloak
             name="{{ $name }}"
-            {{ $attributes }}
             x-on:change="$dispatch('input', getValue())"
         >
             @if ($placeholder)
@@ -22,7 +22,7 @@
             @endif
 
             @foreach ($options as $label => $value)
-                @if ($value === $selectedValues)
+                @if ($value === $selectedValues->first())
                     <option value="{{ $value }}" selected>{{ $label }}</option>
                 @else
                     <option value="{{ $value }}">{{ $label }}</option>
@@ -123,14 +123,6 @@
         </div>
     @endif
 </x-form-group>
-
-@push('css')
-    <style>
-        [x-cloak] {
-            display: none;
-        }
-    </style>
-@endpush
 
 @push('js')
     <script>

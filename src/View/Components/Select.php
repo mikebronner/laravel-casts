@@ -2,36 +2,43 @@
 
 namespace GeneaLabs\LaravelCasts\View\Components;
 
-use Illuminate\Support\Str;
 use Illuminate\Support\Collection;
 
 class Select extends BaseComponent
 {
     public $isMultiSelect;
     public $name;
+    public $label;
     public $options;
     public $placeholder;
     public $selectedValues;
-    public $livewireModel;
 
     public function __construct(
         string $name = "",
+        string $label = null,
         string $placeholder = "",
         Collection $options = null,
         Collection $selectedValues = null,
         bool $isMultiSelect = false
     ) {
-        parent::__construct($name);
+        $this->selectedValues = $selectedValues
+            ?? collect(old($name))
+            ?? collect(optional(session("form-model"))->$name)
+            ?? collect();
+// dump($selectedValues);
+        parent::__construct($name, "", [
+            "label" => $label === ""
+                ? " "
+                : $label,
+        ]);
 
         $this->name = $name;
+        $this->label = $label;
         $this->options = $options
-            ?? collect();
-        $this->selectedValues = $selectedValues
             ?? collect();
         $this->placeholder = $this->options->isEmpty()
             ? "No Options Available"
             : $placeholder;
         $this->isMultiSelect = $isMultiSelect;
-        $this->livewireModel = $this->attributes;
     }
 }

@@ -1,4 +1,5 @@
 <form
+    {{ $attributes }}
     action="{{ $action }}"
     autocomplete="{{ $autocomplete }}"
     class="{{ $class }}"
@@ -11,4 +12,4 @@
 
     {!! $slot !!}
 
- </form>
+</form>

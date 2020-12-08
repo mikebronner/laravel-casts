@@ -3,9 +3,9 @@
     :errors="$errors"
 >
     <input
+        {{ $attributes }}
         type="hidden"
-        :name="$name"
-        :value="$value"
-        {!! $fieldAttributes !!}
+        name="{{ $name }}"
+        value="{{ $value }}"
     >
 </x-form-group>
