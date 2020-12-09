@@ -22,7 +22,7 @@
             @endif
 
             @foreach ($options as $label => $value)
-                @if ($value === $selectedValues->first())
+                @if ($selectedValues->contains($value))
                     <option value="{{ $value }}" selected>{{ $label }}</option>
                 @else
                     <option value="{{ $value }}">{{ $label }}</option>

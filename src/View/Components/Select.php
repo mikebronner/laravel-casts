@@ -25,7 +25,7 @@ class Select extends BaseComponent
             ?? collect(old($name))
             ?? collect(optional(session("form-model"))->$name)
             ?? collect();
-// dump($selectedValues);
+
         parent::__construct($name, "", [
             "label" => $label === ""
                 ? " "
