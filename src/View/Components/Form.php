@@ -46,9 +46,6 @@ class Form extends BaseComponent
         $this->novalidate = $novalidate
             ? "novalidate"
             : "";
-
-        if ($this->model) {
-            session(["form-model" => $this->model]);
-        }
+        session(["form-model" => $this->model]);
     }
 }

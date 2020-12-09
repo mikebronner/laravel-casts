@@ -11,6 +11,7 @@
     "require": {
         "fico7489/laravel-eloquent-join": "^4.1",
         "illuminate/config": "^8.0",
+        "illuminate/session": "^8.0",
         "illuminate/support": "^8.0",
         "jenssegers/model": "^1.4",
         "laravelcollective/html": "^6.1",
