@@ -13,7 +13,5 @@
     <textarea
         name="{{ $name }}"
         {{ $attributes }}
-    >
-        {{ $value }}
-    </textarea>
+    >{{ $value }}</textarea>
 </x-form-group>

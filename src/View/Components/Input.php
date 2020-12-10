@@ -11,13 +11,14 @@ abstract class Input extends BaseComponent
         string $name,
         string $value = null,
         string $labelClasses = "",
-        string $groupClasses = ""
+        string $groupClasses = "",
+        string $label = ""
     ) {
         $value = $value
             ?? old($name)
             ?? optional(session("form-model"))->$name
             ?? "";
-        parent::__construct($name, $value ?? "");
+        parent::__construct($name, $value ?? "", [], $label);
 
         $this->labelClasses = $labelClasses;
         $this->groupClasses = $groupClasses;

@@ -21,14 +21,17 @@ abstract class BaseComponent extends Component
     public function __construct(
         string $name,
         string $value = "",
-        array $options = []
+        array $options = [],
+        string $label = ""
     ) {
         $this->errors = session("errors", new MessageBag)
             ->get(Str::slug($name));
         $this->name = $name;
+        $this->label = $label;
         $this->options = $options;
         $this->value = $value;
-        $this->label = $options["label"]
+        $this->label = $label
+            ?? $options["label"]
             ?? ucwords(str_replace("_id", " ", str_replace("_", " ", str_replace("[", " ", str_replace("]", " ", $name)))));
         // $this->labelClasses = $options["labelClasses"]
         //     ?? "";
