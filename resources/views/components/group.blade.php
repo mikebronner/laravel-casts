@@ -1,6 +1,8 @@
 <div
     {{ $attributes }}
 >
-    {!! $slot !!}
-    <x-form-errors :errors="$errors" />
+    {{ $slot }}
+    <x-form-errors
+        :errors="$errors"
+    />
 </div>

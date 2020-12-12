@@ -2,7 +2,7 @@
 
 namespace GeneaLabs\LaravelCasts\View\Components;
 
-class Datetime extends BaseComponent
+class Datetime extends Input
 {
     //
 }

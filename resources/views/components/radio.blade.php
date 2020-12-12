@@ -1,6 +1,15 @@
 <input
+    {{ $attributes }}
     type="radio"
-    :name="$name"
-    :value="$value"
-    {!! $fieldAttributes !!}
+    id="{{ $name }}"
+    name="{{ $name }}"
+    value="{{ $value }}"
 >
+
+@if ($label)
+    <x-form-label
+        :field="$name"
+        :value="$label"
+        class="{{ $labelClasses }}"
+    />
+@endif

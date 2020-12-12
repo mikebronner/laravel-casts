@@ -2,10 +2,19 @@
     :class="$groupClasses"
     :errors="$errors"
 >
+    @if ($label)
+        <x-form-label
+            :field="$name"
+            :value="$label"
+            class="{{ $labelClasses }}"
+        />
+    @endif
+
     <input
-        type="datetime"
-        :name="$name"
-        :value="$value"
-        {!! $fieldAttributes !!}
+        {{ $attributes->merge(["class" => "form-input"]) }}
+        type="datetime-local"
+        id="{{ $name }}"
+        name="{{ $name }}"
+        value="{{ $value }}"
     >
 </x-form-group>

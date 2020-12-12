@@ -8,7 +8,6 @@ class Select extends BaseComponent
 {
     public $isMultiSelect;
     public $name;
-    public $label;
     public $options;
     public $placeholder;
     public $selectedValues;
@@ -19,21 +18,18 @@ class Select extends BaseComponent
         string $placeholder = "",
         Collection $options = null,
         Collection $selectedValues = null,
-        bool $isMultiSelect = false
+        bool $isMultiSelect = false,
+        string $labelClasses = "",
+        string $groupClasses = ""
     ) {
         $this->selectedValues = $selectedValues
             ?? collect(old($name))
             ?? collect(optional(session("form-model"))->$name)
             ?? collect();
 
-        parent::__construct($name, "", [
-            "label" => $label === ""
-                ? " "
-                : $label,
-        ]);
+        parent::__construct($name, "", [], $label, $labelClasses, $groupClasses);
 
         $this->name = $name;
-        $this->label = $label;
         $this->options = $options
             ?? collect();
         $this->placeholder = $this->options->isEmpty()

@@ -12,14 +12,13 @@ class Checkbox extends BaseComponent
     public function __construct(
         string $name,
         string $value = "",
-        string $labelClass = "",
+        string $label = "",
         bool $isChecked = false,
-        array $options = [],
+        string $labelClasses = "",
+        string $groupClasses = "",
         Model $model = null
     ) {
-        parent::__construct($name, $value, $options);
-
-        $this->labelClass = $labelClass;
+        parent::__construct($name, $value, [], $label, $labelClasses, $groupClasses);
 
         // TODO: get model from Form component
         if ($isChecked

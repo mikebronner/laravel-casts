@@ -5,6 +5,7 @@
     <input
         {{ $attributes }}
         type="hidden"
+        id="{{ $name }}"
         name="{{ $name }}"
         value="{{ $value }}"
     >

@@ -16,27 +16,25 @@ abstract class BaseComponent extends Component
     public $labelClasses;
     public $groupClasses;
 
-    protected $options;
-
     public function __construct(
         string $name,
-        string $value = "",
+        string $value = null,
         array $options = [],
-        string $label = ""
+        string $label = null,
+        string $labelClasses = "",
+        string $groupClasses = ""
     ) {
         $this->errors = session("errors", new MessageBag)
             ->get(Str::slug($name));
         $this->name = $name;
-        $this->label = $label;
-        $this->options = $options;
-        $this->value = $value;
-        $this->label = $label
-            ?? $options["label"]
-            ?? ucwords(str_replace("_id", " ", str_replace("_", " ", str_replace("[", " ", str_replace("]", " ", $name)))));
-        // $this->labelClasses = $options["labelClasses"]
-        //     ?? "";
-        $this->groupClasses = $options["groupClasses"]
+        $this->value = $value
+            ?? old($name)
+            ?? optional(session("form-model"))->$name
             ?? "";
+        $this->label = $label
+            ?? ucwords(str_replace("_id", " ", str_replace("_", " ", str_replace("[", " ", str_replace("]", " ", $name)))));
+        $this->labelClasses = $labelClasses;
+        $this->groupClasses = $groupClasses;
 
         $this->handle();
     }

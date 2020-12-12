@@ -9,17 +9,21 @@ use GeneaLabs\LaravelCasts\Http\Livewire\Combobox;
 use GeneaLabs\LaravelCasts\Http\Middleware\AssetInjection;
 use GeneaLabs\LaravelCasts\View\Components\Button;
 use GeneaLabs\LaravelCasts\View\Components\Checkbox;
+use GeneaLabs\LaravelCasts\View\Components\Datetime;
 use GeneaLabs\LaravelCasts\View\Components\Email;
 use GeneaLabs\LaravelCasts\View\Components\Errors;
 use GeneaLabs\LaravelCasts\View\Components\Form;
 use GeneaLabs\LaravelCasts\View\Components\Group;
 use GeneaLabs\LaravelCasts\View\Components\Hidden;
 use GeneaLabs\LaravelCasts\View\Components\Label;
+use GeneaLabs\LaravelCasts\View\Components\Number;
 use GeneaLabs\LaravelCasts\View\Components\Password;
+use GeneaLabs\LaravelCasts\View\Components\Radio;
 use GeneaLabs\LaravelCasts\View\Components\Select;
 use GeneaLabs\LaravelCasts\View\Components\Submit;
 use GeneaLabs\LaravelCasts\View\Components\Text;
 use GeneaLabs\LaravelCasts\View\Components\Textarea;
+use GeneaLabs\LaravelCasts\View\Components\Time;
 use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Support\Facades\Blade as FacadesBlade;
 use Illuminate\Support\ServiceProvider;
@@ -93,16 +97,20 @@ class Service extends ServiceProvider
             [
                 Button::class,
                 Checkbox::class,
+                Datetime::class,
                 Email::class,
                 Errors::class,
                 Group::class,
                 Hidden::class,
                 Label::class,
+                Number::class,
                 Password::class,
+                Radio::class,
                 Select::class,
                 Submit::class,
                 Text::class,
                 Textarea::class,
+                Time::class,
             ]
         );
     }

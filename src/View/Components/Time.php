@@ -2,7 +2,7 @@
 
 namespace GeneaLabs\LaravelCasts\View\Components;
 
-class Time extends BaseComponent
+class Time extends Input
 {
     //
 }
