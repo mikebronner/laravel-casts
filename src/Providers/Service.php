@@ -14,6 +14,7 @@ use GeneaLabs\LaravelCasts\View\Components\Email;
 use GeneaLabs\LaravelCasts\View\Components\Errors;
 use GeneaLabs\LaravelCasts\View\Components\Form;
 use GeneaLabs\LaravelCasts\View\Components\Group;
+use GeneaLabs\LaravelCasts\View\Components\Gutenberg;
 use GeneaLabs\LaravelCasts\View\Components\Hidden;
 use GeneaLabs\LaravelCasts\View\Components\Label;
 use GeneaLabs\LaravelCasts\View\Components\Number;
@@ -101,6 +102,7 @@ class Service extends ServiceProvider
                 Email::class,
                 Errors::class,
                 Group::class,
+                Gutenberg::class,
                 Hidden::class,
                 Label::class,
                 Number::class,

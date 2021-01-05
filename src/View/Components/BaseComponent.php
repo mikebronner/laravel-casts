@@ -28,9 +28,9 @@ abstract class BaseComponent extends Component
             ->get(Str::slug($name));
         $this->name = $name;
         $this->value = $value
-            ?? old($name)
-            ?? optional(session("form-model"))->$name
-            ?? "";
+            ?: old($name)
+            ?: optional(session("form-model"))->$name
+            ?: "";
         $this->label = $label
             ?? ucwords(str_replace("_id", " ", str_replace("_", " ", str_replace("[", " ", str_replace("]", " ", $name)))));
         $this->labelClasses = $labelClasses;

@@ -2,11 +2,8 @@
 
 namespace GeneaLabs\LaravelCasts\View\Components;
 
-class Textarea extends BaseComponent
+class Gutenberg extends Textarea
 {
-    public $labelClasses = "";
-    public $groupClasses = "";
-
     public function __construct(
         string $name,
         string $value = null,
@@ -14,6 +11,6 @@ class Textarea extends BaseComponent
         string $groupClasses = "",
         string $label = null
     ) {
-        parent::__construct($name, $value, [], $label, $labelClasses, $groupClasses);
+        parent::__construct($name, $value, $labelClasses, $groupClasses, $label);
     }
 }

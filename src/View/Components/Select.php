@@ -13,28 +13,24 @@ class Select extends BaseComponent
     public $selectedValues;
 
     public function __construct(
-        string $name = "",
-        string $label = null,
-        string $placeholder = "",
+        string $name,
         Collection $options = null,
         Collection $selectedValues = null,
         bool $isMultiSelect = false,
         string $labelClasses = "",
-        string $groupClasses = ""
+        string $groupClasses = "",
+        string $label = null,
+        string $placeholder = "No Options Available"
     ) {
-        $this->selectedValues = $selectedValues
-            ?? collect(old($name))
-            ?? collect(optional(session("form-model"))->$name)
-            ?? collect();
-
-        parent::__construct($name, "", [], $label, $labelClasses, $groupClasses);
+        parent::__construct($name, null, [], $label, $labelClasses, $groupClasses);
 
         $this->name = $name;
         $this->options = $options
             ?? collect();
-        $this->placeholder = $this->options->isEmpty()
-            ? "No Options Available"
-            : $placeholder;
+        //     dd($this->attributes);
+        $this->placeholder = $placeholder;
         $this->isMultiSelect = $isMultiSelect;
+        $this->selectedValues = $selectedValues
+            ?? collect();
     }
 }
