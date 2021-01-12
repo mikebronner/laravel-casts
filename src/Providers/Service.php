@@ -9,6 +9,7 @@ use GeneaLabs\LaravelCasts\Http\Livewire\Combobox;
 use GeneaLabs\LaravelCasts\Http\Middleware\AssetInjection;
 use GeneaLabs\LaravelCasts\View\Components\Button;
 use GeneaLabs\LaravelCasts\View\Components\Checkbox;
+use GeneaLabs\LaravelCasts\View\Components\Date;
 use GeneaLabs\LaravelCasts\View\Components\Datetime;
 use GeneaLabs\LaravelCasts\View\Components\Email;
 use GeneaLabs\LaravelCasts\View\Components\Errors;
@@ -98,6 +99,7 @@ class Service extends ServiceProvider
             [
                 Button::class,
                 Checkbox::class,
+                Date::class,
                 Datetime::class,
                 Email::class,
                 Errors::class,

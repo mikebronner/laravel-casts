@@ -6,7 +6,7 @@
         <x-form-label
             :field="$name"
             :value="$label"
-            class="{{ $labelClasses }}"
+            :class="$labelClasses"
         />
     @endif
 
