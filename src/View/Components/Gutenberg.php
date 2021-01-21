@@ -9,8 +9,10 @@ class Gutenberg extends Textarea
         string $value = null,
         string $labelClasses = "",
         string $groupClasses = "",
+        string $helpClasses = "",
+        string $helpText = "",
         string $label = null
     ) {
-        parent::__construct($name, $value, $labelClasses, $groupClasses, $label);
+        parent::__construct($name, $value, $label, $labelClasses, $groupClasses, $helpClasses, $helpText);
     }
 }

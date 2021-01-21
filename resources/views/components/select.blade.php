@@ -1,6 +1,7 @@
 <x-form-group
     :class="$groupClasses"
     :errors="$errors"
+    x-data="{}"
 >
     @if ($label)
         <x-form-label
@@ -12,16 +13,12 @@
 
     @if (! $isMultiSelect)
         <select
-            {{ $attributes }}
-            x-cloak
+            {{ $attributes->merge(["class" => "pr-8 form-select"]) }}
             name="{{ $name }}"
-            x-on:change="$dispatch('input', getValue())"
         >
-            @if ($placeholder)
-                <option selected disabled>{{ $placeholder }}</option>
-            @endif
+            <option selected disabled value="">{{ $placeholder }}</option>
 
-            @foreach ($options as $label => $value)
+            @foreach ($selectOptions as $label => $value)
                 @if ($selectedValues->contains($value))
                     <option value="{{ $value }}" selected>{{ $label }}</option>
                 @else
@@ -35,29 +32,29 @@
         <div
             x-data="dropdown()"
             x-init="setOptions()"
-            class="form-select focus-within:shadow-outline flex flex-col items-center mx-auto h-auto"
+            class="mx-auto h-auto flex flex-col items-center form-select focus-within:shadow-outline"
         >
-            <div class="inline-block relative w-full">
-                <div class="flex flex-col items-center relative">
+            <div class="w-full relative inline-block">
+                <div class="relative flex flex-col items-center">
                     <div x-on:click="open" class="w-full">
-                        <div class="flex flex-auto flex-wrap">
+                        <div class="flex flex-wrap flex-auto">
                             <template
                                 x-for="option in selectedOptions"
                                 :key="option.index"
                             >
                                 <div
-                                    class="mr-2 flex justify-center items-center m-1 font-medium py-1 px-1 text-blue-800 bg-blue-100 rounded"
+                                    class="m-1 mr-2 px-1 py-1 flex items-center justify-center font-medium text-blue-800 bg-blue-100 rounded"
                                 >
                                     <div
-                                        class="text-xs font-normal leading-none max-w-full flex-initial"
+                                        class="max-w-full flex-initial text-xs font-normal leading-none"
                                         x-text="option.text"
                                     ></div>
-                                    <div class="flex flex-auto flex-row-reverse ml-2">
+                                    <div class="ml-2 flex flex-row-reverse flex-auto">
                                         <div x-on:click.stop="remove(option, $dispatch)">
                                             <svg
                                                 aria-hidden="true"
                                                 focusable="false"
-                                                class="fill-current w-3 h-3"
+                                                class="w-3 h-3 fill-current"
                                                 role="button"
                                                 xmlns="http://www.w3.org/2000/svg"
                                                 viewBox="0 0 352 512"
@@ -72,7 +69,7 @@
                                 </div>
                             </template>
                             <input
-                                class="flex-1 text-gray-400 italic font-light shadow-none outline-none"
+                                class="flex-1 italic font-light text-gray-400 shadow-none outline-none"
                                 placeholder="Select an option ..."
                                 x-on:keyup.arrow-up="highlightPrevious()"
                                 x-on:keyup.arrow-down="highlightNext()"
@@ -84,29 +81,29 @@
                         </div>
                     </div>
                 </div>
-                <div class="w-full px-4">
+                <div class="px-4 w-full">
                         <div
                             x-show.transition.origin.top="isOpen()"
-                            class="absolute -ml-3 shadow-md mt-3 bg-white z-40 min-w-full left-0 rounded max-h-select overflow-hidden"
+                            class="mt-3 -ml-3 min-w-full absolute left-0 z-40 overflow-hidden bg-white rounded shadow-md max-h-select"
                             x-on:click.away="close"
                         >
                             <div
                                 x-ref="options"
-                                class="flex flex-col w-full"
+                                class="w-full flex flex-col"
                             >
                                 <template
                                     x-for="option in unselectedOptions"
                                     :key="option.index"
                                 >
                                     <div
-                                        class="cursor-pointer w-full border-gray-100 border-b hover:bg-gray-100"
+                                        class="w-full border-b border-gray-100 cursor-pointer hover:bg-gray-100"
                                         x-on:click="select(option, $dispatch)"
                                     >
                                         <div
-                                            class="flex w-full items-center p-2 pl-2 border-transparent border-l-2 relative"
+                                            class="p-2 pl-2 w-full relative flex items-center border-l-2 border-transparent"
                                         >
                                             <div
-                                                class="w-full items-center flex justify-between"
+                                                class="w-full flex items-center justify-between"
                                             >
                                                 <div
                                                     class="mx-2 leading-6"

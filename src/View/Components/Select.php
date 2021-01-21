@@ -8,7 +8,7 @@ class Select extends BaseComponent
 {
     public $isMultiSelect;
     public $name;
-    public $options;
+    public $selectOptions;
     public $placeholder;
     public $selectedValues;
 
@@ -19,16 +19,21 @@ class Select extends BaseComponent
         bool $isMultiSelect = false,
         string $labelClasses = "",
         string $groupClasses = "",
+        string $helpClasses = "",
+        string $helpText = "",
         string $label = null,
-        string $placeholder = "No Options Available"
+        string $placeholder = ""
     ) {
-        parent::__construct($name, null, [], $label, $labelClasses, $groupClasses);
+        parent::__construct($name, null, $label, $labelClasses, $groupClasses, $helpClasses, $helpText);
 
         $this->name = $name;
-        $this->options = $options
+        $this->selectOptions = $options
             ?? collect();
-        //     dd($this->attributes);
-        $this->placeholder = $placeholder;
+        $this->placeholder = $this->selectOptions->isEmpty()
+            ? "No Options Available"
+            : ($placeholder
+                ?: "Select ...");
+
         $this->isMultiSelect = $isMultiSelect;
         $this->selectedValues = $selectedValues
             ?? collect();
