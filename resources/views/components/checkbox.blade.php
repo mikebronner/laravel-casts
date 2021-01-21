@@ -1,7 +1,7 @@
 <x-form-label
     :field="$name"
     :value="$label"
-    class="{{ $labelClass }}"
+    :class="$labelClasses"
 >
     <input
         x-data
