@@ -12,8 +12,10 @@ class Textarea extends BaseComponent
         string $value = null,
         string $labelClasses = "",
         string $groupClasses = "",
-        string $label = null
+        string $label = null,
+        string $helpClasses = "",
+        string $helpText = ""
     ) {
-        parent::__construct($name, $value, [], $label, $labelClasses, $groupClasses);
+        parent::__construct($name, $value, $label, $labelClasses, $groupClasses, $helpClasses, $helpText);
     }
 }

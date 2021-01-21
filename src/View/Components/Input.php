@@ -11,6 +11,6 @@ abstract class Input extends BaseComponent
         string $groupClasses = "",
         string $label = null
     ) {
-        parent::__construct($name, $value, [], $label, $labelClasses, $groupClasses);
+        parent::__construct($name, $value, $label, $labelClasses, $groupClasses);
     }
 }

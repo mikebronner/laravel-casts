@@ -19,7 +19,6 @@ abstract class BaseComponent extends Component
     public function __construct(
         string $name,
         string $value = null,
-        array $options = [],
         string $label = null,
         string $labelClasses = "",
         string $groupClasses = ""

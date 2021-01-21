@@ -27,7 +27,7 @@ class Form extends BaseComponent
         bool $novalidate = false,
         string $target = ""
     ) {
-        parent::__construct("", "", []);
+        parent::__construct("");
 
         $this->action = $action;
         $this->autocomplete = $autocomplete
