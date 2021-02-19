@@ -33,7 +33,6 @@ class Select extends BaseComponent
             ? "No Options Available"
             : ($placeholder
                 ?: "Select ...");
-
         $this->isMultiSelect = $isMultiSelect;
         $this->selectedValues = $selectedValues
             ?? collect();

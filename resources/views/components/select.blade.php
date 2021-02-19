@@ -15,7 +15,9 @@
             {{ $attributes->merge(["class" => "pr-8 form-select"]) }}
             name="{{ $name }}"
         >
-            <option selected disabled value="">{{ $placeholder }}</option>
+            @if (! $attributes->get("multiple"))
+                <option selected disabled value="">{{ $placeholder }}</option>
+            @endif
 
             @foreach ($selectOptions as $label => $value)
                 @if ($selectedValues->contains($value))

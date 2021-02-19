@@ -26,6 +26,7 @@ use GeneaLabs\LaravelCasts\View\Components\Submit;
 use GeneaLabs\LaravelCasts\View\Components\Text;
 use GeneaLabs\LaravelCasts\View\Components\Textarea;
 use GeneaLabs\LaravelCasts\View\Components\Time;
+use GeneaLabs\LaravelCasts\View\Components\Toggle;
 use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Support\Facades\Blade as FacadesBlade;
 use Illuminate\Support\ServiceProvider;
@@ -112,6 +113,7 @@ class Service extends ServiceProvider
                 Radio::class,
                 Select::class,
                 Submit::class,
+                Toggle::class,
                 Text::class,
                 Textarea::class,
                 Time::class,
