@@ -1,7 +1,7 @@
 <?php namespace GeneaLabs\LaravelCasts\Http\Middleware;
 
 use Closure;
-use Wa72\HtmlPageDom\HtmlPageCrawler;
+// use Wa72\HtmlPageDom\HtmlPageCrawler;
 
 class AssetInjection
 {
@@ -9,31 +9,33 @@ class AssetInjection
     {
         $response = $next($request);
 
-        // return $response;
-        if (! method_exists($response, 'getContent')) {
-            return $response;
-        }
+        // TODO: fix asset injection to not use Wa72\HtmlPageDom, as it is not
+        // PHP 8 compatible
+        // // return $response;
+        // if (! method_exists($response, 'getContent')) {
+        //     return $response;
+        // }
 
-        $content = $response->getContent();
+        // $content = $response->getContent();
 
-        if (! is_string($content)) {
-            return $response;
-        }
+        // if (! is_string($content)) {
+        //     return $response;
+        // }
 
-        $castsScripts = '<script src="' . asset('vendor/laravel-casts/app.js') . '"></script>';
+        // $castsScripts = '<script src="' . asset('vendor/laravel-casts/app.js') . '"></script>';
 
-        $html = new HtmlPageCrawler($content);
+        // $html = new HtmlPageCrawler($content);
 
-        if ($this->isNotOnErrorPage($html)
-            && $html->filter("html > head")->count()
-        ) {
-            $html->filter("html > body")->append($castsScripts);
-            $content = $html->saveHTML();
-        }
+        // if ($this->isNotOnErrorPage($html)
+        //     && $html->filter("html > head")->count()
+        // ) {
+        //     $html->filter("html > body")->append($castsScripts);
+        //     $content = $html->saveHTML();
+        // }
 
-        $original = $response->original;
-        $response->setContent($content);
-        $response->original = $original;
+        // $original = $response->original;
+        // $response->setContent($content);
+        // $response->original = $original;
 
         return $response;
     }
