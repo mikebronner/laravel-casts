@@ -14,7 +14,7 @@
     <div
         x-data="{
             selected: {{ $checked === 'checked' ? 'true' : 'false' }},
-            value: {{ $value }},
+            value: '{{ $value }}',
             toggle: function (dispatch) {
                 this.selected = ! this.selected;
                 dispatch('input', (this.selected == true ? this.value : null));

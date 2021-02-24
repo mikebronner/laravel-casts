@@ -20,11 +20,11 @@
                 <option selected disabled value="">{{ $placeholder }}</option>
             @endif
 
-            @foreach ($selectOptions as $label => $value)
-                @if ($selectedValues->contains($value))
-                    <option value="{{ $value }}" selected>{{ $label }}</option>
+            @foreach ($selectOptions as $label => $optionaValue)
+                @if ($selectedValues->contains($optionaValue))
+                    <option value="{{ $optionaValue }}" selected>{{ $label }}</option>
                 @else
-                    <option value="{{ $value }}">{{ $label }}</option>
+                    <option value="{{ $optionaValue }}">{{ $label }}</option>
                 @endif
             @endforeach
         </select>

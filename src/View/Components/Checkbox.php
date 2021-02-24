@@ -23,10 +23,11 @@ class Checkbox extends BaseComponent
     ) {
         parent::__construct($name, $value, $label, $labelClasses, $groupClasses, $errorClasses, $helpClasses, $helpText);
 
-        // TODO: get model from Form component
         if (
             $isChecked
             || ($model && $model->$name === $value)
+            || (session("form-model") && session("form-model")->$name === $value)
+            || old($name) === $value
         ) {
             $this->checked = "checked";
         }
