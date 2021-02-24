@@ -19,12 +19,13 @@ class Select extends BaseComponent
         bool $isMultiSelect = false,
         string $labelClasses = "",
         string $groupClasses = "",
+        string $errorClasses = "",
         string $helpClasses = "",
         string $helpText = "",
         string $label = null,
         string $placeholder = ""
     ) {
-        parent::__construct($name, null, $label, $labelClasses, $groupClasses, $helpClasses, $helpText);
+        parent::__construct($name, null, $label, $labelClasses, $groupClasses, $errorClasses, $helpClasses, $helpText);
 
         $this->name = $name;
         $this->selectOptions = $options

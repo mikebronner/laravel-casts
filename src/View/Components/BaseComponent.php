@@ -15,16 +15,21 @@ abstract class BaseComponent extends Component
     public $label;
     public $labelClasses;
     public $groupClasses;
+    public $errorClasses;
 
     public function __construct(
         string $name,
         string $value = null,
         string $label = null,
         string $labelClasses = "",
-        string $groupClasses = ""
+        string $groupClasses = "",
+        string $errorClasses = "",
+        string $helpClasses = "",
+        string $helpText = ""
     ) {
         $this->errors = session("errors", new MessageBag)
-            ->get(Str::slug($name));
+            ->get($name);
+
         $this->name = $name;
         $this->value = $value
             ?: old($name)
@@ -34,6 +39,9 @@ abstract class BaseComponent extends Component
             ?? ucwords(str_replace("_id", " ", str_replace("_", " ", str_replace("[", " ", str_replace("]", " ", $name)))));
         $this->labelClasses = $labelClasses;
         $this->groupClasses = $groupClasses;
+        $this->errorClasses = $errorClasses;
+        $this->helpClasses = $helpClasses;
+        $this->helpText = $helpText;
 
         $this->handle();
     }

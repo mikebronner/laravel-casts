@@ -37,9 +37,9 @@ class Service extends ServiceProvider
 
     public function boot()
     {
-        if (! headers_sent()) {
-            $this->registerPreLoadHeader(url('/vendor/laravel-casts/app.js'));
-        }
+        // if (! headers_sent()) {
+            // $this->registerPreLoadHeader(url('/vendor/laravel-casts/app.js'));
+        // }
 
         $this->loadViewsFrom(__DIR__ . '/../../resources/views', 'laravel-forms');
         $this->publishes([
