@@ -15,16 +15,12 @@
 
     <div class="relative">
         <input
-            type="hidden"
-            name="{{ $name }}"
-            x-model="selectedDate"
-        />
-        <input
             x-model="datepickerValue"
             x-on:click="showDatepicker = !showDatepicker"
             x-on:keydown.escape="showDatepicker = false"
             x-on:keyup="updateSelectedDate"
             {{ $attributes->merge(["class" => "form-input"]) }}
+            name="{{ $name }}"
             type="date"
             value="{{ $value }}"
         >
