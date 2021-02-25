@@ -22,7 +22,6 @@
             {{ $attributes->merge(["class" => "form-input"]) }}
             name="{{ $name }}"
             type="date"
-            value="{{ $value }}"
         >
         <div
             class="mt-12 p-4 absolute top-0 left-0 bg-white rounded-lg shadow"
@@ -95,7 +94,7 @@
         return {
             showDatepicker: false,
             selectedDate: '',
-            datepickerValue: '',
+            datepickerValue: '{{ $value }}',
             month: '',
             year: '',
             no_of_days: [],
@@ -104,6 +103,14 @@
             months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
 
             initDate: function () {
+                if (this.datepickerValue.length > 0) {
+                    let dateParts = this.datepickerValue.split("/");
+                    this.month = parseInt(dateParts[0]) - 1;
+                    this.year = parseInt(dateParts[2]);
+
+                    return;
+                }
+
                 let today = new Date();
                 this.month = today.getMonth();
                 this.year = today.getFullYear();
