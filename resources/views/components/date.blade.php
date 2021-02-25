@@ -82,8 +82,9 @@
                             x-text="date"
                             class="text-sm leading-none leading-loose text-center transition duration-100 ease-in-out rounded-full cursor-pointer"
                             x-bind:class="{
-                                'bg-blue-500 text-white': isToday(date) == true,
-                                'text-gray-700 hover:bg-blue-200': isToday(date) == false,
+                                'bg-blue-600 text-blue-100': isSelected(date),
+                                'text-gray-700 hover:bg-blue-400 hover:text-blue-100': ! isToday(date),
+                                'bg-blue-100 text-blue-800': isToday(date),
                             }"
                         ></div>
                     </div>
@@ -149,10 +150,10 @@
 
                 if (
                     dateParts.length === 3
-                    && dateParts[2].length >= 2
+                    && dateParts[2].length === 4
                 ) {
                     this.year = parseInt(dateParts[2]);
-                    this.month = parseInt(dateParts[0]);
+                    this.month = parseInt(dateParts[0]) - 1;
                 }
             },
 
@@ -175,7 +176,15 @@
                 };
 
                 this.getNoOfDays();
-            }
+            },
+
+            isSelected: function (date) {
+                let testDate = new Date(this.year, this.month, date);
+                let dateParts = this.datepickerValue.split("/");
+                let selectedDate = new Date(parseInt(dateParts[2]), parseInt(dateParts[0]) - 1, parseInt(dateParts[1]));
+
+                return testDate.toString() == selectedDate.toString();
+            },
         };
     }
 </script>
