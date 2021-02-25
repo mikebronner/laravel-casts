@@ -15,13 +15,17 @@
 
     <div class="relative">
         <input
+            type="hidden"
+            name="{{ $name }}"
+            x-model="selectedDate"
+        />
+        <input
             x-model="datepickerValue"
             x-on:click="showDatepicker = !showDatepicker"
             x-on:keydown.escape="showDatepicker = false"
             x-on:keyup="updateSelectedDate"
             {{ $attributes->merge(["class" => "form-input"]) }}
             type="date"
-            name="{{ $name }}"
             value="{{ $value }}"
         >
         <div
@@ -93,6 +97,7 @@
     {
         return {
             showDatepicker: false,
+            selectedDate: '',
             datepickerValue: '',
             month: '',
             year: '',
@@ -115,14 +120,14 @@
             },
 
             getDateValue: function (date) {
-                let selectedDate = new Date(this.year, this.month + 1, date);
+                let selectedDate = new Date(this.year, this.month, date);
 
-                this.datepickerValue = ('0' + (selectedDate.getMonth())).slice(-2) + "/" + ('0' + selectedDate.getDate()).slice(-2) + "/" + selectedDate.getFullYear();
+                this.datepickerValue = ('0' + (selectedDate.getMonth() + 1)).slice(-2) + "/" + ('0' + selectedDate.getDate()).slice(-2) + "/" + selectedDate.getFullYear();
                 this.showDatepicker = false;
             },
 
             getNoOfDays: function () {
-                let daysInMonth = new Date(this.year, this.month + 1, 0).getDate();
+                let daysInMonth = new Date(this.year, this.month, 0).getDate();
                 let dayOfWeek = new Date(this.year, this.month).getDay();
                 let blankdaysArray = [];
                 let daysArray = [];
@@ -147,7 +152,7 @@
                     && dateParts[2].length >= 2
                 ) {
                     this.year = parseInt(dateParts[2]);
-                    this.month = parseInt(dateParts[0]) - 1;
+                    this.month = parseInt(dateParts[0]);
                 }
             },
 
