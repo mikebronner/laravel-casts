@@ -26,7 +26,8 @@ class Checkbox extends BaseComponent
         if (
             $isChecked
             || ($model && $model->$name === $value)
-            || (session("form-model") && session("form-model")->$name === $value)
+            || (session("form-model")
+                && (string) session("form-model")->$name === $value)
             || old($name) === $value
         ) {
             $this->checked = "checked";
