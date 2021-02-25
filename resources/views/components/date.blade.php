@@ -18,6 +18,7 @@
             x-model="datepickerValue"
             x-on:click="showDatepicker = !showDatepicker"
             x-on:keydown.escape="showDatepicker = false"
+            x-on:keyup="updateSelectedDate"
             {{ $attributes->merge(["class" => "form-input"]) }}
             type="date"
             name="{{ $name }}"
@@ -38,10 +39,7 @@
                     <button
                         type="button"
                         class="p-1 inline-flex transition duration-100 ease-in-out rounded-full cursor-pointer focus:outline-none focus:shadow-outline hover:bg-gray-200"
-                        x-on:click="if (month == 0) {
-                                year--;
-                                month = 12;
-                            } month--; getNoOfDays()"
+                        x-on:click="subMonth"
                     >
                         <svg class="w-6 h-6 inline-flex text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
@@ -50,12 +48,7 @@
                     <button
                         type="button"
                         class="p-1 inline-flex transition duration-100 ease-in-out rounded-full cursor-pointer focus:outline-none focus:shadow-outline hover:bg-gray-200"
-                        x-on:click="if (month == 11) {
-                                month = 0;
-                                year++;
-                            } else {
-                                month++;
-                            } getNoOfDays()"
+                        x-on:click="addMonth"
                     >
                         <svg class="w-6 h-6 inline-flex text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
@@ -75,9 +68,20 @@
                 <template x-for="blankday in blankdays">
                     <div style="width: 14.28%" class="p-1 text-sm text-center border border-transparent"></div>
                 </template>
-                <template x-for="(date, dateIndex) in no_of_days" :key="dateIndex">
+                <template
+                    x-for="date in no_of_days"
+                    :key="'date' + date"
+                >
                     <div style="width: 14.28%" class="mb-1 px-1">
-                        <div x-on:click="getDateValue(date)" x-text="date" class="text-sm leading-none leading-loose text-center transition duration-100 ease-in-out rounded-full cursor-pointer" :class="{'bg-blue-500 text-white': isToday(date) == true, 'text-gray-700 hover:bg-blue-200': isToday(date) == false }"></div>
+                        <div
+                            x-on:click="getDateValue(date);"
+                            x-text="date"
+                            class="text-sm leading-none leading-loose text-center transition duration-100 ease-in-out rounded-full cursor-pointer"
+                            x-bind:class="{
+                                'bg-blue-500 text-white': isToday(date) == true,
+                                'text-gray-700 hover:bg-blue-200': isToday(date) == false,
+                            }"
+                        ></div>
                     </div>
                 </template>
             </div>
@@ -101,9 +105,6 @@
                 let today = new Date();
                 this.month = today.getMonth();
                 this.year = today.getFullYear();
-                // this.datepickerValue = this.month + "/" + today.getDate() + "/" + this.year;
-                // new Date(this.year, this.month, today.getDate()).toDateString();
-                console.log(today.getMonth());
             },
 
             isToday: function (date) {
@@ -122,7 +123,6 @@
 
             getNoOfDays: function () {
                 let daysInMonth = new Date(this.year, this.month + 1, 0).getDate();
-                // find where to start calendar day of week
                 let dayOfWeek = new Date(this.year, this.month).getDay();
                 let blankdaysArray = [];
                 let daysArray = [];
@@ -137,7 +137,40 @@
 
                 this.blankdays = blankdaysArray;
                 this.no_of_days = daysArray;
+            },
+
+            updateSelectedDate: function () {
+                let dateParts = this.datepickerValue.split("/");
+
+                if (
+                    dateParts.length === 3
+                    && dateParts[2].length >= 2
+                ) {
+                    this.year = parseInt(dateParts[2]);
+                    this.month = parseInt(dateParts[0]) - 1;
+                }
+            },
+
+            subMonth: function () {
+                if (this.month == 0) {
+                    this.year--;
+                    this.month = 12;
+                }
+
+                this.month--;
+                this.getNoOfDays();
+            },
+
+            addMonth: function () {
+                if (this.month == 11) {
+                    this.month = 0;
+                    this.year++;
+                } else {
+                    this.month++;
+                };
+
+                this.getNoOfDays();
             }
-        }
+        };
     }
 </script>
