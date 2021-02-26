@@ -2,6 +2,7 @@
 
 namespace GeneaLabs\LaravelCasts\View\Components;
 
+use Exception;
 use Illuminate\Support\MessageBag;
 use Illuminate\Support\Str;
 use Illuminate\View\Component;
@@ -27,28 +28,27 @@ abstract class BaseComponent extends Component
         string $helpClasses = "",
         string $helpText = ""
     ) {
-        $this->errors = session("errors", new MessageBag)
-            ->get($name);
-
         $this->name = $name;
+        $nameInDotNotation = str_replace("[", ".", str_replace("]", "", $this->name));
         $this->value = $value
-            ?: old($name)
-            ?: optional(session("form-model"))->$name
+            ?: old($nameInDotNotation)
+            ?: data_get(session("form-model"), $nameInDotNotation)
             ?: "";
         $this->label = $label
-            ?? ucwords(str_replace("_id", " ", str_replace("_", " ", str_replace("[", " ", str_replace("]", " ", $name)))));
+            ?? ucwords(str_replace("_id", " ", str_replace("_", " ", str_replace(".", " ", $this->name))));
+        $this->errors = session("errors", new MessageBag)
+            ->get($nameInDotNotation);
+        $this->errors = collect($this->errors)
+            ->map(function ($errorMessage) {
+                return str_replace($this->name, "'{$this->label}'", $errorMessage);
+            })
+            ->toArray();
+
         $this->labelClasses = $labelClasses;
         $this->groupClasses = $groupClasses;
         $this->errorClasses = $errorClasses;
         $this->helpClasses = $helpClasses;
         $this->helpText = $helpText;
-
-        $this->handle();
-    }
-
-    public function handle() : void
-    {
-        //
     }
 
     public function render()
