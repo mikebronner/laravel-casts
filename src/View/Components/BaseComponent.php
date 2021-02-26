@@ -29,7 +29,7 @@ abstract class BaseComponent extends Component
         string $helpText = ""
     ) {
         $this->name = $name;
-        $nameInDotNotation = str_replace("[", ".", str_replace("]", "", $this->name));
+        $nameInDotNotation = trim(str_replace("[", ".", str_replace("]", "", $this->name)), ".");
         $this->value = $value
             ?: old($nameInDotNotation)
             ?: data_get(session("form-model"), $nameInDotNotation)
