@@ -29,7 +29,7 @@
         <button
             x-on:click="toggle($dispatch)"
             type="button"
-            class="w-10 h-5 relative inline-flex items-center justify-center flex-shrink-0 rounded-full cursor-pointer group focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            class="w-10 h-5 relative inline-flex items-center justify-center flex-shrink-0 rounded-full cursor-pointer group focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
             aria-pressed="false"
         >
             <span
@@ -41,9 +41,9 @@
                 aria-hidden="true"
                 class="w-full h-full absolute bg-transparent rounded-md pointer-events-none"
             ></span>
-            <!-- Enabled: "bg-indigo-600", Not Enabled: "bg-gray-200" -->
+            <!-- Enabled: "bg-blue-600", Not Enabled: "bg-gray-200" -->
             <span
-                x-bind:class="{ 'bg-indigo-600': selected, 'bg-gray-200': ! selected }"
+                x-bind:class="{ 'bg-blue-600': selected, 'bg-gray-200': ! selected }"
                 aria-hidden="true"
                 class="mx-auto h-4 absolute transition-colors duration-200 ease-in-out rounded-full pointer-events-none w-9"
             ></span>
