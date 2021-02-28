@@ -24,7 +24,7 @@
             type="date"
         >
         <div
-            class="mt-12 p-4 absolute top-0 left-0 bg-white rounded-lg shadow"
+            class="mt-12 p-4 absolute top-0 left-0 z-10 bg-white rounded-lg shadow"
             style="width: 17rem"
             x-show.transition="showDatepicker"
             x-on:click.away="showDatepicker = false"
