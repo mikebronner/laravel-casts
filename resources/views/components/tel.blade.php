@@ -1,6 +1,7 @@
 <x-form-group
     :class="$groupClasses"
     :errors="$errors"
+    :helpText="$helpText"
 >
     <input
         type="tel"

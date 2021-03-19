@@ -10,8 +10,9 @@ use ReflectionClass;
 
 abstract class BaseComponent extends Component
 {
-    public $errors;
-    public $name;
+    public array $errors = [];
+    public string $helpText = "";
+    public string $name = "";
     public $value;
     public $label;
     public $labelClasses;
@@ -35,7 +36,7 @@ abstract class BaseComponent extends Component
             ?: data_get(session("form-model"), $nameInDotNotation)
             ?: "";
         $this->label = $label
-            ?? ucwords(str_replace("_id", " ", str_replace("_", " ", str_replace(".", " ", $this->name))));
+            ?? trim(ucwords(str_replace("id", " ", str_replace("_", " ", str_replace(".", " ", $this->name)))));
         $this->errors = session("errors", new MessageBag)
             ->get($nameInDotNotation);
         $this->errors = collect($this->errors)

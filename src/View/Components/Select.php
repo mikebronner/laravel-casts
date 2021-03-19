@@ -6,11 +6,11 @@ use Illuminate\Support\Collection;
 
 class Select extends BaseComponent
 {
-    public $isMultiSelect;
-    public $name;
-    public $selectOptions;
-    public $placeholder;
-    public $selectedValues;
+    public bool $isMultiSelect;
+    public string $name;
+    public Collection $selectOptions;
+    public string $placeholder;
+    public Collection $selectedValues;
 
     public function __construct(
         string $name,

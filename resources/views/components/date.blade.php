@@ -1,6 +1,7 @@
 <x-form-group
     :class="$groupClasses"
     :errors="$errors"
+    :helpText="$helpText"
 >
     @if ($label)
         <x-form-label

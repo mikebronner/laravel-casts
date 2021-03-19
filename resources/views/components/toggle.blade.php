@@ -2,6 +2,7 @@
     {{ $attributes->only(['wire:model', 'wire:change']) }}
     :class="$groupClasses"
     :errors="$errors"
+    :helpText="$helpText"
 >
     @if ($label)
         <x-form-label

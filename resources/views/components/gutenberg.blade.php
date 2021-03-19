@@ -3,6 +3,7 @@
     x-init="Laraberg.init('{{ $name }}');"
     :class="$groupClasses"
     :errors="$errors"
+    :helpText="$helpText"
 >
     @if ($label)
         <x-form-label

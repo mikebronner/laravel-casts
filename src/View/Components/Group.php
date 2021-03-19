@@ -3,18 +3,22 @@
 namespace GeneaLabs\LaravelCasts\View\Components;
 
 use Illuminate\View\Component;
+use Illuminate\View\View;
 
 class Group extends Component
 {
-    public $errors;
+    public array $errors;
+    public string $helpText;
 
     public function __construct(
-        array $errors = []
+        array $errors = [],
+        string $helpText = "",
     ) {
         $this->errors = $errors;
+        $this->helpText = $helpText;
     }
 
-    public function render()
+    public function render(): View
     {
         return view("laravel-forms::components.group");
     }
