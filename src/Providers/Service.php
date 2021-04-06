@@ -1,4 +1,6 @@
-<?php namespace GeneaLabs\LaravelCasts\Providers;
+<?php
+
+namespace GeneaLabs\LaravelCasts\Providers;
 
 use Blade;
 use Collective\Html\HtmlBuilder;
@@ -104,6 +106,7 @@ class Service extends ServiceProvider
                 Datetime::class,
                 Email::class,
                 Errors::class,
+                File::class,
                 Group::class,
                 Gutenberg::class,
                 Hidden::class,

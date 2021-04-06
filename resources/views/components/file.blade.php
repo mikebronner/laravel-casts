@@ -4,9 +4,9 @@
     :helpText="$helpText"
 >
     <input
+        {{ $attributes }}
         type="file"
-        :name="$name"
-        :value="$value"
-        {!! $fieldAttributes !!}
+        name="{{ $name }}"
+        value="{{ $value }}"
     >
 </x-form-group>
