@@ -15,6 +15,7 @@ use GeneaLabs\LaravelCasts\View\Components\Date;
 use GeneaLabs\LaravelCasts\View\Components\Datetime;
 use GeneaLabs\LaravelCasts\View\Components\Email;
 use GeneaLabs\LaravelCasts\View\Components\Errors;
+use GeneaLabs\LaravelCasts\View\Components\File;
 use GeneaLabs\LaravelCasts\View\Components\Form;
 use GeneaLabs\LaravelCasts\View\Components\Group;
 use GeneaLabs\LaravelCasts\View\Components\Gutenberg;
