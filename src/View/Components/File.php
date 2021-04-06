@@ -2,7 +2,7 @@
 
 namespace GeneaLabs\LaravelCasts\View\Components;
 
-class File extends BaseComponent
+class File extends Input
 {
     //
 }

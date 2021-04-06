@@ -1,11 +1,20 @@
 <x-form-group
-    :class="$groupClasses"
+    class="{{ $groupClasses }}"
     :errors="$errors"
     :helpText="$helpText"
 >
+    @if ($label)
+        <x-form-label
+            :field="$name"
+            :value="$label"
+            class="{{ $labelClasses }}"
+        />
+    @endif
+
     <input
         {{ $attributes }}
         type="file"
+        id="{{ $name }}"
         name="{{ $name }}"
         value="{{ $value }}"
     >
