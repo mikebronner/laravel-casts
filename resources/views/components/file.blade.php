@@ -1,5 +1,5 @@
 <x-form-group
-    class="{{ $groupClasses }}"
+    :class="$groupClasses"
     :errors="$errors"
     :helpText="$helpText"
 >
@@ -7,12 +7,12 @@
         <x-form-label
             :field="$name"
             :value="$label"
-            class="{{ $labelClasses }}"
+            :class="$labelClasses"
         />
     @endif
 
     <input
-        {{ $attributes }}
+        {{ $attributes->merge(["class" => "form-input"]) }}
         type="file"
         id="{{ $name }}"
         name="{{ $name }}"
