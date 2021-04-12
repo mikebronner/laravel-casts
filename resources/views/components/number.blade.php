@@ -1,5 +1,5 @@
 <x-form-group
-    {{ $attributes->only(["x-show", "x-if"]) }}
+    {{ $attributes->only(['x-show', 'x-if']) }}
     :class="$groupClasses"
     :errors="$errors"
     :helpText="$helpText"
@@ -13,7 +13,7 @@
     @endif
 
     <input
-        {{ $attributes->merge(["class" => "form-input"])->except(["x-show", "x-if"]) }}
+        {{ $attributes->merge(["class" => "form-input"])->except(['x-show', 'x-if']) }}
         type="number"
         name="{{ $name }}"
         value="{{ $value }}"

@@ -1,5 +1,4 @@
 <x-form-group
-    {{ $attributes->only(["x-show", "x-if"]) }}
     :class="$groupClasses"
     :errors="$errors"
     :helpText="$helpText"
@@ -15,7 +14,7 @@
 
     @if (! $isMultiSelect)
         <select
-            {{ $attributes->merge(["class" => "pr-8 form-select"])->except(["x-show", "x-if"]) }}
+            {{ $attributes->merge(["class" => "pr-8 form-select"])->except(['x-show', 'x-if']) }}
             name="{{ $name }}"
         >
             @if (! $attributes->get("multiple"))
