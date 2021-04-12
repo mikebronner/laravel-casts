@@ -1,5 +1,5 @@
 <x-form-group
-    {{ $attributes->only(["x-show", "x-if", 'wire:model', 'wire:change']) }}
+    {{ $attributes->only(['x-show', 'x-if', 'wire:model', 'wire:change']) }}
     :class="$groupClasses"
     :errors="$errors"
     :helpText="$helpText"
