@@ -1,4 +1,5 @@
 <x-form-group
+    {{ $attributes->only(["x-show", "x-if"]) }}
     :class="$groupClasses"
     :errors="$errors"
     :helpText="$helpText"
@@ -12,7 +13,7 @@
     @endif
 
     <textarea
+        {{ $attributes->except(["x-show", "x-if"]) }}
         name="{{ $name }}"
-        {{ $attributes }}
     >{{ $value }}</textarea>
 </x-form-group>

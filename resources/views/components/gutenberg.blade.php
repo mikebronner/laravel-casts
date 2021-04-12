@@ -1,4 +1,5 @@
 <x-form-group
+    {{ $attributes->only(["x-show", "x-if"]) }}
     x-data="{}"
     x-init="Laraberg.init('{{ $name }}');"
     :class="$groupClasses"
@@ -15,8 +16,8 @@
 
     <div wire:ignore>
         <x-form-textarea
+            {{ $attributes->except(["x-show", "x-if"]) }}
             x-on:change="$dispatch('input', $event.target.value)"
-            {{ $attributes }}
             :id="$name"
             :name="$name"
             :value="$value"

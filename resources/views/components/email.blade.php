@@ -1,4 +1,5 @@
 <x-form-group
+    {{ $attributes->only(["x-show", "x-if"]) }}
     class="{{ $groupClasses }}"
     :errors="$errors"
     :helpText="$helpText"
@@ -12,10 +13,10 @@
     @endif
 
     <input
+        {{ $attributes->except(["x-show", "x-if"]) }}
         type="email"
         id="{{ $name }}"
         name="{{ $name }}"
         value="{{ $value }}"
-        {{ $attributes }}
     >
 </x-form-group>
