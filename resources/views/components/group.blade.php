@@ -2,6 +2,13 @@
     {{ $attributes }}
 >
     {{ $slot }}
+
+    @error($name)
+        <p class="mt-1 text-red-600 text-sm">
+            {{ $message }}
+        </p>
+    @enderror
+
     <x-form-errors
         :errorData="$errorData"
     />
