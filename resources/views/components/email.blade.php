@@ -3,6 +3,7 @@
     class="{{ $groupClasses }}"
     :errors="$errorData"
     :helpText="$helpText"
+    :name="$name"
 >
     @if ($label)
         <x-form-label

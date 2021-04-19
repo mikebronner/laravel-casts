@@ -3,6 +3,7 @@
     :class="$groupClasses"
     :errors="$errorData"
     :helpText="$helpText"
+    :name="$name"
 >
     <input
         {{ $attributes->except(['x-show', 'x-if']) }}
