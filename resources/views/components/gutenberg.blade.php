@@ -3,7 +3,7 @@
     x-data="{}"
     x-init="Laraberg.init('{{ $name }}');"
     :class="$groupClasses"
-    :errors="$errorData"
+    :errorData="$errorData"
     :helpText="$helpText"
     :name="$name"
 >
