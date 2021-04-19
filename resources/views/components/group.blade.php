@@ -3,7 +3,7 @@
 >
     {{ $slot }}
     <x-form-errors
-        :errors="$errorData"
+        :errorData="$errorData"
     />
     <span
         class="text-sm italic text-gray-400"
