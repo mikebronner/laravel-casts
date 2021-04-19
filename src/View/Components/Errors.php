@@ -11,7 +11,7 @@ class Errors extends Component
     public function __construct(
         array $errorData = []
     ) {
-        $this->errors = $errorData;
+        $this->errorData = $errorData;
     }
 
     public function render()

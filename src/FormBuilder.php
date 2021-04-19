@@ -64,7 +64,7 @@ class FormBuilder extends Form
     {
         $this->framework = $options['framework']
             ?? config('genealabs-laravel-casts.framework');
-        $this->errors = $this->session->get('customErrors', $this->session->get('errors', new MessageBag));
+        $this->errorData = $this->session->get('customErrors', $this->session->get('errors', new MessageBag));
         $this->isHorizontal = false;
         $this->isInline = false;
         $this->isHorizontal = (strpos($options['class'] ?? '', 'form-horizontal') !== false);

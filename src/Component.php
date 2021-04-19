@@ -45,7 +45,7 @@ abstract class Component extends Model
         }
 
         $this->attributes['options'] = $options;
-        $this->errors = app('form')->errors ?: new MessageBag;
+        $this->errorData = app('form')->errorData ?: new MessageBag;
     }
 
     protected function renderBaseControl() : string
@@ -82,7 +82,7 @@ abstract class Component extends Model
             app('form')->isHorizontal,
             app('form')->isInline,
             app('form')->isInButtonGroup,
-            $this->errors,
+            $this->errorData,
         ];
 
         return call_user_func_array($method, $parameters);
@@ -95,7 +95,7 @@ abstract class Component extends Model
 
     public function getHasErrorAttribute() : bool
     {
-        return $this->errors
+        return $this->errorData
             ->filter(function ($name) {
                 return $this->name === $name;
             })

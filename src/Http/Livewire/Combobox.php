@@ -112,10 +112,10 @@ class Combobox extends Component
             }
         }
 
-        if ($this->errors["errors"] ?? false) {
+        if ($this->errorData["errors"] ?? false) {
             $messageBag = new MessageBag();
 
-            foreach ($this->errors["errors"] ?? [] as $key => $message) {
+            foreach ($this->errorData["errors"] ?? [] as $key => $message) {
                 $messageBag->add($key, $message[0]);
             }
 
@@ -173,7 +173,7 @@ class Combobox extends Component
             return;
         }
 
-        $this->errors = $errorData;
+        $this->errorData = $errorData;
     }
 
     public function updateSelectedItem(array $data = [], string $id) : void

@@ -14,7 +14,7 @@ class Group extends Component
         array $errorData = [],
         string $helpText = "",
     ) {
-        $this->errors = $errorData;
+        $this->errorData = $errorData;
         $this->helpText = $helpText;
     }
 

@@ -37,9 +37,9 @@ abstract class BaseComponent extends Component
             ?: "";
         $this->label = $label
             ?? trim(ucwords(str_replace("id", " ", str_replace("_", " ", str_replace(".", " ", $this->name)))));
-        $this->errors = session("errors", new MessageBag)
+        $this->errorData = session("errors", new MessageBag)
             ->get($nameInDotNotation);
-        $this->errors = collect($this->errors)
+        $this->errorData = collect($this->errorData)
             ->map(function ($errorMessage) {
                 return str_replace($this->name, "'{$this->label}'", $errorMessage);
             })
