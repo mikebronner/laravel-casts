@@ -10,7 +10,7 @@ use ReflectionClass;
 
 abstract class BaseComponent extends Component
 {
-    public array $errors = [];
+    public array $errorData = [];
     public string $helpText = "";
     public string $name = "";
     public $value;

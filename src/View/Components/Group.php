@@ -7,14 +7,14 @@ use Illuminate\View\View;
 
 class Group extends Component
 {
-    public array $errors;
+    public array $errorData;
     public string $helpText;
 
     public function __construct(
-        array $errors = [],
+        array $errorData = [],
         string $helpText = "",
     ) {
-        $this->errors = $errors;
+        $this->errors = $errorData;
         $this->helpText = $helpText;
     }
 

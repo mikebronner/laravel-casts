@@ -12,7 +12,7 @@ class Combobox extends Component
     public $createFormIsVisible = false;
     public $createFormUrl;
     public $createFormView;
-    public $errors = [];
+    public $errorData = [];
     public $fieldName;
     public $key;
     public $label;
@@ -167,13 +167,13 @@ class Combobox extends Component
         $this->search = "";
     }
 
-    public function setErrors(array $errors = [], string $id) : void
+    public function setErrors(array $errorData = [], string $id) : void
     {
         if ($id !== $this->key) {
             return;
         }
 
-        $this->errors = $errors;
+        $this->errors = $errorData;
     }
 
     public function updateSelectedItem(array $data = [], string $id) : void

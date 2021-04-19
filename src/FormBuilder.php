@@ -17,7 +17,7 @@ class FormBuilder extends Form
     public $isHorizontal = false;
     public $isInButtonGroup = false;
     public $isInline = false;
-    public $errors;
+    public $errorData;
     public $framework = 'tailwind';
     public $labelWidth = 3;
     public $fieldWidth = 9;

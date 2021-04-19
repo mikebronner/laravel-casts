@@ -1,7 +1,7 @@
 <x-form-group
     {{ $attributes->only(['x-show', 'x-if', 'wire:model', 'wire:change']) }}
     :class="$groupClasses"
-    :errors="$errors"
+    :errors="$errorData"
     :helpText="$helpText"
 >
     @if ($label)

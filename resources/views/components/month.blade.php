@@ -1,7 +1,7 @@
 <x-form-group
     {{ $attributes->only(['x-show', 'x-if']) }}
     :class="$groupClasses"
-    :errors="$errors"
+    :errors="$errorData"
     :helpText="$helpText"
 >
     <input

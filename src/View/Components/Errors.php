@@ -6,12 +6,12 @@ use Illuminate\View\Component;
 
 class Errors extends Component
 {
-    public $errors;
+    public $errorData;
 
     public function __construct(
-        array $errors = []
+        array $errorData = []
     ) {
-        $this->errors = $errors;
+        $this->errors = $errorData;
     }
 
     public function render()

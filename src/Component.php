@@ -7,7 +7,7 @@ use Jenssegers\Model\Model;
 abstract class Component extends Model
 {
     protected $classes;
-    protected $errors;
+    protected $errorData;
     protected $excludedKeys;
     protected $excludedClasses;
     protected $fieldWidth;

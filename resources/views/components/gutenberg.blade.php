@@ -3,7 +3,7 @@
     x-data="{}"
     x-init="Laraberg.init('{{ $name }}');"
     :class="$groupClasses"
-    :errors="$errors"
+    :errors="$errorData"
     :helpText="$helpText"
 >
     @if ($label)
