@@ -1,9 +1,6 @@
 <x-form-group
     {{ $attributes->only(['x-show', 'x-if', 'wire:model', 'wire:change']) }}
     :class="$groupClasses"
-    :errorData="$errorData"
-    :helpText="$helpText"
-    :name="$name"
 >
     @if ($label)
         <x-form-label
@@ -57,4 +54,16 @@
             ></span>
         </button>
     </div>
+
+    @error($nameInDotNotation)
+        <p class="mt-1 text-red-600 text-sm">
+            {{ str_replace($nameInDotNotation, "'{$label}'", $message) }}
+        </p>
+    @enderror
+
+    <span
+        class="text-sm italic text-gray-400"
+    >
+        {{ $helpText }}
+    </span>
 </x-form-group>

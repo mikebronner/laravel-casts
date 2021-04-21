@@ -13,6 +13,7 @@ abstract class BaseComponent extends Component
     public array $errorData = [];
     public string $helpText = "";
     public string $name = "";
+    public string $nameInDotNotation = "";
     public $value;
     public $label;
     public $labelClasses;
@@ -30,18 +31,22 @@ abstract class BaseComponent extends Component
         string $helpText = ""
     ) {
         $this->name = $name;
-        $nameInDotNotation = trim(str_replace("[", ".", str_replace("]", "", $this->name)), ".");
+        $this->nameInDotNotation = trim(str_replace("[", ".", str_replace("]", "", $this->name)), ".");
         $this->value = $value
-            ?: old($nameInDotNotation)
-            ?: data_get(session("form-model"), $nameInDotNotation)
+            ?: old($this->nameInDotNotation)
+            ?: data_get(session("form-model"), $this->nameInDotNotation)
             ?: "";
         $this->label = $label
             ?? trim(ucwords(str_replace("id", " ", str_replace("_", " ", str_replace(".", " ", $this->name)))));
         $this->errorData = session("errors", new MessageBag)
-            ->get($nameInDotNotation);
+            ->get($this->nameInDotNotation);
         $this->errorData = collect($this->errorData)
             ->map(function ($errorMessage) {
-                return str_replace($this->name, "'{$this->label}'", $errorMessage);
+                return str_replace(
+                    $this->nameInDotNotation,
+                    "'{$this->label}'",
+                    $errorMessage,
+                );
             })
             ->toArray();
 
