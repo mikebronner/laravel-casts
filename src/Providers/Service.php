@@ -24,6 +24,7 @@ use GeneaLabs\LaravelCasts\View\Components\Label;
 use GeneaLabs\LaravelCasts\View\Components\Number;
 use GeneaLabs\LaravelCasts\View\Components\Password;
 use GeneaLabs\LaravelCasts\View\Components\Radio;
+use GeneaLabs\LaravelCasts\View\Components\Range;
 use GeneaLabs\LaravelCasts\View\Components\Select;
 use GeneaLabs\LaravelCasts\View\Components\Submit;
 use GeneaLabs\LaravelCasts\View\Components\Text;
@@ -115,6 +116,7 @@ class Service extends ServiceProvider
                 Number::class,
                 Password::class,
                 Radio::class,
+                Range::class,
                 Select::class,
                 Submit::class,
                 Toggle::class,

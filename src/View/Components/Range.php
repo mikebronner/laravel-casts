@@ -4,5 +4,31 @@ namespace GeneaLabs\LaravelCasts\View\Components;
 
 class Range extends BaseComponent
 {
-    //
+    public int $minimum;
+    public int $maximum;
+    public int $step;
+
+    public function __construct(
+        string $name,
+        string $value = null,
+        string $label = null,
+        string $labelClasses = "",
+        string $groupClasses = "",
+        string $errorClasses = "",
+        string $helpClasses = "",
+        string $helpText = "",
+        int $maximum = 10,
+        int $minimum = 1,
+        int $step = 1,
+    ) {
+        parent::__construct($name, $value, $label, $labelClasses, $groupClasses, $errorClasses, $helpClasses, $helpText);
+
+        if (! $this->value) {
+            $this->value = $this->minimum;
+        }
+
+        $this->minimum = $minimum;
+        $this->maximum = $maximum;
+        $this->step = $step;
+    }
 }
