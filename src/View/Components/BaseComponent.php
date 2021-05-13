@@ -2,7 +2,6 @@
 
 namespace GeneaLabs\LaravelCasts\View\Components;
 
-use Exception;
 use Illuminate\Support\MessageBag;
 use Illuminate\Support\Str;
 use Illuminate\View\Component;
@@ -19,6 +18,7 @@ abstract class BaseComponent extends Component
     public $labelClasses;
     public $groupClasses;
     public $errorClasses;
+    public $uniqueId;
 
     public function __construct(
         string $name,
@@ -30,6 +30,7 @@ abstract class BaseComponent extends Component
         string $helpClasses = "",
         string $helpText = ""
     ) {
+        $this->uniqueId = Str::random(16);
         $this->name = $name;
         $this->nameInDotNotation = trim(str_replace("[", ".", str_replace("]", "", $this->name)), ".");
         $this->value = $value

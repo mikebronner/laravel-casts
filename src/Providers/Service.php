@@ -11,6 +11,7 @@ use GeneaLabs\LaravelCasts\Http\Livewire\Combobox;
 use GeneaLabs\LaravelCasts\Http\Middleware\AssetInjection;
 use GeneaLabs\LaravelCasts\View\Components\Button;
 use GeneaLabs\LaravelCasts\View\Components\Checkbox;
+use GeneaLabs\LaravelCasts\View\Components\Combobox as LaravelCastsCombobox;
 use GeneaLabs\LaravelCasts\View\Components\Date;
 use GeneaLabs\LaravelCasts\View\Components\Datetime;
 use GeneaLabs\LaravelCasts\View\Components\Email;
@@ -34,6 +35,7 @@ use GeneaLabs\LaravelCasts\View\Components\Toggle;
 use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Support\Facades\Blade as FacadesBlade;
 use Illuminate\Support\ServiceProvider;
+use Livewire;
 
 class Service extends ServiceProvider
 {
@@ -96,7 +98,7 @@ class Service extends ServiceProvider
         // $this->registerBladeDirective('url');
         // $this->registerBladeDirective('week');
         // $this->registerComponents();
-        // $this->registerLivewireComponents();
+        $this->registerLivewireComponents();
 
         FacadesBlade::component('form', Form::class);
         $this->loadViewComponentsAs(
@@ -104,6 +106,7 @@ class Service extends ServiceProvider
             [
                 Button::class,
                 Checkbox::class,
+                LaravelCastsCombobox::class,
                 Date::class,
                 Datetime::class,
                 Email::class,
@@ -221,10 +224,9 @@ class Service extends ServiceProvider
 
     private function registerLivewireComponents() : void
     {
-        app("livewire")
-            ->component(
-                "genealabs-laravel-casts::combobox",
-                Combobox::class
-            );
+        Livewire::component(
+            "laravel-forms::combobox",
+            Combobox::class
+        );
     }
 }

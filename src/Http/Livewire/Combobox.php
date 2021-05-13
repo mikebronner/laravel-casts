@@ -4,10 +4,12 @@ namespace GeneaLabs\LaravelCasts\Http\Livewire;
 
 use Illuminate\Support\MessageBag;
 use Illuminate\Support\Str;
+use Illuminate\View\View;
 use Livewire\Component;
 
 class Combobox extends Component
 {
+    public string $attributes = "";
     public $callback;
     public $createFormIsVisible = false;
     public $createFormUrl;
@@ -26,7 +28,7 @@ class Combobox extends Component
     public $selectedValue;
     public $valueField;
 
-    protected function getListeners()
+    protected function getListeners(): array
     {
         return [
             "setErrors{$this->key}" => "setErrors",
@@ -35,6 +37,7 @@ class Combobox extends Component
     }
 
     public function mount(
+        array $componentAttributes = [],
         string $createFormView = "",
         string $createFormUrl = "",
         string $fieldName = "",
@@ -48,7 +51,8 @@ class Combobox extends Component
         string $valueField = "id",
         string $callback = "",
         $value = null
-    ) : void {
+    ): void {
+        $this->attributes = $this->parseAttributes($componentAttributes);
         $this->key = Str::random();
         $this->createFormView = $createFormView ?: "";
         $this->createFormUrl = $createFormUrl ?: "";
@@ -79,7 +83,7 @@ class Combobox extends Component
         }
     }
 
-    public function render()
+    public function render(): View
     {
         $results = collect();
 
@@ -122,14 +126,14 @@ class Combobox extends Component
             session(["customErrors" => $messageBag]);
         }
 
-        return view('genealabs-laravel-casts::livewire.combobox')
+        return view('laravel-forms::livewire.combobox')
             ->with([
                 "results" => $results,
                 "id" => $this->id,
             ]);
     }
 
-    public function resetSearch(string $id) : void
+    public function resetSearch(string $id): void
     {
         if ($id !== $this->key) {
             return;
@@ -138,7 +142,7 @@ class Combobox extends Component
         $this->selectedValue = null;
     }
 
-    public function select(string $value, string $search, string $id) : void
+    public function select(string $value, string $search, string $id): void
     {
         if ($id !== $this->key) {
             return;
@@ -146,9 +150,10 @@ class Combobox extends Component
 
         $this->search = $search;
         $this->selectedValue = $value;
+        $this->dispatchBrowserEvent("input", $this->selectedValue);
     }
 
-    public function showCreateForm(string $id) : void
+    public function showCreateForm(string $id): void
     {
         if ($id !== $this->key) {
             return;
@@ -157,7 +162,7 @@ class Combobox extends Component
         $this->createFormIsVisible = true;
     }
 
-    public function cancelForm(string $id) : void
+    public function cancelForm(string $id): void
     {
         if ($id !== $this->key) {
             return;
@@ -167,7 +172,7 @@ class Combobox extends Component
         $this->search = "";
     }
 
-    public function setErrors(array $errorData = [], string $id) : void
+    public function setErrors(array $errorData = [], string $id = ""): void
     {
         if ($id !== $this->key) {
             return;
@@ -176,7 +181,7 @@ class Combobox extends Component
         $this->errorData = $errorData;
     }
 
-    public function updateSelectedItem(array $data = [], string $id) : void
+    public function updateSelectedItem(array $data = [], string $id): void
     {
         if ($id !== $this->key) {
             return;
@@ -185,5 +190,28 @@ class Combobox extends Component
         $this->selectedValue = $data[$this->valueField];
         $this->search = $data[$this->labelField];
         $this->createFormIsVisible = false;
+    }
+
+    public function parseAttributes(array $componentAttributes): string
+    {
+        $attributes = "";
+
+        foreach ($componentAttributes as $key => $value) {
+            if ($value === false || is_null($value)) {
+                continue;
+            }
+
+            if ($value === true) {
+                $value = $key;
+            }
+
+            $attributes .= ' '
+                . $key
+                . '="'
+                . str_replace('"', '\\"', trim($value))
+                . '"';
+        }
+// dd($attributes, $componentAttributes);
+        return trim($attributes);
     }
 }
