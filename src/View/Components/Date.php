@@ -23,6 +23,6 @@ class Date extends BaseComponent
             $this->value = (new Carbon)->parse($value);
         }
 
-        $this->value = $this->value->format("m/d/Y");
+        $this->value = $this->value->format("Y-m-d");
     }
 }

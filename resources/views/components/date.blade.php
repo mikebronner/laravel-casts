@@ -14,6 +14,7 @@
         {{ $attributes->merge(["class" => "form-input"])->except(['x-show', 'x-if']) }}
         name="{{ $name }}"
         type="date"
+        value="{{ $value }}"
     >
 
     @error($nameInDotNotation)
