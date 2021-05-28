@@ -181,7 +181,7 @@ class Combobox extends Component
         $this->errorData = $errorData;
     }
 
-    public function updateSelectedItem(array $data = [], string $id): void
+    public function updateSelectedItem(array $data = [], string $id = ""): void
     {
         if ($id !== $this->key) {
             return;
