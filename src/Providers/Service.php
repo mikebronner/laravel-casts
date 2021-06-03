@@ -22,6 +22,7 @@ use GeneaLabs\LaravelCasts\View\Components\Group;
 use GeneaLabs\LaravelCasts\View\Components\Gutenberg;
 use GeneaLabs\LaravelCasts\View\Components\Hidden;
 use GeneaLabs\LaravelCasts\View\Components\Label;
+use GeneaLabs\LaravelCasts\View\Components\Money;
 use GeneaLabs\LaravelCasts\View\Components\Number;
 use GeneaLabs\LaravelCasts\View\Components\Password;
 use GeneaLabs\LaravelCasts\View\Components\Radio;
@@ -116,6 +117,7 @@ class Service extends ServiceProvider
                 Gutenberg::class,
                 Hidden::class,
                 Label::class,
+                Money::class,
                 Number::class,
                 Password::class,
                 Radio::class,
