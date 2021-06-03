@@ -23,7 +23,6 @@ class Money extends Input
         ?string $helpText = "",
         ?string $label = null,
     ) {
-        dump($decimals, $value, $value / 100, number_format($value / 100, $decimals), (string) round($value / 100, $decimals));
         $this->code = $code;
         $this->decimals = $decimals;
         $this->symbol = $symbol;
