@@ -1,5 +1,5 @@
 <x-form-group
-    {{ $attributes->only(['x-show', 'x-if', 'wire:model', 'wire:change']) }}
+    {{ $attributes->only(['x-show', 'x-if', 'wire:model']) }}
     :class="$groupClasses"
 >
     @if ($label)
@@ -20,11 +20,12 @@
             }
         }"
     >
-    <input
-        type="hidden"
-        name="{{ $name }}"
-        x-bind:value="selected == true ? '{{ $value }}' : ''"
-    >
+        <input
+            {{ $attributes->except(['x-show', 'x-if', 'wire:model']) }}
+            type="hidden"
+            name="{{ $name }}"
+            x-bind:value="selected == true ? '{{ $value }}' : ''"
+        >
         <button
             x-on:click="toggle($dispatch)"
             type="button"
