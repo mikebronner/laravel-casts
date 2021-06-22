@@ -30,7 +30,7 @@
                     class="editor"
                     id="{{ $name }}"
                 >
-                    {{ $value }}
+                    {!! $value !!}
                 </div>
             </div>
         </div>
