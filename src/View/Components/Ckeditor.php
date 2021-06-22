@@ -2,7 +2,7 @@
 
 namespace GeneaLabs\LaravelCasts\View\Components;
 
-class Ckeditor extends TextArea
+class Ckeditor extends Textarea
 {
     //
 }
