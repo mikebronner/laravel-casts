@@ -11,6 +11,7 @@ use GeneaLabs\LaravelCasts\Http\Livewire\Combobox;
 use GeneaLabs\LaravelCasts\Http\Middleware\AssetInjection;
 use GeneaLabs\LaravelCasts\View\Components\Button;
 use GeneaLabs\LaravelCasts\View\Components\Checkbox;
+use GeneaLabs\LaravelCasts\View\Components\CkEditor;
 use GeneaLabs\LaravelCasts\View\Components\Combobox as LaravelCastsCombobox;
 use GeneaLabs\LaravelCasts\View\Components\Date;
 use GeneaLabs\LaravelCasts\View\Components\Datetime;
@@ -108,6 +109,7 @@ class Service extends ServiceProvider
                 Button::class,
                 Checkbox::class,
                 LaravelCastsCombobox::class,
+                Ckeditor::class,
                 Date::class,
                 Datetime::class,
                 Email::class,
