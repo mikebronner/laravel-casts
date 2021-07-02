@@ -14,17 +14,17 @@
         {{ $attributes->except(['x-show', 'x-if', 'x-model', 'x-ref'])->merge(["class" => ""]) }}
         x-data="ckeditor()"
         x-init="init($dispatch)"
-        class="document-editor relative border border-gray-300 rounded-lg flex flex-col"
+        class="relative flex flex-col border border-gray-300 rounded-lg document-editor"
     >
         <div
-            class="editor-toolbar relative shadow-lg border-b border-gray-300"
+            class="relative border-b border-gray-300 shadow-lg editor-toolbar"
         >
         </div>
         <div
-            class="shadow-inner p-8 bg-gray-200 overflow-y-scroll"
+            class="p-8 overflow-y-scroll bg-gray-200 shadow-inner"
         >
             <div
-                class="bg-white shadow-md rounded-sm"
+                class="bg-white rounded-sm shadow-md"
             >
                 <div
                     class="editor"
@@ -37,7 +37,7 @@
     </div>
 
     @error($nameInDotNotation)
-        <p class="mt-1 text-red-600 text-sm">
+        <p class="mt-1 text-sm text-red-600">
             {{ str_replace($nameInDotNotation, "'{$label}'", $message) }}
         </p>
     @enderror
@@ -67,7 +67,8 @@
 @endpush
 
 @push ("js")
-    <script src="https://cdn.ckeditor.com/ckeditor5/28.0.0/decoupled-document/ckeditor.js"></script>
+    <script src="{{ mix('js/ckeditor.js') }}"></script>
+
     <script>
         function ckeditor()
         {
@@ -79,50 +80,54 @@
                     let self = this;
 
                     this.dispatch = dispatch;
-                    DecoupledEditor
+
+                    CKSource.Editor
                         .create(
                             document.querySelector('#{{ $name }}'),
                             {
                                 toolbar: [
-            						'heading',
-            						'|',
-            						'bold',
-            						'italic',
-            						'underline',
-            						'strikethrough',
-            						'superscript',
-            						'subscript',
-            						'removeFormat',
-            						'|',
-            						'alignment',
-            						'|',
-            						'numberedList',
-            						'bulletedList',
-            						'todoList',
-            						'outdent',
-            						'indent',
-            						'|',
-            						'specialCharacters',
-            						'pageBreak',
-            						'horizontalLine',
-            						'link',
-            						'blockQuote',
-            						'imageUpload',
-            						'imageInsert',
-            						'mediaEmbed',
-            						'insertTable',
-            						'|',
-            						'undo',
-            						'redo',
+                                    'heading',
+                                    '|',
+                                    'bold',
+                                    'italic',
+                                    'underline',
+                                    'strikethrough',
+                                    'superscript',
+                                    'subscript',
+                                    'removeFormat',
+                                    'pageBreak',
+                                    '|',
+                                    'alignment',
+                                    '|',
+                                    'numberedList',
+                                    'bulletedList',
+                                    'todoList',
+                                    'outdent',
+                                    'indent',
+                                    '|',
+                                    'specialCharacters',
+                                    'pageBreak',
+                                    'horizontalLine',
+                                    'link',
+                                    'blockQuote',
+                                    'imageUpload',
+                                    'imageInsert',
+                                    'mediaEmbed',
+                                    'insertTable',
+                                    '|',
+                                    'undo',
+                                    'redo',
                                 ],
                             }
                         )
                         .then(function (editor) {
                             const toolbarContainer = document.querySelector('.editor-toolbar');
+
                             editor.model.document.on("change:data", function (event, batch) {
                                 self.changed(editor.getData());
                             });
                             this.editor = editor;
+
                             toolbarContainer.appendChild(editor.ui.view.toolbar.element);
                         })
                         .catch(function (error) {
