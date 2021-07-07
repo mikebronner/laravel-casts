@@ -1,11 +1,11 @@
 <x-form-label
-    {{ $attributes->only(['x-show', 'x-if']) }}
+    {{ $attributes->only(['x-show', 'x-if', 'x-checked']) }}
     :field="$name"
     :value="$label"
     :class="$labelClasses"
 >
     <input
-        {{ $attributes->merge(['class' => 'form-checkbox'])->except(['x-show', 'x-if']) }}
+        {{ $attributes->merge(['class' => 'form-checkbox'])->except(['x-show', 'x-if', 'x-checked']) }}
         x-data
         x-ref="input"
         x-on:change="$dispatch('input', this.value)"
