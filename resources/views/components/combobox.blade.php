@@ -1,6 +1,7 @@
 <x-form-group
-    {{ $attributes->only(['x-show', 'x-if', 'wire:change', 'wire:model']) }}
+    {{ $attributes->whereStartsWith(['x-', 'wire:']) }}
     :class="$groupClasses"
+    wire:ignore
 >
     @if ($label)
         <x-form-label
@@ -11,7 +12,7 @@
     @endif
 
     @livewire("laravel-forms::combobox", [
-        "componentAttributes" => $attributes->except(["wire:change", "wire:model"])->getAttributes(),
+        "componentAttributes" => $attributes->whereDoesntStartWith(['x-', 'wire:'])->getAttributes(),
         "fieldName" => $name,
         "labelField" => $labelField,
         "searchField" => $searchField,
@@ -23,7 +24,7 @@
         "createFormUrl" => $createFromUrl,
         "query" => $query,
         "value" => $value
-    ], "combobox-{$uniqueId}")
+    ], key("combobox-{$uniqueId}"))
 
     @error($nameInDotNotation)
         <p class="mt-1 text-red-600 text-sm">

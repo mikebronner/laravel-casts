@@ -1,6 +1,5 @@
 <x-form-group
     {{ $attributes->whereStartsWith(['x-', 'wire:']) }}
-    wire:ignore
     :class="$groupClasses"
 >
 
@@ -12,30 +11,21 @@
         />
     @endif
 
-    <div
-        {{ $attributes->merge(["class" => ""])->whereDoesntStartWith(['x-', 'wire:']) }}
-        x-data="ckeditor()"
-        x-init="init($dispatch)"
-        class="relative flex flex-col border border-gray-300 rounded-lg document-editor"
+    <input
+        id="trix-content-{{ $name }}"
+        name="{{ $name }}"
+        type="hidden"
+        value="{{ $value }}"
     >
-        <div
-            class="relative border-b border-gray-300 shadow-lg editor-toolbar"
-        >
-        </div>
-        <div
-            class="p-8 overflow-y-scroll bg-gray-200 shadow-inner"
-        >
-            <div
-                class="bg-white rounded-sm shadow-md"
-            >
-                <div
-                    class="editor"
-                    id="{{ $name }}"
-                >
-                    {!! $value !!}
-                </div>
-            </div>
-        </div>
+    <div
+        wire:ignore
+        x-data
+        x-on:trix-blur="$dispatch('change', $event.target.value)"
+    >
+        <trix-editor
+            {{ $attributes->whereDoesntStartWith(['x-', 'wire:']) }}
+            input="trix-content-{{ $name }}"
+        ></trix-editor>
     </div>
 
     @error($nameInDotNotation)

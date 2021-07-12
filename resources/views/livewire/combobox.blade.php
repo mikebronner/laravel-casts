@@ -1,5 +1,6 @@
 <div
     class="w-full"
+    wire:key="{{ $key }}"
 >
     <input
         type="hidden"

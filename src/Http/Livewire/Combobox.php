@@ -37,19 +37,19 @@ class Combobox extends Component
     }
 
     public function mount(
-        array $componentAttributes = [],
-        string $createFormView = "",
-        string $createFormUrl = "",
-        string $fieldName = "",
-        string $label = "",
-        string $labelField = "",
-        string $model = "",
-        string $optionField = "",
-        string $placeholder = "",
-        string $query = "",
-        string $searchField = "",
-        string $valueField = "id",
-        string $callback = "",
+        ?array $componentAttributes = [],
+        ?string $createFormView = "",
+        ?string $createFormUrl = "",
+        ?string $fieldName = "",
+        ?string $label = "",
+        ?string $labelField = "",
+        ?string $model = "",
+        ?string $optionField = "",
+        ?string $placeholder = "",
+        ?string $query = "",
+        ?string $searchField = "",
+        ?string $valueField = "id",
+        ?string $callback = "",
         $value = null
     ): void {
         $this->attributes = $this->parseAttributes($componentAttributes);
@@ -62,7 +62,7 @@ class Combobox extends Component
         $this->model = $model ?: "";
         $this->optionField = $optionField;
         $this->query = $query ?: "";
-        $this->searchField = $searchField ?: "";
+        $this->searchField = $searchField;
         $this->valueField = $valueField ?: "id";
         $this->callback = $callback;
         $value = json_decode($value, false);
@@ -74,8 +74,8 @@ class Combobox extends Component
         $this->callback = $callback;
 
         if ($value) {
-            $this->search = $value->{$this->labelField};
-            $this->selectedValue = $value->{$this->valueField};
+            $this->search = $value?->{$this->labelField};
+            $this->selectedValue = $value?->{$this->valueField};
         }
 
         if ($placeholder) {

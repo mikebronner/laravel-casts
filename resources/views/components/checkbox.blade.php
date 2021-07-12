@@ -1,11 +1,11 @@
 <x-form-label
-    {{ $attributes->only(['x-show', 'x-if', 'x-checked']) }}
+    {{ $attributes->whereStartsWith(['x-', 'wire:']) }}
     :field="$name"
     :value="$label"
     :class="$labelClasses"
 >
     <input
-        {{ $attributes->merge(['class' => 'form-checkbox'])->except(['x-show', 'x-if', 'x-checked']) }}
+        {{ $attributes->merge(['class' => 'form-checkbox'])->whereDoesntStartWith(['x-', 'wire:']) }}
         x-data
         x-ref="input"
         x-on:change="$dispatch('input', this.value)"

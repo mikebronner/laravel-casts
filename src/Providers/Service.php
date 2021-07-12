@@ -34,6 +34,7 @@ use GeneaLabs\LaravelCasts\View\Components\Text;
 use GeneaLabs\LaravelCasts\View\Components\Textarea;
 use GeneaLabs\LaravelCasts\View\Components\Time;
 use GeneaLabs\LaravelCasts\View\Components\Toggle;
+use GeneaLabs\LaravelCasts\View\Components\Trix;
 use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Support\Facades\Blade as FacadesBlade;
 use Illuminate\Support\ServiceProvider;
