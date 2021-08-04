@@ -1,5 +1,5 @@
 <x-form-group
-    {{ $attributes->only(['x-show', 'x-if', 'wire:model']) }}
+    {{ $attributes->only(['x-show', 'x-if']) }}
     :class="$groupClasses"
 >
     @if ($label)
@@ -11,12 +11,24 @@
     @endif
 
     <div
-        x-data="{}"
+        x-data="{
+            value: @entangle($attributes->wire('model')),
+
+            updateValue: function () {
+                this.value = this.$refs.input.value * 100;
+            }
+        }"
         x-init="$nextTick(function () {
             let value = $refs.input.value;
 
             if (value.indexOf('.') !== false) {
-                $refs.input.value = parseFloat(value / 100)
+                $refs.input.value = parseFloat(value / 100.0)
+                    .toLocaleString('us', {
+                        minimumFractionDigits: {{ $decimals }},
+                        maximumFractionDigits: {{ $decimals }}
+                    });
+            } else {
+                $refs.input.value = parseFloat(value)
                     .toLocaleString('us', {
                         minimumFractionDigits: {{ $decimals }},
                         maximumFractionDigits: {{ $decimals }}
@@ -25,12 +37,13 @@
         });"
         class="relative"
     >
-        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+        <div class="pl-3 absolute inset-y-0 left-0 flex items-center pointer-events-none">
             <span class="text-gray-500 sm:text-sm">
                 {{ $symbol }}
             </span>
         </div>
         <input
+            x-on:change="updateValue"
             x-ref="input"
             {{ $attributes->merge(["class" => "form-input pl-7 pr-12"])->except(['x-show', 'x-if', 'wire:model']) }}
             aria-describedby="price-currency"
@@ -39,7 +52,7 @@
             type="text"
             value="{{ $value }}"
         >
-        <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+        <div class="pr-3 absolute inset-y-0 right-0 flex items-center pointer-events-none">
             <span class="text-gray-500 sm:text-sm" id="price-currency">
                 {{ $code }}
             </span>
@@ -47,7 +60,7 @@
     </div>
 
     @error($nameInDotNotation)
-        <p class="mt-1 text-red-600 text-sm">
+        <p class="mt-1 text-sm text-red-600">
             {{ str_replace($nameInDotNotation, "'{$label}'", $message) }}
         </p>
     @enderror
