@@ -15,26 +15,16 @@
             value: @entangle($attributes->wire('model')),
 
             updateValue: function () {
-                this.value = this.$refs.input.value * 100;
+                this.value = parseInt(this.$refs.display.value * 100);
             }
         }"
         x-init="$nextTick(function () {
-            let value = $refs.input.value;
-
-            if (value.indexOf('.') !== false) {
-                $refs.input.value = parseFloat(value / 100.0)
-                    .toLocaleString('us', {
-                        minimumFractionDigits: {{ $decimals }},
-                        maximumFractionDigits: {{ $decimals }}
-                    });
-            } else {
-                $refs.input.value = parseFloat(value)
-                    .toLocaleString('us', {
-                        minimumFractionDigits: {{ $decimals }},
-                        maximumFractionDigits: {{ $decimals }}
-                    });
-            }
-        });"
+            $refs.display.value = parseFloat(value / 100)
+                .toLocaleString('us', {
+                    minimumFractionDigits: {{ $decimals }},
+                    maximumFractionDigits: {{ $decimals }}
+                });
+        })"
         class="relative"
     >
         <div class="pl-3 absolute inset-y-0 left-0 flex items-center pointer-events-none">
@@ -43,14 +33,19 @@
             </span>
         </div>
         <input
-            x-on:change="updateValue"
-            x-ref="input"
-            {{ $attributes->merge(["class" => "form-input pl-7 pr-12"])->except(['x-show', 'x-if', 'wire:model']) }}
-            aria-describedby="price-currency"
+            x-model="value"
             id="{{ $name }}"
             name="{{ $name }}"
-            type="text"
+            type="hidden"
             value="{{ $value }}"
+        />
+        <input
+            x-on:change="updateValue"
+            x-on:keyup="updateValue"
+            x-ref="display"
+            {{ $attributes->merge(["class" => "form-input pl-7 pr-12"])->whereDoesntStartWith(['x-', 'wire:']) }}
+            aria-describedby="price-currency"
+            type="text"
         >
         <div class="pr-3 absolute inset-y-0 right-0 flex items-center pointer-events-none">
             <span class="text-gray-500 sm:text-sm" id="price-currency">
