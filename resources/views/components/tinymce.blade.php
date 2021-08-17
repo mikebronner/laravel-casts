@@ -16,16 +16,12 @@
         {{ $attributes->merge(["class" => ""])->whereDoesntStartWith(['x-', 'wire:']) }}
         x-data="tinymceAlpine()"
         x-init="init($dispatch)"
-        class="relative flex flex-col border border-gray-300 rounded-lg document-editor"
+        class="relative flex flex-col overflow-hidden border border-gray-300 rounded-lg document-editor"
     >
         <div
-            class="overflow-hidden border rounded-lg"
+            id="{{ $name }}"
         >
-            <div
-                id="{{ $name }}"
-            >
-                {!! $value !!}
-            </div>
+            {!! $value !!}
         </div>
     </div>
 
