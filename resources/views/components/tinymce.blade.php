@@ -62,7 +62,8 @@
 
                     tinymce.init({
                         selector: '#{{ $name }}',
-                        menubar: 'edit view insert format tools table',
+                        {{-- menubar: 'edit view insert format tools table', --}}
+                        menubar: '',
                         plugins: 'advcode casechange export fullscreen hr linkchecker autolink lists image advlist pagebreak powerpaste searchreplace table advtable tinymcespellchecker wordcount',
                         toolbar: 'undo redo | fontselect fontsizeselect | bold italic underline strikethrough superscript subscript removeformat pagebreak hr wordcount | align | outdent indent | bullist numlist table | casechange searchreplace | spellchecker spellcheckdialog | code export fullscreen',
                         toolbar_mode: 'sliding',
