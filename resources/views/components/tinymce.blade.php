@@ -16,7 +16,7 @@
         {{ $attributes->merge(["class" => ""])->whereDoesntStartWith(['x-', 'wire:']) }}
         x-data="tinymceAlpine()"
         x-init="init($dispatch)"
-        class="relative flex flex-col overflow-hidden border border-gray-300 rounded-lg document-editor"
+        class="relative flex flex-col rounded-lg document-editor"
     >
         <div
             id="{{ $name }}"
