@@ -34,6 +34,7 @@ use GeneaLabs\LaravelCasts\View\Components\Submit;
 use GeneaLabs\LaravelCasts\View\Components\Text;
 use GeneaLabs\LaravelCasts\View\Components\Textarea;
 use GeneaLabs\LaravelCasts\View\Components\Time;
+use GeneaLabs\LaravelCasts\View\Components\TinyMce;
 use GeneaLabs\LaravelCasts\View\Components\Toggle;
 use GeneaLabs\LaravelCasts\View\Components\Trix;
 use Illuminate\Contracts\Http\Kernel;
@@ -133,7 +134,8 @@ class Service extends ServiceProvider
                 Text::class,
                 Textarea::class,
                 Time::class,
-            ]
+                TinyMce::class,
+            ],
         );
     }
 
