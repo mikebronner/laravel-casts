@@ -31,6 +31,7 @@ class Combobox extends Component
     protected function getListeners(): array
     {
         return [
+            "cancelForm" => "cancelForm",
             "setErrors{$this->key}" => "setErrors",
             "updateSelectedItem{$this->key}" => "updateSelectedItem",
         ];
@@ -211,7 +212,7 @@ class Combobox extends Component
                 . str_replace('"', '\\"', trim($value))
                 . '"';
         }
-// dd($attributes, $componentAttributes);
+
         return trim($attributes);
     }
 }
