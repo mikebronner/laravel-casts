@@ -23,6 +23,7 @@ use GeneaLabs\LaravelCasts\View\Components\Form;
 use GeneaLabs\LaravelCasts\View\Components\Group;
 use GeneaLabs\LaravelCasts\View\Components\Gutenberg;
 use GeneaLabs\LaravelCasts\View\Components\Hidden;
+use GeneaLabs\LaravelCasts\View\Components\Image;
 use GeneaLabs\LaravelCasts\View\Components\Label;
 use GeneaLabs\LaravelCasts\View\Components\Money;
 use GeneaLabs\LaravelCasts\View\Components\Month;
@@ -123,6 +124,7 @@ class Service extends ServiceProvider
                 Group::class,
                 Gutenberg::class,
                 Hidden::class,
+                Image::class,
                 Label::class,
                 Money::class,
                 Month::class,
