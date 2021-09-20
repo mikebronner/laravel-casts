@@ -5,12 +5,12 @@
     <input
         {{ $attributes->except(['x-show', 'x-if']) }}
         type="color"
-        :name="$name"
-        :value="$value"
+        name="{{ $name }}"
+        value="{{ $value }}"
     >
 
     @error($nameInDotNotation)
-        <p class="mt-1 text-red-600 text-sm">
+        <p class="mt-1 text-sm text-red-600">
             {{ str_replace($nameInDotNotation, "'{$label}'", $message) }}
         </p>
     @enderror
