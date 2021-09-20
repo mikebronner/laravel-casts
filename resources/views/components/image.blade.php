@@ -15,7 +15,7 @@
         x-data="imageUploader()"
     >
         <input
-            class="m-0 p-0 w-full h-full text-center border-0 cursor-pointer"
+            class="m-0 p-0 w-full h-full text-center bg-contain border-0 cursor-pointer"
             type="text"
             x-bind:placeholder="placeholderText()"
             x-bind:style="'background-color: ' + (imagePreviewData.length > 0 ? 'transparent' : 'white') + '; background-repeat: no-repeat; background-position: center center; background-image: url(' + imagePreviewData + '); caret-color: transparent;'"
