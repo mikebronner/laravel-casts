@@ -26,7 +26,7 @@
             x-ref="{{ $name }}-text"
         >
         <input
-            {{ $attributes->only(['wire:model']) }}
+            {{-- {{ $attributes->only(['wire:model']) }} --}}
             class="hidden"
             type="file"
             x-on:change="previewImage"
@@ -48,7 +48,7 @@
                 focusable="false"
                 role="img"
                 viewBox="0 0 448 512"
-                x-on:click="clearImage"
+                x-on:click="clearImage()"
                 xmlns="http://www.w3.org/2000/svg"
             >
                 <path
@@ -92,6 +92,9 @@
                 fieldName: "{{ $name }}",
                 fileUri: "{{ $value }}",
                 imagePreviewData: "{{ $value }}",
+                @if ($attributes->has('wire:model'))
+                    value: @entangle($attributes->get('wire:model')),
+                @endif
 
                 fileName: function () {
                     let fileName = this.fileUri.split('\\').pop().split('/').pop();
@@ -119,19 +122,25 @@
 
                 processUriList: function (event) {
                     const data = event.dataTransfer.getData("text/uri-list");
+
                     if ((data || false) === false) {
                         return false;
                     }
+
                     this.handleChange(data);
+
                     return true;
                 },
 
                 processText: function (event) {
                     const data = event.dataTransfer.getData("text");
+
                     if ((data || false) === false) {
                         return false;
                     }
+
                     this.handleChange(data);
+
                     return true;
                 },
 
@@ -139,10 +148,13 @@
                     const data = event.dataTransfer.getData("text/html");
                     const sourceRegExp = /src=['"](.*?)['"]/;
                     const match = sourceRegExp.exec(data);
+
                     if (match && match.length > 0) {
                         this.handleChange(match[1]);
+
                         return true;
                     }
+
                     return false;
                 },
 
@@ -150,8 +162,10 @@
                     if (event.dataTransfer.files.length > 0) {
                         this.$refs[this.fieldName + '-file'].files = event.dataTransfer.files;
                         this.$refs[this.fieldName + '-file'].dispatchEvent(new Event('change', { 'bubbles': true }));
+
                         return true;
                     }
+
                     return false;
                 },
 
@@ -175,6 +189,9 @@
                     this.imagePreviewData = "";
                     this.fileUri = "";
                     this.value = null;
+                    this.$refs[this.fieldName + '-file'].value = null;
+                    this.$refs[this.fieldName + '-file'].files = null;
+                    this.$refs[this.fieldName + '-file'].dispatchEvent(new Event('change', { 'bubbles': true }));
                 },
 
                 handleChange: function (value) {
