@@ -26,7 +26,7 @@
             x-ref="{{ $name }}-text"
         >
         <input
-            {{-- {{ $attributes->only(['wire:model']) }} --}}
+            {{ $attributes->only(['wire:model']) }}
             class="hidden"
             type="file"
             x-on:change="previewImage"
@@ -92,9 +92,6 @@
                 fieldName: "{{ $name }}",
                 fileUri: "{{ $value }}",
                 imagePreviewData: "{{ $value }}",
-                @if ($attributes->has('wire:model'))
-                    value: @entangle($attributes->get('wire:model')),
-                @endif
 
                 fileName: function () {
                     let fileName = this.fileUri.split('\\').pop().split('/').pop();
