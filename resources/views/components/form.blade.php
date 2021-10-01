@@ -4,7 +4,7 @@
     autocomplete="{{ $autocomplete }}"
     class="{{ $class }}"
     enctype="{{ $enctype }}"
-    method="POST"
+    method="{{ in_array(strtolower($method), ['post', 'get']) ? strtoupper($method) : 'POST' }}"
     target="{{ $target }}"
 >
     @csrf()
