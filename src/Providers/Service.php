@@ -76,7 +76,7 @@ class Service extends ServiceProvider
         // $this->registerBladeDirective('email');
         // $this->registerBladeDirective('endButtonGroup');
         // $this->registerBladeDirective('endsubform');
-        $this->registerBladeDirective('errors');
+        // $this->registerBladeDirective('errors');
         // $this->registerBladeDirective('file');
         // $this->registerBladeDirective('form');
         // $this->registerBladeDirective('hidden');
@@ -119,7 +119,7 @@ class Service extends ServiceProvider
                 Date::class,
                 Datetime::class,
                 Email::class,
-                // Errors::class,
+                Errors::class,
                 File::class,
                 Group::class,
                 Gutenberg::class,
@@ -191,7 +191,8 @@ class Service extends ServiceProvider
         $alias = $alias ?: $formMethod;
 
         if (array_key_exists($alias, Blade::getCustomDirectives())) {
-            throw new Exception("Blade directive '{$alias}' is already registered.");
+            return;
+            // throw new Exception("Blade directive '{$alias}' is already registered.");
         }
 
         app('blade.compiler')->directive($alias, function ($parameters) use ($formMethod) {
