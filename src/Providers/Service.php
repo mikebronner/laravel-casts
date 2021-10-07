@@ -119,7 +119,7 @@ class Service extends ServiceProvider
                 Date::class,
                 Datetime::class,
                 Email::class,
-                Errors::class,
+                // Errors::class,
                 File::class,
                 Group::class,
                 Gutenberg::class,
