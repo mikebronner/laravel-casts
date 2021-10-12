@@ -1,13 +1,3 @@
-@push ("css")
-    {{-- TODO: load only once, also add custom styling --}}
-    <link href="https://cdn.jsdelivr.net/npm/tom-select@2.0.0-rc.4/dist/css/tom-select.css" rel="stylesheet">
-@endpush
-
-@push ("js")
-    {{-- TODO: load only once --}}
-    <script src="https://cdn.jsdelivr.net/npm/tom-select@2.0.0-rc.4/dist/js/tom-select.complete.min.js"></script>
-@endpush
-
 <x-form-group
     {{ $attributes->only(['x-show', 'x-if']) }}
     :class="$groupClasses"
@@ -53,6 +43,10 @@
     >
         {{ $helpText }}
     </span>
+    {{-- TODO: load only once, also add custom styling --}}
+    <link href="https://cdn.jsdelivr.net/npm/tom-select@2.0.0-rc.4/dist/css/tom-select.css" rel="stylesheet">
+    {{-- TODO: load only once --}}
+    <script src="https://cdn.jsdelivr.net/npm/tom-select@2.0.0-rc.4/dist/js/tom-select.complete.min.js"></script>
     <script>
         function dropdown()
         {
