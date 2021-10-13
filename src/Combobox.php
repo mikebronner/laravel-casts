@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GeneaLabs\LaravelCasts;
 
-class Combobox extends Dropdown
+class Combobox extends Select
 {
     //
 }
