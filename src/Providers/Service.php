@@ -113,7 +113,6 @@ class Service extends ServiceProvider
             [
                 Button::class,
                 Checkbox::class,
-                LaravelCastsCombobox::class,
                 Ckeditor::class,
                 Color::class,
                 Date::class,
@@ -126,6 +125,7 @@ class Service extends ServiceProvider
                 Hidden::class,
                 Image::class,
                 Label::class,
+                LaravelCastsCombobox::class,
                 Money::class,
                 Month::class,
                 Number::class,
@@ -134,11 +134,11 @@ class Service extends ServiceProvider
                 Range::class,
                 Select::class,
                 Submit::class,
-                Toggle::class,
                 Text::class,
                 Textarea::class,
                 Time::class,
                 TinyMce::class,
+                Toggle::class,
             ],
         );
     }
