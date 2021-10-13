@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GeneaLabs\LaravelCasts\View\Components;
 
-class Combobox extends BaseComponent
+class ComboboxOld extends BaseComponent
 {
     public string $createFromUrl = "";
     public string $createFromView = "";
