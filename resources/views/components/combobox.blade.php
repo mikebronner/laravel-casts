@@ -2,7 +2,7 @@
     {{ $attributes->only(['x-show', 'x-if']) }}
     :class="$groupClasses"
     x-data="dropdown()"
-    x-init="initialize()"
+    x-init="initialize"
     wire:ignore
 >
 
@@ -16,8 +16,8 @@
 
     <select
         {{ $attributes->merge(["class" => "form-select"])->except(['x-show', 'x-if']) }}
+        id="{{ $name }}"
         name="{{ $name }}"
-        x-ref="{{ $name }}"
     >
         @if (! $attributes->get("multiple"))
             <option selected disabled value="null">{{ $placeholder }}</option>
@@ -52,7 +52,7 @@
         {
             return {
                 initialize: function () {
-                    new TomSelect(this.$refs.{{ $name }}, {
+                    new TomSelect("#{{ $name }}", {
                         create: false, // TODO: add create functionality to replace combobox
                     });
                 },
