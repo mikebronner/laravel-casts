@@ -18,6 +18,7 @@
         {{ $attributes->merge(["class" => "form-select"])->except(['x-show', 'x-if']) }}
         id="{{ $name }}"
         name="{{ $name }}"
+        x-ref="{{ $name }}"
     >
         @if (! $attributes->get("multiple"))
             <option selected disabled value="null">{{ $placeholder }}</option>
@@ -52,7 +53,7 @@
         {
             return {
                 initialize: function () {
-                    new TomSelect("#{{ $name }}", {
+                    new TomSelect(this.$refs.{{ $name }}, {
                         create: false, // TODO: add create functionality to replace combobox
                     });
                 },
