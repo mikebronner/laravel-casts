@@ -18,7 +18,8 @@
         {{ $attributes->merge(["class" => "form-select"])->except(['x-show', 'x-if']) }}
         id="{{ $name }}"
         name="{{ $name }}"
-        x-ref="{{ $name }}"
+        placeholder="{{ $placeholder }}"
+        x-ref="{{ str_replace('-', '', $name) }}"
     >
         @if (! $attributes->get("multiple"))
             <option selected disabled value="null">{{ $placeholder }}</option>
@@ -45,16 +46,29 @@
         {{ $helpText }}
     </span>
     {{-- TODO: load only once, also add custom styling --}}
-    <link href="https://cdn.jsdelivr.net/npm/tom-select@2.0.0-rc.4/dist/css/tom-select.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/tail.select@latest/css/default/tail.select-light.css" rel="stylesheet" type="text/css">
     {{-- TODO: load only once --}}
-    <script src="https://cdn.jsdelivr.net/npm/tom-select@2.0.0-rc.4/dist/js/tom-select.complete.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tail.select@latest/js/tail.select.min.js"></script>
     <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            Livewire.hook("message.processed", function (message, component) {
+                tail.select(this.$refs.{{ str_replace('-', '', $name) }}, {
+                    classNames: true,
+                    deselect: true,
+                    search: true,
+                });
+            });
+        });
+
         function dropdown()
         {
             return {
                 initialize: function () {
-                    new TomSelect(this.$refs.{{ $name }}, {
-                        create: false, // TODO: add create functionality to replace combobox
+                    console.log("test");
+                    tail.select(this.$refs.{{ str_replace('-', '', $name) }}, {
+                        classNames: true,
+                        deselect: true,
+                        search: true,
                     });
                 },
             };

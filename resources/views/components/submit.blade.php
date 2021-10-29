@@ -1,6 +1,8 @@
-<input
+<button
     {{ $attributes->merge(["class" => "form-button cursor-pointer"]) }}
-    type="submit"
     name="{{ $name }}"
-    value="{{ $value }}"
+    type="submit"
 >
+    {{ $icon ?? "" }}
+    {{ $value ?? "Save" }}
+</button>
