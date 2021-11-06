@@ -27,6 +27,7 @@
     autocomplete="{{ $autocomplete }}"
     class="{{ $class }}"
     enctype="{{ $enctype }}"
+    id="form-{{ $key }}"
     method="{{ in_array(strtolower($method), ['post', 'get']) ? strtoupper($method) : 'POST' }}"
     target="{{ $target }}"
 
@@ -41,6 +42,14 @@
 >
     @csrf()
     @method($method)
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            Livewire.hook("message.processed", (component) => {
+                window.resetForm(document.getElementById("form-{{ $key }}"));
+            });
+        });
+    </script>
 
     {!! $slot !!}
 

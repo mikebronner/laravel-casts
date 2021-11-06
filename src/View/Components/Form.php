@@ -3,6 +3,7 @@
 namespace GeneaLabs\LaravelCasts\View\Components;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Form extends BaseComponent
 {
@@ -11,6 +12,7 @@ class Form extends BaseComponent
     public $class;
     public $enctype;
     public $framework;
+    public string $key;
     public $method;
     public $model;
     public $target;
@@ -47,5 +49,6 @@ class Form extends BaseComponent
             ? "novalidate"
             : "";
         session(["form-model" => $this->model]);
+        $this->key = Str::random(12);
     }
 }
