@@ -19,6 +19,14 @@
                 });
             };
         }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            Livewire.hook("message.processed", (livewireComponent) => {
+                if (Object.keys(((((livewireComponent || {}).component || {}).serverMemo || {}).errors || {})).length > 0) {
+                    window.resetForm(document.getElementById("form-{{ $key }}"));
+                }
+            });
+        });
     </script>
 @endpush
 
@@ -42,14 +50,6 @@
 >
     @csrf()
     @method($method)
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            Livewire.hook("message.processed", (component) => {
-                window.resetForm(document.getElementById("form-{{ $key }}"));
-            });
-        });
-    </script>
 
     {!! $slot !!}
 
