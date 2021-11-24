@@ -2,6 +2,10 @@
     <script>
         if (typeof window.resetForm === "undefined") {
             window.resetForm = function (form) {
+                if ((form || false) === false) {
+                    return;
+                }
+
                 _.each((form.elements || []), function (element) {
                     if (element.type === "submit") {
                         element.disabled = false;
@@ -12,6 +16,10 @@
 
         if (typeof window.submitForm === "undefined") {
             window.submitForm = function (form) {
+                if ((form || false) === false) {
+                    return;
+                }
+
                 _.each((form.elements || []), function (element) {
                     if (element.type === "submit") {
                         element.disabled = true;
