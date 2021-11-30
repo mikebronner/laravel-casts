@@ -96,11 +96,17 @@
                         }
                     });
 
-                    document.dispatchEvent(new CustomEvent("editor", this.editor));
+                    document.dispatchEvent(new CustomEvent("editor", {
+                        bubbles: true,
+                        detail: this.editor,
+                    }));
                 },
 
                 changed: function (data) {
-                    document.dispatchEvent(new CustomEvent("input", data));
+                    document.dispatchEvent(new CustomEvent("input", {
+                        bubbles: true,
+                        detail: data,
+                    }));
                 },
 
                 dropHandler: function (editor, file) {
