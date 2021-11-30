@@ -15,7 +15,7 @@
     <div
         {{ $attributes->merge(["class" => ""])->whereDoesntStartWith(['x-', 'wire:']) }}
         x-data="tinymceAlpine()"
-        x-init="init($dispatch)"
+        x-init="init()"
         class="relative flex flex-col rounded-lg document-editor"
     >
         <div
@@ -45,13 +45,10 @@
         function tinymceAlpine()
         {
             return {
-                dispatch: null,
                 editor: null,
 
-                init: function (dispatch) {
+                init: function () {
                     let self = this;
-
-                    this.dispatch = dispatch;
 
                     tinymce.init({
                         selector: '#{{ $name }}',
@@ -99,11 +96,11 @@
                         }
                     });
 
-                    this.dispatch("editor", this.editor);
+                    document.dispatchEvent(new CustomEvent("editor", this.editor));
                 },
 
                 changed: function (data) {
-                    this.dispatch("input", data);
+                    document.dispatchEvent(new CustomEvent("input", data));
                 },
 
                 dropHandler: function (editor, file) {
