@@ -15,7 +15,7 @@
     <div
         {{ $attributes->merge(["class" => ""])->whereDoesntStartWith(['x-', 'wire:']) }}
         x-data="tinymceAlpine"
-        x-init="init($dispatch)"
+        x-init="initialize($dispatch)"
         class="relative flex flex-col rounded-lg document-editor"
     >
         <div
@@ -48,7 +48,7 @@
                 editor: null,
                 dispatch: null,
 
-                init: function (dispatch) {
+                initialize: function (dispatch) {
                     let self = this;
 
                     this.dispatch = dispatch;
