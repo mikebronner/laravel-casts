@@ -20,7 +20,9 @@
         @endif
 
         @foreach ($selectOptions as $label => $optionValue)
-            @dump($selectedValues, $optionValue)
+            @php
+                logger()->debug([$selectedValues, $optionValue]);
+            @endphp
             @if ($selectedValues->contains($optionValue))
                 <option value="{{ $optionValue }}" selected>{{ $label }}</option>
             @else
