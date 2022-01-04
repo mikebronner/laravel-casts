@@ -35,7 +35,7 @@ class Select extends BaseComponent
                 ?: "Select ...");
         $this->isMultiSelect = $isMultiSelect;
         $this->selectedValues = $selectedValues->isEmpty()
-            ? collect((string) $this->value)
+            ? collect($this->value)
             : $selectedValues;
     }
 }
