@@ -37,5 +37,6 @@ class Select extends BaseComponent
         $this->selectedValues = $selectedValues->isEmpty()
             ? collect((string) $this->value)
             : $selectedValues;
+        dump($selectedValues, $this->value);
     }
 }
