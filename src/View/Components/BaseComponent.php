@@ -33,7 +33,7 @@ abstract class BaseComponent extends Component
         $this->uniqueId = Str::random(16);
         $this->name = $name;
         $this->nameInDotNotation = trim(str_replace("[", ".", str_replace("]", "", $this->name)), ".");
-        $this->value = $value
+        $this->value = isset($value)
             ?: old($this->nameInDotNotation)
             ?: data_get(session("form-model"), $this->nameInDotNotation)
             ?: "";
