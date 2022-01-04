@@ -35,9 +35,9 @@ abstract class BaseComponent extends Component
         $this->nameInDotNotation = trim(str_replace("[", ".", str_replace("]", "", $this->name)), ".");
         dump($value, old($this->nameInDotNotation), data_get(session("form-model"), $this->nameInDotNotation));
         $this->value = $value
-            ?: old($this->nameInDotNotation)
-            ?: data_get(session("form-model"), $this->nameInDotNotation)
-            ?: "";
+            ?: old($this->nameInDotNotation);
+        $this->value = $this->value
+            ?: data_get(session("form-model"), $this->nameInDotNotation, "");
         $this->label = $label
             ?? trim(ucwords(str_replace("id", " ", str_replace("_", " ", str_replace(".", " ", $this->name)))));
         $this->errorData = session("errors", new MessageBag)
