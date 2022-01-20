@@ -23,7 +23,8 @@ class Select extends BaseComponent
         string $helpClasses = "",
         string $helpText = "",
         string $label = null,
-        string $placeholder = ""
+        string $placeholder = "",
+        string $value = "",
     ) {
         parent::__construct($name, null, $label, $labelClasses, $groupClasses, $errorClasses, $helpClasses, $helpText);
 
@@ -35,7 +36,7 @@ class Select extends BaseComponent
                 ?: "Select ...");
         $this->isMultiSelect = $isMultiSelect;
         $this->selectedValues = $selectedValues->isEmpty()
-            ? collect($this->value)
+            ? collect($value)
             : $selectedValues;
     }
 }
