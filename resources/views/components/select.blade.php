@@ -20,7 +20,7 @@
         @endif
 
         @foreach ($selectOptions as $label => $optionValue)
-            @if ($selectedValues->contains($optionValue))
+            @if ($optionValue && $selectedValues->contains($optionValue))
                 <option value="{{ $optionValue }}" selected>{{ $label }}</option>
             @else
                 <option value="{{ $optionValue }}">{{ $label }}</option>
@@ -41,7 +41,7 @@
                             :key="option.index"
                         >
                             <div
-                                class="m-1 mr-2 px-1 flex items-center font-medium text-blue-800 bg-blue-100 rounded"
+                                class="flex items-center px-1 m-1 mr-2 font-medium text-blue-800 bg-blue-100 rounded"
                             >
                                 <div
                                     class="px-2 py-1 text-xs font-normal leading-none"
@@ -68,7 +68,7 @@
                             </div>
                         </template>
                         <input
-                            class="max-w-full flex-shrink italic font-light text-gray-400 min-w-12"
+                            class="flex-shrink max-w-full italic font-light text-gray-400 min-w-12"
                             placeholder="{{ $placeholder }}"
                             x-on:keyup.arrow-up="highlightPrevious()"
                             x-on:keyup.arrow-down="highlightNext()"
@@ -79,15 +79,15 @@
                         >
                     </div>
                 </div>
-                <div class="mt-1 px-4 w-full">
+                <div class="w-full px-4 mt-1">
                     <div
                         x-show.transition.origin.top="isOpen()"
-                        class="min-w-full absolute left-0 z-40 overflow-hidden bg-white rounded shadow-md max-h-select"
+                        class="absolute left-0 z-40 min-w-full overflow-hidden bg-white rounded shadow-md max-h-select"
                         x-on:click.away="close"
                     >
                         <div
                             x-ref="options"
-                            class="w-full flex flex-col"
+                            class="flex flex-col w-full"
                         >
                             <template
                                 x-for="option in unselectedOptions"
@@ -98,10 +98,10 @@
                                     x-on:click="select(option, $dispatch)"
                                 >
                                     <div
-                                        class="p-2 pl-2 w-full relative flex items-center border-l-2 border-transparent"
+                                        class="relative flex items-center w-full p-2 pl-2 border-l-2 border-transparent"
                                     >
                                         <div
-                                            class="w-full flex items-center justify-between"
+                                            class="flex items-center justify-between w-full"
                                         >
                                             <div
                                                 class="mx-2 leading-6"
