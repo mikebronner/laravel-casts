@@ -16,7 +16,7 @@
         name="{{ $name }}"
     >
         @if (! $attributes->get("multiple"))
-            <option>{{ $placeholder }}</option>
+            <option value="">{{ $placeholder }}</option>
         @endif
 
         @foreach ($selectOptions as $label => $optionValue)
