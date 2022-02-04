@@ -16,7 +16,7 @@
         name="{{ $name }}"
     >
         @if (! $attributes->get("multiple"))
-            <option selected disabled value="null">{{ $placeholder }}</option>
+            <option>{{ $placeholder }}</option>
         @endif
 
         @foreach ($selectOptions as $label => $optionValue)
