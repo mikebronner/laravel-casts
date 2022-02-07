@@ -1,6 +1,6 @@
 <x-form-label
     {{ $attributes->whereStartsWith(['x-']) }}
-    :field="$name"
+    :field="trim($name, '[]') . '[' . $value . ']'"
     :value="$label"
     :class="$labelClasses"
 >
@@ -9,7 +9,7 @@
         x-data
         x-ref="input"
         x-on:change="$dispatch('input', this.value)"
-        id="{{ $name }}"
+        id="{{ trim($name, "[]") }}[{{ $value }}]"
         type="checkbox"
         name="{{ $name }}"
         value="{{ $value }}"
