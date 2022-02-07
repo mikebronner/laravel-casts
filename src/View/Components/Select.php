@@ -38,5 +38,7 @@ class Select extends BaseComponent
         $this->selectedValues = $selectedValues->isEmpty()
             ? collect($value)
             : $selectedValues;
+        $this->selectedValues = collect(old($this->nameInDotNotation))
+            ?: $this->selectedValues;
     }
 }
