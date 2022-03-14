@@ -29,7 +29,7 @@ class Money extends Input
 
         parent::__construct(
             $name,
-            number_format($value / 100, $decimals),
+            number_format(intval($value) / 100, $decimals),
             $labelClasses,
             $groupClasses,
             $errorClasses,
