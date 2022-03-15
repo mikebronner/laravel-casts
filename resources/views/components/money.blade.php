@@ -41,8 +41,7 @@
             id="{{ $name }}"
             name="{{ $name }}"
             type="hidden"
-            value="{{ $value }}"
-            x-model="value"
+            x-model:value="value"
         />
         <input
             {{ $attributes->merge(["class" => "form-input pl-7 pr-12"])->whereDoesntStartWith(['x-', 'wire:']) }}
