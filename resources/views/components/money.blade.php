@@ -25,8 +25,10 @@
             },
 
             updateValue: function (dispatch) {
-                this.$refs.valueField.value = parseInt(parseFloat(this.$refs.moneyField.value.replace(',', '')).toFixed(2).replace('.', ''));
-                this.$wire.set('{{ $attributes->wire('model')->value() }}', this.$refs.valueField.value);
+                let value = (this.$refs.moneyField.value.replace(/[a-z,]/gi, '') || 0);
+                value = parseInt(parseFloat(value).toFixed(2).replace('.', ''));
+                this.$refs.valueField.value = value;
+                this.$wire.set('{{ $attributes->wire('model')->value() }}', value);
             },
         }"
         x-init="
@@ -54,8 +56,8 @@
         <input
             {{ $attributes->merge(["class" => "form-input pl-7 pr-12"])->whereDoesntStartWith(['x-', 'wire:']) }}
             aria-describedby="price-currency"
-            type="text"
-            x-on:keyup="updateValue($dispatch)"
+            type="number"
+            onkeypress="return /[\d.,]/.test(String.fromCharCode(event.keyCode || event.which))"
             x-ref="moneyField"
         >
         <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
