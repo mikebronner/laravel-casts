@@ -1,5 +1,5 @@
 <x-form-group
-    {{ $attributes->only(['x-show', 'x-if']) }}
+    {{ $attributes->whereStartsWith(['x-show', 'x-if']) }}
     :class="$groupClasses"
 >
     @if ($label)
@@ -14,22 +14,26 @@
         x-data="{
             value: @entangle($attributes->wire('model')),
 
-            updateValue: function () {
-                this.value = parseInt(this.$refs.display.value * 100);
-                $refs.display.value = parseFloat(value / 100)
+            updateDisplay: function () {
+                this.value = this.$wire.get('{{ $attributes->wire('model')->value() }}');
+                this.$refs.valueField.value = this.value;
+                this.$refs.moneyField.value = parseFloat(this.$refs.valueField.value / 100)
                     .toLocaleString('us', {
                         minimumFractionDigits: {{ $decimals }},
                         maximumFractionDigits: {{ $decimals }}
                     });
-            }
+            },
+
+            updateValue: function (dispatch) {
+                this.$refs.valueField.value = parseInt(parseFloat(this.$refs.moneyField.value.replace(',', '')).toFixed(2).replace('.', ''));
+                this.$wire.set('{{ $attributes->wire('model')->value() }}', this.$refs.valueField.value);
+            },
         }"
-        x-init="$nextTick(function () {
-            $refs.display.value = parseFloat(value / 100)
-                .toLocaleString('us', {
-                    minimumFractionDigits: {{ $decimals }},
-                    maximumFractionDigits: {{ $decimals }}
-                });
-        })"
+        x-init="
+            $watch('value', function (value) {
+                updateDisplay();
+            });
+        "
         class="relative"
     >
         <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -38,19 +42,21 @@
             </span>
         </div>
         <input
+            {{ $attributes->whereStartsWith(['wire:model']) }}
             id="{{ $name }}"
             name="{{ $name }}"
             type="hidden"
-            x-model:value="value"
+            x-ref="valueField"
+            @if ($value)
+            value="{{ $value }}"
+            @endif
         />
         <input
             {{ $attributes->merge(["class" => "form-input pl-7 pr-12"])->whereDoesntStartWith(['x-', 'wire:']) }}
             aria-describedby="price-currency"
             type="text"
-            x-bind:value="parseFloat(value / 100).toLocaleString('us', {minimumFractionDigits: {{ $decimals }}, maximumFractionDigits: {{ $decimals }}});"
-            x-on:change="updateValue"
-            x-on:keyup="updateValue"
-            x-ref="display"
+            x-on:keyup="updateValue($dispatch)"
+            x-ref="moneyField"
         >
         <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
             <span class="text-gray-500 sm:text-sm" id="price-currency">
