@@ -12,7 +12,13 @@
     @endif
 
     <div
-        x-data="{ selectedValue: '{{ $value }}' }"
+        x-data="{
+            @if ($attributes->wire('model'))
+                selectedValue: @entangle($attributes->wire('model')->value()),
+            @else
+                selectedValue: '{{ $value }}',
+            @endif
+        }"
         class="flex items-center"
     >
         <input
@@ -32,7 +38,7 @@
     </div>
 
     @error($nameInDotNotation)
-        <p class="mt-1 text-red-600 text-sm">
+        <p class="mt-1 text-sm text-red-600">
             {{ str_replace($nameInDotNotation, "'{$label}'", $message) }}
         </p>
     @enderror
