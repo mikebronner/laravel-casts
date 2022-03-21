@@ -14,7 +14,7 @@
     <div
         x-data="{
             @if ($attributes->wire('model'))
-                selectedValue: @entangle($attributes->wire('model')->value()),
+                selectedValue: @entangle($attributes->wire('model')),
             @else
                 selectedValue: '{{ $value }}',
             @endif
