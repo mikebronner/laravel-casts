@@ -13,7 +13,7 @@
 
     <div
         x-data="{
-            @if ($attributes->wire('model'))
+            @if ($attributes->wire('model')->value())
                 selectedValue: @entangle($attributes->wire('model')),
             @else
                 selectedValue: '{{ $value }}',
@@ -23,7 +23,7 @@
     >
         <input
             x-model="selectedValue"
-            {{ $attributes->except(['x-show', 'x-if']) }}
+            {{ $attributes->whereDoesntStartWith(['x-show', 'x-if', 'wire:model']) }}
             type="range"
             id="{{ $name }}"
             min="{{ $minimum }}"
