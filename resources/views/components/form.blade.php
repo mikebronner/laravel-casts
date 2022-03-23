@@ -31,7 +31,9 @@
         document.addEventListener("DOMContentLoaded", function () {
             Livewire.hook("message.processed", (livewireComponent) => {
                 if (Object.keys(((((livewireComponent || {}).component || {}).serverMemo || {}).errors || {})).length > 0) {
-                    window.resetForm(document.getElementById("form-{{ $key }}"));
+                    _.each((document.querySelectorAll("form [type=submit]") || []), function (element) {
+                        element.disabled = false;
+                    });
                 }
             });
         });
