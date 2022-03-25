@@ -7,12 +7,10 @@
     <input
         {{ $attributes->merge(['class' => 'form-checkbox'])->whereDoesntStartWith(['x-']) }}
         type="checkbox"
-        @if (! $attributes->wire('model'))
         id="{{ trim($name, "[]") }}[{{ $value }}]"
         name="{{ $name }}"
         value="{{ $value }}"
         {{ $checked }}
-        @endif
     >
 
     @error($nameInDotNotation)
