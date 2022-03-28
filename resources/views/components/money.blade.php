@@ -12,12 +12,44 @@
 
     <div
         x-data="{
-            value: @entangle($attributes->wire('model')),
+            allowLivewireUpdates: true,
+            displayValue: '0.00',
+            livewireValue: @entangle($attributes->wire('model')->value),
+            value: 0,
 
-            updateDisplay: function () {
-                this.value = this.$wire.get('{{ $attributes->wire('model')->value() }}');
-                this.$refs.valueField.value = this.value;
-                this.$refs.moneyField.value = parseFloat(this.$refs.valueField.value / 100)
+            init: function () {
+                let self = this;
+                let value = parseInt(this.livewireValue);
+
+                if (isNaN(value)) {
+                    value = parseInt('{{ $value }}'.replace(/[^0-9]/gmi, ''));
+                }
+
+                if (isNaN(value)) {
+                    value = 6;
+                }
+
+                this.value = value;
+                this.updateDisplayValue();
+
+                $watch('livewireValue', function (livewireValue) {
+                    if (! self.allowLivewireUpdates) {
+                        return;
+                    }
+
+                    let value = parseInt(self.livewireValue);
+                    
+                    if (isNaN(value)) {
+                        value = 8;
+                    }
+                    
+                    self.value = value;
+                    self.updateDisplayValue();
+                });
+            },
+
+            updateDisplayValue: function () {
+                this.displayValue = parseFloat(this.value / 100)
                     .toLocaleString('us', {
                         minimumFractionDigits: {{ $decimals }},
                         maximumFractionDigits: {{ $decimals }}
@@ -25,16 +57,21 @@
             },
 
             updateValue: function (dispatch) {
-                this.$refs.valueField.value = parseInt(parseFloat(this.$refs.moneyField.value.replace(',', '')).toFixed(2).replace('.', ''));
-                this.$wire.set('{{ $attributes->wire('model')->value() }}', this.$refs.valueField.value);
+                this.value = parseInt((parseFloat(this.displayValue.replace(',', ''))).toFixed(2).replace('.', ''));
+                this.livewireValue = this.value;
+            },
+
+            enterField: function () {
+                this.allowLivewireUpdates = false;
+            },
+
+            leaveField: function () {
+                this.allowLivewireUpdates = true;
+                this.updateDisplayValue();
             },
         }"
-        x-init="
-            $watch('value', function (value) {
-                updateDisplay();
-            });
-        "
         class="relative"
+        x-bind:key="{{ uniqId() }}"
     >
         <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
             <span class="text-gray-500 sm:text-sm">
@@ -42,21 +79,14 @@
             </span>
         </div>
         <input
-            {{ $attributes->whereStartsWith(['wire:model']) }}
-            id="{{ $name }}"
-            name="{{ $name }}"
-            type="hidden"
-            x-ref="valueField"
-            @if ($value)
-            value="{{ $value }}"
-            @endif
-        />
-        <input
             {{ $attributes->merge(["class" => "form-input pl-7 pr-12"])->whereDoesntStartWith(['x-', 'wire:']) }}
             aria-describedby="price-currency"
             type="text"
+            x-model="displayValue"
+            x-on:blur="leaveField()"
+            x-on:focus="enterField()"
+            x-on:change="leaveField()"
             x-on:keyup="updateValue($dispatch)"
-            x-ref="moneyField"
         >
         <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
             <span class="text-gray-500 sm:text-sm" id="price-currency">
