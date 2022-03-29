@@ -81,6 +81,8 @@
         <input
             {{ $attributes->merge(["class" => "form-input pl-7 pr-12"])->whereDoesntStartWith(['x-', 'wire:']) }}
             aria-describedby="price-currency"
+            id="{{ $name }}"
+            name="{{ $name }}"
             type="text"
             x-model="displayValue"
             x-on:blur="leaveField()"
