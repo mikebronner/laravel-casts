@@ -12,13 +12,14 @@
 
     <input
         {{ $attributes->merge(["class" => "form-input"])->except(['x-show', 'x-if']) }}
+        id="{{ $name }}"
         name="{{ $name }}"
         type="date"
         value="{{ $value }}"
     >
 
     @error($nameInDotNotation)
-        <p class="mt-1 text-red-600 text-sm">
+        <p class="mt-1 text-sm text-red-600">
             {{ str_replace($nameInDotNotation, "'{$label}'", $message) }}
         </p>
     @enderror
