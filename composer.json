@@ -8,18 +8,12 @@
             "email": "hello@genealabs.com"
         }
     ],
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/mikebronner/model"
-        }
-    ],
     "require": {
         "cweagans/composer-patches": "^1.7",
         "illuminate/config": "^8.0|^9.0",
         "illuminate/session": "^8.0|^9.0",
         "illuminate/support": "^8.0|^9.0",
-        "jenssegers/model": "dev-patch-2@dev",
+        "jenssegers/model": "^1.5",
         "laravelcollective/html": "^6.1",
         "symfony/thanks": "^1.2",
         "van-ons/laraberg": "^1.1"
