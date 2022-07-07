@@ -14,7 +14,7 @@
         x-data="{
             allowLivewireUpdates: true,
             displayValue: '0.00',
-            livewireValue: $wire.entangle($attributes->wire('model')->value),
+            livewireValue: $wire.entangle('{{ $attributes->wire('model')->value }}'),
             value: 0,
 
             init: function () {
