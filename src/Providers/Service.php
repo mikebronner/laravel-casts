@@ -10,6 +10,7 @@ use GeneaLabs\LaravelCasts\FormBuilder;
 use GeneaLabs\LaravelCasts\Http\Livewire\Combobox;
 use GeneaLabs\LaravelCasts\Http\Middleware\AssetInjection;
 use GeneaLabs\LaravelCasts\View\Components\Button;
+use GeneaLabs\LaravelCasts\View\Components\Card;
 use GeneaLabs\LaravelCasts\View\Components\Checkbox;
 use GeneaLabs\LaravelCasts\View\Components\Ckeditor;
 use GeneaLabs\LaravelCasts\View\Components\Color;
@@ -33,6 +34,7 @@ use GeneaLabs\LaravelCasts\View\Components\Radio;
 use GeneaLabs\LaravelCasts\View\Components\Range;
 use GeneaLabs\LaravelCasts\View\Components\Select;
 use GeneaLabs\LaravelCasts\View\Components\Submit;
+use GeneaLabs\LaravelCasts\View\Components\Tel;
 use GeneaLabs\LaravelCasts\View\Components\Text;
 use GeneaLabs\LaravelCasts\View\Components\Textarea;
 use GeneaLabs\LaravelCasts\View\Components\Time;
@@ -112,6 +114,7 @@ class Service extends ServiceProvider
             'form',
             [
                 Button::class,
+                Card::class,
                 Checkbox::class,
                 Ckeditor::class,
                 Color::class,
@@ -134,6 +137,7 @@ class Service extends ServiceProvider
                 Range::class,
                 Select::class,
                 Submit::class,
+                Tel::class,
                 Text::class,
                 Textarea::class,
                 Time::class,
