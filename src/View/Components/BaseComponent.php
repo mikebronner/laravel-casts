@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace GeneaLabs\LaravelCasts\View\Components;
 
 use Illuminate\Support\MessageBag;
@@ -22,13 +24,13 @@ abstract class BaseComponent extends Component
 
     public function __construct(
         string $name,
-        string $value = null,
-        string $label = null,
-        string $labelClasses = "",
-        string $groupClasses = "",
-        string $errorClasses = "",
-        string $helpClasses = "",
-        string $helpText = ""
+        ?string $value = null,
+        ?string $label = null,
+        ?string $labelClasses = "",
+        ?string $groupClasses = "",
+        ?string $errorClasses = "",
+        ?string $helpClasses = "",
+        ?string $helpText = ""
     ) {
         $this->uniqueId = Str::random(16);
         $this->name = $name;
