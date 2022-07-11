@@ -33,24 +33,19 @@
                     if (! self.allowLivewireUpdates) {
                         return;
                     }
-
-                    let value = parseInt(self.livewireValue);
-                    
-                    if (isNaN(value)) {
-                        value = 8;
-                    }
-                    
-                    self.value = value;
+                   
+                    self.value = self.livewireValue;
                     self.updateDisplayValue();
                 });
             },
 
             updateDisplayValue: function () {
+
                 let cleaned = ('' + this.value).replace(/\D/g, '');
-                let match = cleaned.match(/^(1|)?(\d{3})(\d{3})(\d{4})$/);
+                let match = cleaned.match(/^\+?1?(\d{3})(\d{3})(\d{4})$/);
 
                 if (match) {
-                    this.displayValue = ['(', match[2], ') ', match[3], '-', match[4]].join('');
+                    this.displayValue = ['(', match[1], ') ', match[2], '-', match[3]].join('');
                 }
             },
 
@@ -70,10 +65,10 @@
         }"
     >
         <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-            <span class="text-gray-500 sm:text-sm"> +1 </span>
+            <span class="text-gray-500 sm:text-sm"> (US) +1 </span>
         </div>
         <input
-            {{ $attributes->except(['x-show', 'x-if'])->merge(['class' => 'pl-8']) }}
+            {{ $attributes->whereDoesntStartWith(['wire:', 'x-show', 'x-if'])->merge(['class' => 'pl-16 placeholder-gray-300']) }}
             name="{{ $name }}"
             placeholder="(999) 999-9999"
             type="tel"
