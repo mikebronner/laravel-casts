@@ -1,5 +1,5 @@
 <x-form-group
-    {{ $attributes->whereStartsWith(['x-show', 'x-if']) }}
+    {{ $attributes->only(['x-show', 'x-if']) }}
     :class="$groupClasses"
 >
     @if ($label)
@@ -12,23 +12,20 @@
 
     <div
         class="relative"
+        x-ref="tel"
         x-data="{
             allowLivewireUpdates: true,
             displayValue: '',
-            livewireValue: '',
+            livewireValue: $refs.tel.closest('[wire\\:id]') !== null
+                ? $wire.entangle('{{ $attributes->wire('model')->value }}')
+                : '',
             value: '{{ $value }}',
 
             init: function () {
                 let self = this;
 
-                try {
-                    this.livewireValue = window.livewire.entangle('{{ $attributes->wire('model')->value }}');
-
-                    if (this.value === '') {
-                        this.value = this.livewireValue;
-                    }
-                } catch (error) {
-                    //
+                if (this.value === '') {
+                    this.value = this.livewireValue;
                 }
 
                 this.updateDisplayValue();
@@ -37,10 +34,18 @@
                     if (! self.allowLivewireUpdates) {
                         return;
                     }
-                   
+
                     self.value = self.livewireValue;
                     self.updateDisplayValue();
                 });
+            },
+
+            getLivewireValue: function () {
+                try {
+                    return $wire.entangle('{{ $attributes->wire('model')->value }}');
+                } catch (error) {
+                    return '';
+                }
             },
 
             updateDisplayValue: function () {
@@ -69,10 +74,10 @@
         }"
     >
         <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-            <span class="text-gray-500 sm:text-sm"> (US) +1 </span>
+            <span class="text-gray-500 sm:text-sm"> 🇺🇸 +1 </span>
         </div>
         <input
-            {{ $attributes->whereDoesntStartWith(['wire:', 'x-show', 'x-if'])->merge(['class' => 'pl-16 placeholder-gray-300']) }}
+            {{ $attributes->whereDoesntStartWith(['wire:', 'x-show', 'x-if'])->merge(['class' => 'pl-12 placeholder-gray-300']) }}
             name="{{ $name }}"
             placeholder="(999) 999-9999"
             type="tel"
