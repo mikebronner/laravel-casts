@@ -1,5 +1,5 @@
 <x-form-group
-    {{ $attributes->only(['x-show', 'x-if']) }}
+    {{ $attributes->whereStartsWith(['x-show', 'x-if']) }}
     :class="$groupClasses"
 >
     @if ($label)
@@ -15,18 +15,22 @@
         x-data="{
             allowLivewireUpdates: true,
             displayValue: '',
-            livewireValue: $wire.entangle('{{ $attributes->wire('model')->value }}'),
+            livewireValue: '',
             value: '{{ $value }}',
 
             init: function () {
                 let self = this;
-                let value = this.value;
 
-                if (this.value === '') {
-                    value = this.livewireValue;
+                try {
+                    this.livewireValue = window.livewire.entangle('{{ $attributes->wire('model')->value }}');
+
+                    if (this.value === '') {
+                        this.value = this.livewireValue;
+                    }
+                } catch (error) {
+                    //
                 }
 
-                this.value = value;
                 this.updateDisplayValue();
 
                 $watch('livewireValue', function (livewireValue) {
