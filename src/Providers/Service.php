@@ -33,6 +33,7 @@ use GeneaLabs\LaravelCasts\View\Components\Password;
 use GeneaLabs\LaravelCasts\View\Components\Radio;
 use GeneaLabs\LaravelCasts\View\Components\Range;
 use GeneaLabs\LaravelCasts\View\Components\Select;
+use GeneaLabs\LaravelCasts\View\Components\State;
 use GeneaLabs\LaravelCasts\View\Components\Submit;
 use GeneaLabs\LaravelCasts\View\Components\Tel;
 use GeneaLabs\LaravelCasts\View\Components\Text;
@@ -136,6 +137,7 @@ class Service extends ServiceProvider
                 Radio::class,
                 Range::class,
                 Select::class,
+                State::class,
                 Submit::class,
                 Tel::class,
                 Text::class,
