@@ -21,15 +21,14 @@ class Range extends BaseComponent
         int $minimum = 1,
         int $step = 1,
     ) {
+        $this->minimum = $minimum;
+        $this->maximum = $maximum;
+        $this->step = $step;
 
         if (! $this->value) {
             $this->value = $this->minimum;
         }
 
         parent::__construct($name, $value, $label, $labelClasses, $groupClasses, $errorClasses, $helpClasses, $helpText);
-
-        $this->minimum = $minimum;
-        $this->maximum = $maximum;
-        $this->step = $step;
     }
 }
