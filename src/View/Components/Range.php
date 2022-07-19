@@ -25,8 +25,9 @@ class Range extends BaseComponent
         $this->maximum = $maximum;
         $this->step = $step;
 
-        if (! $this->value) {
-            $this->value = $this->minimum;
+        if ($value === null) {
+            $value = $this->minimum
+                ?? 0;
         }
 
         parent::__construct($name, $value, $label, $labelClasses, $groupClasses, $errorClasses, $helpClasses, $helpText);
