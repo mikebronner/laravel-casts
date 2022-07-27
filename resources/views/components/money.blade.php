@@ -14,11 +14,11 @@
         class="relative"
         x-data="{
             allowLivewireUpdates: true,
-            displayValue: '',
+            displayValue: '0.00',
             livewireValue: $refs.money.closest('[wire\\:id]') !== null
                 ? $wire.entangle('{{ $attributes->wire('model')->value }}')
                 : '',
-            value: '{{ $value }}',
+            value: {{ $value ?: 'null' }},
 
             init: function () {
                 let self = this;
@@ -41,12 +41,13 @@
                     }
 
                     let value = parseInt(self.livewireValue);
-                    
+
                     if (isNaN(value)) {
                         value = null;
                     }
-                    
+
                     self.value = value;
+                    self.updateDisplayValue();
                 });
             },
 
@@ -56,7 +57,7 @@
 
                     return;
                 }
-                
+
                 this.displayValue = parseFloat(this.value / 100)
                     .toLocaleString('us', {
                         minimumFractionDigits: {{ $decimals }},
@@ -66,7 +67,6 @@
 
             updateValue: function (dispatch) {
                 this.value = parseInt((parseFloat(this.displayValue.replace(',', ''))).toFixed(2).replace('.', ''));
-                this.livewireValue = this.value;
             },
 
             enterField: function () {
@@ -75,29 +75,33 @@
 
             leaveField: function () {
                 this.allowLivewireUpdates = true;
-                this.updateDisplayValue();
+                this.updateValue();
+                this.livewireValue = this.value;
             },
         }"
-        x-ref="money"
         x-bind:key="{{ uniqId() }}"
+        x-ref="money"
     >
         <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
             <span class="text-gray-500 sm:text-sm">
                 {{ $symbol }}
             </span>
         </div>
+        <x-form-hidden
+            name="{{ $name }}"
+            x-model="value"
+        />
         <input
             {{ $attributes->merge(["class" => "form-input pl-7 pr-12"])->whereDoesntStartWith(['x-', 'wire:']) }}
             aria-describedby="price-currency"
             id="{{ $name }}"
-            name="{{ $name }}"
             placeholder="0.00"
             type="text"
             x-model="displayValue"
-            x-on:blur="leaveField()"
+            x-on:change="updateValue()"
             x-on:focus="enterField()"
-            x-on:change="leaveField()"
-            x-on:keyup="updateValue($dispatch)"
+            x-on:blur="leaveField()"
+            x-on:keyup="updateValue()"
             x-mask:dynamic="$money($input)"
         >
         <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
