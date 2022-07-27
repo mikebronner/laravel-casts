@@ -77,7 +77,7 @@
             <span class="text-gray-500 sm:text-sm"> 🇺🇸 +1 </span>
         </div>
         <input
-            {{ $attributes->whereDoesntStartWith(['wire:', 'x-show', 'x-if'])->merge(['class' => 'pl-12 placeholder-gray-300']) }}
+            {{ $attributes->whereDoesntStartWith(['wire:', 'x-show', 'x-if'])->merge(['class' => 'pl-14 placeholder-gray-300']) }}
             name="{{ $name }}"
             placeholder="(999) 999-9999"
             type="tel"

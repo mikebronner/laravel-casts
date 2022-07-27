@@ -15,7 +15,7 @@ class Money extends Input
         ?string $code = "USD",
         ?int $decimals = 2,
         ?string $symbol = "\$",
-        ?string $value = "0",
+        ?string $value = null,
         ?string $labelClasses = "",
         ?string $groupClasses = "",
         ?string $errorClasses = "",
@@ -26,10 +26,13 @@ class Money extends Input
         $this->code = $code;
         $this->decimals = $decimals;
         $this->symbol = $symbol;
+        $value = $value
+            ? number_format(intval($value) / 100, $decimals)
+            : null;
 
         parent::__construct(
             $name,
-            number_format(intval($value) / 100, $decimals),
+            $value,
             $labelClasses,
             $groupClasses,
             $errorClasses,

@@ -11,11 +11,14 @@
     @endif
 
     <div
+        class="relative"
         x-data="{
             allowLivewireUpdates: true,
-            displayValue: '0.00',
-            livewireValue: $wire.entangle('{{ $attributes->wire('model')->value }}'),
-            value: 0,
+            displayValue: '',
+            livewireValue: $refs.money.closest('[wire\\:id]') !== null
+                ? $wire.entangle('{{ $attributes->wire('model')->value }}')
+                : '',
+            value: '{{ $value }}',
 
             init: function () {
                 let self = this;
@@ -26,7 +29,7 @@
                 }
 
                 if (isNaN(value)) {
-                    value = 6;
+                    value = null;
                 }
 
                 this.value = value;
@@ -40,15 +43,20 @@
                     let value = parseInt(self.livewireValue);
                     
                     if (isNaN(value)) {
-                        value = 8;
+                        value = null;
                     }
                     
                     self.value = value;
-                    self.updateDisplayValue();
                 });
             },
 
             updateDisplayValue: function () {
+                if (this.value === null) {
+                    this.displayValue = null;
+
+                    return;
+                }
+                
                 this.displayValue = parseFloat(this.value / 100)
                     .toLocaleString('us', {
                         minimumFractionDigits: {{ $decimals }},
@@ -70,7 +78,7 @@
                 this.updateDisplayValue();
             },
         }"
-        class="relative"
+        x-ref="money"
         x-bind:key="{{ uniqId() }}"
     >
         <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -83,12 +91,14 @@
             aria-describedby="price-currency"
             id="{{ $name }}"
             name="{{ $name }}"
+            placeholder="0.00"
             type="text"
             x-model="displayValue"
             x-on:blur="leaveField()"
             x-on:focus="enterField()"
             x-on:change="leaveField()"
             x-on:keyup="updateValue($dispatch)"
+            x-mask:dynamic="$money($input)"
         >
         <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
             <span class="text-gray-500 sm:text-sm" id="price-currency">
