@@ -1,5 +1,5 @@
 <x-form-group
-    {{ $attributes->whereStartsWith(['x-show', 'x-if']) }}
+    {{ $attributes->whereStartsWith(['wire:', 'x-show', 'x-if']) }}
     :class="$groupClasses"
 >
     @if ($label)
