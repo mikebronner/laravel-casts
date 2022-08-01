@@ -18,7 +18,7 @@
             livewireValue: $refs.money.closest('[wire\\:id]') !== null
                 ? $wire.entangle('{{ $attributes->wire('model')->value }}')
                 : '',
-            value: {{ $value ?: 'null' }},
+            value: (parseInt('{{ $value }}') || null),
 
             init: function () {
                 let self = this;
@@ -52,7 +52,8 @@
             },
 
             updateDisplayValue: function () {
-                if (this.value === null) {
+                if (isNaN(this.value)) {
+                    this.value = null;
                     this.displayValue = null;
 
                     return;
@@ -66,7 +67,13 @@
             },
 
             updateValue: function (dispatch) {
-                this.value = parseInt((parseFloat(this.displayValue.replace(',', ''))).toFixed(2).replace('.', ''));
+                let value = parseInt((parseFloat(this.displayValue.replace(',', ''))).toFixed(2).replace('.', ''));
+
+                if (isNaN(value)) {
+                    value = null;
+                }
+
+                this.value = value;
             },
 
             enterField: function () {
