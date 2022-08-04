@@ -1,5 +1,5 @@
 <x-form-group
-    {{ $attributes->whereStartsWith(['wire:', 'x-show', 'x-if']) }}
+    {{ $attributes->whereStartsWith(['wire:key', 'x-show', 'x-if']) }}
     :class="$groupClasses"
 >
     @if ($label)
@@ -14,10 +14,10 @@
         class="relative"
         x-data="{
             allowLivewireUpdates: true,
-            displayValue: '0.00',
+            displayValue: null,
             livewireValue: $refs.money.closest('[wire\\:id]') !== null
                 ? $wire.entangle('{{ $attributes->wire('model')->value }}')
-                : '',
+                : null,
             value: (parseInt('{{ $value }}') || null),
 
             init: function () {
@@ -94,10 +94,6 @@
                 {{ $symbol }}
             </span>
         </div>
-        <x-form-hidden
-            name="{{ $name }}"
-            x-model="value"
-        />
         <input
             {{ $attributes->merge(["class" => "form-input pl-7 pr-12"])->whereDoesntStartWith(['x-', 'wire:']) }}
             aria-describedby="price-currency"
