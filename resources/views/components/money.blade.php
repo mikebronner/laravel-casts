@@ -59,11 +59,17 @@
                     return;
                 }
 
-                this.displayValue = parseFloat(this.value / 100)
+                let displayValue = parseFloat(this.value / 100)
                     .toLocaleString('us', {
                         minimumFractionDigits: {{ $decimals }},
                         maximumFractionDigits: {{ $decimals }}
                     });
+                
+                if (displayValue == '0.00' || displayValue == 0) {
+                    displayValue = null;
+                }
+
+                this.displayValue = displayValue;
             },
 
             updateValue: function (dispatch) {
@@ -94,6 +100,10 @@
                 {{ $symbol }}
             </span>
         </div>
+        <x-form-hidden
+            :name="$name"
+            x-model="value"
+        />
         <input
             {{ $attributes->merge(["class" => "form-input pl-7 pr-12"])->whereDoesntStartWith(['x-', 'wire:']) }}
             aria-describedby="price-currency"
