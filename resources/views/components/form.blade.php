@@ -1,4 +1,4 @@
-@push ("js")
+<div>
     <script>
         if (typeof window.resetForm === "undefined") {
             window.resetForm = function (form) {
@@ -38,29 +38,29 @@
             });
         });
     </script>
-@endpush
 
-<form
-    {{ $attributes }}
-    autocomplete="{{ $autocomplete }}"
-    class="{{ $class }}"
-    enctype="{{ $enctype }}"
-    id="form-{{ $key }}"
-    method="{{ in_array(strtolower($method), ['post', 'get']) ? strtoupper($method) : 'POST' }}"
-    target="{{ $target }}"
+    <form
+        {{ $attributes }}
+        autocomplete="{{ $autocomplete }}"
+        class="{{ $class }}"
+        enctype="{{ $enctype }}"
+        id="form-{{ $key }}"
+        method="{{ in_array(strtolower($method), ['post', 'get']) ? strtoupper($method) : 'POST' }}"
+        target="{{ $target }}"
 
-    @if ($action)
-        action="{{ $action }}"
-        onsubmit="window.submitForm(this);"
-        onreset="window.resetForm(this);"
-    @else
-        onsubmit="window.submitForm(this); return false;"
-        onreset="window.resetForm(this);"
-    @endif
->
-    @csrf()
-    @method($method)
+        @if ($action)
+            action="{{ $action }}"
+            onsubmit="window.submitForm(this);"
+            onreset="window.resetForm(this);"
+        @else
+            onsubmit="window.submitForm(this); return false;"
+            onreset="window.resetForm(this);"
+        @endif
+    >
+        @csrf()
+        @method($method)
 
-    {!! $slot !!}
+        {!! $slot !!}
 
-</form>
+    </form>
+</div>
