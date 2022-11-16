@@ -93,6 +93,11 @@
                         max_height: 600,
                         branding: false,
                         paste_data_images: false,
+                        paste_postprocess: function(pl, o) {
+                            o.node.innerHTML = o.node.innerHTML
+                                .replace(/&nbsp;/ig, " ")
+                                .replace(/  /ig, " ");
+                        },
                         pagebreak_separator: '<div style="page-break-before: always;"></div>',
                         images_dataimg_filter: function (img) {
                             return !img.hasAttribute('internal-blob');
