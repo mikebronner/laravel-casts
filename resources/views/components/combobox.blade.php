@@ -9,6 +9,7 @@
 <x-form-group
     {{ $attributes->only(['x-show', 'x-if']) }}
     :class="$groupClasses"
+    wire:ignore
 >
 
     @if ($label)
@@ -20,10 +21,13 @@
     @endif
 
     <div
-        class="w-full max-w-sm"
+        {{ $attributes->only(["class"])->merge(["class" => "form-select w-full max-w-sm"]) }}
         x-data="{
             multiple: true,
-            value: [{{ $selectedValues->join(", ") }}],
+            value: [{{ $selectedValues->join(', ') }}],
+            livewireValue: '{{ $attributes->wire('model')->value }}' !== ''
+                ? $wire.entangle('{{ $attributes->wire('model')->value }}')
+                : null,
             options: [
 
                 @foreach ($selectOptions as $label => $optionValue)
@@ -34,6 +38,7 @@
             init() {
                 this.$nextTick(() => {
                     let choices = new Choices(this.$refs.select, {
+                        allowHTML: true,
                         removeItemButton: true,
                     })
 
@@ -53,7 +58,8 @@
                     refreshChoices()
 
                     this.$refs.select.addEventListener('change', () => {
-                        this.value = choices.getValue(true)
+                        this.value = choices.getValue(true);
+                        this.livewireValue = this.value;
                     })
 
                     this.$watch('value', () => refreshChoices())

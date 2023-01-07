@@ -1,8 +1,8 @@
 <?php
 
-namespace GeneaLabs\LaravelCasts\View\Components;
+declare(strict_types=1);
 
-use Illuminate\Support\Collection;
+namespace GeneaLabs\LaravelCasts\View\Components;
 
 class Combobox extends Select
 {
