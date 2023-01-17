@@ -26,7 +26,10 @@
             multiple: true,
             value: [{{ $selectedValues->join(', ') }}],
             livewireValue: '{{ $attributes->wire('model')->value }}' !== ''
-                ? $wire.entangle('{{ $attributes->wire('model')->value }}')
+                ? ('{{  $attributes->wire('model.defer')->value }}'.length > 0
+                    ? $wire.entangle('{{ $attributes->wire('model')->value }}').defer
+                    : $wire.entangle('{{ $attributes->wire('model')->value }}')
+                    )
                 : null,
             options: [
 
