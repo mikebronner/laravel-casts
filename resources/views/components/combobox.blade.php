@@ -74,6 +74,7 @@
         <select
             :multiple="multiple"
             x-ref="select"
+            name="{{ $name }}"
         ></select>
     </div>
 
