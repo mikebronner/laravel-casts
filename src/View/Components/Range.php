@@ -33,7 +33,6 @@ class Range extends BaseComponent
                 ?? 0;
         }
 
-        parent::__construct($name, $value, $label, $labelClasses, $groupClasses, $errorClasses, $helpClasses, $helpText);
+        parent::__construct($name, (string) $value, $label, $labelClasses, $groupClasses, $errorClasses, $helpClasses, $helpText);
     }
 }
-
