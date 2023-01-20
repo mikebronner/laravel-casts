@@ -1,8 +1,9 @@
 <input
     {{ $attributes }}
-    type="radio"
+    {{ $checked }}
     id="{{ Str::slug($name) . '-' . Str::slug($value) }}"
     name="{{ $name }}"
+    type="radio"
     value="{{ $value }}"
 >
 
