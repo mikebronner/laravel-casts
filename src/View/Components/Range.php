@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace GeneaLabs\LaravelCasts\View\Components;
 
 class Range extends BaseComponent
@@ -24,6 +26,7 @@ class Range extends BaseComponent
         $this->minimum = $minimum;
         $this->maximum = $maximum;
         $this->step = $step;
+        $value = $value ?: old($name);
 
         if ($value === null) {
             $value = $this->minimum
@@ -33,3 +36,4 @@ class Range extends BaseComponent
         parent::__construct($name, $value, $label, $labelClasses, $groupClasses, $errorClasses, $helpClasses, $helpText);
     }
 }
+
