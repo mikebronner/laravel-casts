@@ -18,14 +18,12 @@ class Date extends BaseComponent
     ) {
         parent::__construct($name, $value, $label, $labelClasses, $groupClasses, $errorClasses, $helpClasses, $helpText);
 
-        if ($value !== null) {
-            if (! $value instanceof Carbon) {
-                $value = (new Carbon)->parse($value);
+        if ($this->value !== null) {
+            if (! $this->value instanceof Carbon) {
+                $this->value = (new Carbon)->parse($this->value);
             }
 
-            $value = $value->format("Y-m-d");
+            $this->value = $this->value->format("Y-m-d");
         }
-
-        $this->value = $value;
     }
 }
