@@ -1,8 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace GeneaLabs\LaravelCasts\View\Components;
 
-class Radio extends BaseComponent
+class Radio extends Checkbox
 {
     //
 }
