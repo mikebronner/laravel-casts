@@ -1,3 +1,11 @@
+@props([
+    "isMultiSelect",
+    "name",
+    "placeholder",
+    "selectedValues",
+    "selectOptions",
+])
+
 @push ("css")
     <link
         href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css"
@@ -40,6 +48,10 @@
             ],
             init() {
                 this.$nextTick(() => {
+                    if (this.livewireValue) {
+                        this.value = Object.keys(this.livewireValue).map(key => this.livewireValue[key]);
+                    }
+
                     let choices = new Choices(this.$refs.select, {
                         allowHTML: true,
                         removeItemButton: true,
