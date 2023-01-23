@@ -29,6 +29,7 @@
             min="{{ $minimum }}"
             max="{{ $maximum }}"
             name="{{ $name }}"
+            step="{{ $step }}"
             value="{{ $value }}"
         >
         <output
