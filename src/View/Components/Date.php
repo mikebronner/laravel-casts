@@ -18,7 +18,7 @@ class Date extends BaseComponent
     ) {
         parent::__construct($name, $value, $label, $labelClasses, $groupClasses, $errorClasses, $helpClasses, $helpText);
 
-        if ($this->value !== null) {
+        if ($this->value) {
             if (! $this->value instanceof Carbon) {
                 $this->value = (new Carbon)->parse($this->value);
             }
