@@ -38,8 +38,7 @@ abstract class BaseComponent extends Component
         $this->value = $value
             ?? old($this->nameInDotNotation, null);
         $this->value = $this->value
-            ? (string) data_get(session("form-model"), $this->nameInDotNotation, "")
-            : null;
+            ?? (string) data_get(session("form-model"), $this->nameInDotNotation, "");
         $this->label = $label
             ?? trim(ucwords(str_replace("id", " ", str_replace("_", " ", str_replace(".", " ", $this->name)))));
         $this->label = preg_replace('/([^A-Z])([A-Z])/', "$1 $2", $this->label);
