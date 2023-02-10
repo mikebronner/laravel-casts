@@ -145,6 +145,7 @@ class Service extends ServiceProvider
                 Time::class,
                 TinyMce::class,
                 Toggle::class,
+                Trix::class,
             ],
         );
     }
