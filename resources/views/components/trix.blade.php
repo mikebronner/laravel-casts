@@ -2,6 +2,11 @@
     {{ $attributes->whereStartsWith(['x-', 'wire:']) }}
     :class="$groupClasses"
 >
+<style>
+    [data-trix-button-group="file-tools"] {
+        display: none !important;
+    }
+</style>
 
     @if ($label)
         <x-form-label
@@ -20,7 +25,7 @@
     <div
         wire:ignore
         x-data
-        x-on:trix-blur="$dispatch('change', $event.target.value)"
+        x-on:trix-change="$dispatch('change', $event.target.value)"
     >
         <trix-editor
             {{ $attributes->whereDoesntStartWith(['x-', 'wire:']) }}
