@@ -2,11 +2,11 @@
     {{ $attributes->whereStartsWith(['x-', 'wire:']) }}
     :class="$groupClasses"
 >
-<style>
-    [data-trix-button-group="file-tools"] {
-        display: none !important;
-    }
-</style>
+    <style>
+        [data-trix-button-group="file-tools"] {
+            display: none !important;
+        }
+    </style>
 
     @if ($label)
         <x-form-label
