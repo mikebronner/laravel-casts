@@ -36,7 +36,7 @@
             {{-- multiple: {{ ($isMultiSelect ?? false) ? 'true' : 'false' }}, --}}
             multiple: true,
             name: '{{ $name }}',
-            value: [{{ Js::from($selectedValues->join(', ')) }}],
+            value: ['{{ ($selectedValues->join('\', \'')) }}'],
             livewireValue: '{{ $attributes->wire('model')->value }}' !== ''
                 ? ('{{  $attributes->wire('model.defer')->value }}'.length > 0
                     ? $wire.entangle('{{ $attributes->wire('model')->value }}').defer
