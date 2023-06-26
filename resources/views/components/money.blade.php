@@ -73,7 +73,7 @@
             },
 
             updateValue: function (dispatch) {
-                let value = parseInt((parseFloat(this.displayValue.replace(',', ''))).toFixed(2).replace('.', ''));
+                let value = parseInt((parseFloat((this.displayValue || '').replace(',', ''))).toFixed(2).replace('.', ''));
 
                 if (isNaN(value)) {
                     value = null;
