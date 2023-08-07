@@ -11,6 +11,7 @@
     @endif
 
     <div
+        {{ $attributes->except(['x-show', 'x-if', 'wire:model']) }}
         x-data="{
             selected: {{ $checked === 'checked' ? 'true' : 'false' }},
             value: '{{ $value }}',
@@ -21,7 +22,6 @@
         }"
     >
         <input
-            {{ $attributes->except(['x-show', 'x-if', 'wire:model']) }}
             type="hidden"
             name="{{ $name }}"
             x-bind:value="selected == true ? '{{ $value }}' : ''"
