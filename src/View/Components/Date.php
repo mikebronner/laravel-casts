@@ -20,10 +20,15 @@ class Date extends BaseComponent
 
         if ($this->value) {
             if (! $this->value instanceof Carbon) {
-                $this->value = (new Carbon)->parse($this->value);
+                try {
+                    $this->value = (new Carbon)->parse($this->value);
+                } catch (\Throwable $th) {
+                    $this->value = null;
+                }
             }
 
-            $this->value = $this->value->format("Y-m-d");
+            $this->value = $this->value
+                ?->format("Y-m-d");
         }
     }
 }
