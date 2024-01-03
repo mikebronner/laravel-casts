@@ -9,11 +9,14 @@ class Tel extends Input
     public string $format;
 
     public function __construct(
-        public string $country,
         string $name,
         string $value = null,
+        public ?string $country = null,
     ) {
         parent::__construct($name, $value, []);
+
+        $this->country = $country
+            ?: "US";
         $examplePhoneNumber = PhoneNumber::getExampleNumber($country);
         $this->countryCode = $examplePhoneNumber->getCountryCode();
         $this->format = $examplePhoneNumber->formatForCallingFrom($country);
