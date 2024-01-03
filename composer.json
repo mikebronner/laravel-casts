@@ -16,7 +16,9 @@
         "jenssegers/model": "^1.5",
         "laravelcollective/html": "^6.4",
         "symfony/thanks": "^1.2",
-        "van-ons/laraberg": "^2.0"
+        "van-ons/laraberg": "^2.0",
+        "spatie/emoji": "^4.0",
+        "brick/phonenumber": "^0.6.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9",
