@@ -82,14 +82,10 @@
     },
     "remoteUser": "sail",
     "postCreateCommand": "sudo chown -R 1000:1000 /var/www/html",
-    "forwardPorts": [
-        80
-    ],
-    "portsAttributes": {
-        "80": {
-            "label": "HTTP"
-        }
-    },
+    // "forwardPorts": [
+    // ],
+    // "portsAttributes": {
+    // },
     "mounts": [
         "source=${localEnv:HOME}/.wakatime.cfg,target=/home/sail/.wakatime.cfg,type=bind,consistency=delegated"
     ]
