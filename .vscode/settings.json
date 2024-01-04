@@ -284,4 +284,10 @@
         "editor.defaultFormatter": "bmewburn.vscode-intelephense-client"
     },
     "workbench.editor.tabActionLocation": "left",
+    "cSpell.words": [
+        "cweagans",
+        "dont",
+        "jenssegers",
+        "symfony"
+    ],
 }

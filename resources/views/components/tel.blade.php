@@ -74,14 +74,17 @@
         }"
     >
         <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-            <span class="text-gray-500 sm:text-sm"> 🇺🇸 +1 </span>
+            <span class="text-gray-500 sm:text-sm">
+                {{ Spatie\Emoji\Emoji::countryFlag($country) }}
+                +{{ $countryCode }}
+            </span>
         </div>
         <input
             {{ $attributes->whereDoesntStartWith(['wire:', 'x-show', 'x-if'])->merge(['class' => 'pl-14 placeholder-gray-300']) }}
             name="{{ $name }}"
-            placeholder="(999) 999-9999"
+            placeholder="{{ $format }}"
             type="tel"
-            x-mask="(999) 999-9999"
+            x-mask="{{ $format }}"
             x-model="displayValue"
             x-on:blur="leaveField()"
             x-on:focus="enterField()"
