@@ -2,6 +2,7 @@
 
 namespace GeneaLabs\LaravelCasts\View\Components;
 
+use Throwable;
 use Illuminate\Support\Carbon;
 
 class Date extends BaseComponent
@@ -21,8 +22,8 @@ class Date extends BaseComponent
         if ($this->value) {
             if (! $this->value instanceof Carbon) {
                 try {
-                    $this->value = (new Carbon)->parse($this->value);
-                } catch (\Throwable $th) {
+                    $this->value = (new Carbon)->make($this->value);
+                } catch (Throwable) {
                     $this->value = null;
                 }
             }
