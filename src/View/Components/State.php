@@ -19,10 +19,11 @@ class State extends Select
         string $label = null,
         string $placeholder = "",
         string $value = "",
+        string $countryCode = "US",
     ) {
         parent::__construct(
             $name,
-            collect((new CountryState)->getStates("US"))->flip(),
+            collect((new CountryState)->getStates($countryCode))->flip(),
             $selectedValues,
             $isMultiSelect,
             $labelClasses,
