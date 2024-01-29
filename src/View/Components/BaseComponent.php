@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GeneaLabs\LaravelCasts\View\Components;
 
+use BackedEnum;
 use Illuminate\Support\MessageBag;
 use Illuminate\Support\Str;
 use Illuminate\View\Component;
@@ -37,8 +38,12 @@ abstract class BaseComponent extends Component
         $this->nameInDotNotation = trim(str_replace("[", ".", str_replace("]", "", $this->name)), ".");
         $this->value = $value
             ?? old($this->nameInDotNotation, null);
-        $this->value = $this->value
-            ?? (string) data_get(session("form-model"), $this->nameInDotNotation, "");
+        $this->value = ($this->value instanceof BackedEnum
+                ? $this->value->value
+                : $value)
+            ?? (data_get(session("form-model"), $this->nameInDotNotation) instanceof BackedEnum
+                ? (string) data_get(session("form-model"), $this->nameInDotNotation)->value
+                : (string) data_get(session("form-model"), $this->nameInDotNotation, ""));
         $this->label = $label
             ?? trim(ucwords(str_replace("id", " ", str_replace("_", " ", str_replace(".", " ", $this->name)))));
         $this->label = preg_replace('/([^A-Z])([A-Z])/', "$1 $2", $this->label);
