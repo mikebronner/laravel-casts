@@ -41,12 +41,12 @@ class Tel extends Input
         parent::__construct(
             $name,
             $value,
-            $label,
             $labelClasses,
             $groupClasses,
             $errorClasses,
             $helpClasses,
             $helpText,
+            $label,
         );
     }
 }
