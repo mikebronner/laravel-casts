@@ -93,7 +93,7 @@
     "editor.inlayHints.fontFamily": "JetBrains Mono",
     "editor.inlineSuggest.enabled": true,
     "editor.insertSpaces": true,
-    "editor.lightbulb.enabled": false,
+    "editor.lightbulb.enabled": "off",
     "editor.linkedEditing": true,
     "editor.minimap.maxColumn": 100,
     "editor.parameterHints.enabled": false,
@@ -287,6 +287,7 @@
     "cSpell.words": [
         "cweagans",
         "dont",
+        "dougsisk",
         "jenssegers",
         "symfony"
     ],
