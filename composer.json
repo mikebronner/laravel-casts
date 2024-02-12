@@ -10,16 +10,13 @@
     ],
     "require": {
         "brick/phonenumber": "^0.6.0",
-        "cweagans/composer-patches": "^1.7",
         "dougsisk/laravel-country-state": "^4.2",
         "illuminate/config": "^8.0|^9.0|^10.0",
         "illuminate/session": "^8.0|^9.0|^10.0",
         "illuminate/support": "^8.0|^9.0|^10.0",
         "jenssegers/model": "^1.5",
-        "laravelcollective/html": "^6.4",
         "spatie/emoji": "^4.0",
-        "symfony/thanks": "^1.2",
-        "van-ons/laraberg": "^2.0"
+        "symfony/thanks": "^1.2"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9",
@@ -35,21 +32,9 @@
     },
     "extra": {
         "laravel": {
-            "dont-discover": [
-                "laravelcollective/html"
-            ],
             "providers": [
                 "GeneaLabs\\LaravelCasts\\Providers\\Service"
-            ],
-            "aliases": {
-                "Form": "GeneaLabs\\LaravelCasts\\FormFacade",
-                "Html": "Collective\\Html\\HtmlFacade"
-            }
-        },
-        "patches": {
-            "van-ons/laraberg": {
-                "PR #110: Fix z-index of block popups.": "https://patch-diff.githubusercontent.com/raw/VanOns/laraberg/pull/110.diff"
-            }
+            ]
         }
     },
     "minimum-stability": "dev",
