@@ -22,24 +22,28 @@
 
     <div
         {{ $attributes->whereStartsWith(['wire:', 'x-']) }}
-        x-on:trix-change="value = $refs.input.value; console.log(value);"
-        x-on:trix-file-accept.prevent
         class="max-w-2xl w-full"
         x-data="{ value: '{!! $value !!}' }"
         x-id="['{{ $name }}']"
         x-init="$refs.trix.editor.loadHTML(value)"
+        x-on:trix-change="value = $refs.input.value; $dispatch('input', value)"
+        x-on:trix-file-accept.prevent
     >
         <input
             type="hidden"
             x-bind:id="$id('{{ $name }}')"
             x-ref="input"
         >
-        <trix-editor
-            {{ $attributes->whereDoesntStartWith(['x-', 'wire:']) }}
-            x-bind:input="$id('{{ $name }}')"
-            class="prose bg-white"
-            x-ref="trix"
-        ></trix-editor>
+        <div
+            wire:ignore
+        >
+            <trix-editor
+                {{ $attributes->whereDoesntStartWith(['x-', 'wire:']) }}
+                class="prose bg-white"
+                x-bind:input="$id('{{ $name }}')"
+                x-ref="trix"
+            ></trix-editor>
+        </div>
     </div>
 
     @error($nameInDotNotation)
