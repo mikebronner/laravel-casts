@@ -64,8 +64,12 @@
                         minimumFractionDigits: {{ $decimals }},
                         maximumFractionDigits: {{ $decimals }}
                     });
-                
-                if (displayValue == '0.00' || displayValue == 0) {
+
+                if (
+                    (displayValue == '0.00'
+                        || displayValue == 0)
+                    && this.value != 0
+                ) {
                     displayValue = null;
                 }
 
